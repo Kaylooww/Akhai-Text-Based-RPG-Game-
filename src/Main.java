@@ -13,6 +13,14 @@ public class Main {
         startGame();
     }
 
+    private static void pressAnyKeyToContinue() {
+        System.out.println("Press Enter key to continue...");
+        try {
+            System.in.read();
+        } catch (Exception e) {
+            // Handle exception
+        }
+    }
     private static void initializeGame() {
         npcs.add(new GuideNPC("Frank", "Player guide"));
         npcs.add(new BossNPC("Zed", "Math geek boss"));
@@ -23,30 +31,58 @@ public class Main {
         enemies.add(new Enemy("Sprain", 50, 20, 80, 60, 30));
 
         System.out.println("Welcome to Akhai!");
-        System.out.println("Choose your character:");
-        System.out.println("[1] Jamal (Berserker, Archer)");
-        System.out.println("[2] Baek (Knight, Magic)");
-        System.out.println("[3] Almond (Archer, Summon, Assassin)");
-        System.out.println("[4] Jinwoo Sun (All classes) - Test character");
+        pressAnyKeyToContinue();
 
-        int choice = getIntInput("Enter your choice: ", 1, 4);
+        boolean characterSelected = false;
 
-        switch (choice) {
-            case 1:
-                player = new Jamal();
-                break;
-            case 2:
-                player = new Baek();
-                break;
-            case 3:
-                player = new Almond();
-                break;
-            case 4:
-                player = new JinwooSun();
-                break;
+        while(!characterSelected){
+            System.out.println("Choose your character:");
+            System.out.println("[1] Jamal (Berserker, Archer)");
+            System.out.println("[2] Baek (Knight, Magic)");
+            System.out.println("[3] Almond (Archer, Summon, Assassin)");
+            System.out.println("[4] Jinwoo Sun (All classes) - Test character");
+
+            int choice = getIntInput("Enter your choice: ", 1, 4);
+
+            switch (choice) {
+                case 1:
+                    characterSelected = confirmCharacterSelection("Jamal", "A competitive athlete with anger management issues. His intense focus during competitions sometimes triggers uncontrollable rage episodes. His athletic precision translates to Archer abilities, while his rage issues manifest as Berserker powers.");
+                    if(characterSelected){
+                        player = new Jamal();
+                    }
+                    break;
+                case 2:
+                    characterSelected = confirmCharacterSelection("Baek", "A history graduate student specializing in medieval warfare and folklore. Spends weekends in historical reenactments and studying occult manuscripts. His knowledge of armor and combat tactics enables Knight abilities, while his study of occult works unlocks Mage potential.");
+                    if(characterSelected){
+                        player = new Baek();
+                    }
+                    break;
+                case 3:
+                    characterSelected = confirmCharacterSelection("Almond", "An animal rights activist and competitive archer who runs a wildlife sanctuary. Known for moving silently through forests to observe animals. Archery skills directly translate, while their deep connection with animals enables summoning abilities, and stealth experience enables assassin techniques.");
+                    if(characterSelected){
+                        player = new Almond();
+                    }
+                    break;
+                case 4:
+                    characterSelected = confirmCharacterSelection("Jinwoo Sun", "This is a test character");
+                    if(characterSelected){
+                        player = new JinwooSun();
+                    }
+                    break;
+            }
         }
 
         System.out.println("You have chosen " + player.getName() + "!");
+        pressAnyKeyToContinue();
+    }
+
+    private static boolean confirmCharacterSelection(String characterName, String description){
+        System.out.println("\n=== "+characterName+" ===");
+        System.out.println(description);
+        System.out.println("\n[1] Select Character\n[2] Back");
+
+        int confirm = getIntInput("Enter your choice: ", 1, 2);
+        return confirm == 1;
     }
 
     private static void startGame() {
@@ -67,6 +103,7 @@ public class Main {
             default:
                 System.out.println("[STORY] You are on a quest to find the treasure of \"Akhai\" to go back to the new world!");
         }
+        pressAnyKeyToContinue();
 
         while(gameRunning) {
             displayLevelMap();
@@ -74,6 +111,7 @@ public class Main {
 
             if (currentLevel > 6) { // Assuming 6 levels based on the map
                 System.out.println("Congratulations! You have completed the game!");
+                pressAnyKeyToContinue();
                 gameRunning = false;
             }
         }
@@ -96,6 +134,7 @@ public class Main {
                 break;
         }
         System.out.println("==================");
+        pressAnyKeyToContinue();
     }
 
     private static void handleLevelActions() {
@@ -146,8 +185,8 @@ public class Main {
     }
 
     private static void battle() {
-        double damage;
-        double actualDamage;
+        int damage;
+        int actualDamage;
 
         Enemy enemy = enemies.get((int)(Math.random() * enemies.size()));
 

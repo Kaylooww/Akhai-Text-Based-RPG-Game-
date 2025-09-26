@@ -17,9 +17,9 @@ abstract class Character extends Entity {
         this.ultimateAttack = attackDamage + (ultimateAttack * attackDamage);
     }
 
-    public abstract double useBasicAttack();
-    public abstract double useSkillAttack();
-    public abstract double useUltimateAttack();
+    public abstract int useBasicAttack();
+    public abstract int useSkillAttack();
+    public abstract int useUltimateAttack();
 
     public void gainExperience(int exp) {
         experience += exp;
