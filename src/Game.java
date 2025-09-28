@@ -9,8 +9,9 @@ public class Game {
     private List<NPC> npcs = new ArrayList<>();
     private int currentLevel = 1;
     private boolean gameRunning = true;
-
+    
     public void initializeGame() {
+        //npcs and enemies need to be finalized
         npcs.add(new GuideNPC("Frank", "Player guide"));
         npcs.add(new BossNPC("Zed", "Math geek boss"));
         npcs.add(new FortuneTellerNPC("Kyle", "Fortune teller"));
@@ -47,8 +48,8 @@ public class Game {
     }
 
     public void startGame() {
-        System.out.println("\n=== Beginning your adventure in Akira ===");
-        System.out.println("You are on a quest to find the power to go back to the new world.");
+        System.out.println("\n=== Beginning your adventure in Akhai ===");
+        System.out.println("You are on a quest to find the power to go back to your world.");
 
         while(gameRunning) {
             displayLevelMap();
@@ -60,7 +61,7 @@ public class Game {
             }
         }
     }
-
+    //Tarongon nato map
     public void displayLevelMap() {
         System.out.println("==== CURRENT MAP ====");
         switch(currentLevel) {
@@ -203,3 +204,4 @@ public class Game {
         return input;
     }
 }
+
