@@ -6,7 +6,7 @@ abstract class NPC {
         this.name = name;
         this.description = description;
     }
-
+//
     public abstract void interact();
 
     public String getName() {

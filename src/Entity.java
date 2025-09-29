@@ -1,19 +1,21 @@
 abstract class Entity {
     protected String name;
     protected int health;
-    protected int attackDamage;
+    protected int physicalDamage;
     protected int magicDamage;
     protected int defense;
-    protected int physicalResistance;
-    protected int magicResistance;
+    protected double physicalResistance;
+    protected double magicResistance;
     protected int speed;
-
-    public Entity(String name, int health, int attackDamage, int magicDamage, int defense, int magicResistance, int speed) {
+    protected double accuracy = 0.95;
+//
+    public Entity(String name, int health, int physicalDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed) {
         this.name = name;
         this.health = health;
-        this.attackDamage = attackDamage;
+        this.physicalDamage = physicalDamage;
         this.magicDamage = magicDamage;
         this.defense = defense;
+        this.physicalResistance = physicalResistance;
         this.magicResistance = magicResistance;
         this.speed = speed;
     }
@@ -23,8 +25,14 @@ abstract class Entity {
 
     public int takeDamage(double damage) {
         double actualDamage = damage;
+        int oldHealth = health;
         health -= (int) actualDamage;
-        if (health <= 0) health = 0;
+
+        if (health <= 0) {
+            health = 0;
+            System.out.println("💀 " + name + " has been defeated!");
+        }
+
         return (int) actualDamage;
     }
 

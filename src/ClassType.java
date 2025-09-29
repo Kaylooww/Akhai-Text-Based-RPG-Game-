@@ -1,3 +1,4 @@
 public enum ClassType {
-    KNIGHT, ARCHER, MAGIC, BERSERKER, SUMMON
+    //different classes for the characters
+    HAWKSEYE, BLADEMASTER, MAGE, BERSERKER, ASSASSIN, MAGICKNIGHT
 }

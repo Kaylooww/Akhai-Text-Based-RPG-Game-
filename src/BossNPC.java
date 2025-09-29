@@ -4,7 +4,7 @@ public class BossNPC extends NPC {
     public BossNPC(String name, String description) {
         super(name, description);
     }
-
+//
     @Override
     public void interact() {
         System.out.println("Zed: I am the math gett boss! Solve this: 2+2*2 = ?");

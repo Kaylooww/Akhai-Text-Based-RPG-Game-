@@ -7,15 +7,15 @@ class FortuneTellerNPC extends NPC {
 
     @Override
     public void interact() {
-        System.out.println("Kyle: Let me tell your fortune...");
+        System.out.println("\n🔮 " + name + " gazes into their crystal ball...");
         String[] fortunes = {
                 "You will face great challenges ahead!",
-                "A powerful ally will join you soon.",
-                "Beware of enemies in desert areas.",
+                "I sense a great power within you, traveler.",
+                "The spirits have granted you a gift - the ability to cheat death once.",
                 "Your determination will lead you to victory.",
-                "The key to success lies in teamwork."
+                "When death claims you, you shall be given a choice... To return with half your vitality, or to accept your fate."
         };
         Random rand = new Random();
         System.out.println("Kyle: " + fortunes[rand.nextInt(fortunes.length)]);
-    }
+    }//
 }
