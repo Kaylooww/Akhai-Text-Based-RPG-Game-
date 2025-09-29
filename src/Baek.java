@@ -8,16 +8,16 @@ class Baek extends Character {
 
     //Skills
     @Override
-    public double useBasicAttack() {
-        return basicAttack;
+    public int useBasicAttack() {
+        return (int) basicAttack;
     }
     @Override
-    public double useSkillAttack(){
+    public int useSkillAttack(){
         System.out.println("Baek uses Magic imbued swordsman!");
-        return skillAttack;
+        return (int) skillAttack;
     }
     @Override
-    public double useUltimateAttack(){
-        return ultimateAttack;
+    public int useUltimateAttack(){
+        return (int) ultimateAttack;
     }
 }

@@ -4,8 +4,9 @@ abstract class Entity {
     protected int attackDamage;
     protected int magicDamage;
     protected int defense;
-    protected int speed;
+    protected int physicalResistance;
     protected int magicResistance;
+    protected int speed;
 
     public Entity(String name, int health, int attackDamage, int magicDamage, int defense, int magicResistance, int speed) {
         this.name = name;
@@ -21,7 +22,7 @@ abstract class Entity {
     public abstract int attack();
 
     public int takeDamage(double damage) {
-        double actualDamage = damage - defense;
+        double actualDamage = damage;
         health -= (int) actualDamage;
         if (health <= 0) health = 0;
         return (int) actualDamage;
@@ -32,20 +33,5 @@ abstract class Entity {
     }
     public int getHealth() {
         return health;
-    }
-    public int getAttack() {
-        return attackDamage;
-    }
-    public int getMagicDamage() {
-        return magicDamage;
-    }
-    public int getDefense() {
-        return defense;
-    }
-    public int getSpeed() {
-        return speed;
-    }
-    public int getMagicResistance() {
-        return magicResistance;
     }
 }
