@@ -4,14 +4,22 @@ abstract class Character extends Entity {
     protected int energy = 100;
     protected int experience = 0;
     protected int level = 1;
+    protected double basicAttack;
+    protected double skillAttack;
+    protected double ultimateAttack;
     protected List<ClassType> classes;
 
-    public Character(String name, List<ClassType> classes, int health, int attackDamage, int magicDamage, int armor, int speed, int magicResistance) {
-        super(name, health, attackDamage, magicDamage, armor, speed, magicResistance);
+    public Character(String name, List<ClassType> classes, double basicAttack, double skillAttack, double ultimateAttack, int attackDamage, int magicDamage, int magicResistance, int defense, int speed) {
+        super(name, 100, attackDamage, magicDamage, defense, magicResistance, speed);
         this.classes = classes;
+        this.basicAttack = attackDamage + (basicAttack * attackDamage);
+        this.skillAttack = attackDamage + (skillAttack * attackDamage);
+        this.ultimateAttack = attackDamage + (ultimateAttack * attackDamage);
     }
 
-    public abstract void useSpecialAbility();
+    public abstract int useBasicAttack();
+    public abstract int useSkillAttack();
+    public abstract int useUltimateAttack();
 
     public void gainExperience(int exp) {
         experience += exp;
@@ -28,7 +36,7 @@ abstract class Character extends Entity {
         // Improve stats on level up
         health += 20;
         attackDamage += 5;
-        armor += 3;
+        defense += 3;
         speed += 2;
         magicResistance += 3;
         magicDamage += 4;
@@ -41,7 +49,7 @@ abstract class Character extends Entity {
         System.out.println("Classes: " + classes);
         System.out.println("HP: " + health);
         System.out.println("Attack: " + attackDamage);
-        System.out.println("Armor: " + armor);
+        System.out.println("Armor: " + defense);
         System.out.println("Speed: " + speed);
         System.out.println("Energy: " + energy);
         System.out.println("Magic Defense: " + magicResistance);

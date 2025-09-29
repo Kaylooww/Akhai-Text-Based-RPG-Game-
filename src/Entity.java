@@ -3,54 +3,35 @@ abstract class Entity {
     protected int health;
     protected int attackDamage;
     protected int magicDamage;
-    protected int armor;
-    protected int speed;
+    protected int defense;
+    protected int physicalResistance;
     protected int magicResistance;
+    protected int speed;
 
-    public Entity(String name, int health, int attackDamage, int magicDamage, int armor, int speed, int magicResistance) {
+    public Entity(String name, int health, int attackDamage, int magicDamage, int defense, int magicResistance, int speed) {
         this.name = name;
         this.health = health;
         this.attackDamage = attackDamage;
         this.magicDamage = magicDamage;
-        this.armor = armor;
-        this.speed = speed;
+        this.defense = defense;
         this.magicResistance = magicResistance;
+        this.speed = speed;
     }
 
+    //This method is mostly used for the Enemy class
     public abstract int attack();
 
-    public int takeDamage(int damage) {
-        int actualDamage = Math.max(1, damage - armor / 10);
-        health -= actualDamage;
+    public int takeDamage(double damage) {
+        double actualDamage = damage;
+        health -= (int) actualDamage;
         if (health <= 0) health = 0;
-        return actualDamage;
+        return (int) actualDamage;
     }
 
     public String getName() {
         return name;
     }
-
     public int getHealth() {
         return health;
-    }
-
-    public int getAttack() {
-        return attackDamage;
-    }
-
-    public int getMagicDamage() {
-        return magicDamage;
-    }
-
-    public int getArmor() {
-        return armor;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public int getMagicResistance() {
-        return magicResistance;
     }
 }
