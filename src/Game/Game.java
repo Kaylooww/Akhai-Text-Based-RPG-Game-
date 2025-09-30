@@ -1,3 +1,13 @@
+package Game;
+
+import Entities.Enemies.Enemy;
+import Entities.Characters.*;
+import Entities.Characters.Character;
+import NPC.BossNPC;
+import NPC.FortuneTellerNPC;
+import NPC.GuideNPC;
+import NPC.NPC;
+
 import java.util.*;
 
 public class Game {
@@ -202,7 +212,7 @@ public class Game {
             int scaledMagic = baseStats - 10 + (int)(Math.random() * 20);
             int scaledDefense = baseStats + (int)(Math.random() * 15);
 
-            /*enemies.add(new Enemy(enemyName, scaledAttack, scaledMagic,
+            /*enemies.add(new Entities.Enemies.Enemy(enemyName, scaledAttack, scaledMagic,
                     scaledDefense, baseStats, scaledDefense - 10));*/
         }
     }
@@ -259,14 +269,14 @@ public class Game {
             }
 
             if (choice != 4) {
-                int actualDamage = enemy.takeDamage(damage, enemy.defense, enemy.physicalResistance, enemy.magicResistance);
+                int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
                 System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
             }
 
-            // Enemy turn only if still alive and player didn't flee
+            // Entities.Enemies.Enemy turn only if still alive and player didn't flee
             if (enemy.getHealth() > 0 && choice != 4) {
                 int enemyDamage = enemy.attack();
-                int actualEnemyDamage = player.takeDamage(enemyDamage, player.defense, player.physicalResistance, player.magicResistance);
+                int actualEnemyDamage = player.takeDamage(enemyDamage, player.getDefense(), player.getPhysicalResistance(), player.getMagicResistance());
                 System.out.println(enemy.getName() + " dealt " + actualEnemyDamage + " damage to you!");
 
                 // Check if player died and can resurrect
@@ -282,7 +292,7 @@ public class Game {
                         // Player gets a free turn after resurrection
                         System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
                         damage = player.useBasicAttack();
-                        int actualDamage = enemy.takeDamage(damage, enemy.defense, enemy.physicalResistance, enemy.magicResistance);
+                        int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
                         System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
                     } else {
                         System.out.println("You accept your fate...");
@@ -308,12 +318,12 @@ public class Game {
         }
 
         // Partial recovery but lose some progress
-        player.health = player.getMaxHealth() / 4;
-        System.out.println("You wake up with " + player.health + " HP, having lost some items during the escape.");
+        player.setHealth(player.getMaxHealth() / 4);
+        System.out.println("You wake up with " + player.getHealth() + " HP, having lost some items during the escape.");
 
         // Lose some experience but not below current level
-        int expLoss = (int)(player.experience * 0.1);
-        player.experience = Math.max(0, player.experience - expLoss);
+        int expLoss = (int)(player.getExperience() * 0.1);
+        player.setExperience(Math.max(0, player.getExperience() + expLoss));
         System.out.println("You lost " + expLoss + " experience points during the retreat.");
     }
 
@@ -332,7 +342,7 @@ public class Game {
         // Chance for energy restoration
         if (Math.random() > 0.5) {
             System.out.println("✨ Energy partially restored!");
-            player.energy = Math.min(100, player.energy + 25);
+            player.setEnergy(Math.min(100, player.getEnergy() + 25));
         }
     }
 

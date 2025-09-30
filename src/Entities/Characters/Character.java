@@ -1,6 +1,10 @@
+package Entities.Characters;
+
+import Entities.Entity;
+
 import java.util.*;
 
-abstract class Character extends Entity {
+public abstract class Character extends Entity {
     protected int maxHealth; // Track maximum health for resurrection
     protected int maxEnergy;
     protected int energy = 100;
@@ -21,6 +25,14 @@ abstract class Character extends Entity {
         this.ultimateAttack = physicalDamage + (ultimateAttack * physicalDamage);
         this.maxHealth = health; // Initialize max health
     }
+
+    public void setExperience(int experience) {this.experience = experience;}
+    public void setEnergy(int energy) {this.energy = energy;}
+
+    public int getExperience(){
+        return experience;
+    }
+    public int getEnergy(){return energy;}
 
     public abstract int useBasicAttack();
     public abstract int useSkillAttack();

@@ -1,7 +1,9 @@
-//Disregarded
+package Entities;//Disregarded
+
+import Entities.Characters.Character;
+import Entities.Characters.ClassType;
 
 import java.util.List;
-import java.util.Random;
 
 abstract class Player extends Character {
     public Player(String name, int health, List<ClassType> classes, double basicAttack, double skillAttack, double ultimateAttack) {

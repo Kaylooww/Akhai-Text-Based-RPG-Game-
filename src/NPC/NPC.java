@@ -1,4 +1,6 @@
-abstract class NPC {
+package NPC;
+
+public abstract class NPC {
     protected String name;
     protected String description;
 

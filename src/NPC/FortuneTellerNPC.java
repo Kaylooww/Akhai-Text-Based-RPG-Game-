@@ -1,6 +1,8 @@
+package NPC;
+
 import java.util.Random;
 
-class FortuneTellerNPC extends NPC {
+public class FortuneTellerNPC extends NPC {
     public FortuneTellerNPC(String name, String description) {
         super(name, description);
     }

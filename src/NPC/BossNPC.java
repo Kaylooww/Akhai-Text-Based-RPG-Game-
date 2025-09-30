@@ -1,3 +1,5 @@
+package NPC;
+
 import java.util.Scanner;
 
 public class BossNPC extends NPC {

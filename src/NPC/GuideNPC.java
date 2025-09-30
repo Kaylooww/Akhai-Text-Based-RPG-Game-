@@ -1,4 +1,6 @@
-class GuideNPC extends NPC {
+package NPC;
+
+public class GuideNPC extends NPC {
     public GuideNPC(String name, String description) {
         super(name, description);
     }

@@ -1,4 +1,6 @@
-abstract class Entity {
+package Entities;
+
+public abstract class Entity {
     protected String name;
     protected int health;
     protected int physicalDamage;
@@ -36,10 +38,33 @@ abstract class Entity {
         return (int) actualDamage;
     }
 
+    public void setHealth(int health) {this.health = health;}
+
     public String getName() {
         return name;
     }
     public int getHealth() {
         return health;
+    }
+    public int getPhysicalDamage(){
+        return physicalDamage;
+    }
+    public int getMagicDamage(){
+        return magicDamage;
+    }
+    public int getDefense(){
+        return defense;
+    }
+    public double getPhysicalResistance(){
+        return physicalResistance;
+    }
+    public double getMagicResistance(){
+        return magicResistance;
+    }
+    public int getSpeed(){
+        return speed;
+    }
+    public double getAccuracy(){
+        return accuracy;
     }
 }

@@ -1,8 +1,10 @@
+package Entities.Characters;
+
 import java.util.Arrays;
 
-class RuneKnight extends Character{
-    public RuneKnight(String name) {
-        super(name, 285, Arrays.asList(ClassType.MAGICKNIGHT), 0.3, 0.5, 0.7, 18, 22, 15, 0.10, 0.10, 20);
+public class Berserker extends Character{
+    public Berserker(String name) {
+        super(name, 330, Arrays.asList(ClassType.BERSERKER), 0.3, 0.5, 0.7, 27, 0, 12, 0.08, 0.08, 19);
     }
 //
     @Override

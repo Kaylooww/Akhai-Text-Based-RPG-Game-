@@ -1,6 +1,10 @@
+package Entities.Enemies;
+
+import Entities.Entity;
+
 import java.util.Random;
 
-class Enemy extends Entity {
+public class Enemy extends Entity {
     public Enemy(String name, int health, int attackDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed) {
         super(name, health, attackDamage, magicDamage, defense, physicalResistance, magicResistance, speed);
     }

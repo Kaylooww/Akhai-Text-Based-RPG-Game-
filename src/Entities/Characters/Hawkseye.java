@@ -1,8 +1,10 @@
+package Entities.Characters;
+
 import java.util.Arrays;
 
-class Blademaster extends Character{
-    public Blademaster(String name) {
-        super(name, 255, Arrays.asList(ClassType.BLADEMASTER), 0.3, 0.5, 0.7, 23, 0, 15, 0.09, 0.09, 20);
+public class Hawkseye extends Character{
+    public Hawkseye(String name) {
+        super(name, 245, Arrays.asList(ClassType.HAWKSEYE), 0.3, 0.5, 0.7, 31, 0, 11, 0.10, 0.10, 20);
     }
 //
     @Override
