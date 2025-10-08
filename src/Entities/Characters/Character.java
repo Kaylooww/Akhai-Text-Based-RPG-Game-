@@ -2,42 +2,48 @@ package Entities.Characters;
 
 import Entities.Entity;
 import Items.*;
-
-import java.util.*;
+import Items.Weapons.Weapon;
+import Skills.*;
 
 public abstract class Character extends Entity {
-    protected int maxEnergy;
-    protected int energy = 100;
+    protected int maxEnergy = 100;
+    protected int energy = 0;
     protected int level = 1;
     protected int experience = 0;
     protected int experienceNeeded = 100;
-    protected int currency = 100;
+    protected int currency = 100; //money
     protected Inventory inventory = new Inventory();
+    protected Item equippedWeapon;
+    protected Skill basicAttack;
+    protected Skill skillAttack;
+    protected Skill ultimateAttack;
+    /*
     protected double basicAttack;
     protected double skillAttack;
     protected double ultimateAttack;
+     */
     protected ClassType classType;
     protected boolean hasResurrected = false; // New resurrection flag
 
-    public Character(String name, int health, ClassType classType, double basicAttack, double skillAttack, double ultimateAttack, int physicalDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed) {
+    public Character(String name, int health, ClassType classType, int physicalDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed) {
         super(name, health, physicalDamage, magicDamage, defense, physicalResistance, magicResistance, speed);
         this.classType = classType;
+        this.equippedWeapon = new Weapon();
+        this.basicAttack = new UnarmedSkill("Punch", "", 1.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.skillAttack = new UnarmedSkill("Super Punch", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "", 2.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+        /*
         this.basicAttack = basicAttack;
         this.skillAttack = skillAttack;
         this.ultimateAttack = ultimateAttack;
+         */
     }
 
-    public void setExperience(int experience) {this.experience = experience;}
-    public void setEnergy(int energy) {this.energy = energy;}
-
-    public int getExperience(){
-        return experience;
-    }
-    public int getEnergy(){return energy;}
-
+    /*
     public abstract int useBasicAttack();
     public abstract int useSkillAttack();
     public abstract int useUltimateAttack();
+     */
 
     public void gainExperience(int exp) {
         experience += exp;
@@ -89,11 +95,9 @@ public abstract class Character extends Entity {
 
         return;
     }
-
     public boolean hasResurrected() {
         return hasResurrected;
     }
-
     // Update displayStats to show resurrection status
     public void displayStats() {
         System.out.println("\n=== " + name + "'s STATS ===");
@@ -110,11 +114,11 @@ public abstract class Character extends Entity {
         System.out.println("Resurrection: " + (hasResurrected ? "❌ USED" : "✅ AVAILABLE"));
         System.out.println("====================");
     }
-
     public void displayInventory(){
         Item[] items = inventory.getItems();
         System.out.println("========== "+name+"'s INVENTORY ==========");
         System.out.println("CURRENCY: "+currency);
+        System.out.println("\nWeapon: "+ equippedWeapon.getName());
         for(int i = 0; i < inventory.getMaxCapacity(); i++){
             System.out.printf("[%d] ",i+1);
             if (items == null || i >= items.length) {
@@ -127,7 +131,6 @@ public abstract class Character extends Entity {
             System.out.println();
         }
     }
-
     public void obtainItem(Item item) {
         Item[] items = inventory.getItems();
         if (!inventory.getIsFull()) {
@@ -151,7 +154,46 @@ public abstract class Character extends Entity {
             System.out.println("Inventory is full!");
         }
     }
+    public void equipWeapon(Weapon weapon){
+        this.equippedWeapon = weapon;
+        this.basicAttack = weapon.getBasicAttack();
+        this.skillAttack = weapon.getSkillAttack();
+        this.ultimateAttack = weapon.getUltimateAttack();
+        System.out.println(equippedWeapon.getName()+" equipped!");
+    }
+    public  void unequipWeapon(){
+        System.out.println(equippedWeapon.getName()+" unequipped!");
+        this.equippedWeapon = new Weapon();
+        this.basicAttack = new UnarmedSkill("Punch", "", 1.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.skillAttack = new UnarmedSkill("Super Punch", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "", 2.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+    }
+    public void setExperience(int experience) {this.experience = experience;}
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
 
+    public int getExperience(){
+        return experience;
+    }
+    public int getEnergy(){
+        return energy;
+    }
+    public int getMaxEnergy(){
+        return maxEnergy;
+    }
+    public Skill getBasicAttack(){
+        return basicAttack;
+    }
+    public Skill getSkillAttack(){
+        return skillAttack;
+    }
+    public Skill getUltimateAttack(){
+        return ultimateAttack;
+    }
+    public Inventory getInventory() {
+        return inventory;
+    }
     public ClassType getClassType(){
         return classType;
     }

@@ -4,13 +4,14 @@ import java.util.Arrays;
 
 public class Shinobi extends Character{
     public Shinobi(String name) {
-        super(name, 245, ClassType.ASSASSIN, 1.0, 1.4, 2.0, 25, 0, 10, 0.10, 0.10, 35);
+        super(name, 245, ClassType.ASSASSIN, 25, 0, 10, 0.10, 0.10, 35);
     }
     //
     @Override
     public int attack(){
         return 0;
     }
+    /*
     @Override
     public int useBasicAttack(){
         double basicDamage = basicAttack * physicalDamage;
@@ -26,4 +27,5 @@ public class Shinobi extends Character{
         double ultDamage = ultimateAttack * physicalDamage;
         return (int) ultDamage;
     }
+     */
 }

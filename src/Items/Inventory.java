@@ -14,12 +14,16 @@ public class Inventory {
         this.isFull = false;
     }
 
+    public void setItem(Item item, int index) {
+        this.items[index] = item;
+    }
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
     public void setIsFull(boolean isFull) {
         this.isFull = isFull;
     }
+
 
     public int getMaxCapacity() {
         return maxCapacity;

@@ -1,16 +1,19 @@
 package Entities.Characters;
 
+import Skills.UnarmedSkill;
+
 import java.util.Arrays;
 
 public class Blademaster extends Character{
     public Blademaster(String name) {
-        super(name, 255, ClassType.BLADEMASTER, 1.0, 1.4, 2.0, 23, 0, 15, 0.09, 0.09, 20);
+        super(name, 255, ClassType.BLADEMASTER, 23, 0, 15, 0.09, 0.09, 20);
     }
 //
     @Override
     public int attack(){
         return 0;
     }
+    /*
     @Override
     public int useBasicAttack(){
         double basicDamage = basicAttack * physicalDamage;
@@ -26,4 +29,5 @@ public class Blademaster extends Character{
         double ultDamage = ultimateAttack * physicalDamage;
         return (int) ultDamage;
     }
+     */
 }

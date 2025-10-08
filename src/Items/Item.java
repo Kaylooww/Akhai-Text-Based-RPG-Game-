@@ -1,11 +1,12 @@
 package Items;
 
-import Entities.Characters.DamageType;
+import Entities.Characters.Character;
 
 public abstract class Item {
     protected String itemId;
     protected String name;
     protected String description;
+    protected ItemType  itemType;
     protected int maxStack;
     protected int quantity;
     protected int value;
@@ -14,9 +15,9 @@ public abstract class Item {
     protected boolean isEquippable;
 
     public Item(){
-        this.itemId = "EmptyItemId";
-        this.name = "EmptyName";
-        this.description = "EmptyDescription";
+        this.itemId = "None";
+        this.name = "None";
+        this.description = "None";
         this.maxStack = 0;
         this.quantity = 0;
         this.value = 0;
@@ -35,6 +36,7 @@ public abstract class Item {
         this.isEquippable = isEquippable;
     }
 
+    public abstract void use(Character player);
     public abstract void displayInfo();
 
     public void setQuantity(int quantity) {
@@ -49,6 +51,9 @@ public abstract class Item {
     }
     public String getName(){
         return name;
+    }
+    public ItemType getItemType() {
+        return itemType;
     }
     public int getQuantity(){
         return quantity;

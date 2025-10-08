@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class Player extends Character {
     public Player(String name, int health, ClassType classType, double basicAttack, double skillAttack, double ultimateAttack) {
-        super(name, health, classType, basicAttack, skillAttack, ultimateAttack, 20, 20, 50, 50.0, 50.0, 50);
+        super(name, health, classType, 20, 20, 50, 50.0, 50.0, 50);
     }
 //
     /*private void initializeStats() {

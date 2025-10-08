@@ -4,13 +4,14 @@ import java.util.Arrays;
 
 public class RuneKnight extends Character{
     public RuneKnight(String name) {
-        super(name, 285, ClassType.MAGICKNIGHT, 1.0, 1.4, 2.0, 0, 22, 15, 0.10, 0.10, 20);
+        super(name, 285, ClassType.MAGICKNIGHT, 0, 22, 15, 0.10, 0.10, 20);
     }
 //
     @Override
     public int attack(){
         return 0;
     }
+    /*
     @Override
     public int useBasicAttack(){
         double basicDamage = basicAttack * magicDamage;
@@ -26,4 +27,5 @@ public class RuneKnight extends Character{
         double ultDamage = ultimateAttack * magicDamage;
         return (int) ultDamage;
     }
+     */
 }

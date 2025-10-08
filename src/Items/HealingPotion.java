@@ -12,9 +12,16 @@ public class HealingPotion extends Consumable{
 
     @Override
     public void use(Character player){
-        System.out.println("You used item "+name);
-        player.setHealth(player.getHealth()+healingAmount);
-        quantity--;
+        if(player.getHealth() < player.getMaxHealth()){
+            player.setHealth(player.getHealth()+healingAmount);
+            if(player.getHealth() >= player.getMaxHealth()){
+                player.setHealth(player.getMaxHealth());
+            }
+            quantity--;
+        }else{
+            System.out.println("HP is full!");
+        }
+
     }
     @Override
     public void displayInfo(){

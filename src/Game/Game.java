@@ -4,10 +4,14 @@ import Entities.Enemies.Enemy;
 import Entities.Characters.*;
 import Entities.Characters.Character;
 import Items.*;
+import Items.Weapons.Weapon;
+import Items.Weapons.WeaponType;
 import NPC.BossNPC;
 import NPC.FortuneTellerNPC;
 import NPC.GuideNPC;
 import NPC.NPC;
+import Skills.WeaponSkill;
+import TextFormat.ColorUtil;
 
 import java.util.*;
 
@@ -17,12 +21,14 @@ public class Game {
     private List<Enemy> enemies = new ArrayList<>();
     private List<NPC> npcs = new ArrayList<>();
     private List<Item>  items = new ArrayList<>();
+    private List<Weapon> weapons = new ArrayList<>();
     private int currentChapter = 1;
     private boolean gameRunning = true;
     private boolean inBattle = false;
     private final int MAX_LEVEL = 6;
     private boolean[] levelsCompleted = new boolean[MAX_LEVEL + 1];
-    
+
+    //Game
     public void initializeGame() {
         //npcs and enemies need to be finalized
         npcs.add(new GuideNPC("Frank", "Companion"));
@@ -64,6 +70,12 @@ public class Game {
         items.add(new SpeedPotion("SP002", "Speed Potion", "<Empty>", 12, 1, 5, Rarity.RARE, 8));
         items.add(new SpeedPotion("SP003", "Greater Speed Potion", "<Empty>", 12, 1, 5, Rarity.EPIC, 12));
         items.add(new SpeedPotion("SP004", "Legendary Speed Potion", "<Empty>", 12, 1, 5, Rarity.LEGENDARY, 20));
+        items.add(new Weapon("BW001", "Wooden Bow", WeaponType.BOW, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+        items.add(new Weapon("SW001", "Wooden Sword", WeaponType.SWORD, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+        items.add(new Weapon("MGS001", "Wooden Staff", WeaponType.MAGIC_STAFF, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.MAGICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+        items.add(new Weapon("BS001", "Wooden Broadsword", WeaponType.BROADSWORD, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+        items.add(new Weapon("DR001", "Wooden Dagger", WeaponType.DAGGER, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+        items.add(new Weapon("MGSW001", "Wooden Magic Sword", WeaponType.MAGIC_SWORD, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.MAGICAL, TargetType.SINGLE), 20, Rarity.COMMON));
 
         System.out.println("Welcome to Akhai!");
         delay(1000);
@@ -81,6 +93,16 @@ public class Game {
         switch (choice) {
             case 1:
                 player = new Hawkseye("Hawkseye");
+                /*
+                for(int i = 0; i < weapons.size(); i++){
+                    Weapon weapon = weapons.get(i);
+                    switch(weapon.getItemId()){
+                        case "BW001":
+                            weapon.setQuantity(1);
+                            player.equipWeapon(weapon);
+                    }
+                }
+                 */
                 break;
             case 2:
                 player = new Blademaster("Blademaster");
@@ -103,57 +125,14 @@ public class Game {
         }
 
         System.out.println("You have chosen " + player.getName() + "!");
-
-        for(int i = 0; i < items.size(); i++){
-            Item item = items.get(i);
-            switch(player.getClassType()){
-                case HAWKSEYE:
-                case BLADEMASTER:
-                case BERSERKER:
-                case ASSASSIN:
-                    switch (item.getItemId()){
-                        case "PDP001":
-                        case "HP001":
-                        case "EP001":
-                        case "SHP001":
-                        case "SP001":
-                            item.setQuantity(5);
-                            player.obtainItem(item);
-                    }
-                    break;
-                case MAGE:
-                case MAGICKNIGHT:
-                    switch (item.getItemId()){
-                        case "MDP001":
-                        case "HP001":
-                        case "EP001":
-                        case "SHP001":
-                        case "SP001":
-                            item.setQuantity(5);
-                            player.obtainItem(item);
-                    }
-                    break;
-                case SUNJINWOO:
-                    switch (item.getItemId()){
-                        case "HP004":
-                        case "EP004":
-                        case "SHP004":
-                        case "PDP004":
-                        case "MDP004":
-                        case "SP004":
-                            item.setQuantity(99);
-                            player.obtainItem(item);
-                    }
-                    break;
-            }
-        }
         delay(2000);
-    }
 
-    public void startGame() {
         System.out.println("\n=== Beginning your adventure in Akhai ===");
         System.out.println("You are on a quest to find the power to go back to your world.");
         delay(3000);
+    }
+    public void startGame() {
+        addStarterPack(player, items);
 
         while(gameRunning) {
             displayLevelMap();
@@ -165,6 +144,8 @@ public class Game {
             }
         }
     }
+
+    //Exploration
     //Tarongon nato map
     public void displayLevelMap() {
         System.out.println("\n🗺️  === CURRENT MAP ===");
@@ -216,7 +197,8 @@ public class Game {
                 player.displayStats();
                 break;
             case 3:
-                player.displayInventory();
+                //player.displayInventory();
+                openInventory(player);
                 break;
             case 4:
                 checkResurrectionStatus();
@@ -283,34 +265,20 @@ public class Game {
         scaleEnemiesForCurrentLevel();
         System.out.println("New challenges await in " + getLevelName(currentChapter) + "!");
     }
-    private void scaleEnemiesForCurrentLevel() {
-        enemies.clear();
-
-        // Create appropriately scaled enemies for current level
-        int baseStats = 50 + (currentChapter * 10);
-        String[] enemyNames = getEnemyNamesForLevel(currentChapter);
-
-        for (String enemyName : enemyNames) {
-            int scaledAttack = baseStats + (int)(Math.random() * 20);
-            int scaledMagic = baseStats - 10 + (int)(Math.random() * 20);
-            int scaledDefense = baseStats + (int)(Math.random() * 15);
-
-            /*enemies.add(new Entities.Enemies.Enemy(enemyName, scaledAttack, scaledMagic,
-                    scaledDefense, baseStats, scaledDefense - 10));*/
+    public void talkToNPC() {
+        System.out.println("Which NPC would you like to talk to?");
+        for (int i = 0; i < npcs.size(); i++) {
+            System.out.println((i + 1) + ". " + npcs.get(i).getName() + " - " + npcs.get(i).getDescription());
         }
-    }
-    private String[] getEnemyNamesForLevel(int level) {
-        switch(level) {
-            case 1: return new String[]{"Desert Clause", "Sand Stalker", "Dune Crawler"};
-            case 2: return new String[]{"Fungal Spore", "Lume Beast", "Glow Worm"};
-            case 3: return new String[]{"Star Fragment", "Cosmic Horror", "Void Walker"};
-            case 4: return new String[]{"Crystal Golem", "Gem Eater", "Shard Warrior"};
-            case 5: return new String[]{"Root Guardian", "Ancient Protector", "World Eater"};
-            case 6: return new String[]{"Final Boss", "Ultimate Challenge", "Destiny's End"};
-            default: return new String[]{"Mysterious Foe"};
-        }
+
+        int choice = getIntInput("Enter your choice: ", 1, npcs.size());
+        NPC selectedNPC = npcs.get(choice - 1);
+
+        System.out.println("You approach " + selectedNPC.getName() + "...");
+        selectedNPC.interact();
     }
 
+    //Battle
     public void battle() {
         inBattle = true;
         int turns = 1;
@@ -325,16 +293,20 @@ public class Game {
         int enemyCurrentSpeed = enemy.getSpeed();
         int enemyOriginalSpeed = enemy.getSpeed();
 
-        while (enemy.getHealth() > 0 && player.getHealth() > 0) {
+        while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
             String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
+            String playerEnergyBar = createEnergyBar(player.getEnergy(), player.getMaxEnergy(), 20);
             String enemyHealthBar =  createHealthBar(enemy.getHealth(), enemy.getMaxHealth(), 20);
+
             System.out.println("\n========== TURN "+(turns++)+" ==========");
-            System.out.print(player.getName() + playerHealthBar);
-            System.out.print(enemy.getName() + enemyHealthBar);
+            System.out.println("\t\t"+enemy.getName());
+            System.out.println(ColorUtil.red(enemyHealthBar));
+            System.out.println("\n\t\t"+player.getName());
+            System.out.println(ColorUtil.green(playerHealthBar));
+            System.out.println(playerEnergyBar);
 
             //Uncomment the line below if you want to check the speed during combat
             //System.out.println("Speed - " + player.getName() + ": " + playerCurrentSpeed + ", " + enemy.getName() + ": " + enemyCurrentSpeed);
-
             boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
             System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
 
@@ -371,7 +343,8 @@ public class Game {
                     player.resurrect();
                     // Player gets a free turn after resurrection
                     System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
-                    damage = player.useBasicAttack();
+                    damage = player.getBasicAttack().execute(player);
+                    //damage = player.useBasicAttack();
                     int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
                     System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
 
@@ -382,7 +355,6 @@ public class Game {
                 }
             }
         }
-
         playerHealthCheck(enemy, baseExp);
         inBattle = false;
     }
@@ -391,7 +363,14 @@ public class Game {
         int empty = length - filled;
 
         String bar = "█".repeat(filled) + "░".repeat(empty);
-        return String.format(" HP: %s %d/%d\n", bar, currentHealth, maxHealth);
+        return String.format("%s %d/%d", bar, currentHealth, maxHealth);
+    }
+    private String createEnergyBar(int currentEnergy, int maxEnergy, int length) {
+        int filled = (currentEnergy * length) / maxEnergy;
+        int empty = length - filled;
+
+        String bar = "█".repeat(filled) + "░".repeat(empty);
+        return String.format(ColorUtil.purple("%s %d/%d"), bar, currentEnergy, maxEnergy);
     }
     private boolean checkSpeed(int playerCurrentSpeed, int enemyCurrentSpeed){
         if (playerCurrentSpeed >= enemyCurrentSpeed) {
@@ -411,9 +390,11 @@ public class Game {
 
         if (damage != -1) {
             if (isPlayerTurn) {
-                int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
-                System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
-                delay(1000);
+                if(damage != 0){
+                    int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
+                    System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
+                    delay(1000);
+                }
             } else {
                 int actualEnemyDamage = player.takeDamage(damage, player.getDefense(), player.getPhysicalResistance(), player.getMagicResistance());
                 System.out.println(enemy.getName() + " dealt " + actualEnemyDamage + " damage to you!");
@@ -423,15 +404,76 @@ public class Game {
         return damage;
     }
     private int playerAction() {
-        System.out.println("[1] Basic Attack");
-        System.out.println("[2] Use Skill");
-        System.out.println("[3] Use Ultimate");
-        System.out.println("[4] Try to flee");
-
-        int choice = getIntInput("Choose action: ", 1, 4);
-
+        boolean hasActed = false;
         int damage = 0;
-        switch(choice) {
+        int choice;
+
+        while(!hasActed) {
+            System.out.println("========== SELECT ACTION ==========");
+            System.out.println("[1] Fight");
+            System.out.println("[2] Inventory");
+            System.out.println("[3] Run");
+
+            choice = getIntInput("Choose action: ", 1, 3);
+
+            switch(choice) {
+                case 1:
+                    System.out.println("========== FIGHT ==========");
+                    System.out.println("[1] Use Basic Attack");
+                    System.out.println("[2] Use Skill");
+                    System.out.println("[3] Use Ultimate");
+                    System.out.println("[4] Back");
+
+                    choice = getIntInput("Choose action: ", 1, 4);
+
+                    switch(choice) {
+                        case 1:
+                            if(player.getEnergy() >= player.getBasicAttack().getEnergyCost()){
+                                damage = player.getBasicAttack().execute(player);
+                                //damage = player.useBasicAttack();
+                                hasActed = true;
+                            }else{
+                                System.out.println("You need "+player.getBasicAttack().getEnergyCost()+" energy before you can use this skill.");
+                            }
+                            break;
+                        case 2:
+                            if(player.getEnergy() >= player.getSkillAttack().getEnergyCost()){ //Must only be used when energy is at certain amount (optional maybe)
+                                damage = player.getSkillAttack().execute(player);
+                                //damage = player.useSkillAttack();
+                                hasActed = true;
+                            }else{
+                                System.out.println("You need "+player.getSkillAttack().getEnergyCost()+" energy before you can use this skill.");
+                            }
+                            break;
+                        case 3:
+                            if(player.getEnergy() >= player.getUltimateAttack().getEnergyCost()){ //Must only be used when energy is at maximum
+                                damage = player.getUltimateAttack().execute(player);
+                                //damage = player.useUltimateAttack();
+                                hasActed = true;
+                            }else{
+                                System.out.println("You need "+player.getUltimateAttack().getEnergyCost()+" energy before you can use this skill.");
+                            }
+                            break;
+                    }
+                    break;
+                case 2:
+                    hasActed = openInventory(player) == 1;
+                    break;
+                case 3:
+                    if (Math.random() > 0.7) {
+                        System.out.println("You successfully fled!");
+                        inBattle = false;
+                        return -1;
+                    } else {
+                        System.out.println("You failed to flee!");
+                    }
+                    hasActed = true;
+                    break;
+            }
+        }
+
+
+        /*switch(choice) {
             case 1:
                 damage = player.useBasicAttack();
                 break;
@@ -450,7 +492,7 @@ public class Game {
                     System.out.println("You failed to flee!");
                 }
                 break;
-        }
+        }*/
         return damage;
     }
     private int enemyAction(Enemy enemy) {
@@ -482,25 +524,27 @@ public class Game {
         System.out.println("You lost " + expLoss + " experience points during the retreat.");
     }
     private void handleVictory(Enemy enemy, int baseExp) {
-        System.out.println("🎉 You defeated " + enemy.getName() + "!");
-        delay(500);
-        System.out.println("💰 Gained " + baseExp + " experience!");
-        delay(500);
-        player.gainExperience(baseExp);
-
-        // Bonus for not using resurrection
-        if (!player.hasResurrected()) {
-            int bonusExp = (int)(baseExp * 0.2);
-            System.out.println("⭐ Bonus " + bonusExp + " experience for completing the battle without resurrection!");
+        if(enemy.getHealth() <= 100){
+            System.out.println("🎉 You defeated " + enemy.getName() + "!");
             delay(500);
-            player.gainExperience(bonusExp);
-        }
-
-        // Chance for energy restoration
-        if (Math.random() > 0.5) {
-            System.out.println("✨ Energy partially restored!");
+            System.out.println("💰 Gained " + baseExp + " experience!");
             delay(500);
-            player.setEnergy(Math.min(100, player.getEnergy() + 25));
+            player.gainExperience(baseExp);
+
+            // Bonus for not using resurrection
+            if (!player.hasResurrected()) {
+                int bonusExp = (int)(baseExp * 0.2);
+                System.out.println("⭐ Bonus " + bonusExp + " experience for completing the battle without resurrection!");
+                delay(500);
+                player.gainExperience(bonusExp);
+            }
+
+            // Chance for energy restoration
+            if (Math.random() > 0.5) {
+                System.out.println("✨ Energy partially restored!");
+                delay(500);
+                player.setEnergy(Math.min(100, player.getEnergy() + 25));
+            }
         }
     }
     // Add a method to check resurrection status
@@ -513,20 +557,122 @@ public class Game {
             System.out.println("This powerful ability can only be used once per playthrough.");
         }
     }
+    private void scaleEnemiesForCurrentLevel() {
+        enemies.clear();
 
+        // Create appropriately scaled enemies for current level
+        int baseStats = 50 + (currentChapter * 10);
+        String[] enemyNames = getEnemyNamesForLevel(currentChapter);
 
-    public void talkToNPC() {
-        System.out.println("Which NPC would you like to talk to?");
-        for (int i = 0; i < npcs.size(); i++) {
-            System.out.println((i + 1) + ". " + npcs.get(i).getName() + " - " + npcs.get(i).getDescription());
+        for (String enemyName : enemyNames) {
+            int scaledAttack = baseStats + (int)(Math.random() * 20);
+            int scaledMagic = baseStats - 10 + (int)(Math.random() * 20);
+            int scaledDefense = baseStats + (int)(Math.random() * 15);
+
+            /*enemies.add(new Entities.Enemies.Enemy(enemyName, scaledAttack, scaledMagic,
+                    scaledDefense, baseStats, scaledDefense - 10));*/
         }
-
-        int choice = getIntInput("Enter your choice: ", 1, npcs.size());
-        NPC selectedNPC = npcs.get(choice - 1);
-
-        System.out.println("You approach " + selectedNPC.getName() + "...");
-        selectedNPC.interact();
     }
+    private String[] getEnemyNamesForLevel(int level) {
+        switch(level) {
+            case 1: return new String[]{"Desert Clause", "Sand Stalker", "Dune Crawler"};
+            case 2: return new String[]{"Fungal Spore", "Lume Beast", "Glow Worm"};
+            case 3: return new String[]{"Star Fragment", "Cosmic Horror", "Void Walker"};
+            case 4: return new String[]{"Crystal Golem", "Gem Eater", "Shard Warrior"};
+            case 5: return new String[]{"Root Guardian", "Ancient Protector", "World Eater"};
+            case 6: return new String[]{"Final Boss", "Ultimate Challenge", "Destiny's End"};
+            default: return new String[]{"Mysterious Foe"};
+        }
+    }
+
+    //Character
+    public void addStarterPack(Character player, List<Item> items){
+        if(player instanceof Hawkseye || player instanceof Blademaster || player instanceof Berserker || player instanceof Shinobi) {
+            player.obtainItem(findItemId("PDP001", items, 5));
+            player.obtainItem(findItemId("HP001", items, 5));
+            player.obtainItem(findItemId("EP001", items, 5));
+            player.obtainItem(findItemId("SHP001", items, 5));
+            player.obtainItem(findItemId("SP001", items, 5));
+            switch(player.getClassType()){
+                case ClassType.HAWKSEYE:
+                    player.obtainItem(findItemId("BW001", items, 1));
+                    break;
+                case ClassType.BLADEMASTER:
+                    player.obtainItem(findItemId("SW001", items, 1));
+                    break;
+                case ClassType.BERSERKER:
+                    player.obtainItem(findItemId("BS001", items, 1));
+                    break;
+                case ClassType.ASSASSIN:
+                    player.obtainItem(findItemId("DR001", items, 1));
+                    break;
+            }
+        }else if(player instanceof Runecaster || player instanceof RuneKnight){
+            player.obtainItem(findItemId("MDP001", items, 5));
+            player.obtainItem(findItemId("HP001", items, 5));
+            player.obtainItem(findItemId("EP001", items, 5));
+            player.obtainItem(findItemId("SHP001", items, 5));
+            player.obtainItem(findItemId("SP001", items, 5));
+        }else{
+            player.obtainItem(findItemId("PDP004", items, 99));
+            player.obtainItem(findItemId("MDP004", items, 99));
+            player.obtainItem(findItemId("HP004", items, 99));
+            player.obtainItem(findItemId("EP004", items, 99));
+            player.obtainItem(findItemId("SHP004", items, 99));
+            player.obtainItem(findItemId("SP004", items, 99));
+            player.obtainItem(findItemId("BW001", items, 1));
+            player.obtainItem(findItemId("SW001", items, 1));
+            player.obtainItem(findItemId("BS001", items, 1));
+            player.obtainItem(findItemId("DR001", items, 1));
+        }
+    }
+    private int openInventory(Character player){
+        int confirm = 0;
+        while(confirm == 0){
+            player.displayInventory();
+            System.out.println("[11] Back");
+            int choice = getIntInput("Select an item: ", 1, 11);
+            if(choice == 11){
+                break;
+            }
+            Item item = player.getInventory().getItems()[--choice];
+
+            System.out.println("========== SELECTING ITEM ==========");
+            System.out.println("Select "+item.getName()+"?: ");
+            System.out.println("[1] Select Item");
+            System.out.println("[2] Back");
+
+            confirm = getIntInput("Choose action: ", 1, 2);
+            if(confirm == 1){
+                if(inBattle && item.getItemType() == ItemType.WEAPON){
+                    System.out.println("You can't equip a weapon during battle!");
+                    confirm = 0;
+                    delay(1000);
+                }else{
+                    System.out.println(player.getName()+" used "+item.getName()+"!");
+                    delay(1000);
+                    item.use(player);
+                }
+            }else{
+                confirm = 0;
+            }
+        }
+        return confirm;
+    }
+
+    //Item
+    public Item findItemId(String itemId, List<Item> item, int quantity){
+        Item foundItem = items.getFirst();
+        for(int i = 0; i < item.size(); i++){
+            if(itemId.equals(item.get(i).getItemId())) {
+                item.get(i).setQuantity(quantity);
+                foundItem = item.get(i);
+            }
+        }
+        return foundItem;
+    }
+
+    //Misc
     public int getIntInput(String prompt, int min, int max) {
         int input = -1;
         while (input < min || input > max) {

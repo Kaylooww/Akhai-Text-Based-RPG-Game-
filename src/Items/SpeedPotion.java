@@ -12,7 +12,6 @@ public class SpeedPotion extends Consumable{
 
     @Override
     public void use(Character player){
-        System.out.println("You used item "+name);
         player.setSpeed(player.getSpeed()+ speedAmount);
         quantity--;
     }

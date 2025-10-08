@@ -12,8 +12,7 @@ public class PhysicalDamagePotion extends Consumable{
 
     @Override
     public void use(Character player){
-        System.out.println("You used item "+name);
-        player.setPhysicalDamage((int) (player.getPhysicalDamage()+ physicalDamageAmount));
+        player.setPhysicalDamage((int) (player.getPhysicalDamage() * physicalDamageAmount + player.getPhysicalDamage()));
         quantity--;
     }
     @Override

@@ -13,8 +13,8 @@ public class ShieldPotion extends Consumable{
     @Override
     public void use(Character player){
         System.out.println("You used item "+name);
-        player.setShield(player.getShield()+shieldAmount);
-        quantity--;
+        //Formula/Calculation for adding shield; FOR YOU ZEDJY!!!
+        //quantity--; //Uncomment once the formula is added
     }
     @Override
     public void displayInfo(){

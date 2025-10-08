@@ -12,8 +12,7 @@ public class MagicalDamagePotion extends Consumable{
 
     @Override
     public void use(Character player){
-        System.out.println("You used item "+name);
-        player.setMagicDamage((int) (player.getMagicDamage()+ magicalDamageAmount));
+        player.setMagicDamage((int) (player.getMagicDamage() * magicalDamageAmount + player.getMagicDamage()));
         quantity--;
     }
     @Override

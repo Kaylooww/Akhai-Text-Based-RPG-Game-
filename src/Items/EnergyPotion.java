@@ -12,9 +12,15 @@ public class EnergyPotion extends Consumable{
 
     @Override
     public void use(Character player){
-        System.out.println("You used item "+name);
-        player.setEnergy(player.getEnergy()+energyAmount);
-        quantity--;
+        if(player.getEnergy() < player.getMaxEnergy()){
+            player.setEnergy(player.getEnergy() + energyAmount);
+            if(player.getEnergy() >= player.getMaxEnergy()){
+                player.setEnergy(player.getMaxEnergy());
+            }
+            quantity--;
+        }else{
+            System.out.println("Energy is full!");
+        }
     }
     @Override
     public void displayInfo(){
