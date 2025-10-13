@@ -8,7 +8,7 @@ import Skills.*;
 public abstract class Character extends Entity {
     protected int maxEnergy = 100;
     protected int energy = 0;
-    protected int level = 1;
+    protected int level;
     protected int experience = 0;
     protected int experienceNeeded = 100;
     protected int currency = 100; //money
@@ -17,11 +17,7 @@ public abstract class Character extends Entity {
     protected Skill basicAttack;
     protected Skill skillAttack;
     protected Skill ultimateAttack;
-    /*
-    protected double basicAttack;
-    protected double skillAttack;
-    protected double ultimateAttack;
-     */
+
     protected ClassType classType;
     protected boolean hasResurrected = false; // New resurrection flag
 
@@ -165,8 +161,8 @@ public abstract class Character extends Entity {
         System.out.println(equippedWeapon.getName()+" unequipped!");
         this.equippedWeapon = new Weapon();
         this.basicAttack = new UnarmedSkill("Punch", "", 1.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
-        this.skillAttack = new UnarmedSkill("Super Punch", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE);
-        this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "", 2.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.skillAttack = new UnarmedSkill("Jab", "", 1.1, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.ultimateAttack = new UnarmedSkill("Kick", "", 1.2, 0, DamageType.PHYSICAL, TargetType.SINGLE);
     }
     public void setExperience(int experience) {this.experience = experience;}
     public void setEnergy(int energy) {
