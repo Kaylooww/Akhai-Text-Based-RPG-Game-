@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class Berserker extends Character{
     public Berserker(String name) {
         super(name, 330, ClassType.BERSERKER, 27, 0, 12, 0.08, 0.08, 19);
+        this.level = 1;
     }
 //
     @Override

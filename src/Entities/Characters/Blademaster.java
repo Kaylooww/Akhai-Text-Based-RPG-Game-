@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class Blademaster extends Character{
     public Blademaster(String name) {
         super(name, 255, ClassType.BLADEMASTER, 23, 0, 15, 0.09, 0.09, 20);
+        this.level = 1;
     }
 //
     @Override

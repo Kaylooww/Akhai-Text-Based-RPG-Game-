@@ -70,12 +70,51 @@ public class Game {
         items.add(new SpeedPotion("SP002", "Speed Potion", "<Empty>", 12, 1, 5, Rarity.RARE, 8));
         items.add(new SpeedPotion("SP003", "Greater Speed Potion", "<Empty>", 12, 1, 5, Rarity.EPIC, 12));
         items.add(new SpeedPotion("SP004", "Legendary Speed Potion", "<Empty>", 12, 1, 5, Rarity.LEGENDARY, 20));
-        items.add(new Weapon("BW001", "Wooden Bow", WeaponType.BOW, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
-        items.add(new Weapon("SW001", "Wooden Sword", WeaponType.SWORD, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
-        items.add(new Weapon("MGS001", "Wooden Staff", WeaponType.MAGIC_STAFF, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.MAGICAL, TargetType.SINGLE), 20, Rarity.COMMON));
-        items.add(new Weapon("BS001", "Wooden Broadsword", WeaponType.BROADSWORD, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
-        items.add(new Weapon("DR001", "Wooden Dagger", WeaponType.DAGGER, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
-        items.add(new Weapon("MGSW001", "Wooden Magic Sword", WeaponType.MAGIC_SWORD, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.73, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.25, 0, DamageType.MAGICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+
+        //Tier 1 (COMMON) Weapons
+        items.add(new Weapon("BW001", "Wooden Bow", WeaponType.BOW, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.3, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+        items.add(new Weapon("SW001", "Bronze Sword", WeaponType.SWORD, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.3, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+        items.add(new Weapon("MGS001", "Wooden Staff", WeaponType.MAGIC_STAFF, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.3, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+        items.add(new Weapon("BS001", "Iron Broadsword", WeaponType.BROADSWORD, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.3, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+        items.add(new Weapon("DR001", "Rusty Dagger", WeaponType.DAGGER, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.3, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+        items.add(new Weapon("MGSW001", "Rookies Magic Sword", WeaponType.MAGIC_SWORD, "", new WeaponSkill("Basic Attack", "", 1.15, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.3, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE), 20, Rarity.COMMON));
+
+        //Tier 2 (RARE) Weapons
+        items.add(new Weapon("BW002.1", "Iron Bow", WeaponType.BOW, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.PHYSICAL, TargetType.SINGLE), 80, Rarity.RARE));
+        items.add(new Weapon("SW002.1", "Steel Sword", WeaponType.SWORD, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.PHYSICAL, TargetType.SINGLE), 80, Rarity.RARE));
+        items.add(new Weapon("MGS002.1", "Crystal Staff", WeaponType.MAGIC_STAFF, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.MAGICAL, TargetType.SINGLE), 80, Rarity.RARE));
+        items.add(new Weapon("BS002.1", "Steel Broadsword", WeaponType.BROADSWORD, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.PHYSICAL, TargetType.SINGLE), 80, Rarity.RARE));
+        items.add(new Weapon("DR002.1", "Iron Dagger", WeaponType.DAGGER, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.PHYSICAL, TargetType.SINGLE), 80, Rarity.RARE));
+        items.add(new Weapon("MGSW002.1", "Apprentice's Magic Sword", WeaponType.MAGIC_SWORD, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.MAGICAL, TargetType.SINGLE), 80, Rarity.RARE));
+
+        items.add(new Weapon("BW002.2", "Reinforced Bow", WeaponType.BOW, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.PHYSICAL, TargetType.SINGLE), 80, Rarity.RARE));
+        items.add(new Weapon("SW002.2", "Tempered Sword", WeaponType.SWORD, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.PHYSICAL, TargetType.SINGLE), 80, Rarity.RARE));
+        items.add(new Weapon("MGS002.2", "Enchanter’s Staff", WeaponType.MAGIC_STAFF, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.MAGICAL, TargetType.SINGLE), 80, Rarity.RARE));
+        items.add(new Weapon("BS002.2", "Knight’s Broadsword", WeaponType.BROADSWORD, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.PHYSICAL, TargetType.SINGLE), 80, Rarity.RARE));
+        items.add(new Weapon("DR002.2", "Steelfang Dagger", WeaponType.DAGGER, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.PHYSICAL, TargetType.SINGLE), 80, Rarity.RARE));
+        items.add(new Weapon("MGSW002.2", "Spellforged Blade", WeaponType.MAGIC_SWORD, "", new WeaponSkill("Basic Attack", "", 1.25, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.5, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 1.9, 0, DamageType.MAGICAL, TargetType.SINGLE), 80, Rarity.RARE));
+
+        //Tier 3 (EPIC) Weapons including Varieties
+        items.add(new Weapon("BW003.1", "Elven Bow", WeaponType.BOW, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("SW003.1", "Mythril Sword", WeaponType.SWORD, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("MGS003.1", "Arcane Staff", WeaponType.MAGIC_STAFF, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.MAGICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("BS003.1", "Runed Broadsword", WeaponType.BROADSWORD, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("DR003.1", "Shadow Dagger", WeaponType.DAGGER, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("MGSW003.1", "Runic Magic Sword", WeaponType.MAGIC_SWORD, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.MAGICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+
+        items.add(new Weapon("BW003.2", "Phoenix Bow", WeaponType.BOW, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("SW003.2", "Tempest Sword", WeaponType.SWORD, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("MGS003.2", "Soulbinder Staff", WeaponType.MAGIC_STAFF, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.MAGICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("BS003.2", "Frostbane Broadsword", WeaponType.BROADSWORD, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("DR003.2", "Bloodthorn Dagger", WeaponType.DAGGER, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("MGSW003.2", "Lunaris Blade", WeaponType.MAGIC_SWORD, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.MAGICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+
+        items.add(new Weapon("BW003.3", "Moonpiercer Bow", WeaponType.BOW, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("SW003.3", "Flameheart Sword", WeaponType.SWORD, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("MGS003.3", "Stormcaller Staff", WeaponType.MAGIC_STAFF, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.MAGICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("BS003.3", "Earthshatter Broadsword", WeaponType.BROADSWORD, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("DR003.3", "Nightshade Dagger", WeaponType.DAGGER, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+        items.add(new Weapon("MGSW003.3", "Aetherfang Blade", WeaponType.MAGIC_SWORD, "", new WeaponSkill("Basic Attack", "", 1.4, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 2.2, 0, DamageType.MAGICAL, TargetType.SINGLE), 200, Rarity.EPIC));
 
         System.out.println("Welcome to Akhai!");
         delay(1000);
@@ -184,7 +223,7 @@ public class Game {
         System.out.println("[3] Open Inventory");
         System.out.println("[4] Check resurrection status");
         System.out.println("[5] Talk to NPC");
-        System.out.println("[6] Move to next level");
+        System.out.println("[6] Proceed to Story");
         System.out.println("[7] Quit game");
 
         int choice = getIntInput("Enter your choice: ", 1, 7);
@@ -472,27 +511,6 @@ public class Game {
             }
         }
 
-
-        /*switch(choice) {
-            case 1:
-                damage = player.useBasicAttack();
-                break;
-            case 2:
-                damage = player.useSkillAttack();
-                break;
-            case 3:
-                damage = player.useUltimateAttack();
-                break;
-            case 4:
-                if (Math.random() > 0.7) {
-                    System.out.println("You successfully fled!");
-                    inBattle = false;
-                    return -1;
-                } else {
-                    System.out.println("You failed to flee!");
-                }
-                break;
-        }*/
         return damage;
     }
     private int enemyAction(Enemy enemy) {

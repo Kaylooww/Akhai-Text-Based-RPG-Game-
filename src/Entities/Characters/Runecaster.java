@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Runecaster extends Character{
     public Runecaster(String name) {
         super(name, 225, ClassType.MAGE, 0, 37, 9, 0.09, 0.09, 20);
+        this.level = 1;
     }
     //
     @Override
