@@ -1,10 +1,8 @@
 package Entities.Characters;
 
-import java.util.Arrays;
-
 public class RuneKnight extends Character{
     public RuneKnight(String name) {
-        super(name, 285, ClassType.MAGICKNIGHT, 0, 22, 15, 0.10, 0.10, 20);
+        super(name, 285, ClassType.RUNEKNIGHT, 0, 22, 15, 0.10, 0.10, 20);
         this.level = 1;
     }
 //
