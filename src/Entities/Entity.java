@@ -1,5 +1,8 @@
 package Entities;
 
+import StatusEffects.StatusEffect;
+import java.util.*;
+
 public abstract class Entity {
     protected String name;
     protected int health;
@@ -12,6 +15,7 @@ public abstract class Entity {
     protected double magicResistance;
     protected int speed;
     protected double accuracy = 0.95;
+    protected List<StatusEffect>  statusEffects;
 //
     public Entity(String name, int health, int physicalDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed) {
         this.name = name;
@@ -39,6 +43,61 @@ public abstract class Entity {
         }
 
         return (int) actualDamage;
+    }
+
+    public void addStatusEffect(StatusEffect statusEffect) {
+        statusEffects.add(statusEffect);
+    }
+    public void removeStatusEffect(StatusEffect statusEffect) {
+        statusEffects.remove(statusEffect);
+    }
+    public void modifyStatPercentage(StatType statType, int value) {
+        switch (statType) {
+            case StatType.PHYSICAL_DAMAGE:
+                physicalDamage += physicalDamage * value;
+                break;
+            case StatType.MAGIC_DAMAGE:
+                magicDamage += magicDamage * value;
+                break;
+            case StatType.DEFENSE:
+                defense += defense * value;
+                break;
+            case StatType.PHYSICAL_RESISTANCE:
+                physicalResistance += physicalResistance * value;
+                break;
+            case StatType.MAGIC_RESISTANCE:
+                magicResistance += magicResistance * value;
+                break;
+            case StatType.SPEED:
+                speed += speed * value;
+                break;
+            case StatType.ACCURACY:
+                accuracy += accuracy * value;
+        }
+    }
+    public void modifyStatFlat(StatType statType, int value){
+        switch (statType) {
+            case StatType.PHYSICAL_DAMAGE:
+                physicalDamage += value;
+                break;
+            case StatType.MAGIC_DAMAGE:
+                magicDamage += value;
+                break;
+            case StatType.DEFENSE:
+                defense += value;
+                break;
+            case StatType.PHYSICAL_RESISTANCE:
+                physicalResistance += value;
+                break;
+            case StatType.MAGIC_RESISTANCE:
+                magicResistance += value;
+                break;
+            case StatType.SPEED:
+                speed += value;
+                break;
+            case StatType.ACCURACY:
+                accuracy += value;
+        }
     }
 
     public void setHealth(int health) {this.health = health;}

@@ -1,7 +1,5 @@
 package Items;
 
-import Entities.Characters.Character;
-
 public class Inventory {
     protected int maxCapacity;
     protected int capacity = 0;

@@ -4,6 +4,7 @@ import Entities.Entity;
 import Items.*;
 import Items.Weapons.Weapon;
 import Skills.*;
+import java.util.Random;
 
 public abstract class Character extends Entity {
     protected int maxEnergy = 100;
@@ -21,6 +22,10 @@ public abstract class Character extends Entity {
     protected ClassType classType;
     protected boolean hasResurrected = false; // New resurrection flag
 
+    protected int ultimateCounter = 0;
+    protected int maxUltimateCounter = 8;
+    protected Random random = new Random();
+
     public Character(String name, int health, ClassType classType, int physicalDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed) {
         super(name, health, physicalDamage, magicDamage, defense, physicalResistance, magicResistance, speed);
         this.classType = classType;
@@ -28,25 +33,49 @@ public abstract class Character extends Entity {
         this.basicAttack = new UnarmedSkill("Punch", "", 1.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         this.skillAttack = new UnarmedSkill("Super Punch", "", 1.4, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "", 2.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
-        /*
-        this.basicAttack = basicAttack;
-        this.skillAttack = skillAttack;
-        this.ultimateAttack = ultimateAttack;
-         */
     }
 
-    /*
-    public abstract int useBasicAttack();
-    public abstract int useSkillAttack();
-    public abstract int useUltimateAttack();
-     */
+    public int getUltimateCounter() {
+        return ultimateCounter;
+    }
+
+    public int getMaxUltimateCounter() {
+        return maxUltimateCounter;
+    }
+
+    public void addUltimateCounter(int amount) {
+        ultimateCounter = Math.min(ultimateCounter + amount, maxUltimateCounter);
+        System.out.println("⭐ Ultimate Charge: " + ultimateCounter + "/" + maxUltimateCounter);
+    }
+
+    public void resetUltimateCounter() {
+        ultimateCounter = 0;
+    }
+
+    public void generateEnergyFromDamage() {
+        int energyGained = 5 + random.nextInt(10) + 1; //5 + random 1-10
+        this.energy = Math.min(this.energy + energyGained, this.maxEnergy);
+        System.out.println("💫 Gained " + energyGained + " energy from taking damage! (" + energy + "/" + maxEnergy + ")");
+    }
+
+    public void generateEnergy(int amount) {
+        this.energy = Math.min(this.energy + amount, this.maxEnergy);
+        System.out.println("⚡ Generated " + amount + " energy! (" + energy + "/" + maxEnergy + ")");
+    }
+
+    public boolean consumeEnergy(int amount) {
+        if (energy >= amount) {
+            energy -= amount;
+            return true;
+        }
+        return false;
+    }
 
     public void gainExperience(int exp) {
         experience += exp;
         while (experience >= experienceNeeded && level <= 30) { // Added level cap
             levelUp();
         }
-
     }
     public void levelUp() {
         experience -= experienceNeeded;
@@ -59,7 +88,7 @@ public abstract class Character extends Entity {
         maxHealth += 15;
         health += 15; // Also increase current health
         physicalDamage += 3;
-        defense += 2;
+        defense += 1;
         speed += 1;
         magicResistance += 2;
         magicDamage += 3;
@@ -82,14 +111,14 @@ public abstract class Character extends Entity {
         System.out.println("✨ ✨ ✨ DIVINE INTERVENTION! ✨ ✨ ✨");
         System.out.println(name + " has been granted a second chance!");
 
-        // Resurrect with 50% of max health
+        //Resurrect with 50% of max health and reset ultimate counter
         health = maxHealth / 2;
         hasResurrected = true;
+        resetUltimateCounter(); //Reset ultimate charges on resurrection
 
         System.out.println(name + " resurrects with " + health + " HP!");
+        System.out.println("Ultimate charges have been reset!");
         System.out.println("This resurrection has been consumed and cannot be used again.");
-
-        return;
     }
     public boolean hasResurrected() {
         return hasResurrected;
@@ -104,7 +133,8 @@ public abstract class Character extends Entity {
         System.out.println("Attack: " + physicalDamage);
         System.out.println("Armor: " + defense);
         System.out.println("Speed: " + speed);
-        System.out.println("Energy: " + energy);
+        System.out.println("Energy: " + energy + "/" + maxEnergy);
+        System.out.println("Ultimate Charge: " + ultimateCounter + "/" + maxUltimateCounter);
         System.out.println("Magic Defense: " + magicResistance);
         System.out.println("Magic Damage: " + magicDamage);
         System.out.println("Resurrection: " + (hasResurrected ? "❌ USED" : "✅ AVAILABLE"));
@@ -134,6 +164,7 @@ public abstract class Character extends Entity {
                 if (items[i] != null && items[i].getItemId().equals(item.getItemId())) {
                     items[i].setQuantity(items[i].getQuantity() + 1);
                     System.out.println("Item \"" + item.getName() + "\" obtained.");
+                    delay(500);
                     return;
                 }
             }
@@ -143,13 +174,19 @@ public abstract class Character extends Entity {
                     inventory.setCapacity(inventory.getCapacity() + 1);
                     inventory.setIsFull(inventory.getCapacity() == inventory.getMaxCapacity());
                     System.out.println("NEW ITEM \"" + item.getName() + "\" obtained!");
+                    delay(500);
                     return;
                 }
             }
-        }else {
+        } else {
             System.out.println("Inventory is full!");
         }
     }
+
+    public boolean isUltimateReady() {
+        return ultimateCounter >= maxUltimateCounter;
+    }
+
     public void equipWeapon(Weapon weapon){
         this.equippedWeapon = weapon;
         this.basicAttack = weapon.getBasicAttack();
@@ -164,11 +201,12 @@ public abstract class Character extends Entity {
         this.skillAttack = new UnarmedSkill("Jab", "", 1.1, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         this.ultimateAttack = new UnarmedSkill("Kick", "", 1.2, 0, DamageType.PHYSICAL, TargetType.SINGLE);
     }
-    public void setExperience(int experience) {this.experience = experience;}
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
     public void setEnergy(int energy) {
         this.energy = energy;
     }
-
     public int getExperience(){
         return experience;
     }
@@ -198,5 +236,14 @@ public abstract class Character extends Entity {
     }
     public int getCurrency(){
         return currency;
+    }
+
+    public void delay(int delay) {
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Re-interrupt the thread
+            System.err.println("Thread was interrupted during sleep.");
+        }
     }
 }

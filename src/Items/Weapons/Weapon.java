@@ -8,7 +8,7 @@ import Skills.*;
 
 public class Weapon extends Item {
     protected WeaponType weaponType;
-    protected boolean isEquipped;
+    protected boolean isEquipped = false;
     protected Skill basicAttack;
     protected Skill skillAttack;
     protected Skill ultimateAttack;
