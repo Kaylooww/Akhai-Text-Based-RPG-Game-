@@ -12,7 +12,7 @@ public class PhysicalDamagePotion extends Consumable{
 
     @Override
     public void use(Character player){
-        player.setPhysicalDamage((int) (player.getPhysicalDamage() * physicalDamageAmount + player.getPhysicalDamage()));
+        //Temporarily boosts the stat during combat. Item can be consumed before/during combat but removes the boosted stat after combat (Utilizing the StatusEffect class)
         quantity--;
     }
     @Override

@@ -13,8 +13,8 @@ public class ShieldPotion extends Consumable{
     @Override
     public void use(Character player){
         System.out.println("You used item "+name);
-        //Formula/Calculation for adding shield; FOR YOU ZEDJY!!!
-        //quantity--; //Uncomment once the formula is added
+        //Formula/Calculation for adding shield. FOR YOU ZEDJY!!! (Not utilizing the StatusEffect class)
+        //quantity--;
     }
     @Override
     public void displayInfo(){

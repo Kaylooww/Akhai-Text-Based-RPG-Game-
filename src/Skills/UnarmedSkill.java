@@ -4,6 +4,7 @@ import Entities.Characters.DamageType;
 import Entities.Characters.TargetType;
 import Entities.Entity;
 import Entities.Characters.Character;
+import StatusEffects.StatusEffect;
 
 public class UnarmedSkill extends Skill{
     public UnarmedSkill(String name, String description, double multiplier, int energyCost, DamageType damageType, TargetType targetType){
