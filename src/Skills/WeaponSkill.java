@@ -21,8 +21,7 @@ public class WeaponSkill extends Skill{
 
             handleEnergyAndCounters(character, attackType);
 
-            int baseDamage = (damageType == DamageType.PHYSICAL) ?
-                    character.getPhysicalDamage() : character.getMagicDamage();
+            int baseDamage = (damageType == DamageType.PHYSICAL) ? character.getPhysicalDamage() : character.getMagicDamage();
 
             return (int)(baseDamage * multiplier);
         }

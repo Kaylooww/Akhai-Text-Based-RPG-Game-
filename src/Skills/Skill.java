@@ -4,6 +4,10 @@ import Entities.Characters.DamageType;
 import Entities.Characters.TargetType;
 import Entities.Entity;
 import Entities.Characters.Character;
+import StatusEffects.StatusEffect;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Skill {
     protected String name;
@@ -12,6 +16,7 @@ public abstract class Skill {
     protected int energyCost;
     protected DamageType damageType;
     protected TargetType targetType;
+    StatusEffect statusEffect;
 
     public Skill(String name, String description, double multiplier, int energyCost, DamageType damageType, TargetType targetType) {
         this.name = name;
@@ -22,7 +27,7 @@ public abstract class Skill {
         this.targetType = targetType;
     }
 
-    public abstract int execute(Entity caster); //You decide how you use this method zed // aight bet chat
+    public abstract int execute(Entity caster);
 
     protected void handleEnergyAndCounters(Character caster, String attackType) {
         switch (attackType) {
@@ -52,16 +57,13 @@ public abstract class Skill {
     public static void generateEnergyFromDamage(Character target) {
         target.generateEnergyFromDamage();
     }
-
     //UI display (optional)
     public static boolean isUltimateReady(Character caster) {
         return caster.isUltimateReady();
     }
-
     public static int getUltimateCounter(Character caster) {
         return caster.getUltimateCounter();
     }
-
     public static int getMaxUltimateCounter() {
         return 8;
     }

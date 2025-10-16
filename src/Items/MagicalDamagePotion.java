@@ -12,7 +12,7 @@ public class MagicalDamagePotion extends Consumable{
 
     @Override
     public void use(Character player){
-        player.setMagicDamage((int) (player.getMagicDamage() * magicalDamageAmount + player.getMagicDamage()));
+        //Temporarily boosts the stat during combat. Item can be consumed before/during combat but removes the boosted stat after combat (Utilizing the StatusEffect class)
         quantity--;
     }
     @Override

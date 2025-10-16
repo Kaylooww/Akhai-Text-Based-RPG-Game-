@@ -5,6 +5,7 @@ import Items.Item;
 import Items.ItemType;
 import Items.Rarity;
 import Skills.*;
+import StatusEffects.StatusEffect;
 
 public class Weapon extends Item {
     protected WeaponType weaponType;
@@ -21,7 +22,18 @@ public class Weapon extends Item {
         this.ultimateAttack = null;
     }
 
+    //Without Debuffs
     public Weapon(String itemId, String name, WeaponType weaponType, String description, Skill basicAttack, Skill skillAttack, Skill ultimateAttack, int value, Rarity rarity){
+        super(itemId, name, description, 1, 1, value, rarity, false, true);
+        itemType = ItemType.WEAPON;
+        this.weaponType = weaponType;
+        this.basicAttack = basicAttack;
+        this.skillAttack = skillAttack;
+        this.ultimateAttack = ultimateAttack;
+    }
+
+    //With Debuffs
+    public Weapon(String itemId, String name, WeaponType weaponType, String description, Skill basicAttack, Skill skillAttack, Skill ultimateAttack, StatusEffect statusEffect, int value, Rarity rarity){
         super(itemId, name, description, 1, 1, value, rarity, false, true);
         itemType = ItemType.WEAPON;
         this.weaponType = weaponType;

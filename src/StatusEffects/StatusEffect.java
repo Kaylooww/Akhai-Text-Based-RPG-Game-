@@ -3,11 +3,11 @@ package StatusEffects;
 import Entities.Entity;
 
 public abstract class StatusEffect {
-    String name;
-    String description;
+    protected String name;
+    protected String description;
     protected int duration;
     protected int currentDuration;
-    StatusType type;
+    protected StatusType type;
     protected boolean isExpired;
 
     public StatusEffect(String name, String description,  int duration, StatusType type) {
@@ -35,4 +35,13 @@ public abstract class StatusEffect {
     public String getDescription(){return description;}
     public boolean getIsExpired(){return isExpired;}
     public StatusType getType(){return type;}
+
+    public void delay(int delay) {
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Re-interrupt the thread
+            System.err.println("Thread was interrupted during sleep.");
+        }
+    }
 }

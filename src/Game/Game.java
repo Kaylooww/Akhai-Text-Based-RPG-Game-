@@ -3,15 +3,12 @@ package Game;
 import Entities.Enemies.Enemy;
 import Entities.Characters.*;
 import Entities.Characters.Character;
+import Entities.Entity;
 import Items.*;
-import Items.Weapons.Weapon;
-import Items.Weapons.WeaponType;
-import NPC.BossNPC;
-import NPC.FortuneTellerNPC;
-import NPC.GuideNPC;
-import NPC.NPC;
+import Items.Weapons.*;
+import NPC.*;
 import Skills.WeaponSkill;
-import StatusEffects.DamageOverTimeEffect;
+import StatusEffects.DamageOverTimeEffects.*;
 import StatusEffects.StatusEffect;
 import TextFormat.ColorUtil;
 
@@ -23,7 +20,6 @@ public class Game {
     private List<Enemy> enemies = new ArrayList<>();
     private List<NPC> npcs = new ArrayList<>();
     private List<Item>  items = new ArrayList<>();
-    private List<Weapon> weapons = new ArrayList<>();
     private List<StatusEffect> status = new ArrayList<>();
     private int currentChapter = 1;
     private boolean gameRunning = true;
@@ -42,6 +38,10 @@ public class Game {
         enemies.add(new Enemy("Desert Clause", 220, 20, 30, 10, 0.10, 0.10, 20));
         enemies.add(new Enemy("Sand Stalker", 210, 20, 30, 10, 0.10, 0.10, 20));
         enemies.add(new Enemy("Dune Crawler", 200, 20, 30, 10, 0.10, 0.10, 20));
+
+        //Status Effects
+        status.add(new DamageOverTimeEffect("Poison", "Deals poison damage", 3,  DamageType.MAGICAL, 20));
+        status.add(new DamageOverTimeEffect("Burn", "Deals burn damage", 3,  DamageType.MAGICAL, 30));
 
         //Items (LEGENDARY Items should be very rare)
         items.add(new HealingPotion("HP001", "Lesser Healing Potion", "<Empty>", 12, 1, 5, Rarity.COMMON, 50));
@@ -163,10 +163,6 @@ public class Game {
         items.add(new Weapon("DR005", "Void of the Forsaken Rift", WeaponType.DAGGER, "", new WeaponSkill("Basic Attack", "", 2.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 3.2, 40, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 4.5, 80, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
         items.add(new Weapon("MGSW005", "Chronoblade of the Severed Realm", WeaponType.MAGIC_SWORD, "", new WeaponSkill("Basic Attack", "", 2.5, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 3.2, 40, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 4.5, 80, DamageType.MAGICAL, TargetType.SINGLE), 200, Rarity.EPIC));
 
-        //Status Effects (Buffs/Debuffs)
-        status.add(new DamageOverTimeEffect("Poison", "", 3, DamageType.MAGICAL, 20));
-        status.add(new DamageOverTimeEffect("Burn", "", 3, DamageType.MAGICAL, 30));
-
         System.out.println("Welcome to Akhai!");
         delay(1000);
         System.out.println("Choose your class:");
@@ -183,16 +179,6 @@ public class Game {
         switch (choice) {
             case 1:
                 player = new Hawkseye("Hawkseye");
-                /*
-                for(int i = 0; i < weapons.size(); i++){
-                    Weapon weapon = weapons.get(i);
-                    switch(weapon.getItemId()){
-                        case "BW001":
-                            weapon.setQuantity(1);
-                            player.equipWeapon(weapon);
-                    }
-                }
-                 */
                 break;
             case 2:
                 player = new Blademaster("Blademaster");
@@ -449,6 +435,8 @@ public class Game {
                     System.out.println("You accept your fate...");
                 }
             }
+            player.checkStatusEffect();
+            enemy.checkStatusEffect();
         }
         playerHealthCheck(enemy, baseExp);
         inBattle = false;
@@ -477,7 +465,7 @@ public class Game {
     private int takeAction(boolean isPlayerTurn, Enemy enemy){
         int damage = 0;
         if (isPlayerTurn) {
-            damage = playerAction();
+            damage = playerAction(enemy);
         } else {
             damage = enemyAction(enemy);
         }
@@ -498,7 +486,7 @@ public class Game {
         }
         return damage;
     }
-    private int playerAction() {
+    private int playerAction(Entity enemy) {
         boolean hasActed = false;
         int damage = 0;
         int choice;
@@ -708,17 +696,17 @@ public class Game {
                     player.obtainItem(findItemId("MGSW001.1", items, 1));
                     break;
             }
-        }else{
+        }else{ //JinwooSun
             player.obtainItem(findItemId("PDP004", items, 99));
             player.obtainItem(findItemId("MDP004", items, 99));
             player.obtainItem(findItemId("HP004", items, 99));
             player.obtainItem(findItemId("EP004", items, 99));
             player.obtainItem(findItemId("SHP004", items, 99));
             player.obtainItem(findItemId("SP004", items, 99));
-            player.obtainItem(findItemId("BW001", items, 1));
-            player.obtainItem(findItemId("SW001", items, 1));
-            player.obtainItem(findItemId("BS001", items, 1));
-            player.obtainItem(findItemId("DR001", items, 1));
+            player.obtainItem(findItemId("BW005", items, 1));
+            player.obtainItem(findItemId("SW005", items, 1));
+            player.obtainItem(findItemId("BS005", items, 1));
+            player.obtainItem(findItemId("DR005", items, 1));
         }
     }
     private int openInventory(Character player){
@@ -765,6 +753,15 @@ public class Game {
             }
         }
         return foundItem;
+    }
+    public StatusEffect findStatus(String name, List<StatusEffect> statusEffects){
+        StatusEffect foundStatus = statusEffects.getFirst();
+        for(StatusEffect statusEffect : statusEffects){
+            if(statusEffect.getName().equals(name)){
+                foundStatus = statusEffect;
+            }
+        }
+        return foundStatus;
     }
 
     //Misc

@@ -6,7 +6,6 @@ import java.util.*;
 public abstract class Entity {
     protected String name;
     protected int health;
-    protected int maxHealth;
     protected int shield;
     protected int physicalDamage;
     protected int magicDamage;
@@ -15,7 +14,17 @@ public abstract class Entity {
     protected double magicResistance;
     protected int speed;
     protected double accuracy = 0.95;
-    protected List<StatusEffect>  statusEffects;
+    protected List<StatusEffect>  statusEffects = new ArrayList<>();
+
+    protected int maxHealth;
+    protected int originalPhysicalDamage;
+    protected int originalMagicDamage;
+    protected int originalDefense;
+    protected double originalPhysicalResistance;
+    protected double originalMagicResistance;
+    protected int originalSpeed;
+    protected int originalAccuracy;
+
 //
     public Entity(String name, int health, int physicalDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed) {
         this.name = name;
@@ -51,7 +60,10 @@ public abstract class Entity {
     public void removeStatusEffect(StatusEffect statusEffect) {
         statusEffects.remove(statusEffect);
     }
-    public void modifyStatPercentage(StatType statType, int value) {
+    public void removeAllStatusEffect(){
+        statusEffects.clear();
+    }
+    public void modifyStatPercentage(StatType statType, double value) {
         switch (statType) {
             case StatType.PHYSICAL_DAMAGE:
                 physicalDamage += physicalDamage * value;
@@ -98,6 +110,15 @@ public abstract class Entity {
             case StatType.ACCURACY:
                 accuracy += value;
         }
+    }
+    public void checkStatusEffect(){
+        for(int i = 0; i < statusEffects.size(); i++){
+            statusEffects.get(i).onTurnStart(this);
+            statusEffects.get(i).onTurnEnd(this);
+        }
+    } //This method shouldn't exist (onTurnStart | onTurnEnd should be placed before | after the Entity makes a move)
+    public boolean hasEffect(StatusEffect statusEffect){
+        return statusEffects.contains(statusEffect);
     }
 
     public void setHealth(int health) {this.health = health;}
