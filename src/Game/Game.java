@@ -26,9 +26,12 @@ public class Game {
     private boolean inBattle = false;
     private final int MAX_LEVEL = 6;
     private boolean[] levelsCompleted = new boolean[MAX_LEVEL + 1];
+    private Story story;
 
     //Game
     public void initializeGame() {
+        this.story = story;
+
         //npcs and enemies need to be finalized
         npcs.add(new GuideNPC("Frank", "Companion"));
         npcs.add(new BossNPC("Zed", "Edge-Lord Math geek boss"));
@@ -336,6 +339,21 @@ public class Game {
         System.out.println("🚀 Moving to " + getLevelName(currentChapter + 1) + "...");
         levelsCompleted[currentChapter++] = true;
         //currentLevel++;
+
+        // Display chapter story
+        story.displayChapterStory(currentChapter);
+
+        // Display boss introduction
+        story.displayBossIntroduction(currentChapter);
+
+        // Start boss battle (you'll need to implement the multi-wave battle system)
+        startChapterBossBattle(currentChapter);
+
+        // After victory
+        story.displayVictoryDialogue(currentChapter);
+
+        levelsCompleted[currentChapter] = true;
+        currentChapter++;
 
         // Scale enemies for new level
         scaleEnemiesForCurrentLevel();
@@ -764,6 +782,58 @@ public class Game {
         return foundStatus;
     }
 
+    public void startChapterBossBattle(int chapter) {
+        int waves = (chapter == 1) ? 2 : 3;
+
+        for (int wave = 1; wave <= waves; wave++) {
+            System.out.println("\n🌊 " + ColorUtil.yellow("WAVE " + wave + "/" + waves));
+
+            if (wave == waves) {
+                System.out.println(ColorUtil.red("⚠️  BOSS WAVE!"));
+                // Spawn boss enemy
+                Enemy boss = createBossForChapter(chapter);
+                battle(boss);
+            } else {
+                // Spawn regular enemies
+                Enemy regularEnemy = enemies.get((int)(Math.random() * enemies.size()));
+                battle(regularEnemy);
+            }
+
+            // Check if player survived the wave
+            if (player.getHealth() <= 0) {
+                System.out.println("💀 You were defeated in wave " + wave);
+                return;
+            }
+
+            // Small recovery between waves (except after final wave)
+            if (wave < waves) {
+                System.out.println("✨ Preparing for next wave...");
+                player.setHealth(Math.min(player.getMaxHealth(), player.getHealth() + player.getMaxHealth() / 4));
+                player.setEnergy(Math.min(player.getMaxEnergy(), player.getEnergy() + 25));
+            }
+        }
+    }
+
+    private Enemy createBossForChapter(int chapter) {
+        // Create boss enemies with enhanced stats based on chapter
+        switch(chapter) {
+            case 1:
+                return new Enemy("Desert Sentinel", 300, 30, 40, 15, 0.15, 0.15, 25);
+            case 2:
+                return new Enemy("Mycelium Lord", 400, 40, 50, 20, 0.20, 0.20, 30);
+            case 3:
+                return new Enemy("Cosmic Warden", 500, 50, 60, 25, 0.25, 0.25, 35);
+            case 4:
+                return new Enemy("Crystal Golem", 600, 60, 70, 30, 0.30, 0.30, 40);
+            case 5:
+                return new Enemy("World Guardian", 700, 70, 80, 35, 0.35, 0.35, 45);
+            case 6:
+                return new Enemy("Zed, The World Breaker", 800, 80, 90, 40, 0.40, 0.40, 50);
+            default:
+                return new Enemy("Mysterious Boss", 500, 50, 50, 20, 0.20, 0.20, 30);
+        }
+    }
+
     //Misc
     public int getIntInput(String prompt, int min, int max) {
         int input = -1;
@@ -777,6 +847,7 @@ public class Game {
         }
         return input;
     }
+
     public void delay(int delay) {
         try {
             Thread.sleep(delay);
