@@ -61,6 +61,9 @@ public abstract class Item {
     public int getValue(){
         return value;
     }
+    public int getMaxStack(){
+        return maxStack;
+    }
     public Rarity getRarity(Rarity rarity){
         return rarity;
     }
