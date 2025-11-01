@@ -315,6 +315,7 @@ public class Game {
                     viewCurrentStory();  // NEW
                     break;
                 case 7:
+                    //TODO before next level must fight boss
                     //add boss before next chapter and must win in order to proceed
                     attemptChapterProgression();
                     break;
@@ -324,6 +325,7 @@ public class Game {
                     break;
             }
         } else {
+            //TODO battle finale boss (Demon King Din)
             System.out.println("\n🎯 What would you like to do?");
             System.out.println("[1] Enter the Finale");
             System.out.println("[2] Check stats");
