@@ -1,6 +1,6 @@
 package Game;
 
-import Entities.Enemies.Enemy;
+import Entities.Enemies.*;
 import Entities.Characters.*;
 import Entities.Characters.Character;
 import Entities.Entity;
@@ -29,16 +29,6 @@ public class Game {
 
     //Game
     public void initializeGame() {
-        //npcs and enemies need to be finalized
-        npcs.add(new GuideNPC("Frank", "Companion"));
-        npcs.add(new BossNPC("Zed", "Edge-Lord Math geek boss"));
-        npcs.add(new FortuneTellerNPC("Kyle", "Shopkeeper"));
-
-        //add enemies in relation to the current level of the game
-        enemies.add(new Enemy("Desert Clause", 220, 20, 30, 10, 0.10, 0.10, 20));
-        enemies.add(new Enemy("Sand Stalker", 210, 20, 30, 10, 0.10, 0.10, 20));
-        enemies.add(new Enemy("Dune Crawler", 200, 20, 30, 10, 0.10, 0.10, 20));
-
         //Status Effects
         status.add(new DamageOverTimeEffect("Poison", "Deals poison damage", 3,  DamageType.MAGICAL, 30));
         status.add(new DamageOverTimeEffect("Burn", "Deals burn damage", 3,  DamageType.MAGICAL, 30));
@@ -167,6 +157,21 @@ public class Game {
         items.add(new Weapon("BS005", "Cleave of the Oblivion's Edge", WeaponType.BROADSWORD, "", new WeaponSkill("Basic Attack", "", 2.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 3.2, 40, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 4.5, 80, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
         items.add(new Weapon("DR005", "Void of the Forsaken Rift", WeaponType.DAGGER, "", new WeaponSkill("Basic Attack", "", 2.5, 0, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 3.2, 40, DamageType.PHYSICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 4.5, 80, DamageType.PHYSICAL, TargetType.SINGLE), 200, Rarity.EPIC));
         items.add(new Weapon("MGSW005", "Chronoblade of the Severed Realm", WeaponType.MAGIC_SWORD, "", new WeaponSkill("Basic Attack", "", 2.5, 0, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Skill Attack", "", 3.2, 40, DamageType.MAGICAL, TargetType.SINGLE), new WeaponSkill("Ultimate Attack", "", 4.5, 80, DamageType.MAGICAL, TargetType.SINGLE), 200, Rarity.EPIC));
+
+        //npcs and enemies need to be finalized
+        npcs.add(new GuideNPC("Frank", "Guide Companion"));
+        npcs.add(new ShopNPC("Kyle", "Shopkeeper", items));
+
+        //add enemies in relation to the current level of the game
+        enemies.add(new Enemy("Desert Clause", 220, 20, 30, 10, 0.10, 0.10, 20));
+        enemies.add(new Enemy("Sand Stalker", 210, 20, 30, 10, 0.10, 0.10, 20));
+        enemies.add(new Enemy("Dune Crawler", 200, 20, 30, 10, 0.10, 0.10, 20));
+
+        //Common, Elite, Boss, Miniboss (Examples)
+        enemies.add(new CommonEnemy("Gooners", 100, 10, 10, 5, 0.05, 0.05, 10));
+        enemies.add(new EliteEnemy("Masterbaiters", 250, 25, 25, 20, 0.15, 0.15, 25));
+        enemies.add(new Boss("Ragebaiter", 300, 2, 30, 30, 25, 0.20, 0.20, 30));
+        enemies.add(new MiniBoss("Edge-Lord Zedjy", 500, 3, 35, 35, 28, 0.22, 0.22, 32));
 
         System.out.println("Welcome to Akhai!");
         delay(1000);
@@ -306,6 +311,11 @@ public class Game {
             System.out.println("🚨 You encountered an enemy!");
             delay(1000);
             battle();
+
+            //battle(player, (CommonEnemy) enemies.get(3));
+            //battle(player, (EliteEnemy) enemies.get(4));
+            //battle(player, (Boss) enemies.get(5));
+            //battle(player, (MiniBoss) enemies.get(6));
         } else {
             // Chance for finding items or hidden events
             if (Math.random() > 0.7) {
@@ -359,12 +369,277 @@ public class Game {
         selectedNPC.interact(player);
     }
 
-    //Battle
+    //Random Battle
     public void battle() {
         inBattle = true;
         int turns = 1;
         Enemy enemy = enemies.get((int)(Math.random() * enemies.size()));
         System.out.println("🚨 A wild " + enemy.getName() + " appears!");
+        delay(1000);
+
+        int baseExp = 25 + (currentChapter * 5);
+
+        int playerCurrentSpeed = player.getSpeed();
+        int playerOriginalSpeed = player.getSpeed();
+        int enemyCurrentSpeed = enemy.getSpeed();
+        int enemyOriginalSpeed = enemy.getSpeed();
+
+        //Reset Ult charges
+        player.resetUltimateCounter();
+
+        while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
+            String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
+            String playerEnergyBar = createEnergyBar(player.getEnergy(), player.getMaxEnergy(), 20);
+            String enemyHealthBar =  createHealthBar(enemy.getHealth(), enemy.getMaxHealth(), 20);
+
+            System.out.println("\n========== TURN "+(turns++)+" ==========");
+            System.out.println("\t\t"+enemy.getName());
+            System.out.println(ColorUtil.red(enemyHealthBar));
+            System.out.println("\n\t\t"+player.getName());
+            System.out.println(ColorUtil.green(playerHealthBar));
+            System.out.println(playerEnergyBar);
+
+            boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
+            System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
+
+            //Take action based on who's acting
+            int damage = takeAction(isPlayerTurn, enemy);
+
+            //Update speed counters after action
+            if (damage != -1) {
+                if (isPlayerTurn) {
+                    playerCurrentSpeed -= enemyCurrentSpeed;
+                    if (enemyCurrentSpeed < enemyOriginalSpeed) {
+                        enemyCurrentSpeed += enemyOriginalSpeed;
+                    }
+                } else {
+                    enemyCurrentSpeed -= playerCurrentSpeed;
+                    if (playerCurrentSpeed < playerOriginalSpeed) {
+                        playerCurrentSpeed += playerOriginalSpeed;
+                    }
+
+                    if (damage > 0) {
+                        player.generateEnergyFromDamage();
+                    }
+                }
+            }
+
+            //Check if player died and can resurrect
+            if (!isPlayerTurn && player.getHealth() <= 0 && !player.hasResurrected()) {
+                System.out.println("\n💫 The power of resurrection is available...");
+                delay(1000);
+                System.out.println("Would you like to use your one-time resurrection?");
+                delay(500);
+                System.out.println("[1] Yes, resurrect and continue fighting!");
+                System.out.println("[2] No, accept defeat");
+
+                int resurrectChoice = getIntInput("Choose: ", 1, 2);
+                if (resurrectChoice == 1) {
+                    player.resurrect();
+                    // Player gets a free turn after resurrection
+                    System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
+                    damage = player.getBasicAttack().execute(player);
+                    int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
+                    System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
+
+                    //Reset player speed after resurrection free turn
+                    playerCurrentSpeed = playerOriginalSpeed;
+                } else {
+                    System.out.println("You accept your fate...");
+                }
+            }
+            player.checkStatusEffect();
+            enemy.checkStatusEffect();
+        }
+        playerHealthCheck(enemy, baseExp);
+
+        // Clear battle effects after combat
+        clearBattleEffects(enemy);
+
+        inBattle = false;
+    }
+    //Fixed Battle
+    public void battle(Character player, CommonEnemy enemy){
+        inBattle = true;
+        int turns = 1;
+
+        System.out.println("🚨 " + enemy.getName() + " appears!");
+        delay(1000);
+
+        int baseExp = 25 + (currentChapter * 5);
+
+        int playerCurrentSpeed = player.getSpeed();
+        int playerOriginalSpeed = player.getSpeed();
+        int enemyCurrentSpeed = enemy.getSpeed();
+        int enemyOriginalSpeed = enemy.getSpeed();
+
+        //Reset Ult charges
+        player.resetUltimateCounter();
+
+        while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
+            String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
+            String playerEnergyBar = createEnergyBar(player.getEnergy(), player.getMaxEnergy(), 20);
+            String enemyHealthBar =  createHealthBar(enemy.getHealth(), enemy.getMaxHealth(), 20);
+
+            System.out.println("\n========== TURN "+(turns++)+" ==========");
+            System.out.println("\t\t"+enemy.getName());
+            System.out.println(ColorUtil.red(enemyHealthBar));
+            System.out.println("\n\t\t"+player.getName());
+            System.out.println(ColorUtil.green(playerHealthBar));
+            System.out.println(playerEnergyBar);
+
+            boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
+            System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
+
+            //Take action based on who's acting
+            int damage = takeAction(isPlayerTurn, enemy);
+
+            //Update speed counters after action
+            if (damage != -1) {
+                if (isPlayerTurn) {
+                    playerCurrentSpeed -= enemyCurrentSpeed;
+                    if (enemyCurrentSpeed < enemyOriginalSpeed) {
+                        enemyCurrentSpeed += enemyOriginalSpeed;
+                    }
+                } else {
+                    enemyCurrentSpeed -= playerCurrentSpeed;
+                    if (playerCurrentSpeed < playerOriginalSpeed) {
+                        playerCurrentSpeed += playerOriginalSpeed;
+                    }
+
+                    if (damage > 0) {
+                        player.generateEnergyFromDamage();
+                    }
+                }
+            }
+
+            //Check if player died and can resurrect
+            if (!isPlayerTurn && player.getHealth() <= 0 && !player.hasResurrected()) {
+                System.out.println("\n💫 The power of resurrection is available...");
+                delay(1000);
+                System.out.println("Would you like to use your one-time resurrection?");
+                delay(500);
+                System.out.println("[1] Yes, resurrect and continue fighting!");
+                System.out.println("[2] No, accept defeat");
+
+                int resurrectChoice = getIntInput("Choose: ", 1, 2);
+                if (resurrectChoice == 1) {
+                    player.resurrect();
+                    // Player gets a free turn after resurrection
+                    System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
+                    damage = player.getBasicAttack().execute(player);
+                    int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
+                    System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
+
+                    //Reset player speed after resurrection free turn
+                    playerCurrentSpeed = playerOriginalSpeed;
+                } else {
+                    System.out.println("You accept your fate...");
+                }
+            }
+            player.checkStatusEffect();
+            enemy.checkStatusEffect();
+        }
+        playerHealthCheck(enemy, baseExp);
+
+        // Clear battle effects after combat
+        clearBattleEffects(enemy);
+
+        inBattle = false;
+    }
+    public void battle(Character player, EliteEnemy enemy){
+        inBattle = true;
+        int turns = 1;
+
+        System.out.println("🚨 Careful! " + enemy.getName() + " appears!");
+        delay(1000);
+
+        int baseExp = 25 + (currentChapter * 5);
+
+        int playerCurrentSpeed = player.getSpeed();
+        int playerOriginalSpeed = player.getSpeed();
+        int enemyCurrentSpeed = enemy.getSpeed();
+        int enemyOriginalSpeed = enemy.getSpeed();
+
+        //Reset Ult charges
+        player.resetUltimateCounter();
+
+        while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
+            String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
+            String playerEnergyBar = createEnergyBar(player.getEnergy(), player.getMaxEnergy(), 20);
+            String enemyHealthBar =  createHealthBar(enemy.getHealth(), enemy.getMaxHealth(), 20);
+
+            System.out.println("\n========== TURN "+(turns++)+" ==========");
+            System.out.println("\t\t"+enemy.getName());
+            System.out.println(ColorUtil.red(enemyHealthBar));
+            System.out.println("\n\t\t"+player.getName());
+            System.out.println(ColorUtil.green(playerHealthBar));
+            System.out.println(playerEnergyBar);
+
+            boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
+            System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
+
+            //Take action based on who's acting
+            int damage = takeAction(isPlayerTurn, enemy);
+
+            //Update speed counters after action
+            if (damage != -1) {
+                if (isPlayerTurn) {
+                    playerCurrentSpeed -= enemyCurrentSpeed;
+                    if (enemyCurrentSpeed < enemyOriginalSpeed) {
+                        enemyCurrentSpeed += enemyOriginalSpeed;
+                    }
+                } else {
+                    enemyCurrentSpeed -= playerCurrentSpeed;
+                    if (playerCurrentSpeed < playerOriginalSpeed) {
+                        playerCurrentSpeed += playerOriginalSpeed;
+                    }
+
+                    if (damage > 0) {
+                        player.generateEnergyFromDamage();
+                    }
+                }
+            }
+
+            //Check if player died and can resurrect
+            if (!isPlayerTurn && player.getHealth() <= 0 && !player.hasResurrected()) {
+                System.out.println("\n💫 The power of resurrection is available...");
+                delay(1000);
+                System.out.println("Would you like to use your one-time resurrection?");
+                delay(500);
+                System.out.println("[1] Yes, resurrect and continue fighting!");
+                System.out.println("[2] No, accept defeat");
+
+                int resurrectChoice = getIntInput("Choose: ", 1, 2);
+                if (resurrectChoice == 1) {
+                    player.resurrect();
+                    // Player gets a free turn after resurrection
+                    System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
+                    damage = player.getBasicAttack().execute(player);
+                    int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
+                    System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
+
+                    //Reset player speed after resurrection free turn
+                    playerCurrentSpeed = playerOriginalSpeed;
+                } else {
+                    System.out.println("You accept your fate...");
+                }
+            }
+            player.checkStatusEffect();
+            enemy.checkStatusEffect();
+        }
+        playerHealthCheck(enemy, baseExp);
+
+        // Clear battle effects after combat
+        clearBattleEffects(enemy);
+
+        inBattle = false;
+    }
+    public void battle(Character player, Boss enemy){
+        inBattle = true;
+        int turns = 1;
+
+        System.out.println("🚨 BOSS " + enemy.getName() + " appears!");
         delay(1000);
 
         int baseExp = 25 + (currentChapter * 5);
@@ -743,16 +1018,16 @@ public class Game {
             player.obtainItem(findItemId("SHP001", items, 5));
             player.obtainItem(findItemId("SP001", items, 5));
             switch(player.getClassType()){
-                case ClassType.HAWKSEYE:
+                case HAWKSEYE:
                     player.obtainItem(findItemId("BW001.1", items, 1));
                     break;
-                case ClassType.BLADEMASTER:
+                case BLADEMASTER:
                     player.obtainItem(findItemId("SW001.1", items, 1));
                     break;
-                case ClassType.BERSERKER:
+                case BERSERKER:
                     player.obtainItem(findItemId("BS001.1", items, 1));
                     break;
-                case ClassType.ASSASSIN:
+                case ASSASSIN:
                     player.obtainItem(findItemId("DR001.1", items, 1));
                     break;
             }
@@ -763,10 +1038,10 @@ public class Game {
             player.obtainItem(findItemId("SHP001", items, 5));
             player.obtainItem(findItemId("SP001", items, 5));
             switch(player.getClassType()) {
-                case ClassType.RUNECASTER:
+                case RUNECASTER:
                     player.obtainItem(findItemId("MGS001.1", items, 1));
                     break;
-                case ClassType.RUNEKNIGHT:
+                case RUNEKNIGHT:
                     player.obtainItem(findItemId("MGSW001.1", items, 1));
                     break;
             }
@@ -856,7 +1131,7 @@ public class Game {
 
     //Item
     public Item findItemId(String itemId, List<Item> item, int quantity){
-        Item foundItem = items.getFirst();
+        Item foundItem = items.get(0);
         for(int i = 0; i < item.size(); i++){
             if(itemId.equals(item.get(i).getItemId())) {
                 item.get(i).setQuantity(quantity);
@@ -864,15 +1139,6 @@ public class Game {
             }
         }
         return foundItem;
-    }
-    public StatusEffect findStatus(String name, List<StatusEffect> statusEffects){
-        StatusEffect foundStatus = statusEffects.getFirst();
-        for(StatusEffect statusEffect : statusEffects){
-            if(statusEffect.getName().equals(name)){
-                foundStatus = statusEffect;
-            }
-        }
-        return foundStatus;
     }
 
     //Misc

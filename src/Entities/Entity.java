@@ -67,49 +67,49 @@ public abstract class Entity {
     }
     public void modifyStatPercentage(StatType statType, double value) {
         switch (statType) {
-            case StatType.PHYSICAL_DAMAGE:
+            case PHYSICAL_DAMAGE:
                 physicalDamage += physicalDamage * value;
                 break;
-            case StatType.MAGIC_DAMAGE:
+            case MAGIC_DAMAGE:
                 magicDamage += magicDamage * value;
                 break;
-            case StatType.DEFENSE:
+            case DEFENSE:
                 defense += defense * value;
                 break;
-            case StatType.PHYSICAL_RESISTANCE:
+            case PHYSICAL_RESISTANCE:
                 physicalResistance += physicalResistance * value;
                 break;
-            case StatType.MAGIC_RESISTANCE:
+            case MAGIC_RESISTANCE:
                 magicResistance += magicResistance * value;
                 break;
-            case StatType.SPEED:
+            case SPEED:
                 speed += speed * value;
                 break;
-            case StatType.ACCURACY:
+            case ACCURACY:
                 accuracy += accuracy * value;
         }
     }
     public void modifyStatFlat(StatType statType, int value){
         switch (statType) {
-            case StatType.PHYSICAL_DAMAGE:
+            case PHYSICAL_DAMAGE:
                 physicalDamage += value;
                 break;
-            case StatType.MAGIC_DAMAGE:
+            case MAGIC_DAMAGE:
                 magicDamage += value;
                 break;
-            case StatType.DEFENSE:
+            case DEFENSE:
                 defense += value;
                 break;
-            case StatType.PHYSICAL_RESISTANCE:
+            case PHYSICAL_RESISTANCE:
                 physicalResistance += value;
                 break;
-            case StatType.MAGIC_RESISTANCE:
+            case MAGIC_RESISTANCE:
                 magicResistance += value;
                 break;
-            case StatType.SPEED:
+            case SPEED:
                 speed += value;
                 break;
-            case StatType.ACCURACY:
+            case ACCURACY:
                 accuracy += value;
         }
     }

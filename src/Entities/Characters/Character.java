@@ -201,6 +201,28 @@ public abstract class Character extends Entity {
             System.out.println("Inventory is full!");
         }
     }
+    public void buyItem(Item item, int quantity){
+        Item[] items = inventory.getItems();
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null && items[i].getItemId().equals(item.getItemId())) {
+                items[i].setQuantity(items[i].getQuantity() + quantity);
+                System.out.println("Purchased "+quantity+"x \"" + item.getName() + "\"!");
+                delay(500);
+                return;
+            }
+        }
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                items[i] = item;
+                inventory.setCapacity(inventory.getCapacity() + 1);
+                inventory.setIsFull(inventory.getCapacity() == inventory.getMaxCapacity());
+                items[i].setQuantity(quantity);
+                System.out.println("Purchased NEW ITEM  "+quantity+"x \"" + item.getName() + "\"!");
+                delay(500);
+                return;
+            }
+        }
+    }
 
     public boolean isUltimateReady() {
         return ultimateCounter >= maxUltimateCounter;
