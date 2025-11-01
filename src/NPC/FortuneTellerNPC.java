@@ -1,11 +1,13 @@
 package NPC;
 
+import java.util.List;
 import java.util.Random;
 import Entities.Characters.Character;
+import Items.Item;
 
 public class FortuneTellerNPC extends ShopNPC {
-    public FortuneTellerNPC(String name, String description) {
-        super(name, description);
+    public FortuneTellerNPC(String name, String description, List<Item> items) {
+        super(name, description, items);
     }
 
     @Override

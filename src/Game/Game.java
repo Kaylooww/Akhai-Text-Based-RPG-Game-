@@ -10,6 +10,7 @@ import NPC.*;
 import Skills.WeaponSkill;
 import StatusEffects.DamageOverTimeEffects.*;
 import StatusEffects.StatusEffect;
+import Story.*;
 import TextFormat.ColorUtil;
 
 import java.util.*;
@@ -24,11 +25,15 @@ public class Game {
     private int currentChapter = 1;
     private boolean gameRunning = true;
     private boolean inBattle = false;
-    private final int MAX_LEVEL = 6;
+    private StoryManager storyManager;
+    private final int MAX_LEVEL = 5;
     private boolean[] levelsCompleted = new boolean[MAX_LEVEL + 1];
 
     //Game
     public void initializeGame() {
+        // Initialize story system
+        storyManager = new StoryManager();
+
         //Status Effects
         status.add(new DamageOverTimeEffect("Poison", "Deals poison damage", 3,  DamageType.MAGICAL, 30));
         status.add(new DamageOverTimeEffect("Burn", "Deals burn damage", 3,  DamageType.MAGICAL, 30));
@@ -182,9 +187,8 @@ public class Game {
         System.out.println("4. Berserker");
         System.out.println("5. Shinobi");
         System.out.println("6. Rune Knight");
-        System.out.println("7. Jinwoo Sun (All classes) - Test Class");
 
-        int choice = getIntInput("Enter your choice (1-7): ", 1, 7);
+        int choice = getIntInput("Enter your choice (1-6): ", 1, 7);
 
         switch (choice) {
             case 1:
@@ -220,12 +224,24 @@ public class Game {
     public void startGame() {
         addStarterPack(player, items);
 
+        // Play Chapter 1 story automatically
+        System.out.println("\n🌟 Your adventure begins...");
+        delay(2000);
+        storyManager.playChapter(1);
+
         while(gameRunning) {
             displayLevelMap();
             handleLevelActions();
 
-            if (currentChapter > 6) { // Assuming 6 levels based on the map
-                System.out.println("Congratulations! You have completed the game!");
+            if (currentChapter > MAX_LEVEL) {
+                System.out.println("\n🎊 Congratulations! You have completed the game!");
+
+                if (storyManager.isStoryComplete()) {
+                    System.out.println("✨ You have experienced the full story of Akhai!");
+                    System.out.println("From a lost traveler to Khai's true successor...");
+                    System.out.println("Your journey has saved an entire world!");
+                }
+
                 gameRunning = false;
             }
         }
@@ -264,41 +280,86 @@ public class Game {
         return String.format("%.1f", (completed / (double)MAX_LEVEL) * 100);
     }
     public void handleLevelActions() {
-        System.out.println("\n🎯 What would you like to do?");
-        System.out.println("[1] Explore");
-        System.out.println("[2] Check stats");
-        System.out.println("[3] Open Inventory");
-        System.out.println("[4] Check resurrection status");
-        System.out.println("[5] Talk to NPC");
-        System.out.println("[6] Proceed to Story");
-        System.out.println("[7] Quit game");
+        int choice;
+        if(currentChapter < 5) {
+            System.out.println("\n🎯 What would you like to do?");
+            System.out.println("[1] Explore");
+            System.out.println("[2] Check stats");
+            System.out.println("[3] Open Inventory");
+            System.out.println("[4] Check resurrection status");
+            System.out.println("[5] Talk to NPC");
+            System.out.println("[6] View Current Story");
+            System.out.println("[7] Proceed to Story");
+            System.out.println("[8] Quit game");
 
-        int choice = getIntInput("Enter your choice: ", 1, 7);
+            choice = getIntInput("Enter your choice: ", 1, 8);
 
-        switch (choice) {
-            case 1:
-                explore();
-                break;
-            case 2:
-                player.displayStats();
-                break;
-            case 3:
-                //player.displayInventory();
-                openInventory(player);
-                break;
-            case 4:
-                checkResurrectionStatus();
-                break;
-            case 5:
-                talkToNPC();
-                break;
-            case 6:
-                attemptLevelProgression();
-                break;
-            case 7:
-                gameRunning = false;
-                System.out.println("Thanks for playing Akhai!");
-                break;
+            switch (choice) {
+                case 1:
+                    explore();
+                    break;
+                case 2:
+                    player.displayStats();
+                    break;
+                case 3:
+                    //player.displayInventory();
+                    openInventory(player);
+                    break;
+                case 4:
+                    checkResurrectionStatus();
+                    break;
+                case 5:
+                    talkToNPC();
+                    break;
+                case 6:
+                    viewCurrentStory();  // NEW
+                    break;
+                case 7:
+                    //add boss before next chapter and must win in order to proceed
+                    attemptChapterProgression();
+                    break;
+                case 8:
+                    gameRunning = false;
+                    System.out.println("Thanks for playing Akhai!");
+                    break;
+            }
+        } else {
+            System.out.println("\n🎯 What would you like to do?");
+            System.out.println("[1] Enter the Finale");
+            System.out.println("[2] Check stats");
+            System.out.println("[3] Open Inventory");
+            System.out.println("[4] Check resurrection status");
+            System.out.println("[5] Talk to NPC");
+            System.out.println("[6] View Current Story");
+            System.out.println("[7] Quit game");
+
+            choice = getIntInput("Enter your choice: ", 1, 7);
+
+            switch (choice) {
+                case 1:
+                    //add final boss
+                    break;
+                case 2:
+                    player.displayStats();
+                    break;
+                case 3:
+                    //player.displayInventory();
+                    openInventory(player);
+                    break;
+                case 4:
+                    checkResurrectionStatus();
+                    break;
+                case 5:
+                    talkToNPC();
+                    break;
+                case 6:
+                    viewCurrentStory();  // NEW
+                    break;
+                case 7:
+                    gameRunning = false;
+                    System.out.println("Thanks for playing Akhai!");
+                    break;
+            }
         }
     }
     public void explore() {
@@ -334,27 +395,42 @@ public class Game {
         player.gainExperience(expBonus);
         System.out.println("Gained " + expBonus + " bonus experience!");
     }
-    private void attemptLevelProgression() {
+    private void attemptChapterProgression() {
         if (currentChapter >= MAX_LEVEL) {
-            System.out.println("🎉 Congratulations! You've completed all levels!");
+            System.out.println("🎉 Congratulations! You've completed all chapters!");
+
+            if (storyManager.isStoryComplete()) {
+                System.out.println("\n✨ You have witnessed the complete story of Akhai!");
+                System.out.println("Thank you for playing!");
+            }
             return;
         }
 
         // Check if player is strong enough to progress
         if (player.getLevel() < currentChapter * 2) {
             System.out.println("⚠️  You're not strong enough to face the challenges ahead!");
-            System.out.println("Recommended level for next area: " + (currentChapter * 2));
+            System.out.println("Recommended level for next chapter: " + (currentChapter * 2));
             System.out.println("Your current level: " + player.getLevel());
             return;
         }
 
-        System.out.println("🚀 Moving to " + getLevelName(currentChapter + 1) + "...");
-        levelsCompleted[currentChapter++] = true;
-        //currentLevel++;
+        System.out.println("\n📖 Beginning Chapter " + (currentChapter + 1) + "...");
+        delay(1000);
 
-        // Scale enemies for new level
+        // Mark current chapter as completed
+        levelsCompleted[currentChapter] = true;
+
+        // Move to next chapter
+        currentChapter++;
+        storyManager.setCurrentChapter(currentChapter);
+
+        // Play the new chapter's story
+        storyManager.playChapter(currentChapter);
+
+        // Scale enemies for new chapter
         scaleEnemiesForCurrentLevel();
-        System.out.println("New challenges await in " + getLevelName(currentChapter) + "!");
+
+        System.out.println("\n⚔️ New challenges await in " + getLevelName(currentChapter) + "!");
     }
     public void talkToNPC() {
         System.out.println("Which NPC would you like to talk to?");
@@ -367,6 +443,42 @@ public class Game {
 
         System.out.println("You approach " + selectedNPC.getName() + "...");
         selectedNPC.interact(player);
+    }
+
+    private void viewCurrentStory() {
+        System.out.println("\n📖 STORY MENU");
+        System.out.println("[1] View current chapter");
+        System.out.println("[2] View all unlocked chapters");
+        System.out.println("[3] Back");
+
+        int choice = getIntInput("Choose: ", 1, 3);
+
+        switch(choice) {
+            case 1:
+                storyManager.playChapter(currentChapter);
+                break;
+            case 2:
+                viewAllChapters();
+                break;
+            case 3:
+                return;
+        }
+    }
+
+    private void viewAllChapters() {
+        System.out.println("\n📚 ALL CHAPTERS");
+        for (int i = 1; i <= currentChapter; i++) {
+            Chapter chapter = storyManager.getChapter(i);
+            String status = chapter.isCompleted() ? "✅" : "🔒";
+            System.out.println(status + " Chapter " + i + ": " + chapter.getChapterTitle());
+        }
+
+        System.out.println("\nEnter chapter number to replay (or 0 to go back): ");
+        int choice = getIntInput("Choose: ", 0, currentChapter);
+
+        if (choice > 0) {
+            storyManager.playChapter(choice);
+        }
     }
 
     //Random Battle
@@ -403,6 +515,7 @@ public class Game {
             System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
 
             //Take action based on who's acting
+            //TODO notify when a player/enemy skipped their turn
             int damage = takeAction(isPlayerTurn, enemy);
 
             //Update speed counters after action
@@ -1146,10 +1259,18 @@ public class Game {
         int input = -1;
         while (input < min || input > max) {
             System.out.print(prompt);
+            //TODO revise try catch so that it will catch most exceptions and print
             try {
                 input = Integer.parseInt(scan.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number.");
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid input.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please enter a valid input.");
+            } catch (Exception e) {
+                System.out.println("Please enter a valid input.");
+                throw new RuntimeException(e);
             }
         }
         return input;
