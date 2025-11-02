@@ -173,10 +173,10 @@ public class Game {
         enemies.add(new Enemy("Dune Crawler", 200, 20, 30, 10, 0.10, 0.10, 20));
 
         //Common, Elite, Boss, Miniboss (Examples)
-        enemies.add(new CommonEnemy("Gooners", 100, 10, 10, 5, 0.05, 0.05, 10));
-        enemies.add(new EliteEnemy("Masterbaiters", 250, 25, 25, 20, 0.15, 0.15, 25));
-        enemies.add(new Boss("Ragebaiter", 300, 2, 30, 30, 25, 0.20, 0.20, 30));
-        enemies.add(new MiniBoss("Edge-Lord Zedjy", 500, 3, 35, 35, 28, 0.22, 0.22, 32));
+        enemies.add(new CommonEnemy("Gooners",  100, 10, 10, 5, 0.05, 0.05, 10));
+        enemies.add(new EliteEnemy("Masterbaiters", 250, 15, 15, 8, 0.15, 0.15, 25));
+        enemies.add(new Boss("Demon-King Din", 300, 2, 20, 20, 10, 0.20, 0.20, 30));
+        enemies.add(new MiniBoss("Edge-Lord Zedjy", 50, 3, 22, 22, 11, 0.22, 0.22, 32));
 
         System.out.println("Welcome to Akhai!");
         delay(1000);
@@ -340,6 +340,7 @@ public class Game {
             switch (choice) {
                 case 1:
                     //add final boss
+                    battle(player, new Boss.DemonKingDin(), 2);
                     break;
                 case 2:
                     player.displayStats();
@@ -373,12 +374,20 @@ public class Game {
         if (Math.random() <= encounterRate) {
             System.out.println("🚨 You encountered an enemy!");
             delay(1000);
-            battle();
+            //battle();
 
             //battle(player, (CommonEnemy) enemies.get(3));
             //battle(player, (EliteEnemy) enemies.get(4));
             //battle(player, (Boss) enemies.get(5));
             //battle(player, (MiniBoss) enemies.get(6));
+
+            //battle(player, new CommonEnemy.Gooner());
+            //battle(player, new EliteEnemy.MasterBaiter());
+            //battle(player, new Boss.DemonKingDin());
+            //battle(player, new Boss.Abaddon());
+            //battle(player, new MiniBoss.EdgeLordZedjy());
+
+            battle(player, new Boss.DemonKingDin(), 3);
         } else {
             // Chance for finding items or hidden events
             if (Math.random() > 0.7) {
@@ -566,6 +575,10 @@ public class Game {
             player.checkStatusEffect();
             enemy.checkStatusEffect();
         }
+        //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
+        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
+            needs to be carry over to the next battle method during the wave.
+        */
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -574,7 +587,7 @@ public class Game {
         inBattle = false;
     }
     //Fixed Battle
-    public void battle(Character player, CommonEnemy enemy){
+    public void battle(Character player, CommonEnemy enemy) {
         inBattle = true;
         int turns = 1;
 
@@ -655,6 +668,10 @@ public class Game {
             player.checkStatusEffect();
             enemy.checkStatusEffect();
         }
+        //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
+        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
+            needs to be carry over to the next battle method during the wave.
+        */
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -743,6 +760,10 @@ public class Game {
             player.checkStatusEffect();
             enemy.checkStatusEffect();
         }
+        //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
+        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
+            needs to be carry over to the next battle method during the wave.
+        */
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -831,12 +852,28 @@ public class Game {
             player.checkStatusEffect();
             enemy.checkStatusEffect();
         }
+        //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
+        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
+            needs to be carry over to the next battle method during the wave.
+        */
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
         clearBattleEffects(enemy);
 
         inBattle = false;
+    }
+    public void battle(Character player, Boss enemy, int maxWave/*min: 2 | max: 3*/){
+        for(int wave = 1; wave <= maxWave; wave++){
+            if(wave == maxWave){
+                battle(player, enemy);
+            }else if(wave == 1 && maxWave == 3){
+                battle(player, randomizeCommonEnemy());
+            }else{
+                battle(player, randomizeEliteEnemy());
+            }
+        }
+
     }
 
     public class AccuracySystem {
@@ -1173,7 +1210,6 @@ public class Game {
             player.obtainItem(findItemId("DR005", items, 1));
         }
     }
-
     private int openInventory(Character player){
         int confirm = 0;
         int result = -1;
@@ -1242,6 +1278,50 @@ public class Game {
             }
         }
         return result;
+    }
+
+    //Enemy
+    public CommonEnemy randomizeCommonEnemy(){
+        Random rand = new Random();
+        //TODO adjusts the parameter depending on the quantity of existing enemies
+        int choice = rand.nextInt(3);
+
+        switch(choice){
+            case 0:
+                return new CommonEnemy.Gooner();
+            case 1:
+                return new CommonEnemy.Ragebaiter();
+            case 2:
+                return new CommonEnemy.YourHB();
+        }
+        return null;
+    }
+    public EliteEnemy randomizeEliteEnemy(){
+        Random rand = new Random();
+        //TODO adjusts the parameter depending on the quantity of existing enemies
+        int choice = rand.nextInt(2);
+
+        switch(choice){
+            case 0:
+                return new EliteEnemy.MasterBaiter();
+            case 1:
+                return new EliteEnemy.Redditor();
+        }
+        return null;
+    }
+    //unnecessary but why not lol
+    public Boss randomizeBoss(){
+        Random rand = new Random();
+        //TODO adjusts the parameter depending on the quantity of existing enemies
+        int choice = rand.nextInt(2);
+
+        switch(choice){
+            case 0:
+                return new Boss.DemonKingDin();
+            case 1:
+                return new Boss.Abaddon();
+        }
+        return null;
     }
 
     //Item
