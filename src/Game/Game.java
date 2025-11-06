@@ -168,15 +168,15 @@ public class Game {
         npcs.add(new ShopNPC("Kyle", "Shopkeeper", items));
 
         //add enemies in relation to the current level of the game
-        enemies.add(new Enemy("Desert Clause", 220, 20, 30, 10, 0.10, 0.10, 20));
-        enemies.add(new Enemy("Sand Stalker", 210, 20, 30, 10, 0.10, 0.10, 20));
-        enemies.add(new Enemy("Dune Crawler", 200, 20, 30, 10, 0.10, 0.10, 20));
+        //enemies.add(new Enemy("Desert Clause", 220, 20, 30, 10, 0.10, 0.10, 20));
+        //enemies.add(new Enemy("Sand Stalker", 210, 20, 30, 10, 0.10, 0.10, 20));
+        //enemies.add(new Enemy("Dune Crawler", 200, 20, 30, 10, 0.10, 0.10, 20));
 
         //Common, Elite, Boss, Miniboss (Examples)
-        enemies.add(new CommonEnemy("Gooners",  100, 10, 10, 5, 0.05, 0.05, 10));
-        enemies.add(new EliteEnemy("Masterbaiters", 250, 15, 15, 8, 0.15, 0.15, 25));
-        enemies.add(new Boss("Demon-King Din", 300, 2, 20, 20, 10, 0.20, 0.20, 30));
-        enemies.add(new MiniBoss("Edge-Lord Zedjy", 50, 3, 22, 22, 11, 0.22, 0.22, 32));
+        //enemies.add(new CommonEnemy("Gooners",  100, 10, 10, 5, 0.05, 0.05, 10));
+        //enemies.add(new EliteEnemy("Masterbaiters", 250, 15, 15, 8, 0.15, 0.15, 25));
+        //enemies.add(new Boss("Frank-King Din", 300, 2, 20, 20, 10, 0.20, 0.20, 30));
+        //enemies.add(new MiniBoss("Edge-Lord Zedjy", 50, 3, 22, 22, 11, 0.22, 0.22, 32));
 
         System.out.println("Welcome to Akhai!");
         delay(1000);
@@ -381,7 +381,7 @@ public class Game {
             //battle(player, (Boss) enemies.get(5));
             //battle(player, (MiniBoss) enemies.get(6));
 
-            //battle(player, new CommonEnemy.Gooner());
+            //battle(player, new CommonEnemy.Sludge());
             //battle(player, new EliteEnemy.MasterBaiter());
             //battle(player, new Boss.DemonKingDin());
             //battle(player, new Boss.Abaddon());
@@ -508,7 +508,7 @@ public class Game {
         int enemyOriginalSpeed = enemy.getSpeed();
 
         //Reset Ult charges
-        player.resetUltimateCounter();
+        //player.resetUltimateCounter();
 
         while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
             String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
@@ -576,9 +576,7 @@ public class Game {
             enemy.checkStatusEffect();
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
-            needs to be carry over to the next battle method during the wave.
-        */
+
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -602,7 +600,7 @@ public class Game {
         int enemyOriginalSpeed = enemy.getSpeed();
 
         //Reset Ult charges
-        player.resetUltimateCounter();
+        //player.resetUltimateCounter();
 
         while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
             String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
@@ -669,9 +667,7 @@ public class Game {
             enemy.checkStatusEffect();
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
-            needs to be carry over to the next battle method during the wave.
-        */
+
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -694,7 +690,7 @@ public class Game {
         int enemyOriginalSpeed = enemy.getSpeed();
 
         //Reset Ult charges
-        player.resetUltimateCounter();
+        //player.resetUltimateCounter();
 
         while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
             String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
@@ -761,9 +757,7 @@ public class Game {
             enemy.checkStatusEffect();
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
-            needs to be carry over to the next battle method during the wave.
-        */
+
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -786,7 +780,7 @@ public class Game {
         int enemyOriginalSpeed = enemy.getSpeed();
 
         //Reset Ult charges
-        player.resetUltimateCounter();
+        //player.resetUltimateCounter();
 
         while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
             String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
@@ -853,9 +847,7 @@ public class Game {
             enemy.checkStatusEffect();
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
-            needs to be carry over to the next battle method during the wave.
-        */
+
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -1197,17 +1189,17 @@ public class Game {
                     player.obtainItem(findItemId("MGSW001.1", items, 1));
                     break;
             }
-        }else{ //JinwooSun
-            player.obtainItem(findItemId("PDP004", items, 99));
-            player.obtainItem(findItemId("MDP004", items, 99));
+        }else{ // JinwooSun
+            player.obtainItem(findItemId("DR001.1", items, 1));
+            player.obtainItem(findItemId("DR002.1", items, 1));
+            player.obtainItem(findItemId("DR003.2", items, 1));
+            player.obtainItem(findItemId("DR004.1", items, 1));
+            player.obtainItem(findItemId("DR005", items, 1));
             player.obtainItem(findItemId("HP004", items, 99));
             player.obtainItem(findItemId("EP004", items, 99));
-            player.obtainItem(findItemId("SHP004", items, 99));
+            player.obtainItem(findItemId("PDP004", items, 99));
             player.obtainItem(findItemId("SP004", items, 99));
-            player.obtainItem(findItemId("EVP004", items, 1));
-            player.obtainItem(findItemId("SW005", items, 1));
-            player.obtainItem(findItemId("BS005", items, 1));
-            player.obtainItem(findItemId("DR005", items, 1));
+            //player.obtainItem(findItemId("DR005", items, 1));
         }
     }
     private int openInventory(Character player){
@@ -1283,36 +1275,64 @@ public class Game {
     //Enemy
     public CommonEnemy randomizeCommonEnemy(){
         Random rand = new Random();
-        //TODO adjusts the parameter depending on the quantity of existing enemies
-        int choice = rand.nextInt(3);
+        int choice = rand.nextInt(10);
 
         switch(choice){
             case 0:
-                return new CommonEnemy.Gooner();
+                return new CommonEnemy.Hound();
             case 1:
-                return new CommonEnemy.Ragebaiter();
+                return new CommonEnemy.Slime();
             case 2:
-                return new CommonEnemy.YourHB();
+                return new CommonEnemy.Goblin();
+            case 3:
+                return new CommonEnemy.Chimera();
+            case 4:
+                return new CommonEnemy.Wasp();
+            case 5:
+                return new CommonEnemy.Thief();
+            case 6:
+                return new CommonEnemy.Sludge();
+            case 7:
+                return new CommonEnemy.Orc();
+            case 8:
+                return new CommonEnemy.Demon();
+            case 9:
+                return new CommonEnemy.Frank();
         }
         return null;
     }
     public EliteEnemy randomizeEliteEnemy(){
         Random rand = new Random();
-        //TODO adjusts the parameter depending on the quantity of existing enemies
-        int choice = rand.nextInt(2);
+        int choice = rand.nextInt(10);
 
         switch(choice){
             case 0:
-                return new EliteEnemy.MasterBaiter();
+                return new EliteEnemy.PrimordialVishap();
             case 1:
-                return new EliteEnemy.Redditor();
+                return new EliteEnemy.BathysmalHunter();
+            case 2:
+                return new EliteEnemy.AbyssMage();
+            case 3:
+                return new EliteEnemy.WildernessExile();
+            case 4:
+                return new EliteEnemy.ShadowHusk();
+            case 5:
+                return new EliteEnemy.RuinGuard();
+            case 6:
+                return new EliteEnemy.AbyssRogue();
+            case 7:
+                return new EliteEnemy.MirrorMaiden();
+            case 8:
+                return new EliteEnemy.AbyssHerald();
+            case 9:
+                return new EliteEnemy.Daniel();
+
         }
         return null;
     }
-    //unnecessary but why not lol
+    //unnecessary but why not lol | Bruh HAHAHAHAHA instead of random boss ato butangan each chap refer to the boss class -zed
     public Boss randomizeBoss(){
         Random rand = new Random();
-        //TODO adjusts the parameter depending on the quantity of existing enemies
         int choice = rand.nextInt(2);
 
         switch(choice){
@@ -1337,11 +1357,12 @@ public class Game {
     }
 
     //Misc
-    public int getIntInput(String prompt, int min, int max) {
+    /*public int getIntInput(String prompt, int min, int max) {
         int input = -1;
         while (input < min || input > max) {
             System.out.print(prompt);
-            //TODO revise try catch so that it will catch most exceptions and print
+            //todo (small letters indicating mana pero wa gi remove) revise try catch so that it will catch most exceptions and print
+            //I made a revised version pero I double check lang kyle if its what you had in mind, if not I delete lang and uncomment ni -zed
             try {
                 input = Integer.parseInt(scan.nextLine());
             } catch (NumberFormatException e) {
@@ -1356,6 +1377,27 @@ public class Game {
             }
         }
         return input;
+    }*/
+    public int getIntInput(String prompt, int min, int max) {
+        while (true) {
+            System.out.print(prompt);
+            try {
+                String userInput = scan.nextLine().trim();
+                int input = Integer.parseInt(userInput);
+
+                if (input < min || input > max) {
+                    System.out.println("Please enter a number between " + min + " and " + max + ".");
+                    continue;
+                }
+
+                return input;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid whole number.");
+            } catch (Exception e) {
+                System.out.println("An unexpected error occurred. Please try again.");
+            }
+        }
     }
     public void delay(int delay) {
         try {

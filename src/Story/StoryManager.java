@@ -85,10 +85,10 @@ public class StoryManager {
     }
 
     /**
-     * Initialize Chapter 2: The Demon King's Grief
+     * Initialize Chapter 2: The Frank King's Grief
      */
     private void initChapter2() {
-        Chapter ch2 = new Chapter(2, "The Demon King's Grief",
+        Chapter ch2 = new Chapter(2, "The Frank King's Grief",
                 "Khai reveals the tragic tale of his disciple, Din, and the beloved he lost.");
 
         ch2.addDialogue(new DialogueNode("",
@@ -128,7 +128,7 @@ public class StoryManager {
                 DialogueType.KHAI_SPEECH));
 
         ch2.addDialogue(new DialogueNode("Khai",
-                "He now calls himself the Demon King, and he seeks the Akhai.",
+                "He now calls himself the Frank King, and he seeks the Akhai.",
                 DialogueType.KHAI_SPEECH));
 
         ch2.addDialogue(new DialogueNode("You",
@@ -267,7 +267,7 @@ public class StoryManager {
      */
     private void initChapter5() {
         Chapter ch5 = new Chapter(5, "The Heart of the Storm",
-                "The final confrontation with the Demon King begins.");
+                "The final confrontation with the Frank King begins.");
 
         ch5.addDialogue(new DialogueNode("Din",
                 "Step aside, old master. I will have my peace.",

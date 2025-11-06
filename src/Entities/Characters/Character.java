@@ -11,7 +11,7 @@ public abstract class Character extends Entity {
     protected int energy = 0;
     protected int level;
     protected int experience = 0;
-    protected int experienceNeeded = 100;
+    protected int experienceNeeded = 50;
     protected int currency = 100; //money
     protected Inventory inventory = new Inventory();
     protected Item equippedWeapon;
@@ -80,18 +80,19 @@ public abstract class Character extends Entity {
     public void levelUp() {
         experience -= experienceNeeded;
         level++;
-        experienceNeeded += 20;
+        experienceNeeded += 1;
         System.out.println(name + " leveled up to level " + level + "!");
 
         // Improve stats on level up
         int oldMaxHealth = maxHealth;
-        maxHealth += 15;
-        health += 15; // Also increase current health
-        physicalDamage += 3;
+        maxHealth += 5;
+        health += 5; // Also increase current health
+        physicalDamage += 2;
+        magicDamage += 2;
         defense += 1;
-        speed += 1;
-        magicResistance += 2;
-        magicDamage += 3;
+        magicResistance += 0.01;
+        physicalResistance += 0.01;
+
 
         System.out.println("Max HP increased: " + oldMaxHealth + " → " + maxHealth);
     }
