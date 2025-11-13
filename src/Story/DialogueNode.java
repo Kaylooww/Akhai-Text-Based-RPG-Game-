@@ -110,7 +110,7 @@ public class DialogueNode {
      * Displays Din's speech in red
      */
     private void displayDinSpeech() {
-        System.out.println(ColorUtil.red("\n[Din - The Demon King]: " + text));
+        System.out.println(ColorUtil.red("\n[Din - The Frank King]: " + text));
     }
 
     /**

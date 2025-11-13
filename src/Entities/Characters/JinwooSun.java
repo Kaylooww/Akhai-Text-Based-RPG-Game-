@@ -5,8 +5,8 @@ import java.util.*;
 public class JinwooSun extends Character {
     public JinwooSun(){
         //Values are only a placeholder
-        super("Jinwoo Sun", 1000, ClassType.SUNJINWOO, 1000, 1000, 200, 0.50, 0.50, 99);
-        this.level = 99;
+        super("Jinwoo Sun", 400, ClassType.SUNJINWOO, 81, 81, 49, 0.38, 0.38, 19);
+        this.level = 1;
     }
 //
     //Skills
