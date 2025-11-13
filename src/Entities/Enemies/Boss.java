@@ -33,7 +33,6 @@ public class Boss extends Enemy {
             return performBasicAttack();
         }
     }
-
     public int performBasicAttack() {
         if (basicAttack != null) {
             double damage = getPhysicalDamage() * basicAttack.getDamageMultiplier();
@@ -43,7 +42,6 @@ public class Boss extends Enemy {
         }
         return getPhysicalDamage();
     }
-
     public int performSkillAttack() {
         if (skillAttack != null) {
             double damage = getPhysicalDamage() * skillAttack.getDamageMultiplier();
@@ -53,7 +51,6 @@ public class Boss extends Enemy {
         }
         return getPhysicalDamage();
     }
-
     public int performUltimateAttack() {
         if (ultimateAttack != null) {
             double damage = getPhysicalDamage() * ultimateAttack.getDamageMultiplier();
@@ -63,7 +60,6 @@ public class Boss extends Enemy {
         }
         return getPhysicalDamage();
     }
-
     @Override
     public int takeDamage(double damage, int defense, double physicalResistance, double magicResistance) {
         double actualDamage = damage * (1 - physicalResistance) - defense;
@@ -97,7 +93,6 @@ public class Boss extends Enemy {
             ultimateAttack = new EnemySkill("Ult: Realm of Suffering", "Creates a domain of absolute darkness where pain becomes reality", 2.50, 80, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
-
     // chap 4
     public static class Abaddon extends Boss {
         public Abaddon() {
@@ -107,7 +102,6 @@ public class Boss extends Enemy {
             ultimateAttack = new EnemySkill("Ult: Apocalypse Call", "Summons the end of days in a cataclysmic explosion of power", 2.50, 80, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
-
     //For more Boss add here:
     // Weak bosses chap 1-3, difficulty spike at chap 4
     //chap 3
@@ -119,7 +113,6 @@ public class Boss extends Enemy {
             ultimateAttack = new EnemySkill("Ult: Skyfall Descent", "Plummets from the heavens with the force of a meteor", 2.30, 80, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
-
     // chap 2
     public static class EnderDragon extends Boss {
         public EnderDragon() {
@@ -129,7 +122,6 @@ public class Boss extends Enemy {
             ultimateAttack = new EnemySkill("Ult: Dragon's Dive", "A devastating aerial assault that strikes with immense force", 2.00, 80, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
-
     // chap 1
     public static class EnderMan extends Boss {
         public EnderMan() {

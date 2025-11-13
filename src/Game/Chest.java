@@ -11,6 +11,7 @@ public abstract class Chest{
     public Chest(String name, Rarity rarity, int baseExp){
         Random rnd = new Random();
         this.name = name;
+        //TODO adjust the expYield formula if necessary -For Zed
         this.expYield = baseExp * rnd.nextInt(1, 11);
         this.rarity = rarity;
     }

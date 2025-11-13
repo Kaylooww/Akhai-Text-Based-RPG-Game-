@@ -6,7 +6,7 @@ public class JinwooSun extends Character {
     public JinwooSun(){
         //Values are only a placeholder
         super("Jinwoo Sun", 400, ClassType.SUNJINWOO, 81, 81, 49, 0.38, 0.38, 19);
-        this.level = 1;
+        this.level = 999;
     }
 //
     //Skills

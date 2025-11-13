@@ -51,6 +51,7 @@ public class ShopNPC extends NPC{
             }
         }
     }
+    //TODO unlocks certain weapons in certain chapters -For Zed
     public void stockItems(Character player){
         shopItems.clear();
 

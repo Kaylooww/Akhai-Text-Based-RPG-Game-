@@ -228,7 +228,6 @@ public class Game {
     }
 
     //Exploration
-    //Tarongon nato map
     public void displayLevelMap() {
         System.out.println("\n🗺️  === CURRENT MAP ===");
         System.out.println("Progress: " + getCompletionPercentage() + "% complete");
@@ -282,7 +281,6 @@ public class Game {
                     player.displayStats();
                     break;
                 case 3:
-                    //player.displayInventory();
                     openInventory(player);
                     break;
                 case 4:
@@ -354,7 +352,7 @@ public class Game {
         if (Math.random() <= encounterRate) {
             System.out.println("🚨 You encountered an enemy!");
             delay(1000);
-            //battle();
+            battle();
 
             //battle(player, (CommonEnemy) enemies.get(3));
             //battle(player, (EliteEnemy) enemies.get(4));
@@ -367,7 +365,7 @@ public class Game {
             //battle(player, new Boss.Abaddon());
             //battle(player, new MiniBoss.EdgeLordZedjy());
 
-            battle(player, new Boss.DemonKingDin(), 3);
+            //battle(player, new Boss.DemonKingDin(), 3);
         } else {
             // Chance for finding items or hidden events
             if (Math.random() > 0.7) {
@@ -379,13 +377,39 @@ public class Game {
             }
         }
     }
+    //TODO Implement chance to obtain weapon (specific class) after receiving a chest
     private void obtainLoot(){
-
+        switch(currentChapter){
+            case 1:
+                Chest CommonChest = new Chest.CommonChest();
+                System.out.println("💎 You found a "+CommonChest.name+"!");
+                CommonChest.obtain(player);
+                break;
+            case 2:
+                if(Math.random() > 0.9){
+                    Chest EliteChest = new Chest.EliteChest();
+                    System.out.println("💎 You found a "+EliteChest.name+"!");
+                    EliteChest.obtain(player);
+                }
+                break;
+            case 3:
+                if(Math.random() > 0.8){
+                    Chest EpicChest = new Chest.EpicChest();
+                    System.out.println("💎 You found a "+EpicChest.name+"!");
+                    EpicChest.obtain(player);
+                }
+                break;
+            case 4:
+            case 5:
+                if(Math.random() > 0.7){
+                    Chest LegendaryChest = new Chest.LegendaryChest();
+                    System.out.println("💎 You found a "+LegendaryChest.name+"!");
+                    LegendaryChest.obtain(player);
+                }
+        }
     }
     private void findHiddenTreasure() {
-        //TODO implement the chest class here
         Random rnd = new Random();
-
         System.out.println("💎 You found a hidden treasure!");
         int expBonus = currentChapter * rnd.nextInt(5, 11);
         player.gainExperience(expBonus);
@@ -480,7 +504,7 @@ public class Game {
     public void battle() {
         inBattle = true;
         int turns = 1;
-        Enemy enemy = enemies.get((int)(Math.random() * enemies.size()));
+        Enemy enemy = randomizeCommonEnemy();
         System.out.println("🚨 A wild " + enemy.getName() + " appears!");
         delay(1000);
 
@@ -510,7 +534,6 @@ public class Game {
             System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
 
             //Take action based on who's acting
-            //TODO notify when a player/enemy skipped their turn
             int damage = takeAction(isPlayerTurn, enemy);
 
             //Update speed counters after action
@@ -560,7 +583,6 @@ public class Game {
             enemy.checkStatusEffect();
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -651,7 +673,6 @@ public class Game {
             enemy.checkStatusEffect();
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -831,7 +852,6 @@ public class Game {
             enemy.checkStatusEffect();
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -844,9 +864,9 @@ public class Game {
             if(wave == maxWave){
                 battle(player, enemy);
             }else if(wave == 1 && maxWave == 3){
-                battle(player, randomizeCommonEnemy());
-            }else{
                 battle(player, randomizeEliteEnemy());
+            }else{
+                battle(player, randomizeBoss());
             }
         }
 
@@ -1074,12 +1094,16 @@ public class Game {
         System.out.println("You lost " + expLoss + " experience points during the retreat.");
     }
     private void handleVictory(Enemy enemy, int baseExp) {
-        if(enemy.getHealth() <= 100){
+        if(enemy.getHealth() <= 0){
+            System.out.println("💀 " + enemy.getName() + " has been defeated!");
             System.out.println("🎉 You defeated " + enemy.getName() + "!");
             delay(500);
             System.out.println("💰 Gained " + baseExp + " experience!");
             delay(500);
             player.gainExperience(baseExp);
+            delay(500);
+            obtainLoot();
+            delay(500);
 
             // Chance for energy restoration
             if (Math.random() > 0.5) {
@@ -1309,13 +1333,17 @@ public class Game {
     //unnecessary but why not lol | Bruh HAHAHAHAHA instead of random boss ato butangan each chap refer to the boss class -zed
     public Boss randomizeBoss(){
         Random rand = new Random();
-        int choice = rand.nextInt(2);
+        int choice = rand.nextInt(4);
 
         switch(choice){
             case 0:
-                return new Boss.DemonKingDin();
-            case 1:
                 return new Boss.Abaddon();
+            case 1:
+                return new Boss.Kamish();
+            case 2:
+                return new Boss.EnderDragon();
+            case 3:
+                return new Boss.EnderMan();
         }
         return null;
     }
