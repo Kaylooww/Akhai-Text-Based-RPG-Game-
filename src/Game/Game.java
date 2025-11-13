@@ -34,10 +34,6 @@ public class Game {
         // Initialize story system
         storyManager = new StoryManager();
 
-        //Status Effects
-        status.add(new DamageOverTimeEffect("Poison", "Deals poison damage", 3,  DamageType.MAGICAL, 30));
-        status.add(new DamageOverTimeEffect("Burn", "Deals burn damage", 3,  DamageType.MAGICAL, 30));
-
         //Items (LEGENDARY Items should be very rare)
         items.add(new HealingPotion("HP001", "Lesser Healing Potion", "<Empty>", 12, 1, 5, Rarity.COMMON, 50));
         items.add(new HealingPotion("HP002", "Healing Potion", "<Empty>", 12, 1, 10, Rarity.RARE, 75));
@@ -48,11 +44,6 @@ public class Game {
         items.add(new EnergyPotion("EP002", "Energy Potion", "<Empty>", 12, 1, 9, Rarity.RARE, 60));
         items.add(new EnergyPotion("EP003", "Greater Energy Potion", "<Empty>", 12, 1, 15, Rarity.EPIC, 80));
         items.add(new EnergyPotion("EP004", "Legendary Energy Potion", "<Empty>", 12, 1, 35, Rarity.LEGENDARY, 100));
-
-        items.add(new ShieldPotion("SHP001", "Lesser Shield Potion", "<Empty>", 12, 1, 8, Rarity.COMMON, 60));
-        items.add(new ShieldPotion("SHP002", "Shield Potion", "<Empty>", 12, 1, 18, Rarity.RARE, 80));
-        items.add(new ShieldPotion("SHP003", "Greater Shield Potion", "<Empty>", 12, 1, 25, Rarity.EPIC, 120));
-        items.add(new ShieldPotion("SHP004", "Legendary Shield Potion", "<Empty>", 12, 1, 50, Rarity.LEGENDARY, 200));
 
         items.add(new PhysicalDamagePotion("PDP001", "Lesser Physical Potion", "<Empty>", 12, 1, 4, Rarity.COMMON, 0.24));
         items.add(new PhysicalDamagePotion("PDP002", "Physical Potion", "<Empty>", 12, 1, 9, Rarity.RARE, 0.36));
@@ -166,17 +157,6 @@ public class Game {
         //npcs and enemies need to be finalized
         npcs.add(new GuideNPC("Frank", "Guide Companion"));
         npcs.add(new ShopNPC("Kyle", "Shopkeeper", items));
-
-        //add enemies in relation to the current level of the game
-        //enemies.add(new Enemy("Desert Clause", 220, 20, 30, 10, 0.10, 0.10, 20));
-        //enemies.add(new Enemy("Sand Stalker", 210, 20, 30, 10, 0.10, 0.10, 20));
-        //enemies.add(new Enemy("Dune Crawler", 200, 20, 30, 10, 0.10, 0.10, 20));
-
-        //Common, Elite, Boss, Miniboss (Examples)
-        //enemies.add(new CommonEnemy("Gooners",  100, 10, 10, 5, 0.05, 0.05, 10));
-        //enemies.add(new EliteEnemy("Masterbaiters", 250, 15, 15, 8, 0.15, 0.15, 25));
-        //enemies.add(new Boss("Frank-King Din", 300, 2, 20, 20, 10, 0.20, 0.20, 30));
-        //enemies.add(new MiniBoss("Edge-Lord Zedjy", 50, 3, 22, 22, 11, 0.22, 0.22, 32));
 
         System.out.println("Welcome to Akhai!");
         delay(1000);
@@ -399,12 +379,16 @@ public class Game {
             }
         }
     }
+    private void obtainLoot(){
+
+    }
     private void findHiddenTreasure() {
+        //TODO implement the chest class here
         Random rnd = new Random();
+
         System.out.println("💎 You found a hidden treasure!");
         int expBonus = currentChapter * rnd.nextInt(5, 11);
         player.gainExperience(expBonus);
-        System.out.println("Gained " + expBonus + " bonus experience!");
     }
     private void attemptChapterProgression() {
         if (currentChapter >= MAX_LEVEL) {
@@ -1096,14 +1080,6 @@ public class Game {
             System.out.println("💰 Gained " + baseExp + " experience!");
             delay(500);
             player.gainExperience(baseExp);
-
-            // Bonus for not using resurrection
-            if (!player.hasResurrected()) {
-                int bonusExp = (int)(baseExp * 0.2);
-                System.out.println("⭐ Bonus " + bonusExp + " experience for completing the battle without resurrection!");
-                delay(500);
-                player.gainExperience(bonusExp);
-            }
 
             // Chance for energy restoration
             if (Math.random() > 0.5) {

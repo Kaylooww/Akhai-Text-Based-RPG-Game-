@@ -76,6 +76,7 @@ public abstract class Character extends Entity {
         while (experience >= experienceNeeded && level <= 30) { // Added level cap
             levelUp();
         }
+        System.out.println("Gained " + exp + " experience!");
     }
     public void levelUp() {
         experience -= experienceNeeded;
