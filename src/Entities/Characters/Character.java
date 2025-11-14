@@ -30,9 +30,9 @@ public abstract class Character extends Entity {
         super(name, health, physicalDamage, magicDamage, defense, physicalResistance, magicResistance, speed);
         this.classType = classType;
         this.equippedWeapon = new Weapon();
-        this.basicAttack = new UnarmedSkill("Punch", "", 1.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
-        this.skillAttack = new UnarmedSkill("Super Punch", "", 1.3, 40, DamageType.PHYSICAL, TargetType.SINGLE);
-        this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "", 1.7, 80, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.basicAttack = new UnarmedSkill("Punch", "", 0.5, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.skillAttack = new UnarmedSkill("Super Punch", "", 0.8, 40, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "", 1.2, 80, DamageType.PHYSICAL, TargetType.SINGLE);
     }
 
     public int getUltimateCounter() {

@@ -7,7 +7,7 @@ public class GuideNPC extends NPC {
         super(name, description);
     }
     @Override
-    public void interact(Character player) {
+    public void interact(Character player, int currentChapter) {
         //TODO: ADD DIALOGUES
         //Dialogues will differ based on story progression (For Kyle)
         //Dialogues give hint what the player needs to do for the story to progress

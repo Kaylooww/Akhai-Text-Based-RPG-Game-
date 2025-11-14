@@ -352,14 +352,9 @@ public class Game {
         if (Math.random() <= encounterRate) {
             System.out.println("🚨 You encountered an enemy!");
             delay(1000);
-            battle();
+            //battle();
 
-            //battle(player, (CommonEnemy) enemies.get(3));
-            //battle(player, (EliteEnemy) enemies.get(4));
-            //battle(player, (Boss) enemies.get(5));
-            //battle(player, (MiniBoss) enemies.get(6));
-
-            //battle(player, new CommonEnemy.Sludge());
+            battle(player, new CommonEnemy.Sludge());
             //battle(player, new EliteEnemy.MasterBaiter());
             //battle(player, new Boss.DemonKingDin());
             //battle(player, new Boss.Abaddon());
@@ -461,7 +456,7 @@ public class Game {
         NPC selectedNPC = npcs.get(choice - 1);
 
         System.out.println("You approach " + selectedNPC.getName() + "...");
-        selectedNPC.interact(player);
+        selectedNPC.interact(player, currentChapter);
     }
 
     private void viewCurrentStory() {

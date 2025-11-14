@@ -1,5 +1,6 @@
 package NPC;
 
+import Entities.Characters.*;
 import Entities.Characters.Character;
 import Items.Item;
 
@@ -16,7 +17,7 @@ public class ShopNPC extends NPC{
     }
 
     @Override
-    public void interact(Character player) {
+    public void interact(Character player, int currentChapter) {
         boolean exit = false;
         while(!exit){
             System.out.println(name+": Hello fellow adventurer! Care to browse my wares? Or perhaps interested in fortune telling?");
@@ -28,7 +29,7 @@ public class ShopNPC extends NPC{
 
             switch (choice) {
                 case 1:
-                    browseShop(player);
+                    browseShop(player, currentChapter);
                     break;
                 case 2:
                     sellItem(player);
@@ -52,10 +53,10 @@ public class ShopNPC extends NPC{
         }
     }
     //TODO unlocks certain weapons in certain chapters -For Zed
-    public void stockItems(Character player){
+    public void stockItems(Character player, int currentChapter){
         shopItems.clear();
 
-        if(player.getLevel() >= 50){
+        if(currentChapter >= 5){
             shopItems.add(findItemId("HP004", items));
             shopItems.add(findItemId("EP004", items));
             shopItems.add(findItemId("SHP004", items));
@@ -63,7 +64,7 @@ public class ShopNPC extends NPC{
             shopItems.add(findItemId("MDP004", items));
             shopItems.add(findItemId("SP004", items));
             shopItems.add(findItemId("EVP004", items));
-        }else if(player.getLevel() >= 30){
+        }else if(currentChapter >= 3){
             shopItems.add(findItemId("HP003", items));
             shopItems.add(findItemId("EP003", items));
             shopItems.add(findItemId("SHP003", items));
@@ -71,7 +72,7 @@ public class ShopNPC extends NPC{
             shopItems.add(findItemId("MDP003", items));
             shopItems.add(findItemId("SP003", items));
             shopItems.add(findItemId("EVP003", items));
-        }else if(player.getLevel() >= 20){
+        }else if(currentChapter >= 2){
             shopItems.add(findItemId("HP002", items));
             shopItems.add(findItemId("EP002", items));
             shopItems.add(findItemId("SHP002", items));
@@ -88,9 +89,116 @@ public class ShopNPC extends NPC{
             shopItems.add(findItemId("SP001", items));
             shopItems.add(findItemId("EVP001", items));
         }
+
+        addWeapons(player, currentChapter);
     }
-    public void browseShop(Character player){
-        stockItems(player);
+    public void addWeapons(Character player, int currentChapter){
+        if(player instanceof Berserker || player instanceof JinwooSun){
+            if(currentChapter >= 5){
+                shopItems.add(findItemId("BS004.1", items));
+                shopItems.add(findItemId("BS004.2", items));
+                shopItems.add(findItemId("BS004.3", items));
+            }else if(currentChapter >= 3){
+                shopItems.add(findItemId("BS003.1", items));
+                shopItems.add(findItemId("BS003.2", items));
+                shopItems.add(findItemId("BS003.3", items));
+            }else if(currentChapter >= 2){
+                shopItems.add(findItemId("BS002.1", items));
+                shopItems.add(findItemId("BS002.2", items));
+                shopItems.add(findItemId("BS002.3", items));
+            }else{
+                shopItems.add(findItemId("BS001.1", items));
+                shopItems.add(findItemId("BS001.2", items));
+            }
+        }else if(player instanceof Blademaster || player instanceof JinwooSun){
+            if(currentChapter >= 5){
+                shopItems.add(findItemId("SW004.1", items));
+                shopItems.add(findItemId("SW004.2", items));
+                shopItems.add(findItemId("SW004.3", items));
+            }else if(currentChapter >= 3){
+                shopItems.add(findItemId("SW003.1", items));
+                shopItems.add(findItemId("SW003.2", items));
+                shopItems.add(findItemId("SW003.3", items));
+            }else if(currentChapter >= 2){
+                shopItems.add(findItemId("SW002.1", items));
+                shopItems.add(findItemId("SW002.2", items));
+                shopItems.add(findItemId("SW002.3", items));
+            }else{
+                shopItems.add(findItemId("SW001.1", items));
+                shopItems.add(findItemId("SW001.2", items));
+            }
+        }else if(player instanceof Hawkseye || player instanceof JinwooSun){
+            if(currentChapter >= 5){
+                shopItems.add(findItemId("BW004.1", items));
+                shopItems.add(findItemId("BW004.2", items));
+                shopItems.add(findItemId("BW004.3", items));
+            }else if(currentChapter >= 3){
+                shopItems.add(findItemId("BW003.1", items));
+                shopItems.add(findItemId("BW003.2", items));
+                shopItems.add(findItemId("BW003.3", items));
+            }else if(currentChapter >= 2){
+                shopItems.add(findItemId("BW002.1", items));
+                shopItems.add(findItemId("BW002.2", items));
+                shopItems.add(findItemId("BW002.3", items));
+            }else{
+                shopItems.add(findItemId("BW001.1", items));
+                shopItems.add(findItemId("BW001.2", items));
+            }
+        }else if(player instanceof Runecaster || player instanceof JinwooSun){
+            if(currentChapter >= 5){
+                shopItems.add(findItemId("MGS004.1", items));
+                shopItems.add(findItemId("MGS004.2", items));
+                shopItems.add(findItemId("MGS004.3", items));
+            }else if(currentChapter >= 3){
+                shopItems.add(findItemId("MGS003.1", items));
+                shopItems.add(findItemId("MGS003.2", items));
+                shopItems.add(findItemId("MGS003.3", items));
+            }else if(currentChapter >= 2){
+                shopItems.add(findItemId("MGS002.1", items));
+                shopItems.add(findItemId("MGS002.2", items));
+                shopItems.add(findItemId("MGS002.3", items));
+            }else{
+                shopItems.add(findItemId("MGS001.1", items));
+                shopItems.add(findItemId("MGS001.2", items));
+            }
+        }else if(player instanceof RuneKnight || player instanceof JinwooSun){
+            if(currentChapter >= 5){
+                shopItems.add(findItemId("MGSW004.1", items));
+                shopItems.add(findItemId("MGSW004.2", items));
+                shopItems.add(findItemId("MGSW004.3", items));
+            }else if(currentChapter >= 3){
+                shopItems.add(findItemId("MGSW003.1", items));
+                shopItems.add(findItemId("MGSW003.2", items));
+                shopItems.add(findItemId("MGSW003.3", items));
+            }else if(currentChapter >= 2){
+                shopItems.add(findItemId("MGSW002.1", items));
+                shopItems.add(findItemId("MGSW002.2", items));
+                shopItems.add(findItemId("MGSW002.3", items));
+            }else{
+                shopItems.add(findItemId("MGSW001.1", items));
+                shopItems.add(findItemId("MGSW001.2", items));
+            }
+        }else if(player instanceof Shinobi || player instanceof JinwooSun){
+            if(currentChapter >= 5){
+                shopItems.add(findItemId("DR004.1", items));
+                shopItems.add(findItemId("DR004.2", items));
+                shopItems.add(findItemId("DR004.3", items));
+            }else if(currentChapter >= 3){
+                shopItems.add(findItemId("DR003.1", items));
+                shopItems.add(findItemId("DR003.2", items));
+                shopItems.add(findItemId("DR003.3", items));
+            }else if(currentChapter >= 2){
+                shopItems.add(findItemId("DR002.1", items));
+                shopItems.add(findItemId("DR002.2", items));
+                shopItems.add(findItemId("DR002.3", items));
+            }else{
+                shopItems.add(findItemId("DR001.1", items));
+                shopItems.add(findItemId("DR001.2", items));
+            }
+        }
+    }
+    public void browseShop(Character player, int currentChapter){
+        stockItems(player,  currentChapter);
         boolean exit = false;
         while(!exit){
             System.out.println("╔════════════════════ SHOP ════════════════════╗");
