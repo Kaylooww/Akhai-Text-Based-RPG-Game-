@@ -293,7 +293,7 @@ public class Game {
                     viewCurrentStory();  // NEW
                     break;
                 case 7:
-                    //TODO before next level must fight boss
+                    //TODO before next level must fight boss that correlates to the story
                     //add boss before next chapter and must win in order to proceed
                     attemptChapterProgression();
                     break;
@@ -303,7 +303,6 @@ public class Game {
                     break;
             }
         } else {
-            //TODO battle finale boss (Demon King Din)
             System.out.println("\n🎯 What would you like to do?");
             System.out.println("[1] Enter the Finale");
             System.out.println("[2] Check stats");
@@ -318,6 +317,7 @@ public class Game {
             switch (choice) {
                 case 1:
                     //add final boss
+                    //TODO battle finale boss (Demon King Din) must correlate to the story
                     battle(player, new Boss.DemonKingDin(), 2);
                     break;
                 case 2:
@@ -348,13 +348,13 @@ public class Game {
         delay(1000);
 
         // Different encounter rates based on level
-        double encounterRate = 0.6 + (currentChapter * 0.05);
+        double encounterRate = 0.75 + (currentChapter * 0.05);
         if (Math.random() <= encounterRate) {
             System.out.println("🚨 You encountered an enemy!");
             delay(1000);
-            //battle();
+            battle();
 
-            battle(player, new CommonEnemy.Sludge());
+            //battle(player, new CommonEnemy.Sludge());
             //battle(player, new EliteEnemy.MasterBaiter());
             //battle(player, new Boss.DemonKingDin());
             //battle(player, new Boss.Abaddon());
@@ -379,6 +379,7 @@ public class Game {
                 Chest CommonChest = new Chest.CommonChest();
                 System.out.println("💎 You found a "+CommonChest.getName()+"!");
                 CommonChest.obtain(player);
+                //add here
                 break;
             case 2:
                 if(Math.random() > 0.9){
@@ -666,6 +667,7 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
+            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
         playerHealthCheck(enemy, baseExp);
@@ -755,6 +757,7 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
+            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
 
@@ -845,6 +848,7 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
+            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
         playerHealthCheck(enemy, baseExp);
@@ -1154,7 +1158,6 @@ public class Game {
             player.obtainItem(findItemId("PDP001", items, 5));
             player.obtainItem(findItemId("HP001", items, 5));
             player.obtainItem(findItemId("EP001", items, 5));
-            player.obtainItem(findItemId("SHP001", items, 5));
             player.obtainItem(findItemId("SP001", items, 5));
             switch(player.getClassType()){
                 case HAWKSEYE:
@@ -1174,7 +1177,6 @@ public class Game {
             player.obtainItem(findItemId("MDP001", items, 5));
             player.obtainItem(findItemId("HP001", items, 5));
             player.obtainItem(findItemId("EP001", items, 5));
-            player.obtainItem(findItemId("SHP001", items, 5));
             player.obtainItem(findItemId("SP001", items, 5));
             switch(player.getClassType()) {
                 case RUNECASTER:
@@ -1194,7 +1196,6 @@ public class Game {
             player.obtainItem(findItemId("EP004", items, 99));
             player.obtainItem(findItemId("PDP004", items, 99));
             player.obtainItem(findItemId("SP004", items, 99));
-            //player.obtainItem(findItemId("DR005", items, 1));
         }
     }
     private int openInventory(Character player){
@@ -1225,15 +1226,21 @@ public class Game {
                     item.use(player);
                     delay(1000);
 
-                    // For consumable potions in battle, don't end the turn
-                    if(item.getQuantity() > 0) {
-                        System.out.println("Item used! You can take another action.");
-                        result = 0; // Item used, continue turn
-                    } else {
-                        // Item was consumed completely
-                        player.getInventory().removeItem(item);
-                        System.out.println("Item used! You can take another action.");
-                        result = 0; // Item used, continue turn
+                    if(((Consumable) item).getHasConsumed() == true){
+                        confirm = 0;
+                    }else{
+                        // For consumable potions in battle, don't end the turn
+                        if(item.getQuantity() > 0) {
+                            System.out.println("Item used! You can take another action.");
+                            openInventory(player);
+                            result = 0; // Item used, continue turn
+                        } else {
+                            // Item was consumed completely
+                            player.getInventory().removeItem(item);
+                            System.out.println("Item used! You can take another action.");
+                            openInventory(player);
+                            result = 0; // Item used, continue turn
+                        }
                     }
                 }else{
                     confirm = 0;
@@ -1351,6 +1358,15 @@ public class Game {
             }
         }
         return foundItem;
+    }
+    public void resetHasConsumed(List<Item> items){
+        for(Item item : items){
+            if(item instanceof Consumable consumable){
+                if(consumable instanceof PhysicalDamagePotion || consumable instanceof MagicalDamagePotion || consumable instanceof SpeedPotion || consumable instanceof EvasivenessPotion){
+                    consumable.setHasConsumed(false);
+                }
+            }
+        }
     }
 
     //Misc

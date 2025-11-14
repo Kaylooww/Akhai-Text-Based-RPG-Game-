@@ -10,7 +10,7 @@ public class BossNPC extends NPC {
 //
     @Override
     public void interact(Character player, int currentChapter) {
-        System.out.println("Zed: I am the math gett boss! Solve this: 2+2*2 = ?");
+        System.out.println("Zed: I am the math geek boss! Solve this: 2+2*2 = ?");
         Scanner scanner = new Scanner(System.in);
         int answer = scanner.nextInt();
         if (answer == 6) {

@@ -3,6 +3,7 @@ package NPC;
 import Entities.Characters.*;
 import Entities.Characters.Character;
 import Items.Item;
+import Items.Weapons.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -212,21 +213,25 @@ public class ShopNPC extends NPC{
                 Item purchasedItem = shopItems.get(choice-1);
                 boolean confirm = false;
                 while(!confirm){
-                    int quantity = getIntInput("How many would you like to buy? (1-"+purchasedItem.getMaxStack()+"):",1, purchasedItem.getMaxStack());
+                    if(purchasedItem.getMaxStack() == purchasedItem.getQuantity()){
+                        System.out.println("Cannot buy item (Max Stack)!");
+                        break;
+                    }
+
+                    int quantity = getIntInput("How many would you like to buy? (1-"+(purchasedItem.getMaxStack() - purchasedItem.getQuantity())+"):",1, purchasedItem.getMaxStack());
                     if(player.getCurrency() > quantity * purchasedItem.getValue()){
                         if(player.getInventory().getIsFull()){
                             System.out.println("Inventory is full!");
                             break;
-                        }else if(purchasedItem.getQuantity() == purchasedItem.getMaxStack() || quantity + purchasedItem.getQuantity() > purchasedItem.getMaxStack() ){
-                            System.out.println("Cannot buy item (Max Stack)!");
-                            break;
+                        }else if(purchasedItem instanceof Weapon){
+                            System.out.println("You've already owned this weapon!");
                         }else{
                             player.buyItem(purchasedItem, quantity);
                             player.setCurrency(player.getCurrency() - quantity * purchasedItem.getValue());
                             confirm = true;
                         }
                     }else{
-                        System.out.println("Not enough money.");
+                        System.out.println("Not enough money!");
                     }
                 }
             }else{

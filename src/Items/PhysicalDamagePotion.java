@@ -13,11 +13,16 @@ public class PhysicalDamagePotion extends Consumable{
 
     @Override
     public void use(Character player){
-        PhysicalDamageBoost effect = new PhysicalDamageBoost(physicalDamageAmount);
-        effect.applyEffect(player);
-        player.addStatusEffect(effect);
-        System.out.println("💪 " + player.getName() + "'s physical damage increased by " + (physicalDamageAmount * 100) + "%!");
-        setQuantity(getQuantity() - 1);
+        if(hasConsumed == false){
+            PhysicalDamageBoost effect = new PhysicalDamageBoost(physicalDamageAmount);
+            effect.applyEffect(player);
+            player.addStatusEffect(effect);
+            System.out.println("💪 " + player.getName() + "'s physical damage increased by " + (physicalDamageAmount * 100) + "%!");
+            setQuantity(getQuantity() - 1);
+            hasConsumed = true;
+        }else{
+            System.out.println("You can only consume this potion once!");
+        }
     }
 
     @Override
