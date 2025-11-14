@@ -17,15 +17,6 @@ public abstract class Entity {
     protected List<StatusEffect> statusEffects = new ArrayList<>();
 
     protected int maxHealth;
-    protected int originalPhysicalDamage;
-    protected int originalMagicDamage;
-    protected int originalDefense;
-    protected double originalPhysicalResistance;
-    protected double originalMagicResistance;
-    protected int originalSpeed;
-    protected int originalAccuracy;
-    protected double evasion = 0.0;
-    protected int temporaryShield = 0;
 
     public Entity(String name, int health, int physicalDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed) {
         this.name = name;
@@ -53,7 +44,6 @@ public abstract class Entity {
 
         if (health <= 0) {
             health = 0;
-            System.out.println("💀 " + name + " has been defeated!");
         }
 
         return (int) actualDamage;

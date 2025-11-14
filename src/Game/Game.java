@@ -228,7 +228,6 @@ public class Game {
     }
 
     //Exploration
-    //Tarongon nato map
     public void displayLevelMap() {
         System.out.println("\n🗺️  === CURRENT MAP ===");
         System.out.println("Progress: " + getCompletionPercentage() + "% complete");
@@ -282,7 +281,6 @@ public class Game {
                     player.displayStats();
                     break;
                 case 3:
-                    //player.displayInventory();
                     openInventory(player);
                     break;
                 case 4:
@@ -295,7 +293,7 @@ public class Game {
                     viewCurrentStory();  // NEW
                     break;
                 case 7:
-                    //TODO before next level must fight boss
+                    //TODO before next level must fight boss that correlates to the story
                     //add boss before next chapter and must win in order to proceed
                     attemptChapterProgression();
                     break;
@@ -305,7 +303,6 @@ public class Game {
                     break;
             }
         } else {
-            //TODO battle finale boss (Demon King Din)
             System.out.println("\n🎯 What would you like to do?");
             System.out.println("[1] Enter the Finale");
             System.out.println("[2] Check stats");
@@ -320,6 +317,7 @@ public class Game {
             switch (choice) {
                 case 1:
                     //add final boss
+                    //TODO battle finale boss (Demon King Din) must correlate to the story
                     battle(player, new Boss.DemonKingDin(), 2);
                     break;
                 case 2:
@@ -350,16 +348,11 @@ public class Game {
         delay(1000);
 
         // Different encounter rates based on level
-        double encounterRate = 0.6 + (currentChapter * 0.05);
+        double encounterRate = 0.75 + (currentChapter * 0.05);
         if (Math.random() <= encounterRate) {
             System.out.println("🚨 You encountered an enemy!");
             delay(1000);
-            //battle();
-
-            //battle(player, (CommonEnemy) enemies.get(3));
-            //battle(player, (EliteEnemy) enemies.get(4));
-            //battle(player, (Boss) enemies.get(5));
-            //battle(player, (MiniBoss) enemies.get(6));
+            battle();
 
             //battle(player, new CommonEnemy.Sludge());
             //battle(player, new EliteEnemy.MasterBaiter());
@@ -367,7 +360,7 @@ public class Game {
             //battle(player, new Boss.Abaddon());
             //battle(player, new MiniBoss.EdgeLordZedjy());
 
-            battle(player, new Boss.DemonKingDin(), 3);
+            //battle(player, new Boss.DemonKingDin(), 3);
         } else {
             // Chance for finding items or hidden events
             if (Math.random() > 0.7) {
@@ -379,13 +372,40 @@ public class Game {
             }
         }
     }
+    //TODO Implement chance to obtain weapon (specific class) after receiving a chest
     private void obtainLoot(){
-
+        switch(currentChapter){
+            case 1:
+                Chest CommonChest = new Chest.CommonChest();
+                System.out.println("💎 You found a "+CommonChest.getName()+"!");
+                CommonChest.obtain(player);
+                //add here
+                break;
+            case 2:
+                if(Math.random() > 0.9){
+                    Chest EliteChest = new Chest.EliteChest();
+                    System.out.println("💎 You found a "+EliteChest.getName()+"!");
+                    EliteChest.obtain(player);
+                }
+                break;
+            case 3:
+                if(Math.random() > 0.8){
+                    Chest EpicChest = new Chest.EpicChest();
+                    System.out.println("💎 You found a "+EpicChest.getName()+"!");
+                    EpicChest.obtain(player);
+                }
+                break;
+            case 4:
+            case 5:
+                if(Math.random() > 0.7){
+                    Chest LegendaryChest = new Chest.LegendaryChest();
+                    System.out.println("💎 You found a "+LegendaryChest.getName()+"!");
+                    LegendaryChest.obtain(player);
+                }
+        }
     }
     private void findHiddenTreasure() {
-        //TODO implement the chest class here
         Random rnd = new Random();
-
         System.out.println("💎 You found a hidden treasure!");
         int expBonus = currentChapter * rnd.nextInt(5, 11);
         player.gainExperience(expBonus);
@@ -437,7 +457,7 @@ public class Game {
         NPC selectedNPC = npcs.get(choice - 1);
 
         System.out.println("You approach " + selectedNPC.getName() + "...");
-        selectedNPC.interact(player);
+        selectedNPC.interact(player, currentChapter);
     }
 
     private void viewCurrentStory() {
@@ -480,7 +500,7 @@ public class Game {
     public void battle() {
         inBattle = true;
         int turns = 1;
-        Enemy enemy = enemies.get((int)(Math.random() * enemies.size()));
+        Enemy enemy = randomizeCommonEnemy();
         System.out.println("🚨 A wild " + enemy.getName() + " appears!");
         delay(1000);
 
@@ -499,7 +519,7 @@ public class Game {
             String playerEnergyBar = createEnergyBar(player.getEnergy(), player.getMaxEnergy(), 20);
             String enemyHealthBar =  createHealthBar(enemy.getHealth(), enemy.getMaxHealth(), 20);
 
-            System.out.println("\n========== TURN "+(turns++)+" ==========");
+            System.out.println("\n══════════ TURN "+(turns++)+" ══════════");
             System.out.println("\t\t"+enemy.getName());
             System.out.println(ColorUtil.red(enemyHealthBar));
             System.out.println("\n\t\t"+player.getName());
@@ -510,7 +530,6 @@ public class Game {
             System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
 
             //Take action based on who's acting
-            //TODO notify when a player/enemy skipped their turn
             int damage = takeAction(isPlayerTurn, enemy);
 
             //Update speed counters after action
@@ -560,7 +579,6 @@ public class Game {
             enemy.checkStatusEffect();
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -649,9 +667,9 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
+            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -739,6 +757,7 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
+            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
 
@@ -829,9 +848,9 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
+            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-
         playerHealthCheck(enemy, baseExp);
 
         // Clear battle effects after combat
@@ -844,9 +863,9 @@ public class Game {
             if(wave == maxWave){
                 battle(player, enemy);
             }else if(wave == 1 && maxWave == 3){
-                battle(player, randomizeCommonEnemy());
-            }else{
                 battle(player, randomizeEliteEnemy());
+            }else{
+                battle(player, randomizeBoss());
             }
         }
 
@@ -1074,12 +1093,16 @@ public class Game {
         System.out.println("You lost " + expLoss + " experience points during the retreat.");
     }
     private void handleVictory(Enemy enemy, int baseExp) {
-        if(enemy.getHealth() <= 100){
+        if(enemy.getHealth() <= 0){
+            System.out.println("💀 " + enemy.getName() + " has been defeated!");
             System.out.println("🎉 You defeated " + enemy.getName() + "!");
             delay(500);
             System.out.println("💰 Gained " + baseExp + " experience!");
             delay(500);
             player.gainExperience(baseExp);
+            delay(500);
+            obtainLoot();
+            delay(500);
 
             // Chance for energy restoration
             if (Math.random() > 0.5) {
@@ -1135,7 +1158,6 @@ public class Game {
             player.obtainItem(findItemId("PDP001", items, 5));
             player.obtainItem(findItemId("HP001", items, 5));
             player.obtainItem(findItemId("EP001", items, 5));
-            player.obtainItem(findItemId("SHP001", items, 5));
             player.obtainItem(findItemId("SP001", items, 5));
             switch(player.getClassType()){
                 case HAWKSEYE:
@@ -1155,7 +1177,6 @@ public class Game {
             player.obtainItem(findItemId("MDP001", items, 5));
             player.obtainItem(findItemId("HP001", items, 5));
             player.obtainItem(findItemId("EP001", items, 5));
-            player.obtainItem(findItemId("SHP001", items, 5));
             player.obtainItem(findItemId("SP001", items, 5));
             switch(player.getClassType()) {
                 case RUNECASTER:
@@ -1175,7 +1196,6 @@ public class Game {
             player.obtainItem(findItemId("EP004", items, 99));
             player.obtainItem(findItemId("PDP004", items, 99));
             player.obtainItem(findItemId("SP004", items, 99));
-            //player.obtainItem(findItemId("DR005", items, 1));
         }
     }
     private int openInventory(Character player){
@@ -1206,15 +1226,21 @@ public class Game {
                     item.use(player);
                     delay(1000);
 
-                    // For consumable potions in battle, don't end the turn
-                    if(item.getQuantity() > 0) {
-                        System.out.println("Item used! You can take another action.");
-                        result = 0; // Item used, continue turn
-                    } else {
-                        // Item was consumed completely
-                        player.getInventory().removeItem(item);
-                        System.out.println("Item used! You can take another action.");
-                        result = 0; // Item used, continue turn
+                    if(((Consumable) item).getHasConsumed() == true){
+                        confirm = 0;
+                    }else{
+                        // For consumable potions in battle, don't end the turn
+                        if(item.getQuantity() > 0) {
+                            System.out.println("Item used! You can take another action.");
+                            openInventory(player);
+                            result = 0; // Item used, continue turn
+                        } else {
+                            // Item was consumed completely
+                            player.getInventory().removeItem(item);
+                            System.out.println("Item used! You can take another action.");
+                            openInventory(player);
+                            result = 0; // Item used, continue turn
+                        }
                     }
                 }else{
                     confirm = 0;
@@ -1309,13 +1335,15 @@ public class Game {
     //unnecessary but why not lol | Bruh HAHAHAHAHA instead of random boss ato butangan each chap refer to the boss class -zed
     public Boss randomizeBoss(){
         Random rand = new Random();
-        int choice = rand.nextInt(2);
+        int choice = rand.nextInt(3);
 
         switch(choice){
             case 0:
-                return new Boss.DemonKingDin();
+                return new Boss.Kamish();
             case 1:
-                return new Boss.Abaddon();
+                return new Boss.EnderDragon();
+            case 2:
+                return new Boss.EnderMan();
         }
         return null;
     }
@@ -1330,6 +1358,15 @@ public class Game {
             }
         }
         return foundItem;
+    }
+    public void resetHasConsumed(List<Item> items){
+        for(Item item : items){
+            if(item instanceof Consumable consumable){
+                if(consumable instanceof PhysicalDamagePotion || consumable instanceof MagicalDamagePotion || consumable instanceof SpeedPotion || consumable instanceof EvasivenessPotion){
+                    consumable.setHasConsumed(false);
+                }
+            }
+        }
     }
 
     //Misc
