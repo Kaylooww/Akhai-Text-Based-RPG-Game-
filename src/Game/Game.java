@@ -382,20 +382,20 @@ public class Game {
         switch(currentChapter){
             case 1:
                 Chest CommonChest = new Chest.CommonChest();
-                System.out.println("💎 You found a "+CommonChest.name+"!");
+                System.out.println("💎 You found a "+CommonChest.getName()+"!");
                 CommonChest.obtain(player);
                 break;
             case 2:
                 if(Math.random() > 0.9){
                     Chest EliteChest = new Chest.EliteChest();
-                    System.out.println("💎 You found a "+EliteChest.name+"!");
+                    System.out.println("💎 You found a "+EliteChest.getName()+"!");
                     EliteChest.obtain(player);
                 }
                 break;
             case 3:
                 if(Math.random() > 0.8){
                     Chest EpicChest = new Chest.EpicChest();
-                    System.out.println("💎 You found a "+EpicChest.name+"!");
+                    System.out.println("💎 You found a "+EpicChest.getName()+"!");
                     EpicChest.obtain(player);
                 }
                 break;
@@ -403,7 +403,7 @@ public class Game {
             case 5:
                 if(Math.random() > 0.7){
                     Chest LegendaryChest = new Chest.LegendaryChest();
-                    System.out.println("💎 You found a "+LegendaryChest.name+"!");
+                    System.out.println("💎 You found a "+LegendaryChest.getName()+"!");
                     LegendaryChest.obtain(player);
                 }
         }
@@ -523,7 +523,7 @@ public class Game {
             String playerEnergyBar = createEnergyBar(player.getEnergy(), player.getMaxEnergy(), 20);
             String enemyHealthBar =  createHealthBar(enemy.getHealth(), enemy.getMaxHealth(), 20);
 
-            System.out.println("\n========== TURN "+(turns++)+" ==========");
+            System.out.println("\n══════════ TURN "+(turns++)+" ══════════");
             System.out.println("\t\t"+enemy.getName());
             System.out.println(ColorUtil.red(enemyHealthBar));
             System.out.println("\n\t\t"+player.getName());
@@ -1333,16 +1333,14 @@ public class Game {
     //unnecessary but why not lol | Bruh HAHAHAHAHA instead of random boss ato butangan each chap refer to the boss class -zed
     public Boss randomizeBoss(){
         Random rand = new Random();
-        int choice = rand.nextInt(4);
+        int choice = rand.nextInt(3);
 
         switch(choice){
             case 0:
-                return new Boss.Abaddon();
-            case 1:
                 return new Boss.Kamish();
-            case 2:
+            case 1:
                 return new Boss.EnderDragon();
-            case 3:
+            case 2:
                 return new Boss.EnderMan();
         }
         return null;

@@ -5,7 +5,7 @@ import java.util.*;
 public class JinwooSun extends Character {
     public JinwooSun(){
         //Values are only a placeholder
-        super("Jinwoo Sun", 400, ClassType.SUNJINWOO, 81, 81, 49, 0.38, 0.38, 19);
+        super("Jinwoo Sun", 4000, ClassType.SUNJINWOO, 810, 810, 490, 0.38, 0.38, 190);
         this.level = 999;
     }
 //

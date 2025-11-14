@@ -5,15 +5,19 @@ import Items.Rarity;
 import Entities.Characters.Character;
 
 public abstract class Chest{
-    String name;
-    int expYield;
-    Rarity rarity;
+    private String name;
+    private int expYield;
+    private Rarity rarity;
+
     public Chest(String name, Rarity rarity, int baseExp){
         Random rnd = new Random();
         this.name = name;
-        //TODO adjust the expYield formula if necessary -For Zed
-        this.expYield = baseExp * rnd.nextInt(1, 11);
+        this.expYield = (1 * (6 - baseExp)) + rnd.nextInt(1, 11);
         this.rarity = rarity;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public void obtain(Character player){
