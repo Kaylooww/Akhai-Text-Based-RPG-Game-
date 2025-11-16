@@ -13,7 +13,7 @@ public abstract class NPC {
         this.description = description;
     }
 
-    public abstract void interact(Character player);
+    public abstract void interact(Character player,  int currentChapter);
 
     public String getName() {
         return name;

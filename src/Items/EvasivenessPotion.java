@@ -2,6 +2,7 @@ package Items;
 
 import Entities.Characters.Character;
 import StatusEffects.EvasivenessBoost;
+import StatusEffects.SpeedBoost;
 
 public class EvasivenessPotion extends Consumable{
     double accuracyReduction;
@@ -13,10 +14,15 @@ public class EvasivenessPotion extends Consumable{
 
     @Override
     public void use(Character player){
-        EvasivenessBoost effect = new EvasivenessBoost(accuracyReduction);
-        player.addStatusEffect(effect);
-        System.out.println("🌪️ " + player.getName() + "'s evasiveness increased! Enemy accuracy reduced by " + (accuracyReduction * 100) + "%!");
-        setQuantity(getQuantity() - 1);
+        if(hasConsumed == false){
+            EvasivenessBoost effect = new EvasivenessBoost(accuracyReduction);
+            player.addStatusEffect(effect);
+            System.out.println("🌪️ " + player.getName() + "'s evasiveness increased! Enemy accuracy reduced by " + (accuracyReduction * 100) + "%!");
+            setQuantity(getQuantity() - 1);
+            hasConsumed = true;
+        }else{
+            System.out.println("You can only consume this potion once!");
+        }
     }
 
     @Override

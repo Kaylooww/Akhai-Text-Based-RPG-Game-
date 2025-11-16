@@ -11,7 +11,7 @@ public abstract class Character extends Entity {
     protected int energy = 0;
     protected int level;
     protected int experience = 0;
-    protected int experienceNeeded = 100;
+    protected int experienceNeeded = 50;
     protected int currency = 100; //money
     protected Inventory inventory = new Inventory();
     protected Item equippedWeapon;
@@ -30,9 +30,9 @@ public abstract class Character extends Entity {
         super(name, health, physicalDamage, magicDamage, defense, physicalResistance, magicResistance, speed);
         this.classType = classType;
         this.equippedWeapon = new Weapon();
-        this.basicAttack = new UnarmedSkill("Punch", "", 1.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
-        this.skillAttack = new UnarmedSkill("Super Punch", "", 1.3, 40, DamageType.PHYSICAL, TargetType.SINGLE);
-        this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "", 1.7, 80, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.basicAttack = new UnarmedSkill("Punch", "", 0.5, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.skillAttack = new UnarmedSkill("Super Punch", "", 0.8, 40, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "", 1.2, 80, DamageType.PHYSICAL, TargetType.SINGLE);
     }
 
     public int getUltimateCounter() {
@@ -73,27 +73,38 @@ public abstract class Character extends Entity {
 
     public void gainExperience(int exp) {
         experience += exp;
+        System.out.println("💰 Gained " + exp + " experience!");
         while (experience >= experienceNeeded && level <= 30) { // Added level cap
             levelUp();
         }
+
     }
     public void levelUp() {
         experience -= experienceNeeded;
         level++;
-        experienceNeeded += 20;
-        System.out.println(name + " leveled up to level " + level + "!");
+        experienceNeeded += 1;
+        //TODO add the last enclosure for this kay wa nako na enclose HAHAHAHAHAHAH ang right side nalang kuwang -for frank
+        System.out.println("╔═════════════════════════════════════╗");
+        System.out.println("║ " + name + " leveled up to level " + level + "!");
+        System.out.println("║ Stats Increased!");
 
         // Improve stats on level up
         int oldMaxHealth = maxHealth;
-        maxHealth += 15;
-        health += 15; // Also increase current health
-        physicalDamage += 3;
+        maxHealth += 5;
+        health += 5; // Also increase current health
+        physicalDamage += 2;
+        magicDamage += 2;
         defense += 1;
-        speed += 1;
-        magicResistance += 2;
-        magicDamage += 3;
+        magicResistance += 0.01;
+        physicalResistance += 0.01;
 
-        System.out.println("Max HP increased: " + oldMaxHealth + " → " + maxHealth);
+
+        System.out.println("║ Max HP increased: " + oldMaxHealth + " → " + maxHealth);
+        System.out.println("║ Attack stat +2");
+        System.out.println("║ Defense stat +2");
+        System.out.println("║ Physical Resistance stat +1%");
+        System.out.println("║ Magic Resistance stat +1%");
+        System.out.println("╚════════════════════════════════════╝");
     }
 
     // New resurrection method

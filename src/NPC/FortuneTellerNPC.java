@@ -11,7 +11,7 @@ public class FortuneTellerNPC extends ShopNPC {
     }
 
     @Override
-    public void interact(Character player) {
+    public void interact(Character player, int currentChapter) {
         boolean exit = false;
         while(!exit){
             System.out.println(name+": Hello fellow adventurer! Care to browse my wares? Or perhaps interested in fortune telling?");
@@ -23,7 +23,7 @@ public class FortuneTellerNPC extends ShopNPC {
 
             switch (choice) {
                 case 1:
-                    browseShop(player);
+                    browseShop(player, currentChapter);
                     break;
                 case 2:
                     sellItem(player);
