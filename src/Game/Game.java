@@ -8,7 +8,6 @@ import Items.*;
 import Items.Weapons.*;
 import NPC.*;
 import Skills.WeaponSkill;
-import StatusEffects.DamageOverTimeEffects.*;
 import StatusEffects.StatusEffect;
 import Story.*;
 import TextFormat.ColorUtil;
@@ -291,7 +290,7 @@ public class Game {
                     talkToNPC();
                     break;
                 case 6:
-                    viewCurrentStory();  // NEW
+                    viewCurrentStory(); 
                     break;
                 case 7:
                     //TODO before next level must fight boss that correlates to the story
