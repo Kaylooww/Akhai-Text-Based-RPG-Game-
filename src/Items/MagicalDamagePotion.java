@@ -2,6 +2,7 @@ package Items;
 
 import Entities.Characters.Character;
 import StatusEffects.MagicalDamageBoost;
+import StatusEffects.PhysicalDamageBoost;
 
 public class MagicalDamagePotion extends Consumable{
     double magicalDamageAmount;
@@ -13,11 +14,16 @@ public class MagicalDamagePotion extends Consumable{
 
     @Override
     public void use(Character player){
-        MagicalDamageBoost effect = new MagicalDamageBoost(magicalDamageAmount);
-        effect.applyEffect(player);
-        player.addStatusEffect(effect);
-        System.out.println("✨ " + player.getName() + "'s magical damage increased by " + (magicalDamageAmount * 100) + "%!");
-        setQuantity(getQuantity() - 1);
+        if(hasConsumed == false){
+            MagicalDamageBoost effect = new MagicalDamageBoost(magicalDamageAmount);
+            effect.applyEffect(player);
+            player.addStatusEffect(effect);
+            System.out.println("✨ " + player.getName() + "'s magical damage increased by " + (magicalDamageAmount * 100) + "%!");
+            setQuantity(getQuantity() - 1);
+            hasConsumed = true;
+        }else{
+            System.out.println("You can only consume this potion once!");
+        }
     }
 
     @Override

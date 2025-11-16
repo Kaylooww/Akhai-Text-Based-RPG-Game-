@@ -17,17 +17,7 @@ public abstract class Entity {
     protected List<StatusEffect> statusEffects = new ArrayList<>();
 
     protected int maxHealth;
-    protected int originalPhysicalDamage;
-    protected int originalMagicDamage;
-    protected int originalDefense;
-    protected double originalPhysicalResistance;
-    protected double originalMagicResistance;
-    protected int originalSpeed;
-    protected int originalAccuracy;
-    protected double evasion = 0.0;
-    protected int temporaryShield = 0;
 
-//
     public Entity(String name, int health, int physicalDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed) {
         this.name = name;
         this.health = health;
@@ -40,17 +30,20 @@ public abstract class Entity {
         this.speed = speed;
     }
 
-    //This method is mostly used for the Enemy class
+    // Abstract attack method for player to use
     public abstract int attack();
 
     public int takeDamage(double damage, int defense, double physicalResistance, double magicResistance) {
         double actualDamage = damage - defense;
+        //added this simple if statement to counter negative damage issues
+        if(actualDamage < 0){
+            actualDamage = 1;
+        }
         int oldHealth = health;
         health -= (int) actualDamage;
 
         if (health <= 0) {
             health = 0;
-            System.out.println("💀 " + name + " has been defeated!");
         }
 
         return (int) actualDamage;
@@ -118,7 +111,7 @@ public abstract class Entity {
             statusEffects.get(i).onTurnStart(this);
             statusEffects.get(i).onTurnEnd(this);
         }
-    } //This method shouldn't exist (onTurnStart | onTurnEnd should be placed before | after the Entity makes a move)
+    }
     public boolean hasEffect(StatusEffect statusEffect){
         return statusEffects.contains(statusEffect);
     }

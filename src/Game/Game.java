@@ -34,10 +34,6 @@ public class Game {
         // Initialize story system
         storyManager = new StoryManager();
 
-        //Status Effects
-        status.add(new DamageOverTimeEffect("Poison", "Deals poison damage", 3,  DamageType.MAGICAL, 30));
-        status.add(new DamageOverTimeEffect("Burn", "Deals burn damage", 3,  DamageType.MAGICAL, 30));
-
         //Items (LEGENDARY Items should be very rare)
         items.add(new HealingPotion("HP001", "Lesser Healing Potion", "<Empty>", 12, 1, 5, Rarity.COMMON, 50));
         items.add(new HealingPotion("HP002", "Healing Potion", "<Empty>", 12, 1, 10, Rarity.RARE, 75));
@@ -48,11 +44,6 @@ public class Game {
         items.add(new EnergyPotion("EP002", "Energy Potion", "<Empty>", 12, 1, 9, Rarity.RARE, 60));
         items.add(new EnergyPotion("EP003", "Greater Energy Potion", "<Empty>", 12, 1, 15, Rarity.EPIC, 80));
         items.add(new EnergyPotion("EP004", "Legendary Energy Potion", "<Empty>", 12, 1, 35, Rarity.LEGENDARY, 100));
-
-        items.add(new ShieldPotion("SHP001", "Lesser Shield Potion", "<Empty>", 12, 1, 8, Rarity.COMMON, 60));
-        items.add(new ShieldPotion("SHP002", "Shield Potion", "<Empty>", 12, 1, 18, Rarity.RARE, 80));
-        items.add(new ShieldPotion("SHP003", "Greater Shield Potion", "<Empty>", 12, 1, 25, Rarity.EPIC, 120));
-        items.add(new ShieldPotion("SHP004", "Legendary Shield Potion", "<Empty>", 12, 1, 50, Rarity.LEGENDARY, 200));
 
         items.add(new PhysicalDamagePotion("PDP001", "Lesser Physical Potion", "<Empty>", 12, 1, 4, Rarity.COMMON, 0.24));
         items.add(new PhysicalDamagePotion("PDP002", "Physical Potion", "<Empty>", 12, 1, 9, Rarity.RARE, 0.36));
@@ -167,17 +158,6 @@ public class Game {
         npcs.add(new GuideNPC("Frank", "Guide Companion"));
         npcs.add(new ShopNPC("Kyle", "Shopkeeper", items));
 
-        //add enemies in relation to the current level of the game
-        enemies.add(new Enemy("Desert Clause", 220, 20, 30, 10, 0.10, 0.10, 20));
-        enemies.add(new Enemy("Sand Stalker", 210, 20, 30, 10, 0.10, 0.10, 20));
-        enemies.add(new Enemy("Dune Crawler", 200, 20, 30, 10, 0.10, 0.10, 20));
-
-        //Common, Elite, Boss, Miniboss (Examples)
-        enemies.add(new CommonEnemy("Gooners",  100, 10, 10, 5, 0.05, 0.05, 10));
-        enemies.add(new EliteEnemy("Masterbaiters", 250, 15, 15, 8, 0.15, 0.15, 25));
-        enemies.add(new Boss("Demon-King Din", 300, 2, 20, 20, 10, 0.20, 0.20, 30));
-        enemies.add(new MiniBoss("Edge-Lord Zedjy", 50, 3, 22, 22, 11, 0.22, 0.22, 32));
-
         System.out.println("Welcome to Akhai!");
         delay(1000);
         System.out.println("Choose your class:");
@@ -215,18 +195,18 @@ public class Game {
         }
 
         System.out.println("You have chosen " + player.getName() + "!");
-        delay(2000);
+        delay(1200);
 
         System.out.println("\n=== Beginning your adventure in Akhai ===");
         System.out.println("You are on a quest to find the power to go back to your world.");
-        delay(3000);
+        delay(1500);
     }
     public void startGame() {
         addStarterPack(player, items);
 
         // Play Chapter 1 story automatically
         System.out.println("\n🌟 Your adventure begins...");
-        delay(2000);
+        delay(1200);
         storyManager.playChapter(1);
 
         while(gameRunning) {
@@ -248,9 +228,9 @@ public class Game {
     }
 
     //Exploration
-    //Tarongon nato map
     public void displayLevelMap() {
         System.out.println("\n🗺️  === CURRENT MAP ===");
+        System.out.println("Current Chapter: " + currentChapter);
         System.out.println("Progress: " + getCompletionPercentage() + "% complete");
 
         for (int i = 1; i <= MAX_LEVEL; i++) {
@@ -302,7 +282,6 @@ public class Game {
                     player.displayStats();
                     break;
                 case 3:
-                    //player.displayInventory();
                     openInventory(player);
                     break;
                 case 4:
@@ -315,7 +294,7 @@ public class Game {
                     viewCurrentStory();  // NEW
                     break;
                 case 7:
-                    //TODO before next level must fight boss
+                    //TODO before next level must fight boss that correlates to the story
                     //add boss before next chapter and must win in order to proceed
                     attemptChapterProgression();
                     break;
@@ -325,7 +304,6 @@ public class Game {
                     break;
             }
         } else {
-            //TODO battle finale boss (Demon King Din)
             System.out.println("\n🎯 What would you like to do?");
             System.out.println("[1] Enter the Finale");
             System.out.println("[2] Check stats");
@@ -340,6 +318,7 @@ public class Game {
             switch (choice) {
                 case 1:
                     //add final boss
+                    //TODO battle finale boss (Demon King Din) must correlate to the story
                     battle(player, new Boss.DemonKingDin(), 2);
                     break;
                 case 2:
@@ -365,29 +344,57 @@ public class Game {
             }
         }
     }
+    boolean EncounterZed = true;
     public void explore() {
         System.out.println("\nYou explore " + getLevelName(currentChapter) + "...");
         delay(1000);
 
         // Different encounter rates based on level
-        double encounterRate = 0.6 + (currentChapter * 0.05);
+        double encounterRate = 0.75 + (currentChapter * 0.05);
         if (Math.random() <= encounterRate) {
-            System.out.println("🚨 You encountered an enemy!");
-            delay(1000);
-            //battle();
+            if(currentChapter < 3) {
+                System.out.println("🚨 You encountered a Common enemy!");
+                battleCommon();
+            } else if (currentChapter == 3) {
+                System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                battleElite();
+            } else if(currentChapter == 4) {
+                if(Math.random() >= 0.10) {
+                    System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                    battleElite();
+                } else {
+                    if(EncounterZed) {
+                        System.out.println("🚨" + ColorUtil.redBold(" WARNING!!!") + " You encountered a " + ColorUtil.redBold("BOSS") + " enemy!");
+                        battle(player, new MiniBoss.EdgeLordZedjy());
+                        EncounterZed = false;
+                    } else {
+                        System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                        battleElite();
+                    }
+                }
+            } else {
+                if(Math.random() >= 0.25) {
+                    System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                    battleElite();
+                } else {
+                    if(EncounterZed) {
+                        System.out.println("🚨" + ColorUtil.redBold(" WARNING!!!") + " You encountered a " + ColorUtil.redBold("BOSS") + " enemy!");
+                        battle(player, new MiniBoss.EdgeLordZedjy());
+                        EncounterZed = false;
+                    } else {
+                        System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                        battleElite();
+                    }
+                }
+            }
 
-            //battle(player, (CommonEnemy) enemies.get(3));
-            //battle(player, (EliteEnemy) enemies.get(4));
-            //battle(player, (Boss) enemies.get(5));
-            //battle(player, (MiniBoss) enemies.get(6));
 
-            //battle(player, new CommonEnemy.Gooner());
-            //battle(player, new EliteEnemy.MasterBaiter());
+            //battle(player, new CommonEnemy.Sludge());
             //battle(player, new Boss.DemonKingDin());
             //battle(player, new Boss.Abaddon());
             //battle(player, new MiniBoss.EdgeLordZedjy());
 
-            battle(player, new Boss.DemonKingDin(), 3);
+            //battle(player, new Boss.DemonKingDin(), 3);
         } else {
             // Chance for finding items or hidden events
             if (Math.random() > 0.7) {
@@ -399,12 +406,332 @@ public class Game {
             }
         }
     }
+    //TODO make sure that if they already own the weapon they dont get another copy of it -for frank
+    private void obtainLoot(Character player){
+        double chance = Math.random(); //Made a variable para di sigeg gamit ug Math.random ugh
+        switch(currentChapter) {
+            case 1:
+                Chest CommonChest = new Chest.CommonChest();
+                System.out.println("💎 You found a " + CommonChest.getName() + "!");
+                CommonChest.obtain(player);
+                //40% to obtain a weapon :P
+                if(Math.random() <= 0.4) {
+                    switch (player.getClassType()) {
+                        case HAWKSEYE:
+                            if (Math.random() <= 0.5) {
+                                player.obtainItem(findItemId("BW001.1", items, 1));
+                            } else {
+                                player.obtainItem(findItemId("BW001.2", items, 1));
+                            }
+                            break;
+                        case BLADEMASTER:
+                            if (Math.random() <= 0.5) {
+                                player.obtainItem(findItemId("SW001.1", items, 1));
+                            } else {
+                                player.obtainItem(findItemId("SW001.2", items, 1));
+                            }
+                            break;
+                        case BERSERKER:
+                            if (Math.random() <= 0.5) {
+                                player.obtainItem(findItemId("BS001.1", items, 1));
+                            } else {
+                                player.obtainItem(findItemId("BS001.2", items, 1));
+                            }
+                            break;
+                        case ASSASSIN:
+                            if (Math.random() <= 0.5) {
+                                player.obtainItem(findItemId("DR001.1", items, 1));
+                            } else {
+                                player.obtainItem(findItemId("DR001.2", items, 1));
+                            }
+                            break;
+                        case RUNECASTER:
+                            if (Math.random() <= 0.5) {
+                                player.obtainItem(findItemId("MGS001.1", items, 1));
+                            } else {
+                                player.obtainItem(findItemId("MGS001.2", items, 1));
+                            }
+                            break;
+                        case RUNEKNIGHT:
+                            if (Math.random() <= 0.5) {
+                                player.obtainItem(findItemId("MGSW001.1", items, 1));
+                            } else {
+                                player.obtainItem(findItemId("MGSW001.2", items, 1));
+                            }
+                            break;
+                    }
+                }
+                break;
+            case 2:
+                if(Math.random() > 0.9){
+                    Chest EliteChest = new Chest.EliteChest();
+                    System.out.println("💎 You found a "+EliteChest.getName()+"!");
+                    EliteChest.obtain(player);
+                    //40% chance to obtain weap
+                    if(Math.random() <= 0.4) {
+                        switch (player.getClassType()) {
+                            case HAWKSEYE:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("BW002.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("BW002.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("BW002.3", items, 1));
+                                }
+                                break;
+                            case BLADEMASTER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("SW002.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("SW002.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("SW002.3", items, 1));
+                                }
+                                break;
+                            case BERSERKER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("BS002.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("BS002.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("BS002.3", items, 1));
+                                }
+                                break;
+                            case ASSASSIN:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("DR002.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("DR002.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("DR002.3", items, 1));
+                                }
+                                break;
+                            case RUNECASTER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("MGS002.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("MGS002.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("MGS002.3", items, 1));
+                                }
+                                break;
+                            case RUNEKNIGHT:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("MGSW002.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("MGSW002.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("MGSW002.3", items, 1));
+                                }
+                                break;
+                        }
+                    }
+                }
+                break;
+            case 3:
+                if(Math.random() > 0.8){
+                    Chest EpicChest = new Chest.EpicChest();
+                    System.out.println("💎 You found a "+EpicChest.getName()+"!");
+                    EpicChest.obtain(player);
+                    //30% chance to obtain weap
+                    if(Math.random() <= 0.3) {
+                        switch (player.getClassType()) {
+                            case HAWKSEYE:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("BW003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("BW003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("BW003.3", items, 1));
+                                }
+                                break;
+                            case BLADEMASTER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("SW003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("SW003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("SW003.3", items, 1));
+                                }
+                                break;
+                            case BERSERKER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("BS003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("BS003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("BS003.3", items, 1));
+                                }
+                                break;
+                            case ASSASSIN:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("DR003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("DR003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("DR003.3", items, 1));
+                                }
+                                break;
+                            case RUNECASTER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("MGS003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("MGS003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("MGS003.3", items, 1));
+                                }
+                                break;
+                            case RUNEKNIGHT:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("MGSW003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("MGSW003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("MGSW003.3", items, 1));
+                                }
+                                break;
+                        }
+                    }
+                }
+                break;
+            case 4:
+                if(Math.random() > 0.8){
+                    Chest EpicChest = new Chest.EpicChest();
+                    System.out.println("💎 You found a "+EpicChest.getName()+"!");
+                    EpicChest.obtain(player);
+                    //30% chance to obtain weap
+                    if(Math.random() <= 0.3) {
+                        switch (player.getClassType()) {
+                            case HAWKSEYE:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("BW003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("BW003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("BW003.3", items, 1));
+                                }
+                                break;
+                            case BLADEMASTER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("SW003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("SW003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("SW003.3", items, 1));
+                                }
+                                break;
+                            case BERSERKER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("BS003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("BS003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("BS003.3", items, 1));
+                                }
+                                break;
+                            case ASSASSIN:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("DR003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("DR003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("DR003.3", items, 1));
+                                }
+                                break;
+                            case RUNECASTER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("MGS003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("MGS003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("MGS003.3", items, 1));
+                                }
+                                break;
+                            case RUNEKNIGHT:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("MGSW003.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("MGSW003.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("MGSW003.3", items, 1));
+                                }
+                                break;
+                        }
+                    }
+                }
+                break;
+            case 5:
+                if(Math.random() > 0.7){
+                    Chest LegendaryChest = new Chest.LegendaryChest();
+                    System.out.println("💎 You found a "+LegendaryChest.getName()+"!");
+                    LegendaryChest.obtain(player);
+                    //20% chance to obtain weap
+                    if(Math.random() <= 0.2) {
+                        switch (player.getClassType()) {
+                            case HAWKSEYE:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("BW004.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("BW004.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("BW004.3", items, 1));
+                                }
+                                break;
+                            case BLADEMASTER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("SW004.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("SW004.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("SW004.3", items, 1));
+                                }
+                                break;
+                            case BERSERKER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("BS004.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("BS004.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("BS004.3", items, 1));
+                                }
+                                break;
+                            case ASSASSIN:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("DR004.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("DR004.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("DR004.3", items, 1));
+                                }
+                                break;
+                            case RUNECASTER:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("MGS004.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("MGS004.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("MGS004.3", items, 1));
+                                }
+                                break;
+                            case RUNEKNIGHT:
+                                if (chance <= 0.33) {
+                                    player.obtainItem(findItemId("MGSW004.1", items, 1));
+                                } else if (chance <= 0.66) {
+                                    player.obtainItem(findItemId("MGSW004.2", items, 1));
+                                } else {
+                                    player.obtainItem(findItemId("MGSW004.3", items, 1));
+                                }
+                                break;
+                        }
+                    }
+                }
+        }
+    }
     private void findHiddenTreasure() {
         Random rnd = new Random();
         System.out.println("💎 You found a hidden treasure!");
         int expBonus = currentChapter * rnd.nextInt(5, 11);
         player.gainExperience(expBonus);
-        System.out.println("Gained " + expBonus + " bonus experience!");
     }
     private void attemptChapterProgression() {
         if (currentChapter >= MAX_LEVEL) {
@@ -439,7 +766,7 @@ public class Game {
         storyManager.playChapter(currentChapter);
 
         // Scale enemies for new chapter
-        scaleEnemiesForCurrentLevel();
+        //scaleEnemiesForCurrentLevel();
 
         System.out.println("\n⚔️ New challenges await in " + getLevelName(currentChapter) + "!");
     }
@@ -453,7 +780,7 @@ public class Game {
         NPC selectedNPC = npcs.get(choice - 1);
 
         System.out.println("You approach " + selectedNPC.getName() + "...");
-        selectedNPC.interact(player);
+        selectedNPC.interact(player, currentChapter);
     }
 
     private void viewCurrentStory() {
@@ -492,30 +819,28 @@ public class Game {
         }
     }
 
-    //Random Battle
-    public void battle() {
+    //Random Battle (Common Enemies)
+    public void battleCommon() {
         inBattle = true;
         int turns = 1;
-        Enemy enemy = enemies.get((int)(Math.random() * enemies.size()));
+        Enemy enemy = randomizeCommonEnemy();
+
         System.out.println("🚨 A wild " + enemy.getName() + " appears!");
         delay(1000);
 
-        int baseExp = 25 + (currentChapter * 5);
+        int baseExp = 25;
 
         int playerCurrentSpeed = player.getSpeed();
         int playerOriginalSpeed = player.getSpeed();
         int enemyCurrentSpeed = enemy.getSpeed();
         int enemyOriginalSpeed = enemy.getSpeed();
 
-        //Reset Ult charges
-        player.resetUltimateCounter();
-
         while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
             String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
             String playerEnergyBar = createEnergyBar(player.getEnergy(), player.getMaxEnergy(), 20);
             String enemyHealthBar =  createHealthBar(enemy.getHealth(), enemy.getMaxHealth(), 20);
 
-            System.out.println("\n========== TURN "+(turns++)+" ==========");
+            System.out.println("\n══════════ TURN "+(turns++)+" ══════════");
             System.out.println("\t\t"+enemy.getName());
             System.out.println(ColorUtil.red(enemyHealthBar));
             System.out.println("\n\t\t"+player.getName());
@@ -526,7 +851,6 @@ public class Game {
             System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
 
             //Take action based on who's acting
-            //TODO notify when a player/enemy skipped their turn
             int damage = takeAction(isPlayerTurn, enemy);
 
             //Update speed counters after action
@@ -576,16 +900,102 @@ public class Game {
             enemy.checkStatusEffect();
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
-            needs to be carry over to the next battle method during the wave.
-        */
-        playerHealthCheck(enemy, baseExp);
+        playerHealthCheck(enemy, baseExp, player);
 
         // Clear battle effects after combat
         clearBattleEffects(enemy);
 
         inBattle = false;
     }
+    //Random Battle (Elite Enemies)
+    public void battleElite() {
+        inBattle = true;
+        int turns = 1;
+        Enemy enemy = randomizeEliteEnemy();
+
+        System.out.println("🚨 A wild " + enemy.getName() + " appears!");
+        delay(1000);
+
+        int baseExp = 25;
+
+        int playerCurrentSpeed = player.getSpeed();
+        int playerOriginalSpeed = player.getSpeed();
+        int enemyCurrentSpeed = enemy.getSpeed();
+        int enemyOriginalSpeed = enemy.getSpeed();
+
+        while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
+            String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
+            String playerEnergyBar = createEnergyBar(player.getEnergy(), player.getMaxEnergy(), 20);
+            String enemyHealthBar =  createHealthBar(enemy.getHealth(), enemy.getMaxHealth(), 20);
+
+            System.out.println("\n══════════ TURN "+(turns++)+" ══════════");
+            System.out.println("\t\t"+enemy.getName());
+            System.out.println(ColorUtil.red(enemyHealthBar));
+            System.out.println("\n\t\t"+player.getName());
+            System.out.println(ColorUtil.green(playerHealthBar));
+            System.out.println(playerEnergyBar);
+
+            boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
+            System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
+
+            //Take action based on who's acting
+            int damage = takeAction(isPlayerTurn, enemy);
+
+            //Update speed counters after action
+            if (damage != -1) {
+                if (isPlayerTurn) {
+                    playerCurrentSpeed -= enemyCurrentSpeed;
+                    if (enemyCurrentSpeed < enemyOriginalSpeed) {
+                        enemyCurrentSpeed += enemyOriginalSpeed;
+                    }
+                } else {
+                    enemyCurrentSpeed -= playerCurrentSpeed;
+                    if (playerCurrentSpeed < playerOriginalSpeed) {
+                        playerCurrentSpeed += playerOriginalSpeed;
+                    }
+
+                    if (damage > 0) {
+                        player.generateEnergyFromDamage();
+                    }
+                }
+            }
+
+            //Check if player died and can resurrect
+            if (!isPlayerTurn && player.getHealth() <= 0 && !player.hasResurrected()) {
+                System.out.println("\n💫 The power of resurrection is available...");
+                delay(1000);
+                System.out.println("Would you like to use your one-time resurrection?");
+                delay(500);
+                System.out.println("[1] Yes, resurrect and continue fighting!");
+                System.out.println("[2] No, accept defeat");
+
+                int resurrectChoice = getIntInput("Choose: ", 1, 2);
+                if (resurrectChoice == 1) {
+                    player.resurrect();
+                    // Player gets a free turn after resurrection
+                    System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
+                    damage = player.getBasicAttack().execute(player);
+                    int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
+                    System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
+
+                    //Reset player speed after resurrection free turn
+                    playerCurrentSpeed = playerOriginalSpeed;
+                } else {
+                    System.out.println("You accept your fate...");
+                }
+            }
+            player.checkStatusEffect();
+            enemy.checkStatusEffect();
+        }
+        //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
+        playerHealthCheck(enemy, baseExp, player);
+
+        // Clear battle effects after combat
+        clearBattleEffects(enemy);
+
+        inBattle = false;
+    }
+
     //Fixed Battle
     public void battle(Character player, CommonEnemy enemy) {
         inBattle = true;
@@ -602,7 +1012,7 @@ public class Game {
         int enemyOriginalSpeed = enemy.getSpeed();
 
         //Reset Ult charges
-        player.resetUltimateCounter();
+        //player.resetUltimateCounter();
 
         while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
             String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
@@ -667,12 +1077,10 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
+            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
-            needs to be carry over to the next battle method during the wave.
-        */
-        playerHealthCheck(enemy, baseExp);
+        playerHealthCheck(enemy, baseExp, player);
 
         // Clear battle effects after combat
         clearBattleEffects(enemy);
@@ -694,7 +1102,7 @@ public class Game {
         int enemyOriginalSpeed = enemy.getSpeed();
 
         //Reset Ult charges
-        player.resetUltimateCounter();
+        //player.resetUltimateCounter();
 
         while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
             String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
@@ -759,12 +1167,11 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
+            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
-            needs to be carry over to the next battle method during the wave.
-        */
-        playerHealthCheck(enemy, baseExp);
+
+        playerHealthCheck(enemy, baseExp, player);
 
         // Clear battle effects after combat
         clearBattleEffects(enemy);
@@ -786,7 +1193,7 @@ public class Game {
         int enemyOriginalSpeed = enemy.getSpeed();
 
         //Reset Ult charges
-        player.resetUltimateCounter();
+        //player.resetUltimateCounter();
 
         while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
             String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
@@ -851,12 +1258,10 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
+            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-        /*TODO In addition, the ultimate counter (counter is reset to 0 every battle method)
-            needs to be carry over to the next battle method during the wave.
-        */
-        playerHealthCheck(enemy, baseExp);
+        playerHealthCheck(enemy, baseExp, player);
 
         // Clear battle effects after combat
         clearBattleEffects(enemy);
@@ -868,9 +1273,9 @@ public class Game {
             if(wave == maxWave){
                 battle(player, enemy);
             }else if(wave == 1 && maxWave == 3){
-                battle(player, randomizeCommonEnemy());
-            }else{
                 battle(player, randomizeEliteEnemy());
+            }else{
+                battle(player, randomizeBoss());
             }
         }
 
@@ -1073,11 +1478,11 @@ public class Game {
         player.setShield(0);
     }
 
-    private void playerHealthCheck(Enemy enemy, int baseExp){
+    private void playerHealthCheck(Enemy enemy, int baseExp, Character player){
         if (player.getHealth() <= 0) {
             handlePlayerDefeat();
         } else {
-            handleVictory(enemy, baseExp);
+            handleVictory(enemy, baseExp, player);
         }
     }
     private void handlePlayerDefeat() {
@@ -1097,21 +1502,17 @@ public class Game {
         player.setExperience(Math.max(0, player.getExperience() + expLoss));
         System.out.println("You lost " + expLoss + " experience points during the retreat.");
     }
-    private void handleVictory(Enemy enemy, int baseExp) {
-        if(enemy.getHealth() <= 100){
+    private void handleVictory(Enemy enemy, int baseExp, Character player) {
+        if(enemy.getHealth() <= 0){
+            System.out.println("💀 " + enemy.getName() + " has been defeated!");
             System.out.println("🎉 You defeated " + enemy.getName() + "!");
             delay(500);
-            System.out.println("💰 Gained " + baseExp + " experience!");
-            delay(500);
+            //Commented this out cuz it already prints this in the gainExperience method
+            //System.out.println("💰 Gained " + baseExp + " experience!");
             player.gainExperience(baseExp);
-
-            // Bonus for not using resurrection
-            if (!player.hasResurrected()) {
-                int bonusExp = (int)(baseExp * 0.2);
-                System.out.println("⭐ Bonus " + bonusExp + " experience for completing the battle without resurrection!");
-                delay(500);
-                player.gainExperience(bonusExp);
-            }
+            delay(500);
+            obtainLoot(player);
+            delay(500);
 
             // Chance for energy restoration
             if (Math.random() > 0.5) {
@@ -1131,43 +1532,15 @@ public class Game {
             System.out.println("This powerful ability can only be used once per playthrough.");
         }
     }
-    private void scaleEnemiesForCurrentLevel() {
-        enemies.clear();
-
-        // Create appropriately scaled enemies for current level
-        int baseStats = 50 + (currentChapter * 10);
-        String[] enemyNames = getEnemyNamesForLevel(currentChapter);
-
-        for (String enemyName : enemyNames) {
-            int scaledAttack = baseStats + (int)(Math.random() * 20);
-            int scaledMagic = baseStats - 10 + (int)(Math.random() * 20);
-            int scaledDefense = baseStats + (int)(Math.random() * 15);
-
-            /*enemies.add(new Entities.Enemies.Enemy(enemyName, scaledAttack, scaledMagic,
-                    scaledDefense, baseStats, scaledDefense - 10));*/
-        }
-    }
-    private String[] getEnemyNamesForLevel(int level) {
-        switch(level) {
-            case 1: return new String[]{"Desert Clause", "Sand Stalker", "Dune Crawler"};
-            case 2: return new String[]{"Fungal Spore", "Lume Beast", "Glow Worm"};
-            case 3: return new String[]{"Star Fragment", "Cosmic Horror", "Void Walker"};
-            case 4: return new String[]{"Crystal Golem", "Gem Eater", "Shard Warrior"};
-            case 5: return new String[]{"Root Guardian", "Ancient Protector", "World Eater"};
-            case 6: return new String[]{"Final Boss", "Ultimate Challenge", "Destiny's End"};
-            default: return new String[]{"Mysterious Foe"};
-        }
-    }
 
     //Character
     public void addStarterPack(Character player, List<Item> items){
         System.out.println("Adding starter pack...");
-        delay(1500);
+        delay(800);
         if(player instanceof Hawkseye || player instanceof Blademaster || player instanceof Berserker || player instanceof Shinobi) {
             player.obtainItem(findItemId("PDP001", items, 5));
             player.obtainItem(findItemId("HP001", items, 5));
             player.obtainItem(findItemId("EP001", items, 5));
-            player.obtainItem(findItemId("SHP001", items, 5));
             player.obtainItem(findItemId("SP001", items, 5));
             switch(player.getClassType()){
                 case HAWKSEYE:
@@ -1187,7 +1560,6 @@ public class Game {
             player.obtainItem(findItemId("MDP001", items, 5));
             player.obtainItem(findItemId("HP001", items, 5));
             player.obtainItem(findItemId("EP001", items, 5));
-            player.obtainItem(findItemId("SHP001", items, 5));
             player.obtainItem(findItemId("SP001", items, 5));
             switch(player.getClassType()) {
                 case RUNECASTER:
@@ -1197,17 +1569,16 @@ public class Game {
                     player.obtainItem(findItemId("MGSW001.1", items, 1));
                     break;
             }
-        }else{ //JinwooSun
-            player.obtainItem(findItemId("PDP004", items, 99));
-            player.obtainItem(findItemId("MDP004", items, 99));
+        }else{ // JinwooSun
+            player.obtainItem(findItemId("DR001.1", items, 1));
+            player.obtainItem(findItemId("DR002.1", items, 1));
+            player.obtainItem(findItemId("DR003.2", items, 1));
+            player.obtainItem(findItemId("DR004.1", items, 1));
+            player.obtainItem(findItemId("DR005", items, 1));
             player.obtainItem(findItemId("HP004", items, 99));
             player.obtainItem(findItemId("EP004", items, 99));
-            player.obtainItem(findItemId("SHP004", items, 99));
+            player.obtainItem(findItemId("PDP004", items, 99));
             player.obtainItem(findItemId("SP004", items, 99));
-            player.obtainItem(findItemId("EVP004", items, 1));
-            player.obtainItem(findItemId("SW005", items, 1));
-            player.obtainItem(findItemId("BS005", items, 1));
-            player.obtainItem(findItemId("DR005", items, 1));
         }
     }
     private int openInventory(Character player){
@@ -1238,15 +1609,21 @@ public class Game {
                     item.use(player);
                     delay(1000);
 
-                    // For consumable potions in battle, don't end the turn
-                    if(item.getQuantity() > 0) {
-                        System.out.println("Item used! You can take another action.");
-                        result = 0; // Item used, continue turn
-                    } else {
-                        // Item was consumed completely
-                        player.getInventory().removeItem(item);
-                        System.out.println("Item used! You can take another action.");
-                        result = 0; // Item used, continue turn
+                    if(((Consumable) item).getHasConsumed() == true){
+                        confirm = 0;
+                    }else{
+                        // For consumable potions in battle, don't end the turn
+                        if(item.getQuantity() > 0) {
+                            System.out.println("Item used! You can take another action.");
+                            openInventory(player);
+                            result = 0; // Item used, continue turn
+                        } else {
+                            // Item was consumed completely
+                            player.getInventory().removeItem(item);
+                            System.out.println("Item used! You can take another action.");
+                            openInventory(player);
+                            result = 0; // Item used, continue turn
+                        }
                     }
                 }else{
                     confirm = 0;
@@ -1283,43 +1660,73 @@ public class Game {
     //Enemy
     public CommonEnemy randomizeCommonEnemy(){
         Random rand = new Random();
-        //TODO adjusts the parameter depending on the quantity of existing enemies
-        int choice = rand.nextInt(3);
+        int choice = rand.nextInt(10);
 
         switch(choice){
             case 0:
-                return new CommonEnemy.Gooner();
+                return new CommonEnemy.Hound();
             case 1:
-                return new CommonEnemy.Ragebaiter();
+                return new CommonEnemy.Slime();
             case 2:
-                return new CommonEnemy.YourHB();
+                return new CommonEnemy.Goblin();
+            case 3:
+                return new CommonEnemy.Chimera();
+            case 4:
+                return new CommonEnemy.Wasp();
+            case 5:
+                return new CommonEnemy.Thief();
+            case 6:
+                return new CommonEnemy.Sludge();
+            case 7:
+                return new CommonEnemy.Orc();
+            case 8:
+                return new CommonEnemy.Demon();
+            case 9:
+                return new CommonEnemy.Frank();
         }
         return null;
     }
     public EliteEnemy randomizeEliteEnemy(){
         Random rand = new Random();
-        //TODO adjusts the parameter depending on the quantity of existing enemies
-        int choice = rand.nextInt(2);
+        int choice = rand.nextInt(10);
 
         switch(choice){
             case 0:
-                return new EliteEnemy.MasterBaiter();
+                return new EliteEnemy.PrimordialVishap();
             case 1:
-                return new EliteEnemy.Redditor();
+                return new EliteEnemy.BathysmalHunter();
+            case 2:
+                return new EliteEnemy.AbyssMage();
+            case 3:
+                return new EliteEnemy.WildernessExile();
+            case 4:
+                return new EliteEnemy.ShadowHusk();
+            case 5:
+                return new EliteEnemy.RuinGuard();
+            case 6:
+                return new EliteEnemy.AbyssRogue();
+            case 7:
+                return new EliteEnemy.MirrorMaiden();
+            case 8:
+                return new EliteEnemy.AbyssHerald();
+            case 9:
+                return new EliteEnemy.Daniel();
+
         }
         return null;
     }
-    //unnecessary but why not lol
+    //unnecessary but why not lol | Bruh HAHAHAHAHA instead of random boss ato butangan each chap refer to the boss class -zed
     public Boss randomizeBoss(){
         Random rand = new Random();
-        //TODO adjusts the parameter depending on the quantity of existing enemies
-        int choice = rand.nextInt(2);
+        int choice = rand.nextInt(3);
 
         switch(choice){
             case 0:
-                return new Boss.DemonKingDin();
+                return new Boss.Kamish();
             case 1:
-                return new Boss.Abaddon();
+                return new Boss.EnderDragon();
+            case 2:
+                return new Boss.EnderMan();
         }
         return null;
     }
@@ -1335,27 +1742,36 @@ public class Game {
         }
         return foundItem;
     }
-
-    //Misc
-    public int getIntInput(String prompt, int min, int max) {
-        int input = -1;
-        while (input < min || input > max) {
-            System.out.print(prompt);
-            //TODO revise try catch so that it will catch most exceptions and print
-            try {
-                input = Integer.parseInt(scan.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number.");
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter a valid input.");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please enter a valid input.");
-            } catch (Exception e) {
-                System.out.println("Please enter a valid input.");
-                throw new RuntimeException(e);
+    public void resetHasConsumed(List<Item> items){
+        for(Item item : items){
+            if(item instanceof Consumable consumable){
+                if(consumable instanceof PhysicalDamagePotion || consumable instanceof MagicalDamagePotion || consumable instanceof SpeedPotion || consumable instanceof EvasivenessPotion){
+                    consumable.setHasConsumed(false);
+                }
             }
         }
-        return input;
+    }
+
+    public int getIntInput(String prompt, int min, int max) {
+        while (true) {
+            System.out.print(prompt);
+            try {
+                String userInput = scan.nextLine().trim();
+                int input = Integer.parseInt(userInput);
+
+                if (input < min || input > max) {
+                    System.out.println("Please enter a number between " + min + " and " + max + ".");
+                    continue;
+                }
+
+                return input;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid whole number.");
+            } catch (Exception e) {
+                System.out.println("An unexpected error occurred. Please try again.");
+            }
+        }
     }
     public void delay(int delay) {
         try {

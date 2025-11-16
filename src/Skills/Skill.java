@@ -68,6 +68,9 @@ public abstract class Skill {
         return 8;
     }
 
+    public double getDamageMultiplier() { return multiplier; }
+    public DamageType getDamageType() { return damageType; }
+
     public String getName(){
         return name;
     }
