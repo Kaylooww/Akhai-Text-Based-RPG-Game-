@@ -24,6 +24,7 @@ public abstract class Chest{
 
     public void obtain(Character player){
         player.gainExperience(expYield);
+        System.out.println("\uD83E\uDE99 Gained "+gold+" extra gold coins!");
         player.setCurrency(gold);
     }
 
