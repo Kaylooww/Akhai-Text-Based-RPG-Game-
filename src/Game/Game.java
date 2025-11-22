@@ -1600,7 +1600,8 @@ public class Game {
             // Check if item is a consumable potion
             if(item instanceof Consumable && inBattle) {
                 System.out.println("========== SELECTING ITEM ==========");
-                System.out.println("Use " + item.getName() + "?");
+                item.displayInfo();
+                System.out.println("\nUse " + item.getName() + "?");
                 System.out.println("[1] Use Item");
                 System.out.println("[2] Back");
 
@@ -1632,7 +1633,8 @@ public class Game {
             } else {
                 // For non-consumables or non-battle usage
                 System.out.println("========== SELECTING ITEM ==========");
-                System.out.println("Select "+item.getName()+"?: ");
+                item.displayInfo();
+                System.out.println("\nSelect "+item.getName()+"?: ");
                 System.out.println("[1] Select Item");
                 System.out.println("[2] Back");
 

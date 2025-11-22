@@ -4,6 +4,8 @@ import Entities.Characters.Character;
 import StatusEffects.EvasivenessBoost;
 import StatusEffects.SpeedBoost;
 
+import java.text.DecimalFormat;
+
 public class EvasivenessPotion extends Consumable{
     double accuracyReduction;
 
@@ -27,8 +29,8 @@ public class EvasivenessPotion extends Consumable{
 
     @Override
     public void displayInfo(){
+        DecimalFormat df = new DecimalFormat("####");
         System.out.println(name+" (x"+getQuantity()+")");
-        System.out.println(description);
-        System.out.println("Reduces enemy accuracy by " + (accuracyReduction * 100) + "% for the current battle");
+        System.out.println("Reduces enemy accuracy by " + (df.format(accuracyReduction * 100)) + "%. Can only be used once before/during battle");
     }
 }

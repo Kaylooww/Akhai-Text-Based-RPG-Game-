@@ -2,6 +2,8 @@ package Items;
 
 import Entities.Characters.Character;
 
+import java.text.DecimalFormat;
+
 public abstract class Item {
     protected String itemId;
     protected String name;

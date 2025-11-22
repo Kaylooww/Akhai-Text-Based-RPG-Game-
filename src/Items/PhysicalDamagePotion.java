@@ -3,6 +3,8 @@ package Items;
 import Entities.Characters.Character;
 import StatusEffects.PhysicalDamageBoost;
 
+import java.text.DecimalFormat;
+
 public class PhysicalDamagePotion extends Consumable{
     double physicalDamageAmount;
 
@@ -13,7 +15,7 @@ public class PhysicalDamagePotion extends Consumable{
 
     @Override
     public void use(Character player){
-        if(hasConsumed == false){
+        if(!hasConsumed){
             PhysicalDamageBoost effect = new PhysicalDamageBoost(physicalDamageAmount);
             effect.applyEffect(player);
             player.addStatusEffect(effect);
@@ -27,8 +29,8 @@ public class PhysicalDamagePotion extends Consumable{
 
     @Override
     public void displayInfo(){
+        DecimalFormat df = new DecimalFormat("####");
         System.out.println(name+" (x"+getQuantity()+")");
-        System.out.println(description);
-        System.out.println("Increases physical damage by " + (physicalDamageAmount * 100) + "% for the current battle");
+        System.out.println("\"Increases physical damage by " + (df.format(physicalDamageAmount * 100)) + "%. Can only be used once before/during battle\"");
     }
 }

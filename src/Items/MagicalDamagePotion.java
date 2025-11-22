@@ -4,6 +4,8 @@ import Entities.Characters.Character;
 import StatusEffects.MagicalDamageBoost;
 import StatusEffects.PhysicalDamageBoost;
 
+import java.text.DecimalFormat;
+
 public class MagicalDamagePotion extends Consumable{
     double magicalDamageAmount;
 
@@ -14,7 +16,7 @@ public class MagicalDamagePotion extends Consumable{
 
     @Override
     public void use(Character player){
-        if(hasConsumed == false){
+        if(!hasConsumed){
             MagicalDamageBoost effect = new MagicalDamageBoost(magicalDamageAmount);
             effect.applyEffect(player);
             player.addStatusEffect(effect);
@@ -28,8 +30,8 @@ public class MagicalDamagePotion extends Consumable{
 
     @Override
     public void displayInfo(){
+        DecimalFormat df = new DecimalFormat("####");
         System.out.println(name+" (x"+getQuantity()+")");
-        System.out.println(description);
-        System.out.println("Increases magical damage by " + (magicalDamageAmount * 100) + "% for the current battle");
+        System.out.println("\"Increases magical damage by " + (df.format(magicalDamageAmount * 100)) + "%. Can only be used once before/during battle\"");
     }
 }

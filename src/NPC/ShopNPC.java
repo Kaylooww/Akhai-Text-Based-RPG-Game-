@@ -213,18 +213,24 @@ public class ShopNPC extends NPC{
                 Item purchasedItem = shopItems.get(choice-1);
                 boolean confirm = false;
                 while(!confirm){
-                    if(purchasedItem.getMaxStack() == purchasedItem.getQuantity()){
+                    if(player.hasItem(purchasedItem) && purchasedItem instanceof Weapon){
+                        System.out.println("You've already owned this weapon!");
+                        break;
+                    }else if(purchasedItem.getMaxStack() == purchasedItem.getQuantity()){
                         System.out.println("Cannot buy item (Max Stack)!");
                         break;
                     }
 
-                    int quantity = getIntInput("How many would you like to buy? (1-"+(purchasedItem.getMaxStack() - purchasedItem.getQuantity())+"):",1, purchasedItem.getMaxStack());
+                    System.out.println("========== BUYING ITEM ==========");
+                    purchasedItem.displayInfo();
+                    int quantity = getIntInput("\nHow many would you like to buy? (0-"+(purchasedItem.getMaxStack() - purchasedItem.getQuantity())+"): ",0, purchasedItem.getMaxStack());
+                    if(quantity == 0){
+                        break;
+                    }
                     if(player.getCurrency() > quantity * purchasedItem.getValue()){
                         if(player.getInventory().getIsFull()){
                             System.out.println("Inventory is full!");
                             break;
-                        }else if(purchasedItem instanceof Weapon){
-                            System.out.println("You've already owned this weapon!");
                         }else{
                             player.buyItem(purchasedItem, quantity);
                             player.setCurrency(player.getCurrency() - quantity * purchasedItem.getValue());
@@ -248,22 +254,25 @@ public class ShopNPC extends NPC{
             int choice = getIntInput("Select item to sell: ", 1, 11);
             if(choice == 11){
                 confirm = true;
-                break;
             }
-
             Item item = player.getInventory().getItems()[--choice];
             System.out.println("========= SELLING ITEM =========");
             if(item.getQuantity() > 1){
-                int quantity = getIntInput("How many would you like to sell?: ", 1, item.getQuantity());
-                int soldPrice = quantity * (item.getValue() - (int) (item.getValue() * 0.25));
-                player.setCurrency(player.getCurrency() + soldPrice);
-                item.setQuantity(item.getQuantity() - quantity);
-                System.out.println("Sold $"+soldPrice+" worth of items!");
+                int quantity = getIntInput("How many would you like to sell?: ", 0, item.getQuantity());
+                if(quantity != 0){
+                    int soldPrice = quantity * (item.getValue() - (int) (item.getValue() * 0.25));
+                    player.setCurrency(player.getCurrency() + soldPrice);
+                    item.setQuantity(item.getQuantity() - quantity);
+                    System.out.println("Sold "+quantity+"x "+item.getName()+" for $"+soldPrice+"!");
+                }
             }else{
-                int soldPrice = item.getValue() - (int) (item.getValue() * 0.25);
-                player.setCurrency(player.getCurrency() + soldPrice);
-                item.setQuantity(item.getQuantity() - 1);
-                System.out.println("Sold $"+soldPrice+" worth of item!");
+                choice = getIntInput("Are you sure you want to sell "+item.getName()+"? (Yes [1] | No [0]): ", 0, 1);
+                if(choice == 1){
+                    int soldPrice = item.getValue() - (int) (item.getValue() * 0.25);
+                    player.setCurrency(player.getCurrency() + soldPrice);
+                    item.setQuantity(item.getQuantity() - 1);
+                    System.out.println("Sold "+item.getName()+" for $"+soldPrice+"!");
+                }
             }
         }
     }

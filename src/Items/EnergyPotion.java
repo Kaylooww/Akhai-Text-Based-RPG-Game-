@@ -27,7 +27,6 @@ public class EnergyPotion extends Consumable{
     @Override
     public void displayInfo(){
         System.out.println(name+" (x"+getQuantity()+")");
-        System.out.println(description);
         System.out.println("Restores " + energyAmount + " energy");
     }
 }

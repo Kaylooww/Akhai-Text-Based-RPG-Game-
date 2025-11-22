@@ -4,7 +4,10 @@ import Entities.Entity;
 import Items.*;
 import Items.Weapons.Weapon;
 import Skills.*;
+import StatusEffects.*;
+
 import java.util.Random;
+import java.text.DecimalFormat;
 
 public abstract class Character extends Entity {
     protected int maxEnergy = 100;
@@ -131,25 +134,28 @@ public abstract class Character extends Entity {
         System.out.println("Ultimate charges have been reset!");
         System.out.println("This resurrection has been consumed and cannot be used again.");
     }
-    public boolean hasResurrected() {
+    public boolean hasResurrected(){
         return hasResurrected;
     }
-    // Update displayStats to show resurrection status
+    // TODO display stats surrounded by a box dynamically (We need your calculation zed kay AI sux at it HAHHAAHAH)
     public void displayStats() {
-        System.out.println("\n=== " + name + "'s STATS ===");
+        DecimalFormat df = new DecimalFormat("####");
+        System.out.println("\n═════════ " + name + "'s STATS ═════════");
+        System.out.println("CURRENCY: "+currency+"\n");
         System.out.println("Level: " + level);
         System.out.println("Experience: " + experience + "/" + experienceNeeded);
         System.out.println("Class: " + classType);
         System.out.println("HP: " + health + "/" + maxHealth);
-        System.out.println("Attack: " + physicalDamage);
-        System.out.println("Armor: " + defense);
-        System.out.println("Speed: " + speed);
         System.out.println("Energy: " + energy + "/" + maxEnergy);
+        System.out.println("Attack: " + (hasStatusEffect("PhysicalDamageBoost") ? "↑" : "") +physicalDamage);
+        System.out.println("Defense: " + df.format(physicalResistance * 100));
+        System.out.println("Magic Damage: " + (hasStatusEffect("MagicalDamageBoost") ? "↑" : "") +magicDamage);
+        System.out.println("Magic Defense: " + df.format(magicResistance * 100));
+        System.out.println("Armor: " + defense);
+        System.out.println("Speed: " + (hasStatusEffect("SpeedBoost") ? "↑" : "") + speed);
         System.out.println("Ultimate Charge: " + ultimateCounter + "/" + maxUltimateCounter);
-        System.out.println("Magic Defense: " + magicResistance);
-        System.out.println("Magic Damage: " + magicDamage);
         System.out.println("Resurrection: " + (hasResurrected ? "❌ USED" : "✅ AVAILABLE"));
-        System.out.println("====================");
+        System.out.println("══════════════════════════════════════");
     }
     public void displayInventory(){
         inventory.cleanInventory();
@@ -186,6 +192,41 @@ public abstract class Character extends Entity {
             }
             System.out.println();
         }
+    }
+    public boolean hasItem(Item item){
+        Item[]  items = inventory.getItems();
+        for(int i = 0; i < items.length; i++){
+            if(items[i] == item){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean hasStatusEffect(String status){
+        for(StatusEffect statusEffect : statusEffects){
+            switch(status){
+                case "PhysicalDamageBoost":
+                    if(statusEffect instanceof PhysicalDamageBoost){
+                        return true;
+                    }
+                    break;
+                case "MagicalDamageBoost":
+                    if(statusEffect instanceof MagicalDamageBoost){
+                        return true;
+                    }
+                    break;
+                case "EvasivenessBoost":
+                    if(statusEffect instanceof EvasivenessBoost){
+                        return true;
+                    }
+                    break;
+                case "SpeedBoost":
+                    if(statusEffect instanceof SpeedBoost){
+                        return true;
+                    }
+            }
+        }
+        return false;
     }
     public void obtainItem(Item item) {
         Item[] items = inventory.getItems();

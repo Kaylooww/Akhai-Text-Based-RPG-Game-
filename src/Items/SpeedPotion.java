@@ -14,7 +14,7 @@ public class SpeedPotion extends Consumable{
 
     @Override
     public void use(Character player){
-        if(hasConsumed == false){
+        if(!hasConsumed){
             SpeedBoost effect = new SpeedBoost(speedAmount);
             effect.applyEffect(player);
             player.addStatusEffect(effect);
@@ -29,7 +29,6 @@ public class SpeedPotion extends Consumable{
     @Override
     public void displayInfo(){
         System.out.println(name+" (x"+getQuantity()+")");
-        System.out.println(description);
-        System.out.println("Increases speed by " + speedAmount + " for the current battle");
+        System.out.println("\"Increases speed by " + speedAmount + ". Can only be used once before/during battle\"");
     }
 }

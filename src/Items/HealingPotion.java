@@ -13,19 +13,26 @@ public class HealingPotion extends Consumable{
     @Override
     public void use(Character player){
         if(player.getHealth() < player.getMaxHealth()){
-            player.setHealth(player.getHealth()+healingAmount);
-            if(player.getHealth() >= player.getMaxHealth()){
-                player.setHealth(player.getMaxHealth());
+            int currentHealth = player.getHealth();
+            int maxHealth = player.getMaxHealth();
+            int potentialHealth = currentHealth + healingAmount;
+
+            if(potentialHealth > maxHealth){
+                int actualHeal = maxHealth - currentHealth;
+                player.setHealth(maxHealth);
+                System.out.println(player.getName() + " recovered " + actualHeal + " HP! (HP is now full)");
+            } else {
+                player.setHealth(potentialHealth);
+                System.out.println(player.getName() + " recovered " + healingAmount + " HP!");
             }
             quantity--;
-        }else{
+        } else {
             System.out.println("HP is full!");
         }
-
     }
     @Override
     public void displayInfo(){
         System.out.println(name+" (x"+quantity+")");
-        System.out.println(description);
+        System.out.println("\"Heals up to "+healingAmount+" HP. Can be used outside the battle\"");
     }
 }
