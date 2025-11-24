@@ -13,7 +13,7 @@ public abstract class Chest{
     public Chest(String name, Rarity rarity, int baseExp, int baseGold){
         Random rnd = new Random();
         this.name = name;
-        this.expYield = 1 + (5 - baseExp) * rnd.nextInt(1, 6);
+        this.expYield = 2 * baseExp + rnd.nextInt(1, 6);
         this.gold = baseGold * rnd.nextInt(20, 26);
         this.rarity = rarity;
     }
@@ -53,6 +53,7 @@ public abstract class Chest{
         }
     }
     //100% drop rate but only once (dropped by the miniboss)
+    //TODO after defeating mini boss, it needs to drop this -for frank
     public static class MythicalChest extends Chest{
         public MythicalChest(){
             super("Mythical Chest", Rarity.MYTHICAL, 5, 5);

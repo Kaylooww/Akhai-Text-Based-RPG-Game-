@@ -19,7 +19,7 @@ public class Boss extends Enemy {
     @Override
     public int attack() {
         // Bosses have more complex attack patterns based on phase and health
-        if (getHealth() < getMaxHealth() * 0.15) {
+        if (getHealth() < getMaxHealth() * 0.10) {
             // Low health - use ultimate
             return performUltimateAttack();
         } else if (Math.random() < 0.3) {
@@ -60,7 +60,7 @@ public class Boss extends Enemy {
         }
         return getPhysicalDamage();
     }
-    //TODO make sure it prints the damage first before entering the next Phase -for frank
+
     @Override
     public int takeDamage(double damage, int defense, double physicalResistance, double magicResistance) {
         double actualDamage = damage * (1 - physicalResistance) - defense;
@@ -97,7 +97,7 @@ public class Boss extends Enemy {
     // chap 4
     public static class Abaddon extends Boss {
         public Abaddon() {
-            super("Abaddon", 800, 2, 70, 70, 28, 0.23, 0.23, 19);
+            super("Abaddon", 700, 2, 70, 70, 28, 0.23, 0.23, 19);
             basicAttack = new EnemySkill("Soul Reaver", "A blade strike that seeks to sever the very essence of life", 1.30, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Plague Wind", "Releases a corrosive gust that decays all it touches", 1.80, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Apocalypse Call", "Summons the end of days in a cataclysmic explosion of power", 2.50, 80, DamageType.PHYSICAL, TargetType.SINGLE);
@@ -108,7 +108,7 @@ public class Boss extends Enemy {
     //chap 3
     public static class Kamish extends Boss {
         public Kamish() {
-            super("Kamish", 500, 2, 60, 60, 17, 0.21, 0.21, 18);
+            super("Kamish", 400, 2, 65, 65, 17, 0.21, 0.21, 18);
             basicAttack = new EnemySkill("Dragon's Claw", "A swift, precise strike with razor-sharp talons", 1.30, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Ancient Roar", "A thunderous cry that shakes the very foundations of the earth", 1.70, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Skyfall Descent", "Plummets from the heavens with the force of a meteor", 2.30, 80, DamageType.PHYSICAL, TargetType.SINGLE);
@@ -117,7 +117,7 @@ public class Boss extends Enemy {
     // chap 2
     public static class EnderDragon extends Boss {
         public EnderDragon() {
-            super("Ender Dragon", 400, 2, 45, 45, 16, 0.17, 0.17, 17);
+            super("Ender Dragon", 300, 2, 45, 45, 16, 0.17, 0.17, 17);
             basicAttack = new EnemySkill("Void Bite", "A chilling attack that seems to consume the light around it", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Ender Breath", "Exhales a cloud of pure void energy that corroses reality", 1.45, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Dragon's Dive", "A devastating aerial assault that strikes with immense force", 2.00, 80, DamageType.PHYSICAL, TargetType.SINGLE);
@@ -126,7 +126,7 @@ public class Boss extends Enemy {
     // chap 1
     public static class EnderMan extends Boss {
         public EnderMan() {
-            super("Ender Man", 380, 2, 40, 40, 15, 0.16, 0.16, 16);
+            super("Ender Man", 280, 2, 40, 40, 15, 0.16, 0.16, 16);
             basicAttack = new EnemySkill("Telekinetic Slam", "Uses psychic power to strike from an unexpected angle", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Void Warp", "Instantly teleports behind the target for a surprise attack", 1.40, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Enderman's Wrath", "Unleashes the full power of the void in a chaotic burst", 1.90, 80, DamageType.PHYSICAL, TargetType.SINGLE);

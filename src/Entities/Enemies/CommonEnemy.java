@@ -26,67 +26,67 @@ public class CommonEnemy extends Enemy {
         return getPhysicalDamage();
     }
 
-    public static class Hound extends CommonEnemy {
-        public Hound() {
-            super("Hound", 100, 32, 32, 8, 0.05, 0.05, 10);
-            basicAttack = new EnemySkill("Savage Bite", "The hound lunges and bites fiercely", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+    public static class Gloomfang extends CommonEnemy {
+        public Gloomfang() {
+            super("Gloomfang", 100, 32, 32, 8, 0.05, 0.05, 10);
+            basicAttack = new EnemySkill("Shadow Maul", "The beast bites with darkness-infused fangs", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
 
-    public static class Slime extends CommonEnemy {
-        public Slime() {
-            super("Slime", 150, 30, 30, 5, 0.05, 0.05, 10);
-            basicAttack = new EnemySkill("Acidic Splash", "The slime launches a corrosive glob", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+    public static class Mireling extends CommonEnemy {
+        public Mireling() {
+            super("Mireling", 150, 30, 30, 5, 0.05, 0.05, 10);
+            basicAttack = new EnemySkill("Bog Spit", "The mireling spits murky sludge that slows its target", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
 
-    public static class Goblin extends CommonEnemy {
-        public Goblin() {
-            super("Goblin", 100, 31, 31, 6, 0.05, 0.05, 10);
-            basicAttack = new EnemySkill("Crude Strike", "The goblin attacks with a poorly-made weapon", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+    public static class CrossroadSneak extends CommonEnemy {
+        public CrossroadSneak() {
+            super("Crossroad Sneak", 100, 31, 31, 6, 0.05, 0.05, 10);
+            basicAttack = new EnemySkill("Back-Alley Jab", "A dirty, sudden stab from the shadows", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
 
     // For more Common Enemy add here:
-    public static class Chimera extends CommonEnemy {
-        public Chimera() {
-            super("Chimera", 100, 32, 32, 8, 0.05, 0.05, 10);
-            basicAttack = new EnemySkill("Multi-headed Assault", "The chimera attacks with multiple heads simultaneously", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+    public static class WhisperChimera extends CommonEnemy {
+        public WhisperChimera() {
+            super("Whisper Chimera", 100, 32, 32, 8, 0.05, 0.05, 10);
+            basicAttack = new EnemySkill("Echoing Rend", "Multiple heads strike, their snarls echo unnaturally", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
 
-    public static class Wasp extends CommonEnemy {
-        public Wasp() {
-            super("Wasp", 150, 30, 30, 5, 0.05, 0.05, 10);
-            basicAttack = new EnemySkill("Venomous Sting", "The wasp strikes with its poisonous stinger", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+    public static class Mistwing extends CommonEnemy {
+        public Mistwing() {
+            super("Mistwing", 150, 30, 30, 5, 0.05, 0.05, 10);
+            basicAttack = new EnemySkill("Piercing Needle", "A sharp thrust darting through drifting mist", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
 
-    public static class Thief extends CommonEnemy {
-        public Thief() {
-            super("Thief", 100, 31, 31, 6, 0.05, 0.05, 10);
-            basicAttack = new EnemySkill("Dagger Slash", "A quick, precise strike with a concealed blade", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+    public static class CrossroadCutpurse extends CommonEnemy {
+        public CrossroadCutpurse() {
+            super("Crossroad Cutpurse", 100, 31, 31, 6, 0.05, 0.05, 10);
+            basicAttack = new EnemySkill("Silent Slice", "A clean, fast cut delivered without a sound", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
 
-    public static class Sludge extends CommonEnemy {
-        public Sludge() {
-            super("Sludge", 100, 32, 32, 8, 0.05, 0.05, 10);
-            basicAttack = new EnemySkill("Toxic Ooze", "The sludge releases a wave of poisonous muck", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+    public static class Murkgut extends CommonEnemy {
+        public Murkgut() {
+            super("Murkgut", 100, 32, 32, 8, 0.05, 0.05, 10);
+            basicAttack = new EnemySkill("Rotwave", "The creature releases a sickening ripple of decay", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
 
-    public static class Orc extends CommonEnemy {
-        public Orc() {
-            super("Orc", 150, 30, 30, 5, 0.05, 0.05, 10);
-            basicAttack = new EnemySkill("Brutal Smash", "The orc delivers a powerful, crushing blow", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+    public static class RoadbreakerBrute extends CommonEnemy {
+        public RoadbreakerBrute() {
+            super("Roadbreaker Brute", 150, 30, 30, 5, 0.05, 0.05, 10);
+            basicAttack = new EnemySkill("Earthshatter Blow", "A heavy strike that cracks the ground beneath it", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
 
-    public static class Demon extends CommonEnemy {
-        public Demon() {
-            super("Demon", 100, 31, 31, 6, 0.05, 0.05, 10);
-            basicAttack = new EnemySkill("Infernal Claw", "The demon attacks with fiery, sharp claws", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
+    public static class CrossroadFiend extends CommonEnemy {
+        public CrossroadFiend() {
+            super("Crossroad Fiend", 100, 31, 31, 6, 0.05, 0.05, 10);
+            basicAttack = new EnemySkill("Soulflare Slash", "A burning claw strike that emits eerie whispers", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
 
