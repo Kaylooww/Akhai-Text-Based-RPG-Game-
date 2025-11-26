@@ -253,7 +253,7 @@ public class ShopNPC extends NPC{
             System.out.println("[11] Back");
             int choice = getIntInput("Select item to sell: ", 1, 11);
             if(choice == 11){
-                confirm = true;
+                break;
             }
             Item item = player.getInventory().getItems()[--choice];
             System.out.println("========= SELLING ITEM =========");
