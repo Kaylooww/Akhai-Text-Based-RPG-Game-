@@ -1,6 +1,8 @@
 package Story;
 
 import Story.DialogueNode.DialogueType;
+import TextFormat.ColorUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -437,7 +439,7 @@ public class StoryManager {
         Chapter chapter = chapters.get(chapterNumber - 1);
         chapter.displayChapterIntro();
 
-        System.out.println("[Press ENTER at any time to skip delays and display all dialogue]\n");
+        System.out.println(ColorUtil.brightCyanBold("[Press ENTER at any time to skip delays and display all dialogue]\n"));
 
         try {
             Thread.sleep(800);
@@ -448,8 +450,8 @@ public class StoryManager {
         chapter.playDialogues();
         chapter.setCompleted(true);
 
-        System.out.println("\n✅ Chapter " + chapterNumber + " completed!");
-        System.out.println("[Press ENTER to continue...]");
+        System.out.println(ColorUtil.brightYellowBold("\n✅ Chapter " + chapterNumber + " completed!"));
+        System.out.println(ColorUtil.brightCyanBold("[Press ENTER to continue...]"));
 
         java.util.Scanner scanner = new java.util.Scanner(System.in);
         scanner.nextLine();

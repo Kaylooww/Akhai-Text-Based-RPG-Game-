@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import Entities.Characters.Character;
 import Items.Item;
+import TextFormat.ColorUtil;
 
 public class FortuneTellerNPC extends ShopNPC {
     public FortuneTellerNPC(String name, String description, List<Item> items) {
@@ -14,7 +15,7 @@ public class FortuneTellerNPC extends ShopNPC {
     public void interact(Character player, int currentChapter) {
         boolean exit = false;
         while(!exit){
-            System.out.println(name+": Hello fellow adventurer! Care to browse my wares? Or perhaps interested in fortune telling?");
+            System.out.println(ColorUtil.brightPurpleBold("\n"+name+": Hello fellow adventurer! Care to browse my wares? Or perhaps interested in fortune telling?"));
             System.out.println("[1] Browse Shop");
             System.out.println("[2] Sell Item");
             System.out.println("[3] Fortune Telling");
@@ -38,7 +39,7 @@ public class FortuneTellerNPC extends ShopNPC {
                             "When death claims you, you shall be given a choice... To return with half your vitality, or to accept your fate."
                     };
                     Random rand = new Random();
-                    System.out.println("Kyle: " + fortunes[rand.nextInt(fortunes.length)]);
+                    System.out.println(ColorUtil.brightPurpleBold("Kyle The Shopkeeper: " + fortunes[rand.nextInt(fortunes.length)] + "\n"));
                     break;
                 case 4:
                     exit = true;

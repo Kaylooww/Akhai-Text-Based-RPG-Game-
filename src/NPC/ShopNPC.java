@@ -4,6 +4,7 @@ import Entities.Characters.*;
 import Entities.Characters.Character;
 import Items.Item;
 import Items.Weapons.Weapon;
+import TextFormat.ColorUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,15 @@ public class ShopNPC extends NPC{
     public void interact(Character player, int currentChapter) {
         boolean exit = false;
         while(!exit){
-            System.out.println(name+": Hello fellow adventurer! Care to browse my wares? Or perhaps interested in fortune telling?");
-            System.out.println("[1] Browse Shop");
-            System.out.println("[2] Sell Item");
-            System.out.println("[3] Fortune Telling");
-            System.out.println("[4] Exit");
+            System.out.println(ColorUtil.purple("\n"+name+": Hello fellow adventurer! Care to browse my wares? Or perhaps interested in fortune telling?"));
+            System.out.println(ColorUtil.blueBright("╔════════════════════════════════════════════════════╗"));
+            System.out.println(ColorUtil.blueBright("║") + ColorUtil.brightCyanBold("                    KYLE'S SHOP                     ") + ColorUtil.blueBright("║"));
+            System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[1] Browse Shop") + ColorUtil.blueBright("                                   ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Sell Item") + ColorUtil.blueBright("                                     ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3] Fortune Telling") + ColorUtil.blueBright("                               ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[4] Exit ") + ColorUtil.blueBright("                                         ║"));
+            System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
             int choice = getIntInput("Enter choice: ", 1, 4);
 
             switch (choice) {
@@ -36,7 +41,7 @@ public class ShopNPC extends NPC{
                     sellItem(player);
                     break;
                 case 3:
-                    System.out.println("\n🔮 " + name + " gazes into their crystal ball...");
+                    System.out.println(ColorUtil.blue("\n🔮 " + name + " gazes into their crystal ball..."));
                     String[] fortunes = {
                             "You will face great challenges ahead!",
                             "I sense a great power within you, traveler.",
@@ -45,7 +50,7 @@ public class ShopNPC extends NPC{
                             "When death claims you, you shall be given a choice... To return with half your vitality, or to accept your fate."
                     };
                     Random rand = new Random();
-                    System.out.println("Kyle: " + fortunes[rand.nextInt(fortunes.length)]);
+                    System.out.println(ColorUtil.brightPurpleBold("Kyle The Fortune Teller: " + fortunes[rand.nextInt(fortunes.length)]));
                     break;
                 case 4:
                     exit = true;
@@ -202,12 +207,12 @@ public class ShopNPC extends NPC{
         stockItems(player,  currentChapter);
         boolean exit = false;
         while(!exit){
-            System.out.println("╔════════════════════ SHOP ════════════════════╗");
+            System.out.println(ColorUtil.brightBlueBold("╔═══════════════════════ SHOP ═══════════════════════╗"));
             displayShop();
-            System.out.println("╚══════════════════════════════════════════════╝");
+            System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
 
             System.out.println("CURRENCY: "+player.getCurrency());
-            System.out.println("\n["+(shopItems.size()+1)+"] Exit");
+            System.out.println(ColorUtil.brightCyanBold("\n["+(shopItems.size()+1)+"] Exit"));
             int choice = getIntInput("Select item to buy: ", 1, shopItems.size()+1);
             if(choice != shopItems.size()+1){
                 Item purchasedItem = shopItems.get(choice-1);
@@ -221,7 +226,7 @@ public class ShopNPC extends NPC{
                         break;
                     }
 
-                    System.out.println("========== BUYING ITEM ==========");
+                    System.out.println(ColorUtil.brightBlueBold("════════════════════ BUYING ITEM ═════════════════════"));
                     purchasedItem.displayInfo();
                     int quantity = getIntInput("\nHow many would you like to buy? (0-"+(purchasedItem.getMaxStack() - purchasedItem.getQuantity())+"): ",0, purchasedItem.getMaxStack());
                     if(quantity == 0){
@@ -250,13 +255,13 @@ public class ShopNPC extends NPC{
 
         while(!confirm){
             player.displayInventoryInShop();
-            System.out.println("[11] Back");
+            System.out.println(ColorUtil.brightCyanBold("[11] Back"));
             int choice = getIntInput("Select item to sell: ", 1, 11);
             if(choice == 11){
                 break;
             }
             Item item = player.getInventory().getItems()[--choice];
-            System.out.println("========= SELLING ITEM =========");
+            System.out.println(ColorUtil.brightBlueBold("════════════════════ SELLING ITEM ════════════════════"));
             if(item.getQuantity() > 1){
                 int quantity = getIntInput("How many would you like to sell?: ", 0, item.getQuantity());
                 if(quantity != 0){
@@ -283,7 +288,7 @@ public class ShopNPC extends NPC{
     public void displayShop(){
         int i = 1;
         for(Item item: shopItems){
-            System.out.println("  ["+i+"] "+"$"+item.getValue()+" "+item.getName());
+            System.out.println(ColorUtil.brightCyanBold("   ["+i+"] "+"$"+item.getValue()+" ")+item.getName());
             i++;
         }
     }

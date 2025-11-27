@@ -2,7 +2,7 @@ package Entities.Characters;
 
 public class Runecaster extends Character{
     public Runecaster(String name) {
-        super(name, 225, ClassType.RUNECASTER, 5, 37, 11, 0.09, 0.09, 20);
+        super(name, 225, ClassType.RUNECASTER, 5, 37, 11, 0.09, 0.09, 17);
         this.level = 1;
     }
     //

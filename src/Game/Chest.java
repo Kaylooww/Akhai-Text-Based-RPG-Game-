@@ -14,7 +14,7 @@ public abstract class Chest{
         Random rnd = new Random();
         this.name = name;
         this.expYield = 2 * baseExp + rnd.nextInt(1, 6);
-        this.gold = baseGold * rnd.nextInt(20, 26);
+        this.gold = baseGold * rnd.nextInt(1, 4);
         this.rarity = rarity;
     }
 
