@@ -517,16 +517,16 @@ public class Game {
 
     //Exploration
     public void displayLevelMap() {
-        System.out.println("\n🗺️  === CURRENT MAP ===");
-        System.out.println("Current Chapter: " + currentChapter);
-        System.out.println("Progress: " + getCompletionPercentage() + "% complete");
+        System.out.println(ColorUtil.blue("\n╔══════════════════ CURRENT MAP ════════════════════╗"));
+        System.out.println(ColorUtil.cyanBold("   Current Chapter:") + ColorUtil.yellowBold(" " + currentChapter));
+        System.out.println(ColorUtil.cyanBold("   Progress: ") + ColorUtil.yellowBold(getCompletionPercentage() + "% complete"));
 
         for (int i = 1; i <= MAX_LEVEL; i++) {
-            String status = (i == currentChapter) ? "📍 CURRENT" :
-                    (levelsCompleted[i]) ? "✅ COMPLETED" : "🔒 LOCKED";
-            System.out.println("Level " + i + ": " + getLevelName(i) + " - " + status);
+            String status = (i == currentChapter) ? ColorUtil.green("📍 CURRENT") :
+                    (levelsCompleted[i]) ? ColorUtil.yellowBold("✅ COMPLETED") : ColorUtil.red("🔒 LOCKED");
+            System.out.println(ColorUtil.cyanBold("   Chapter " + i + ": ") + getLevelName(i) + " - " + status);
         }
-        System.out.println("======================");
+        System.out.println(ColorUtil.blue("╚══════════════════════════════════════════════════╝"));
         delay(1000);
     }
     private String getLevelName(int level) {

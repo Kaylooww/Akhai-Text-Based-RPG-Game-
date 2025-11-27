@@ -86,9 +86,9 @@ public abstract class Character extends Entity {
         experience -= experienceNeeded;
         level++;
         experienceNeeded += 3;
-        System.out.println("╔═════════════════════════════════════╗");
-        System.out.println("   " + name + " leveled up to level " + level + "!");
-        System.out.println("   Stats Increased!");
+        System.out.println("╔═════════════════════════════════════════╗");
+        System.out.println("   ✨ " + name + " leveled up to level " + level + "!");
+        System.out.println("   ✨ Stats Increased!");
 
         // Improve stats on level up
         int oldMaxHealth = maxHealth;
@@ -101,12 +101,12 @@ public abstract class Character extends Entity {
         physicalResistance += 0.01;
 
 
-        System.out.println("   Max HP increased: " + oldMaxHealth + " → " + maxHealth);
-        System.out.println("   Attack stat +2");
-        System.out.println("   Defense stat +2");
-        System.out.println("   Physical Resistance stat +1%");
-        System.out.println("   Magic Resistance stat +1%");
-        System.out.println("╚════════════════════════════════════╝");
+        System.out.println("   💖️ Max HP increased: " + oldMaxHealth + " → " + maxHealth);
+        System.out.println("   🗡️ Attack stat +2");
+        System.out.println("   🛡️ Defense stat +1");
+        System.out.println("   🛡️ Physical Resistance stat +1%");
+        System.out.println("   🛡️ Magic Resistance stat +1%");
+        System.out.println("╚════════════════════════════════════════╝");
     }
 
     // New resurrection method

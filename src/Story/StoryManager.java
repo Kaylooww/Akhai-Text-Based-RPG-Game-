@@ -440,7 +440,7 @@ public class StoryManager {
         System.out.println("[Press ENTER at any time to skip delays and display all dialogue]\n");
 
         try {
-            Thread.sleep(1500);
+            Thread.sleep(800);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
