@@ -1207,7 +1207,7 @@ public class Game {
         System.out.println("🚨 A wild " + enemy.getName() + " appears!");
         delay(1000);
 
-        int baseExp = 30;
+        int baseExp = 40;
 
         int playerCurrentSpeed = player.getSpeed();
         int playerOriginalSpeed = player.getSpeed();
@@ -1943,7 +1943,7 @@ public class Game {
     public void obtainGold(Character player){
         Random rnd = new Random();
         int goldYield = currentChapter * rnd.nextInt(20, 26);
-        player.setCurrency(goldYield);
+        player.setCurrency(player.getCurrency() + goldYield);
         System.out.println("\uD83E\uDE99 Gained "+goldYield+" gold coins!");
     }
 
