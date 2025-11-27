@@ -612,6 +612,7 @@ public class Game {
                     //add final boss
                     //TODO battle finale boss (Demon King Din) must correlate to the story
                     battle(player, new Boss.DemonKingDin(), 2);
+                    //TODO story ends after winning the battle
                     break;
                 case 2:
                     player.displayStats();
@@ -627,7 +628,7 @@ public class Game {
                     talkToNPC();
                     break;
                 case 6:
-                    viewCurrentStory();  // NEW
+                    viewCurrentStory();
                     break;
                 case 7:
                     gameRunning = false;
@@ -698,7 +699,6 @@ public class Game {
             }
         }
     }
-    //TODO make sure that if they already own the weapon they dont get another copy of it -for frank
     private void obtainLoot(Character player){
         double chance = Math.random(); //Made a variable para di sigeg gamit ug Math.random ugh
         switch(currentChapter) {
@@ -887,7 +887,7 @@ public class Game {
                 }
                 break;
             case 4:
-                if(Math.random() > 0.8){
+                if(Math.random() > 0.5){
                     Chest EpicChest = new Chest.EpicChest();
                     System.out.println("💎 You found a "+EpicChest.getName()+"!");
                     EpicChest.obtain(player);
@@ -1191,7 +1191,6 @@ public class Game {
             player.checkStatusEffect();
             enemy.checkStatusEffect();
         }
-        //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
         playerHealthCheck(enemy, baseExp, player);
 
         // Clear battle effects after combat
@@ -1279,7 +1278,6 @@ public class Game {
             player.checkStatusEffect();
             enemy.checkStatusEffect();
         }
-        //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
         playerHealthCheck(enemy, baseExp, player);
 
         // Clear battle effects after combat
@@ -1370,7 +1368,6 @@ public class Game {
             player.checkStatusEffect();
             enemy.checkStatusEffect();
         }
-        //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
         playerHealthCheck(enemy, baseExp, player);
 
         // Clear battle effects after combat
@@ -1456,8 +1453,6 @@ public class Game {
             player.checkStatusEffect();
             enemy.checkStatusEffect();
         }
-        //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
-
         playerHealthCheck(enemy, baseExp, player);
 
         // Clear battle effects after combat
@@ -1543,14 +1538,16 @@ public class Game {
             player.checkStatusEffect();
             enemy.checkStatusEffect();
         }
-        //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
         playerHealthCheck(enemy, baseExp, player);
 
         clearBattleEffects(enemy);
 
         inBattle = false;
     }
+    //Boss Din
     public void battle(Character player, Boss enemy, int maxWave/*min: 2 | max: 3*/){
+        int baseExp = 50;
+
         for(int wave = 1; wave <= maxWave; wave++){
             if(wave == maxWave){
                 battle(player, enemy);
@@ -1560,7 +1557,7 @@ public class Game {
                 battle(player, randomizeBoss());
             }
         }
-
+        playerHealthCheck(enemy, baseExp, player);
     }
 
     public class AccuracySystem {
@@ -1793,6 +1790,8 @@ public class Game {
             //Commented this out cuz it already prints this in the gainExperience method
             //System.out.println("💰 Gained " + baseExp + " experience!");
             player.gainExperience(baseExp);
+            delay(500);
+            obtainGold(player);
             delay(500);
             obtainLoot(player);
             delay(500);

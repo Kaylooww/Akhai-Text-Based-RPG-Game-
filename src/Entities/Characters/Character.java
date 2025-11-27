@@ -235,6 +235,10 @@ public abstract class Character extends Entity {
         if (!inventory.getIsFull()) {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null && items[i].getItemId().equals(item.getItemId())) {
+                    if(item instanceof Weapon){
+                        System.out.println("Obtained "+item.getName()+" but already owned");
+                        break;
+                    }
                     items[i].setQuantity(items[i].getQuantity() + 1);
                     System.out.println("Item \"" + item.getName() + "\" obtained.");
                     delay(500);

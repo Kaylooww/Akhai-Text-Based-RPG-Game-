@@ -260,7 +260,7 @@ public class ShopNPC extends NPC{
             if(item.getQuantity() > 1){
                 int quantity = getIntInput("How many would you like to sell?: ", 0, item.getQuantity());
                 if(quantity != 0){
-                    int soldPrice = quantity * (item.getValue() - (int) (item.getValue() * 0.25));
+                    int soldPrice = quantity * (item.getValue() - (int) (item.getValue() * 0.75));
                     player.setCurrency(player.getCurrency() + soldPrice);
                     item.setQuantity(item.getQuantity() - quantity);
                     System.out.println("Sold "+quantity+"x "+item.getName()+" for $"+soldPrice+"!");
