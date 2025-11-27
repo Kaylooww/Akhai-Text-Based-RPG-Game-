@@ -158,7 +158,6 @@ public abstract class Character extends Entity {
         System.out.println("══════════════════════════════════════");
     }
 
-    //TODO currency does not display total currency (like di ma apil ang gold nga na earn nimo throughout the game) - for frank
     public void displayInventory(){
         inventory.cleanInventory();
         Item[] items = inventory.getItems();
@@ -172,7 +171,8 @@ public abstract class Character extends Entity {
             } else if (items[i] == null) {
                 System.out.print("-EMPTY-");
             } else {
-                System.out.print(items[i].getQuantity() + "x " + items[i].getName());
+                System.out.print(items[i].getQuantity() + "x " + items[i].getName() +
+                        (items[i] instanceof Weapon weapon && weapon.getIsEquipped() ? " (equipped)" : ""));
             }
             System.out.println();
         }

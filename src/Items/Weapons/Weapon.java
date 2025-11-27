@@ -76,4 +76,8 @@ public class Weapon extends Item {
     public Skill getUltimateAttack(){
         return ultimateAttack;
     }
+
+    public boolean getIsEquipped(){
+        return isEquipped;
+    }
 }
