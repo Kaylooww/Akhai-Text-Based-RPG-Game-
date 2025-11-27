@@ -69,4 +69,13 @@ public abstract class Item {
     public Rarity getRarity(Rarity rarity){
         return rarity;
     }
+
+    public void delay(int delay) {
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Re-interrupt the thread
+            System.err.println("Thread was interrupted during sleep.");
+        }
+    }
 }

@@ -21,9 +21,11 @@ public class HealingPotion extends Consumable{
                 int actualHeal = maxHealth - currentHealth;
                 player.setHealth(maxHealth);
                 System.out.println(player.getName() + " recovered " + actualHeal + " HP! (HP is now full)");
+                delay(1000);
             } else {
                 player.setHealth(potentialHealth);
                 System.out.println(player.getName() + " recovered " + healingAmount + " HP!");
+                delay(1000);
             }
             quantity--;
         } else {

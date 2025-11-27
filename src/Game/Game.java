@@ -1651,19 +1651,7 @@ public class Game {
                     hasActed = true;
                     break;
                 case 2:
-                    int inventoryResult = openInventory(player);
-                    if (inventoryResult == 1) {
-                        // Player chose to attack after using items
-                        damage = handleFightAction(enemy);
-                        hasActed = true;
-                    } else if (inventoryResult == 0) {
-                        // Player used an item but turn continues
-                        System.out.println("You can take another action...");
-                        // Continue the loop without setting hasActed to true
-                    } else {
-                        // Player cancelled inventory, continue loop
-                        System.out.println("Returning to action selection...");
-                    }
+                    hasActed = openInventory(player, enemy) == 1;
                     break;
                 case 3:
                     if (Math.random() > 0.75) {
@@ -1865,86 +1853,97 @@ public class Game {
     }
     private int openInventory(Character player){
         int confirm = 0;
-        int result = -1;
-
-        while(confirm == 0 && result == -1){
+        while(confirm == 0){
             player.displayInventory();
             System.out.println("[11] Back");
             int choice = getIntInput("Select an item: ", 1, 11);
-
             if(choice == 11){
-                result = -1;
                 break;
             }
-
             Item item = player.getInventory().getItems()[--choice];
 
-            // Check if item is a consumable potion
-            if(item instanceof Consumable && inBattle) {
-                System.out.println("========== SELECTING ITEM ==========");
-                item.displayInfo();
-                System.out.println("\nUse " + item.getName() + "?");
-                System.out.println("[1] Use Item");
-                System.out.println("[2] Back");
+            System.out.println("========== SELECTING ITEM ==========");
+            System.out.println("Select "+item.getName()+"?: ");
+            System.out.println("[1] Select Item");
+            System.out.println("[2] Back");
 
-                confirm = getIntInput("Choose action: ", 1, 2);
-                if(confirm == 1){
-                    item.use(player);
+            confirm = getIntInput("Choose action: ", 1, 2);
+            if(confirm == 1){
+                if(inBattle && item.getItemType() == ItemType.WEAPON){
+                    System.out.println("You can't equip a weapon during battle!");
+                    confirm = 0;
                     delay(1000);
-
-                    if(((Consumable) item).getHasConsumed() == true){
-                        confirm = 0;
-                    }else{
-                        // For consumable potions in battle, don't end the turn
-                        if(item.getQuantity() > 0) {
-                            System.out.println("Item used! You can take another action.");
-                            openInventory(player);
-                            result = 0; // Item used, continue turn
-                        } else {
-                            // Item was consumed completely
-                            player.getInventory().removeItem(item);
-                            System.out.println("Item used! You can take another action.");
-                            openInventory(player);
-                            result = 0; // Item used, continue turn
-                        }
-                    }
                 }else{
-                    confirm = 0;
-                    result = -1;
-                }
-            } else {
-                // For non-consumables or non-battle usage
-                System.out.println("========== SELECTING ITEM ==========");
-                item.displayInfo();
-                System.out.println("\nSelect "+item.getName()+"?: ");
-                System.out.println("[1] Select Item");
-                System.out.println("[2] Back");
-
-                confirm = getIntInput("Choose action: ", 1, 2);
-                if(confirm == 1){
-                    if(inBattle && item.getItemType() == ItemType.WEAPON){
-                        System.out.println("You can't equip a weapon during battle!");
+                    System.out.println(player.getName()+" used "+item.getName()+"!");
+                    delay(1000);
+                    item.use(player);
+                    if(inBattle){
+                        System.out.println("You can take another action!");
+                        delay(1000);
                         confirm = 0;
-                        delay(1000);
-                        result = -1;
-                    }else{
-                        item.use(player);
-                        delay(1000);
-                        result = 0;
                     }
-                }else{
-                    confirm = 0;
-                    result = -1;
                 }
+            }else{
+                confirm = 0;
             }
         }
-        return result;
+        return confirm;
+    }
+    private int openInventory(Character player, Entity enemy){
+        int confirm = 0;
+        while(confirm == 0){
+            player.displayInventory();
+            System.out.println("[11] Back");
+            int choice = getIntInput("Select an item: ", 1, 11);
+            if(choice == 11){
+                break;
+            }
+            Item item = player.getInventory().getItems()[--choice];
+
+            System.out.println("========== SELECTING ITEM ==========");
+            System.out.println("Select "+item.getName()+"?: ");
+            System.out.println("[1] Select Item");
+            System.out.println("[2] Back");
+
+            confirm = getIntInput("Choose action: ", 1, 2);
+            if(confirm == 1){
+                if(inBattle && item.getItemType() == ItemType.WEAPON){
+                    System.out.println("You can't equip a weapon during battle!");
+                    confirm = 0;
+                    delay(1000);
+                }else{
+                    System.out.println(player.getName()+" used "+item.getName()+"!");
+                    delay(1000);
+                    item.use(player);
+                    if(inBattle){
+                        System.out.println("You can take another action!");
+                        delay(1000);
+                        displayBattleHealth(player, enemy);
+                        confirm = 0;
+                    }
+                }
+            }else{
+                confirm = 0;
+            }
+        }
+        return confirm;
     }
     public void obtainGold(Character player){
         Random rnd = new Random();
         int goldYield = currentChapter * rnd.nextInt(20, 26);
         player.setCurrency(player.getCurrency() + goldYield);
         System.out.println("\uD83E\uDE99 Gained "+goldYield+" gold coins!");
+    }
+    public void displayBattleHealth(Character player, Entity enemy){
+        String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 20);
+        String playerEnergyBar = createEnergyBar(player.getEnergy(), player.getMaxEnergy(), 20);
+        String enemyHealthBar =  createHealthBar(enemy.getHealth(), enemy.getMaxHealth(), 20);
+
+        System.out.println("\t\t"+enemy.getName());
+        System.out.println(ColorUtil.red(enemyHealthBar));
+        System.out.println("\n\t\t"+player.getName());
+        System.out.println(ColorUtil.green(playerHealthBar));
+        System.out.println(playerEnergyBar);
     }
 
     //Enemy
