@@ -268,10 +268,14 @@ public class ShopNPC extends NPC{
             }else{
                 choice = getIntInput("Are you sure you want to sell "+item.getName()+"? (Yes [1] | No [0]): ", 0, 1);
                 if(choice == 1){
-                    int soldPrice = item.getValue() - (int) (item.getValue() * 0.25);
-                    player.setCurrency(player.getCurrency() + soldPrice);
-                    item.setQuantity(item.getQuantity() - 1);
-                    System.out.println("Sold "+item.getName()+" for $"+soldPrice+"!");
+                    if(item instanceof Weapon weapon && weapon.getIsEquipped() == true){
+                        System.out.println("Selected item cannot be sold. Unequip item first.");
+                    }else{
+                        int soldPrice = item.getValue() - (int) (item.getValue() * 0.75);
+                        player.setCurrency(player.getCurrency() + soldPrice);
+                        item.setQuantity(item.getQuantity() - 1);
+                        System.out.println("Sold "+item.getName()+" for $"+soldPrice+"!");
+                    }
                 }
             }
         }

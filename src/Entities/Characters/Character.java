@@ -190,7 +190,7 @@ public abstract class Character extends Entity {
             } else if (items[i] == null) {
                 System.out.print("-EMPTY-");
             } else {
-                System.out.print(items[i].getQuantity() + "x " + items[i].getName() + " $"+(items[i].getValue() - (int) (items[i].getValue() * 0.25)));
+                System.out.print(items[i].getQuantity() + "x " + items[i].getName() + " $"+(items[i].getValue() - (int) (items[i].getValue() * 0.75)) + (items[i] instanceof Weapon weapon && weapon.getIsEquipped() ? " (equipped)" : ""));
             }
             System.out.println();
         }

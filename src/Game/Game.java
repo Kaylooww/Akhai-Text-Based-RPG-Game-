@@ -446,10 +446,6 @@ public class Game {
                 new WeaponSkill("Ultimate Attack", "Executes the Temporal Finality Strike that collapses all of the target's possible timelines into a single moment of absolute cessation.", 4.5, 80, DamageType.MAGICAL, TargetType.SINGLE),
                 200, Rarity.MYTHICAL));
 
-        //npcs and enemies need to be finalized
-        npcs.add(new GuideNPC("Frank", "Guide Companion"));
-        npcs.add(new ShopNPC("Kyle", "Shopkeeper", items));
-
         System.out.println("Welcome to Akhai!");
         delay(1000);
         System.out.println("Choose your class:");
@@ -559,7 +555,7 @@ public class Game {
             System.out.println("[2] Check stats");
             System.out.println("[3] Open Inventory");
             System.out.println("[4] Check resurrection status");
-            System.out.println("[5] Talk to NPC");
+            System.out.println("[5] Shop");
             System.out.println("[6] View Current Story");
             System.out.println("[7] Proceed to Story");
             System.out.println("[8] Quit game");
@@ -580,7 +576,8 @@ public class Game {
                     checkResurrectionStatus();
                     break;
                 case 5:
-                    talkToNPC();
+                    ShopNPC Kyle = new ShopNPC("Kyle", "Shopkeeper", items);
+                    Kyle.interact(player, currentChapter);
                     break;
                 case 6:
                     viewCurrentStory();  // NEW
@@ -601,7 +598,7 @@ public class Game {
             System.out.println("[2] Check stats");
             System.out.println("[3] Open Inventory");
             System.out.println("[4] Check resurrection status");
-            System.out.println("[5] Talk to NPC");
+            System.out.println("[5] Shop");
             System.out.println("[6] View Current Story");
             System.out.println("[7] Quit game");
 
@@ -625,7 +622,8 @@ public class Game {
                     checkResurrectionStatus();
                     break;
                 case 5:
-                    talkToNPC();
+                    ShopNPC Kyle = new ShopNPC("Kyle", "Shopkeeper", items);
+                    Kyle.interact(player, currentChapter);
                     break;
                 case 6:
                     viewCurrentStory();
