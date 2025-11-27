@@ -1369,7 +1369,6 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
-            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
         playerHealthCheck(enemy, baseExp, player);
@@ -1456,7 +1455,6 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
-            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
 
@@ -1544,7 +1542,6 @@ public class Game {
             }
             player.checkStatusEffect();
             enemy.checkStatusEffect();
-            resetHasConsumed(items);
         }
         //TODO This needs to be executed outside the battle method due to the wave system utilizing 2 or more battle methods.
         playerHealthCheck(enemy, baseExp, player);
@@ -1769,6 +1766,7 @@ public class Game {
         } else {
             handleVictory(enemy, baseExp, player);
         }
+        resetHasConsumed(items);
     }
     private void handlePlayerDefeat() {
         System.out.println("\n💀 You have been defeated...");
@@ -2039,7 +2037,9 @@ public class Game {
         for(Item item : items){
             if(item instanceof Consumable consumable){
                 if(consumable instanceof PhysicalDamagePotion || consumable instanceof MagicalDamagePotion || consumable instanceof SpeedPotion || consumable instanceof EvasivenessPotion){
-                    consumable.setHasConsumed(false);
+                    if(consumable.getHasConsumed() == true){
+                        consumable.setHasConsumed(false);
+                    }
                 }
             }
         }
