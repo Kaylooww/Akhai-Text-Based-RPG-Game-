@@ -1845,6 +1845,7 @@ public class Game {
 
             if(!isEmpty){
                 System.out.println("========== SELECTING ITEM ==========");
+                item.displayInfo();
                 System.out.println("Select "+item.getName()+"?: ");
                 System.out.println("[1] Select Item");
                 System.out.println("[2] Back");
