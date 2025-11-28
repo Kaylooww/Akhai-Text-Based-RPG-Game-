@@ -466,7 +466,7 @@ public class Game {
             System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("6. Rune Knight") + ColorUtil.brightBlueBold("                                    ║"));
             System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
 
-        int choice = getIntInput("Enter your choice (1-6): ", 1, 7);
+            int choice = getIntInput("Enter your choice (1-6): ", 1, 7);
 
             switch (choice) {
                 case 1:
@@ -1989,7 +1989,7 @@ public class Game {
         for(Item item : items){
             if(item instanceof Consumable consumable){
                 if(consumable instanceof PhysicalDamagePotion || consumable instanceof MagicalDamagePotion || consumable instanceof SpeedPotion || consumable instanceof EvasivenessPotion){
-                    if(consumable.getHasConsumed() == true){
+                    if(consumable.getHasConsumed()){
                         consumable.setHasConsumed(false);
                     }
                 }

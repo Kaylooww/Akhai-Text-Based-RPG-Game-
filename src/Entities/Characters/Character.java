@@ -239,7 +239,7 @@ public abstract class Character extends Entity {
         if (!inventory.getIsFull()) {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null && items[i].getItemId().equals(item.getItemId())) {
-                    if(item instanceof Weapon){
+                    if(item instanceof Weapon && items[i].getQuantity() == items[i].getMaxStack()){
                         System.out.println("Obtained "+item.getName()+" but already owned");
                         break;
                     }
@@ -291,6 +291,9 @@ public abstract class Character extends Entity {
     }
 
     public void equipWeapon(Weapon weapon){
+        if(equippedWeapon != weapon){
+            unequipWeapon();
+        }
         this.equippedWeapon = weapon;
         this.basicAttack = weapon.getBasicAttack();
         this.skillAttack = weapon.getSkillAttack();

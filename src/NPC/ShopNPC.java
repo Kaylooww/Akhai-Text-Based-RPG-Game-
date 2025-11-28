@@ -65,7 +65,6 @@ public class ShopNPC extends NPC{
         if(currentChapter >= 5){
             shopItems.add(findItemId("HP004", items));
             shopItems.add(findItemId("EP004", items));
-            shopItems.add(findItemId("SHP004", items));
             shopItems.add(findItemId("PDP004", items));
             shopItems.add(findItemId("MDP004", items));
             shopItems.add(findItemId("SP004", items));
@@ -73,15 +72,13 @@ public class ShopNPC extends NPC{
         }else if(currentChapter >= 3){
             shopItems.add(findItemId("HP003", items));
             shopItems.add(findItemId("EP003", items));
-            shopItems.add(findItemId("SHP003", items));
             shopItems.add(findItemId("PDP003", items));
             shopItems.add(findItemId("MDP003", items));
             shopItems.add(findItemId("SP003", items));
             shopItems.add(findItemId("EVP003", items));
-        }else if(currentChapter >= 2){
+        }else if(currentChapter == 2){
             shopItems.add(findItemId("HP002", items));
             shopItems.add(findItemId("EP002", items));
-            shopItems.add(findItemId("SHP002", items));
             shopItems.add(findItemId("PDP002", items));
             shopItems.add(findItemId("MDP002", items));
             shopItems.add(findItemId("SP002", items));
@@ -89,7 +86,6 @@ public class ShopNPC extends NPC{
         }else{
             shopItems.add(findItemId("HP001", items));
             shopItems.add(findItemId("EP001", items));
-            shopItems.add(findItemId("SHP001", items));
             shopItems.add(findItemId("PDP001", items));
             shopItems.add(findItemId("MDP001", items));
             shopItems.add(findItemId("SP001", items));
@@ -108,7 +104,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("BS003.1", items));
                 shopItems.add(findItemId("BS003.2", items));
                 shopItems.add(findItemId("BS003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("BS002.1", items));
                 shopItems.add(findItemId("BS002.2", items));
                 shopItems.add(findItemId("BS002.3", items));
@@ -125,7 +121,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("SW003.1", items));
                 shopItems.add(findItemId("SW003.2", items));
                 shopItems.add(findItemId("SW003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("SW002.1", items));
                 shopItems.add(findItemId("SW002.2", items));
                 shopItems.add(findItemId("SW002.3", items));
@@ -142,7 +138,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("BW003.1", items));
                 shopItems.add(findItemId("BW003.2", items));
                 shopItems.add(findItemId("BW003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("BW002.1", items));
                 shopItems.add(findItemId("BW002.2", items));
                 shopItems.add(findItemId("BW002.3", items));
@@ -176,7 +172,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("MGSW003.1", items));
                 shopItems.add(findItemId("MGSW003.2", items));
                 shopItems.add(findItemId("MGSW003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("MGSW002.1", items));
                 shopItems.add(findItemId("MGSW002.2", items));
                 shopItems.add(findItemId("MGSW002.3", items));
@@ -193,7 +189,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("DR003.1", items));
                 shopItems.add(findItemId("DR003.2", items));
                 shopItems.add(findItemId("DR003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("DR002.1", items));
                 shopItems.add(findItemId("DR002.2", items));
                 shopItems.add(findItemId("DR002.3", items));

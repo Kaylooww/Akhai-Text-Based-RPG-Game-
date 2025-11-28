@@ -74,9 +74,6 @@ public class Boss extends Enemy {
                 phase++;
                 health = maxHealth;
                 System.out.println("BOSS "+name+" is entering phase "+phase+"!");
-            }else{
-                health = 0;
-                System.out.println("🎯 " + name + " has been defeated!");
             }
         } else if (health < oldHealth * 0.3) {
             System.out.println("⚠️  " + name + " is looking weak!");
