@@ -30,9 +30,17 @@ public class ColorUtil {
         return ConsoleColors.CYAN + text + ConsoleColors.RESET;
     }
 
+    public static String orange(String text) {
+        return ConsoleColors.ORANGE + text + ConsoleColors.RESET;
+    }
+
     // bright versions
     public static String blueBright(String text) {
         return ConsoleColors.BLUE_BRIGHT + text + ConsoleColors.RESET;
+    }
+
+    public static String purpleBright(String text) {
+        return ConsoleColors.PURPLE_BRIGHT + text + ConsoleColors.RESET;
     }
 
     public static String yellowBright(String text) {

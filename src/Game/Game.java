@@ -450,8 +450,15 @@ public class Game {
 
         System.out.println("Welcome to Akhai!");
         delay(1000);
-        System.out.print("Who hast thou name?: ");
-        String thyName = scan.nextLine();
+
+        String thyName;
+        while(true){
+            thyName = getStringInput("What is thy name?: ");
+            int choice = getIntInput("Is "+thyName+" your name?: (Yes [1]| No [0]): ", 0, 1);
+            if(choice == 1){
+                break;
+            }
+        }
 
         int classChosen = 0;
         while(classChosen == 0){
@@ -1518,19 +1525,34 @@ public class Game {
         }
     }
 
-    private String createHealthBar(int currentHealth, int maxHealth, int length) {
-        int filled = (currentHealth * length) / maxHealth;
+    private String createHealthBar(Entity entity, int length) {
+        int filled = (entity.getHealth() * length) / entity.getMaxHealth();
         int empty = length - filled;
 
         String bar = "█".repeat(filled) + "░".repeat(empty);
-        return String.format("%s %d/%d", bar, currentHealth, maxHealth);
+        return String.format("%s %d/%d", bar, entity.getHealth(), entity.getMaxHealth());
     }
-    private String createEnergyBar(int currentEnergy, int maxEnergy, int length) {
-        int filled = (currentEnergy * length) / maxEnergy;
+    private String createEnergyBar(Character player, int length) {
+        int filled = (player.getEnergy() * length) / player.getMaxEnergy();
         int empty = length - filled;
 
         String bar = "█".repeat(filled) + "░".repeat(empty);
-        return String.format(ColorUtil.purple("%s %d/%d"), bar, currentEnergy, maxEnergy);
+
+        if(player instanceof Hawkseye){
+            return String.format(ColorUtil.greenBold("%s %d/%d\n\t\t\t\tInsight"), bar, player.getEnergy(), player.getMaxEnergy());
+        }else if(player instanceof  Blademaster){
+            return String.format(ColorUtil.blueBright("%s %d/%d\n\t\t\t\tEnergy"), bar, player.getEnergy(), player.getMaxEnergy());
+        }else if(player instanceof Berserker){
+            return String.format(ColorUtil.orange("%s %d/%d\n\t\t\t\tFury"), bar, player.getEnergy(), player.getMaxEnergy());
+        }else if(player instanceof  Runecaster){
+            return String.format(ColorUtil.purpleBright("%s %d/%d\n\t\t\t\tMana"), bar, player.getEnergy(), player.getMaxEnergy());
+        }else if(player instanceof  RuneKnight){
+            return String.format(ColorUtil.yellowBright("%s %d/%d\n\t\t\t\tBlessing"), bar, player.getEnergy(), player.getMaxEnergy());
+        }else if(player instanceof Shinobi){
+            return String.format(ColorUtil.purple("%s %d/%d\n\t\t\t\tChakra"), bar, player.getEnergy(), player.getMaxEnergy());
+        }else{
+            return String.format(ColorUtil.blue("%s %d/%d\n\t\t\t\tAura"), bar, player.getEnergy(), player.getMaxEnergy());
+        }
     }
     private boolean checkSpeed(int playerCurrentSpeed, int enemyCurrentSpeed){
         if (playerCurrentSpeed >= enemyCurrentSpeed) {
@@ -1909,9 +1931,9 @@ public class Game {
         System.out.println("\uD83E\uDE99 Gained "+goldYield+" gold coins!");
     }
     public void displayBattleHealth(Character player, Entity enemy){
-        String playerHealthBar = createHealthBar(player.getHealth(), player.getMaxHealth(), 45);
-        String playerEnergyBar = createEnergyBar(player.getEnergy(), player.getMaxEnergy(), 45);
-        String enemyHealthBar =  createHealthBar(enemy.getHealth(), enemy.getMaxHealth(), 45);
+        String playerHealthBar = createHealthBar(player, 45);
+        String playerEnergyBar = createEnergyBar(player, 45);
+        String enemyHealthBar =  createHealthBar(enemy, 45);
 
         System.out.println("\t\t\t\t"+enemy.getName());
         System.out.println(ColorUtil.red(enemyHealthBar));
@@ -2009,7 +2031,7 @@ public class Game {
         for(Item item : items){
             if(item instanceof Consumable consumable){
                 if(consumable instanceof PhysicalDamagePotion || consumable instanceof MagicalDamagePotion || consumable instanceof SpeedPotion || consumable instanceof EvasivenessPotion){
-                    if(consumable.getHasConsumed() == true){
+                    if(consumable.getHasConsumed()){
                         consumable.setHasConsumed(false);
                     }
                 }
@@ -2035,6 +2057,21 @@ public class Game {
                 System.out.println("Invalid input. Please enter a valid whole number.");
             } catch (Exception e) {
                 System.out.println("An unexpected error occurred. Please try again.");
+            }
+        }
+    }
+    public String getStringInput(String prompt){
+        while(true){
+            System.out.print(prompt);
+            try{
+                String userInput = scan.nextLine().trim();
+                if(userInput.isEmpty()){
+                    System.out.println("Please enter your name");
+                    continue;
+                }
+                return userInput;
+            }catch(Exception e){
+                System.out.println("Invalid input. Please enter a valid name");
             }
         }
     }
