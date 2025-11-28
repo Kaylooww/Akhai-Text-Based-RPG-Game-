@@ -40,33 +40,33 @@ public class Game {
         //Items (LEGENDARY Items should be very rare)
         items.add(new HealingPotion("HP001", ColorUtil.green("Lesser Healing Potion"), "<Empty>", 12, 1, 5, Rarity.COMMON, 50));
         items.add(new HealingPotion("HP002", ColorUtil.blueBright("Healing Potion"), "<Empty>", 12, 1, 10, Rarity.RARE, 75));
-        items.add(new HealingPotion("HP003", ColorUtil.brightPurpleBold("Greater Healing Potion"), "<Empty>", 12, 1, 20, Rarity.EPIC, 100));
-        items.add(new HealingPotion("HP004", ColorUtil.brightYellowBold("Legendary Healing Potion"), "<Empty>", 12, 1, 40, Rarity.LEGENDARY, 200));
+        items.add(new HealingPotion("HP003", ColorUtil.brightPurpleBold("Greater Healing Potion"), "<Empty>", 12, 1, 15, Rarity.EPIC, 100));
+        items.add(new HealingPotion("HP004", ColorUtil.brightYellowBold("Legendary Healing Potion"), "<Empty>", 12, 1, 25, Rarity.LEGENDARY, 200));
 
         items.add(new EnergyPotion("EP001", ColorUtil.green("Lesser Energy Potion"), "<Empty>", 12, 1, 3, Rarity.COMMON, 40));
         items.add(new EnergyPotion("EP002", ColorUtil.blueBright("Energy Potion"), "<Empty>", 12, 1, 9, Rarity.RARE, 60));
-        items.add(new EnergyPotion("EP003", ColorUtil.brightPurpleBold("Greater Energy Potion"), "<Empty>", 12, 1, 15, Rarity.EPIC, 80));
-        items.add(new EnergyPotion("EP004", ColorUtil.brightYellowBold("Legendary Energy Potion"), "<Empty>", 12, 1, 35, Rarity.LEGENDARY, 100));
+        items.add(new EnergyPotion("EP003", ColorUtil.brightPurpleBold("Greater Energy Potion"), "<Empty>", 12, 1, 12, Rarity.EPIC, 80));
+        items.add(new EnergyPotion("EP004", ColorUtil.brightYellowBold("Legendary Energy Potion"), "<Empty>", 12, 1, 18, Rarity.LEGENDARY, 100));
 
         items.add(new PhysicalDamagePotion("PDP001", ColorUtil.green("Lesser Physical Potion"), "<Empty>", 12, 1, 4, Rarity.COMMON, 0.24));
         items.add(new PhysicalDamagePotion("PDP002", ColorUtil.blueBright("Physical Potion"), "<Empty>", 12, 1, 9, Rarity.RARE, 0.36));
         items.add(new PhysicalDamagePotion("PDP003", ColorUtil.brightPurpleBold("Greater Physical Potion"), "<Empty>", 12, 1, 18, Rarity.EPIC, 0.48));
-        items.add(new PhysicalDamagePotion("PDP004", ColorUtil.brightYellowBold("Legendary Physical Potion"), "<Empty>", 12, 1, 35, Rarity.LEGENDARY, 0.60));
+        items.add(new PhysicalDamagePotion("PDP004", ColorUtil.brightYellowBold("Legendary Physical Potion"), "<Empty>", 12, 1, 24, Rarity.LEGENDARY, 0.60));
 
         items.add(new MagicalDamagePotion("MDP001", ColorUtil.green("Lesser Magic Potion"), "<Empty>", 12, 1, 4, Rarity.COMMON, 0.24));
         items.add(new MagicalDamagePotion("MDP002", ColorUtil.blueBright("Magic Potion"), "<Empty>", 12, 1, 9, Rarity.RARE, 0.36));
         items.add(new MagicalDamagePotion("MDP003", ColorUtil.brightPurpleBold("Greater Magic Potion"), "<Empty>", 12, 0, 18, Rarity.EPIC, 0.48));
-        items.add(new MagicalDamagePotion("MDP004", ColorUtil.brightYellowBold("Legendary Magic Potion"), "<Empty>", 12, 0, 35, Rarity.LEGENDARY, 0.60));
+        items.add(new MagicalDamagePotion("MDP004", ColorUtil.brightYellowBold("Legendary Magic Potion"), "<Empty>", 12, 0, 24, Rarity.LEGENDARY, 0.60));
 
         items.add(new SpeedPotion("SP001", ColorUtil.green("Lesser Speed Potion"), "<Empty>", 12, 1, 5, Rarity.COMMON, 4));
         items.add(new SpeedPotion("SP002", ColorUtil.blueBright("Speed Potion"), "<Empty>", 12, 1, 10, Rarity.RARE, 8));
-        items.add(new SpeedPotion("SP003", ColorUtil.brightPurpleBold("Greater Speed Potion"), "<Empty>", 12, 1, 20, Rarity.EPIC, 12));
-        items.add(new SpeedPotion("SP004", ColorUtil.brightYellowBold("Legendary Speed Potion"), "<Empty>", 12, 1, 40, Rarity.LEGENDARY, 20));
+        items.add(new SpeedPotion("SP003", ColorUtil.brightPurpleBold("Greater Speed Potion"), "<Empty>", 12, 1, 15, Rarity.EPIC, 12));
+        items.add(new SpeedPotion("SP004", ColorUtil.brightYellowBold("Legendary Speed Potion"), "<Empty>", 12, 1, 25, Rarity.LEGENDARY, 20));
 
         items.add(new EvasivenessPotion("EVP001", ColorUtil.green("Lesser Evasiveness Potion"), "Slightly reduces enemy accuracy", 12, 1, 5, Rarity.COMMON, 0.05));
         items.add(new EvasivenessPotion("EVP002", ColorUtil.blueBright("Evasiveness Potion"), "Reduces enemy accuracy", 12, 1, 10, Rarity.RARE, 0.10));
-        items.add(new EvasivenessPotion("EVP003", ColorUtil.brightPurpleBold("Greater Evasiveness Potion"), "Greatly reduces enemy accuracy", 12, 1, 20, Rarity.EPIC, 0.15));
-        items.add(new EvasivenessPotion("EVP004", ColorUtil.brightYellowBold("Legendary Evasiveness Potion"), "Massively reduces enemy accuracy", 12, 1, 40, Rarity.LEGENDARY, 0.25));
+        items.add(new EvasivenessPotion("EVP003", ColorUtil.brightPurpleBold("Greater Evasiveness Potion"), "Greatly reduces enemy accuracy", 12, 1, 15, Rarity.EPIC, 0.15));
+        items.add(new EvasivenessPotion("EVP004", ColorUtil.brightYellowBold("Legendary Evasiveness Potion"), "Massively reduces enemy accuracy", 12, 1, 25, Rarity.LEGENDARY, 0.25));
 //Tier 1 (COMMON) Weapons and Varieties
 //1
         items.add(new Weapon("BW001.1", ColorUtil.green("Wooden Bow"), WeaponType.BOW, "",
