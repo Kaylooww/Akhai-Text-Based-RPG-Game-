@@ -47,10 +47,8 @@ public class Weapon extends Item {
         if(isEquippable){
             if(!isEquipped){
                 player.equipWeapon(this);
-                isEquipped = true;
             }else{
                 player.unequipWeapon();
-                isEquipped = false;
             }
         }
 
@@ -79,5 +77,9 @@ public class Weapon extends Item {
 
     public boolean getIsEquipped(){
         return isEquipped;
+    }
+
+    public void setIsEquipped(boolean isEquipped){
+        this.isEquipped = isEquipped;
     }
 }

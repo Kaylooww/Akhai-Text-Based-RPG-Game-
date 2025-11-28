@@ -534,11 +534,10 @@ public class Game {
 
                     classChosen = getIntInput("Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
-                        player = new RuneKnight(thyName+" (Test)");
+                        player = new JinwooSun(thyName + " (Test)");
                         System.out.println(ColorUtil.brightCyanBold("\nSelecting Test Class..."));
                         delay(1200);
                     }
-                    player = new JinwooSun();
                     break;
             }
         }
@@ -1118,9 +1117,6 @@ public class Game {
 
         // Play the new chapter's story
         storyManager.playChapter(currentChapter);
-
-        // Scale enemies for new chapter
-        //scaleEnemiesForCurrentLevel();
 
         System.out.println("\n⚔️ New challenges await in " + getLevelName(currentChapter) + "!");
     }
@@ -1807,6 +1803,7 @@ public class Game {
     }
     private int openInventory(Character player){
         int confirm = 0;
+        boolean isEmpty = false;
         while(confirm == 0){
             player.displayInventory();
             System.out.println(ColorUtil.brightCyanBold("[11] Back"));
@@ -1815,36 +1812,47 @@ public class Game {
                 break;
             }
             Item item = player.getInventory().getItems()[--choice];
+            if(item == null){
+                isEmpty = true;
+            }
 
-            System.out.println("========== SELECTING ITEM ==========");
-            System.out.println("Select "+item.getName()+"?: ");
-            System.out.println("[1] Select Item");
-            System.out.println("[2] Back");
+            if(!isEmpty){
+                System.out.println("========== SELECTING ITEM ==========");
+                System.out.println("Select "+item.getName()+"?: ");
+                System.out.println("[1] Select Item");
+                System.out.println("[2] Back");
 
-            confirm = getIntInput("Choose action: ", 1, 2);
-            if(confirm == 1){
-                if(inBattle && item.getItemType() == ItemType.WEAPON){
-                    System.out.println("You can't equip a weapon during battle!");
-                    confirm = 0;
-                    delay(1000);
-                }else{
-                    System.out.println(player.getName()+" used "+item.getName()+"!");
-                    delay(1000);
-                    item.use(player);
-                    if(inBattle){
-                        System.out.println("You can take another action!");
-                        delay(1000);
+                confirm = getIntInput("Choose action: ", 1, 2);
+                if(confirm == 1){
+                    if(inBattle && item.getItemType() == ItemType.WEAPON){
+                        System.out.println("You can't equip a weapon during battle!");
                         confirm = 0;
+                        delay(1000);
+                    }else{
+                        System.out.println(player.getName()+" used "+item.getName()+"!");
+                        delay(1000);
+                        item.use(player);
+                        if(inBattle){
+                            System.out.println("You can take another action!");
+                            delay(1000);
+                            confirm = 0;
+                        }
                     }
+                }else{
+                    confirm = 0;
                 }
             }else{
-                confirm = 0;
+                System.out.println("Please select another item.");
+                isEmpty = false;
+                delay(1000);
             }
+
         }
         return confirm;
     }
     private int openInventory(Character player, Entity enemy){
         int confirm = 0;
+        boolean isEmpty = false;
         while(confirm == 0){
             player.displayInventory();
             System.out.println(ColorUtil.brightCyanBold("[11] Back"));
@@ -1853,31 +1861,38 @@ public class Game {
                 break;
             }
             Item item = player.getInventory().getItems()[--choice];
+            if(item == null){isEmpty = true;}
 
-            System.out.println("========== SELECTING ITEM ==========");
-            System.out.println("Select "+item.getName()+"?: ");
-            System.out.println("[1] Select Item");
-            System.out.println("[2] Back");
+            if(!isEmpty){
+                System.out.println("========== SELECTING ITEM ==========");
+                System.out.println("Select "+item.getName()+"?: ");
+                System.out.println("[1] Select Item");
+                System.out.println("[2] Back");
 
-            confirm = getIntInput("Choose action: ", 1, 2);
-            if(confirm == 1){
-                if(inBattle && item.getItemType() == ItemType.WEAPON){
-                    System.out.println("You can't equip a weapon during battle!");
-                    confirm = 0;
-                    delay(1000);
-                }else{
-                    System.out.println(player.getName()+" used "+item.getName()+"!");
-                    delay(1000);
-                    item.use(player);
-                    if(inBattle){
-                        System.out.println("You can take another action!");
-                        delay(1000);
-                        displayBattleHealth(player, enemy);
+                confirm = getIntInput("Choose action: ", 1, 2);
+                if(confirm == 1){
+                    if(inBattle && item.getItemType() == ItemType.WEAPON){
+                        System.out.println("You can't equip a weapon during battle!");
                         confirm = 0;
+                        delay(1000);
+                    }else{
+                        System.out.println(player.getName()+" used "+item.getName()+"!");
+                        delay(1000);
+                        item.use(player);
+                        if(inBattle){
+                            System.out.println("You can take another action!");
+                            delay(1000);
+                            displayBattleHealth(player, enemy);
+                            confirm = 0;
+                        }
                     }
+                }else{
+                    confirm = 0;
                 }
             }else{
-                confirm = 0;
+                System.out.println("Please select another item.");
+                isEmpty = false;
+                delay(1000);
             }
         }
         return confirm;

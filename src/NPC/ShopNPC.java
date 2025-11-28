@@ -65,7 +65,6 @@ public class ShopNPC extends NPC{
         if(currentChapter >= 5){
             shopItems.add(findItemId("HP004", items));
             shopItems.add(findItemId("EP004", items));
-            shopItems.add(findItemId("SHP004", items));
             shopItems.add(findItemId("PDP004", items));
             shopItems.add(findItemId("MDP004", items));
             shopItems.add(findItemId("SP004", items));
@@ -73,15 +72,13 @@ public class ShopNPC extends NPC{
         }else if(currentChapter >= 3){
             shopItems.add(findItemId("HP003", items));
             shopItems.add(findItemId("EP003", items));
-            shopItems.add(findItemId("SHP003", items));
             shopItems.add(findItemId("PDP003", items));
             shopItems.add(findItemId("MDP003", items));
             shopItems.add(findItemId("SP003", items));
             shopItems.add(findItemId("EVP003", items));
-        }else if(currentChapter >= 2){
+        }else if(currentChapter == 2){
             shopItems.add(findItemId("HP002", items));
             shopItems.add(findItemId("EP002", items));
-            shopItems.add(findItemId("SHP002", items));
             shopItems.add(findItemId("PDP002", items));
             shopItems.add(findItemId("MDP002", items));
             shopItems.add(findItemId("SP002", items));
@@ -89,7 +86,6 @@ public class ShopNPC extends NPC{
         }else{
             shopItems.add(findItemId("HP001", items));
             shopItems.add(findItemId("EP001", items));
-            shopItems.add(findItemId("SHP001", items));
             shopItems.add(findItemId("PDP001", items));
             shopItems.add(findItemId("MDP001", items));
             shopItems.add(findItemId("SP001", items));
@@ -108,7 +104,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("BS003.1", items));
                 shopItems.add(findItemId("BS003.2", items));
                 shopItems.add(findItemId("BS003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("BS002.1", items));
                 shopItems.add(findItemId("BS002.2", items));
                 shopItems.add(findItemId("BS002.3", items));
@@ -125,7 +121,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("SW003.1", items));
                 shopItems.add(findItemId("SW003.2", items));
                 shopItems.add(findItemId("SW003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("SW002.1", items));
                 shopItems.add(findItemId("SW002.2", items));
                 shopItems.add(findItemId("SW002.3", items));
@@ -142,7 +138,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("BW003.1", items));
                 shopItems.add(findItemId("BW003.2", items));
                 shopItems.add(findItemId("BW003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("BW002.1", items));
                 shopItems.add(findItemId("BW002.2", items));
                 shopItems.add(findItemId("BW002.3", items));
@@ -159,7 +155,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("MGS003.1", items));
                 shopItems.add(findItemId("MGS003.2", items));
                 shopItems.add(findItemId("MGS003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("MGS002.1", items));
                 shopItems.add(findItemId("MGS002.2", items));
                 shopItems.add(findItemId("MGS002.3", items));
@@ -176,7 +172,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("MGSW003.1", items));
                 shopItems.add(findItemId("MGSW003.2", items));
                 shopItems.add(findItemId("MGSW003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("MGSW002.1", items));
                 shopItems.add(findItemId("MGSW002.2", items));
                 shopItems.add(findItemId("MGSW002.3", items));
@@ -193,7 +189,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("DR003.1", items));
                 shopItems.add(findItemId("DR003.2", items));
                 shopItems.add(findItemId("DR003.3", items));
-            }else if(currentChapter >= 2){
+            }else if(currentChapter == 2){
                 shopItems.add(findItemId("DR002.1", items));
                 shopItems.add(findItemId("DR002.2", items));
                 shopItems.add(findItemId("DR002.3", items));
@@ -252,6 +248,7 @@ public class ShopNPC extends NPC{
     }
     public void sellItem(Character player){
         boolean confirm = false;
+        boolean isEmpty = false;
 
         while(!confirm){
             player.displayInventoryInShop();
@@ -261,27 +258,37 @@ public class ShopNPC extends NPC{
                 break;
             }
             Item item = player.getInventory().getItems()[--choice];
-            System.out.println(ColorUtil.brightBlueBold("════════════════════ SELLING ITEM ════════════════════"));
-            if(item.getQuantity() > 1){
-                int quantity = getIntInput("How many would you like to sell?: ", 0, item.getQuantity());
-                if(quantity != 0){
-                    int soldPrice = quantity * (item.getValue() - (int) (item.getValue() * 0.75));
-                    player.setCurrency(player.getCurrency() + soldPrice);
-                    item.setQuantity(item.getQuantity() - quantity);
-                    System.out.println("Sold "+quantity+"x "+item.getName()+" for $"+soldPrice+"!");
-                }
-            }else{
-                choice = getIntInput("Are you sure you want to sell "+item.getName()+"? (Yes [1] | No [0]): ", 0, 1);
-                if(choice == 1){
-                    if(item instanceof Weapon weapon && weapon.getIsEquipped() == true){
-                        System.out.println("Selected item cannot be sold. Unequip item first.");
-                    }else{
-                        int soldPrice = item.getValue() - (int) (item.getValue() * 0.75);
+            if(item == null){
+                isEmpty = true;
+            }
+
+            if(!isEmpty){
+                System.out.println(ColorUtil.brightBlueBold("════════════════════ SELLING ITEM ════════════════════"));
+                if(item.getQuantity() > 1){
+                    int quantity = getIntInput("How many would you like to sell?: ", 0, item.getQuantity());
+                    if(quantity != 0){
+                        int soldPrice = quantity * (item.getValue() - (int) (item.getValue() * 0.75));
                         player.setCurrency(player.getCurrency() + soldPrice);
-                        item.setQuantity(item.getQuantity() - 1);
-                        System.out.println("Sold "+item.getName()+" for $"+soldPrice+"!");
+                        item.setQuantity(item.getQuantity() - quantity);
+                        System.out.println("Sold "+quantity+"x "+item.getName()+" for $"+soldPrice+"!");
+                    }
+                }else{
+                    choice = getIntInput("Are you sure you want to sell "+item.getName()+"? (Yes [1] | No [0]): ", 0, 1);
+                    if(choice == 1){
+                        if(item instanceof Weapon weapon && weapon.getIsEquipped() == true){
+                            System.out.println("Selected item cannot be sold. Unequip item first.");
+                        }else{
+                            int soldPrice = item.getValue() - (int) (item.getValue() * 0.75);
+                            player.setCurrency(player.getCurrency() + soldPrice);
+                            item.setQuantity(item.getQuantity() - 1);
+                            System.out.println("Sold "+item.getName()+" for $"+soldPrice+"!");
+                        }
                     }
                 }
+            }else{
+                System.out.println("Please select another item.");
+                isEmpty = false;
+                delay(1000);
             }
         }
     }
@@ -300,6 +307,15 @@ public class ShopNPC extends NPC{
             }
         }
         return foundItem;
+    }
+
+    public void delay(int delay) {
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Re-interrupt the thread
+            System.err.println("Thread was interrupted during sleep.");
+        }
     }
 }
 

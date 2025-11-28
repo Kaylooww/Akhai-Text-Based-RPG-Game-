@@ -18,7 +18,7 @@ public abstract class Character extends Entity {
     protected int experienceNeeded = 30;
     protected int currency = 100; //money
     protected Inventory inventory = new Inventory();
-    protected Item equippedWeapon;
+    protected Weapon equippedWeapon;
     protected Skill basicAttack;
     protected Skill skillAttack;
     protected Skill ultimateAttack;
@@ -236,13 +236,15 @@ public abstract class Character extends Entity {
     }
     public void obtainItem(Item item) {
         Item[] items = inventory.getItems();
-        if (!inventory.getIsFull()) {
+        boolean hasStored = false;
+
+        if(item instanceof Weapon && hasItem(item)){
+            System.out.println("Obtained "+item.getName()+" but already owned");
+            hasStored = true;
+        }
+        if (!inventory.getIsFull() && !hasStored) {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null && items[i].getItemId().equals(item.getItemId())) {
-                    if(item instanceof Weapon){
-                        System.out.println("Obtained "+item.getName()+" but already owned");
-                        break;
-                    }
                     items[i].setQuantity(items[i].getQuantity() + 1);
                     System.out.println("Item \"" + item.getName() + "\" obtained.");
                     delay(500);
@@ -291,7 +293,11 @@ public abstract class Character extends Entity {
     }
 
     public void equipWeapon(Weapon weapon){
+        if(equippedWeapon != weapon){
+            unequipWeapon();
+        }
         this.equippedWeapon = weapon;
+        this.equippedWeapon.setIsEquipped(true);
         this.basicAttack = weapon.getBasicAttack();
         this.skillAttack = weapon.getSkillAttack();
         this.ultimateAttack = weapon.getUltimateAttack();
@@ -299,6 +305,7 @@ public abstract class Character extends Entity {
     }
     public  void unequipWeapon(){
         System.out.println(equippedWeapon.getName()+" unequipped!");
+        this.equippedWeapon.setIsEquipped(false);
         this.equippedWeapon = new Weapon();
         this.basicAttack = new UnarmedSkill("Punch", "", 1.0, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         this.skillAttack = new UnarmedSkill("Jab", "", 1.1, 0, DamageType.PHYSICAL, TargetType.SINGLE);
