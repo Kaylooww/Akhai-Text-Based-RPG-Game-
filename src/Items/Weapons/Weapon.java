@@ -7,6 +7,8 @@ import Items.Rarity;
 import Skills.*;
 import StatusEffects.StatusEffect;
 
+import java.text.DecimalFormat;
+
 public class Weapon extends Item {
     protected WeaponType weaponType;
     protected boolean isEquipped = false;
@@ -55,14 +57,16 @@ public class Weapon extends Item {
     }
     @Override
     public void displayInfo(){
+        DecimalFormat df = new DecimalFormat("####");
+
         System.out.println(name+"\n"+description);
         System.out.println("Skills:");
-        System.out.println(basicAttack.getName());
+        System.out.println(basicAttack.getName() + " ("+df.format(basicAttack.getDamageMultiplier() * 10)+"% DMG)");
         System.out.println("\t"+basicAttack.getDescription());
-        System.out.println(skillAttack.getName());
+        System.out.println(skillAttack.getName() + " ("+df.format(skillAttack.getDamageMultiplier() * 10)+"%) DMG");
         System.out.println("\t"+skillAttack.getDescription());
-        System.out.println(ultimateAttack.getName());
-        System.out.println("\t"+ultimateAttack.getDescription());
+        System.out.println(ultimateAttack.getName() + " ("+df.format(ultimateAttack.getDamageMultiplier() * 10)+"% DMG)");
+        System.out.println("\t"+ultimateAttack.getDescription()+"\n");
     }
 
     public Skill getBasicAttack(){
