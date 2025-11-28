@@ -609,9 +609,9 @@ public class Game {
     public void handleLevelActions() {
         int choice;
         if(currentChapter < 5) {
+            //TODO Display the character's name, hp, energy, and exp here
             System.out.println(ColorUtil.blueBright("\n╔════════════════════════════════════════════════════╗"));
             System.out.println(ColorUtil.blueBright("║") + ColorUtil.brightCyanBold("             What would you like to do?             ") + ColorUtil.blueBright("║"));
-            //TODO Display the character's name, hp, energy, and exp here
             System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[1] Explore") + ColorUtil.blueBright("                                       ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Check stats") + ColorUtil.blueBright("                                   ║"));
@@ -710,8 +710,13 @@ public class Game {
                 System.out.println("🚨 You encountered a Common enemy!");
                 battleCommon();
             } else if (currentChapter == 3) {
-                System.out.println("🚨 Warning! You encountered an Elite enemy!");
-                battleElite();
+                if(Math.random() >= 0.75){
+                    System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                    battleElite();
+                } else {
+                    System.out.println("🚨 You encountered a Common enemy!");
+                    battleCommon();
+                }
             } else if(currentChapter == 4) {
                 if(Math.random() >= 0.10) {
                     System.out.println("🚨 Warning! You encountered an Elite enemy!");
@@ -765,7 +770,7 @@ public class Game {
         switch(currentChapter) {
             case 1:
                 Chest CommonChest = new Chest.CommonChest();
-                System.out.println("💎 You found a " + CommonChest.getName() + "!");
+                System.out.println("↓ 💎 You found a " + CommonChest.getName() + " and open it ↓!");
                 CommonChest.obtain(player);
                 //40% to obtain a weapon :P
                 if(Math.random() <= 0.4) {
@@ -816,7 +821,7 @@ public class Game {
                 }
                 break;
             case 2:
-                if(Math.random() > 0.9){
+                if(Math.random() > 0.1){
                     Chest EliteChest = new Chest.EliteChest();
                     System.out.println("💎 You found a "+EliteChest.getName()+"!");
                     EliteChest.obtain(player);
@@ -882,7 +887,7 @@ public class Game {
                 }
                 break;
             case 3:
-                if(Math.random() > 0.8){
+                if(Math.random() > 0.2){
                     Chest EpicChest = new Chest.EpicChest();
                     System.out.println("💎 You found a "+EpicChest.getName()+"!");
                     EpicChest.obtain(player);
@@ -1014,7 +1019,7 @@ public class Game {
                 }
                 break;
             case 5:
-                if(Math.random() > 0.7){
+                if(Math.random() > 0.6){
                     Chest LegendaryChest = new Chest.LegendaryChest();
                     System.out.println("💎 You found a "+LegendaryChest.getName()+"!");
                     LegendaryChest.obtain(player);
@@ -1712,8 +1717,8 @@ public class Game {
         }
 
         // Partial recovery but lose some progress
-        player.setHealth(player.getMaxHealth() / 4);
-        System.out.println("You wake up with " + player.getHealth() + " HP, having lost some items during the escape.");
+        player.setHealth(player.getMaxHealth() / 3);
+        System.out.println("You wake up with " + player.getHealth() + " HP.");
 
         // Lose some experience but not below current level
         int expLoss = (int)(player.getExperience() * 0.1);
@@ -1835,8 +1840,8 @@ public class Game {
                         if(inBattle){
                             System.out.println("You can take another action!");
                             delay(1000);
-                            confirm = 0;
                         }
+                        confirm = 0;
                     }
                 }else{
                     confirm = 0;

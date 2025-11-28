@@ -261,7 +261,7 @@ public abstract class Character extends Entity {
                     return;
                 }
             }
-        } else {
+        } else if(inventory.getIsFull()){
             System.out.println("Inventory is full!");
         }
     }
