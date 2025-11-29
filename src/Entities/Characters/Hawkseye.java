@@ -1,7 +1,5 @@
 package Entities.Characters;
 
-import java.util.Arrays;
-
 public class Hawkseye extends Character{
     public Hawkseye(String name) {
         super(name, 245, ClassType.HAWKSEYE, 31, 0, 13, 0.10, 0.10, 20);

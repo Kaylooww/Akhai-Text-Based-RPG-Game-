@@ -1,7 +1,5 @@
 package Entities.Characters;
 
-import java.util.Arrays;
-
 public class Shinobi extends Character{
     public Shinobi(String name) {
         super(name, 245, ClassType.ASSASSIN, 25, 0, 12, 0.10, 0.10, 35);

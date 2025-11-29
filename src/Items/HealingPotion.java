@@ -1,6 +1,7 @@
 package Items;
 
 import Entities.Characters.Character;
+import TextFormat.ColorUtil;
 
 public class HealingPotion extends Consumable{
     int healingAmount;
@@ -34,7 +35,22 @@ public class HealingPotion extends Consumable{
     }
     @Override
     public void displayInfo(){
-        System.out.println(name+" (x"+quantity+")");
-        System.out.println("\"Heals up to "+healingAmount+" HP. Can be used outside the battle\"");
+        int totalWidth = 54;
+        String nameLine = name + " (x" + quantity + ") ";
+        String visibleNameLine = nameLine.replaceAll("\u001B\\[[;\\d]*m", "");
+
+        String healLine = "> Heals " + healingAmount + " HP";
+
+        //padding for each line
+        int namePadding = totalWidth - visibleNameLine.length() - 4;
+        int healPadding = totalWidth - healLine.length() - 3;
+
+        // Ensure padding is at least 1
+        namePadding = Math.max(1, namePadding);
+        healPadding = Math.max(1, healPadding);
+
+        System.out.println(ColorUtil.brightCyanBold("┌─ ") + nameLine + ColorUtil.brightCyanBold("─".repeat(namePadding)) + ColorUtil.cyanBold("┐"));
+        System.out.println(ColorUtil.brightCyanBold("│ " + healLine + " ".repeat(healPadding) + "│"));
+        System.out.println(ColorUtil.brightCyanBold("└" + "─".repeat(totalWidth - 2) + "┘"));
     }
 }

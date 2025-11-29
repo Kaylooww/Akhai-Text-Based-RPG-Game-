@@ -207,7 +207,7 @@ public class ShopNPC extends NPC{
             displayShop();
             System.out.println(ColorUtil.brightPurpleBold("╚════════════════════════════════════════════════════╝"));
 
-            System.out.println("CURRENCY: "+player.getCurrency());
+            System.out.println(ColorUtil.brightYellowBold("💰 CURRENCY: "+player.getCurrency()));
             System.out.println(ColorUtil.brightCyanBold("\n["+(shopItems.size()+1)+"] Exit"));
             int choice = getIntInput("Select item to buy: ", 1, shopItems.size()+1);
             if(choice != shopItems.size()+1){
@@ -265,7 +265,7 @@ public class ShopNPC extends NPC{
             if(!isEmpty){
                 System.out.println(ColorUtil.brightPurpleBold("════════════════════ SELLING ITEM ════════════════════"));
                 if(item.getQuantity() > 1){
-                    int quantity = getIntInput(ColorUtil.orange("How many would you like to sell?: "), 0, item.getQuantity());
+                    int quantity = getIntInput(ColorUtil.orange("How many would you like to sell? (0 if none): "), 0, item.getQuantity());
                     if(quantity != 0){
                         int soldPrice = quantity * (item.getValue() - (int) (item.getValue() * 0.75));
                         player.setCurrency(player.getCurrency() + soldPrice);
@@ -273,7 +273,7 @@ public class ShopNPC extends NPC{
                         System.out.println("Sold "+quantity+"x "+item.getName()+" for" + ColorUtil.greenBright(" $"+soldPrice)+"!");
                     }
                 }else{
-                    choice = getIntInput(ColorUtil.orange("Are you sure you want to sell "+item.getName()+"? (Yes [1] | No [0]): "), 0, 1);
+                    choice = getIntInput(ColorUtil.orange("Are you sure you want to sell ")+item.getName()+ColorUtil.orange("? \n(Yes [1] | No [0]): "), 0, 1);
                     if(choice == 1){
                         if(item instanceof Weapon weapon && weapon.getIsEquipped() == true){
                             System.out.println(ColorUtil.redBright("Selected item cannot be sold. Unequip item first."));

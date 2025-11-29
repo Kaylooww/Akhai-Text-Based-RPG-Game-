@@ -2,6 +2,7 @@ package Items;
 
 import Entities.Characters.Character;
 import StatusEffects.PhysicalDamageBoost;
+import TextFormat.ColorUtil;
 
 import java.text.DecimalFormat;
 
@@ -30,7 +31,22 @@ public class PhysicalDamagePotion extends Consumable{
     @Override
     public void displayInfo(){
         DecimalFormat df = new DecimalFormat("####");
-        System.out.println(name+" (x"+getQuantity()+")");
-        System.out.println("\"Increases physical damage by " + (df.format(physicalDamageAmount * 100)) + "%. Can only be used once before/during battle\"");
+        int totalWidth = 54;
+        String nameLine = name + " (x" + getQuantity() + ") ";
+        String visibleNameLine = nameLine.replaceAll("\u001B\\[[;\\d]*m", "");
+
+        String damageLine = "> Increases physical damage by " + df.format(physicalDamageAmount * 100) + "%";
+
+        //padding for each line
+        int namePadding = totalWidth - visibleNameLine.length() - 4;
+        int damagePadding = totalWidth - damageLine.length() - 3;
+
+        // Ensure padding is at least 1
+        namePadding = Math.max(1, namePadding);
+        damagePadding = Math.max(1, damagePadding);
+
+        System.out.println(ColorUtil.brightCyanBold("┌─ ") + nameLine + ColorUtil.brightCyanBold("─".repeat(namePadding)) + ColorUtil.brightCyanBold("┐"));
+        System.out.println(ColorUtil.brightCyanBold("│ " + damageLine + " ".repeat(damagePadding) + "│"));
+        System.out.println(ColorUtil.brightCyanBold("└" + "─".repeat(totalWidth - 2) + "┘"));
     }
 }

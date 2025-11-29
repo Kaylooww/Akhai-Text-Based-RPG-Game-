@@ -1,5 +1,7 @@
 package Story;
 
+import TextFormat.ColorUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,16 +46,16 @@ public class Chapter {
 
         // Header line
         int headerPadding = (bannerWidth - header.length() - 2) / 2;
-        System.out.print("\n╔" + "═".repeat(headerPadding));
+        System.out.print(ColorUtil.blueBright("\n╔" + "═".repeat(headerPadding)));
         System.out.print(" " + header + " ");
-        System.out.println("═".repeat(bannerWidth - headerPadding - header.length() - 2) + "╗");
+        System.out.println(ColorUtil.blueBright("═".repeat(bannerWidth - headerPadding - header.length() - 2) + "╗"));
 
         // Center the title
         int titlePadding = (bannerWidth - fullTitle.length()) / 2;
         System.out.println(" ".repeat(titlePadding) + fullTitle);
 
         // Footer line
-        System.out.println("╚" + "═".repeat(bannerWidth) + "╝\n");
+        System.out.println(ColorUtil.blueBright("╚" + "═".repeat(bannerWidth) + "╝\n"));
     }
 
     /**

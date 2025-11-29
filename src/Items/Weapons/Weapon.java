@@ -6,6 +6,7 @@ import Items.ItemType;
 import Items.Rarity;
 import Skills.*;
 import StatusEffects.StatusEffect;
+import TextFormat.ColorUtil;
 
 import java.text.DecimalFormat;
 
@@ -59,14 +60,32 @@ public class Weapon extends Item {
     public void displayInfo(){
         DecimalFormat df = new DecimalFormat("####");
 
-        System.out.println(name+"\n"+description);
-        System.out.println("Skills:");
-        System.out.println(basicAttack.getName() + " ("+df.format(basicAttack.getDamageMultiplier() * 10)+"% DMG)");
-        System.out.println("\t"+basicAttack.getDescription());
-        System.out.println(skillAttack.getName() + " ("+df.format(skillAttack.getDamageMultiplier() * 10)+"%) DMG");
-        System.out.println("\t"+skillAttack.getDescription());
-        System.out.println(ultimateAttack.getName() + " ("+df.format(ultimateAttack.getDamageMultiplier() * 10)+"% DMG)");
-        System.out.println("\t"+ultimateAttack.getDescription()+"\n");
+        System.out.println(ColorUtil.blueBright("╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"));
+
+        // Center the name
+        int totalWidth = 164;
+        String visibleName = name.replaceAll("\u001B\\[[;\\d]*m", "");
+        int padding = (totalWidth - visibleName.length()) / 2;
+        int extraPadding = (totalWidth - visibleName.length()) % 2;
+
+        System.out.println(" ".repeat(padding) + name + " ".repeat(padding + extraPadding));
+
+        System.out.println(ColorUtil.blueBright(" ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── "));
+        System.out.println(ColorUtil.brightYellowBold("   Skills:"));
+
+        // Basic Attack
+        System.out.println(ColorUtil.brightCyanBold("     "+basicAttack.getName() + " (" + df.format(basicAttack.getDamageMultiplier() * 100) + "% DMG)"));
+        System.out.println(ColorUtil.cyanBold("\t\t\t" + basicAttack.getDescription()));
+
+        // Skill Attack
+        System.out.println(ColorUtil.brightCyanBold("     "+skillAttack.getName() + " (" + df.format(skillAttack.getDamageMultiplier() * 100) + "% DMG)"));
+        System.out.println(ColorUtil.cyanBold("\t\t\t" + skillAttack.getDescription()));
+
+        // Ultimate Attack
+        System.out.println(ColorUtil.brightCyanBold("     "+ultimateAttack.getName() + " (" + df.format(ultimateAttack.getDamageMultiplier() * 100) + "% DMG)"));
+        System.out.println(ColorUtil.cyanBold("\t\t\t" + ultimateAttack.getDescription()));
+
+        System.out.println(ColorUtil.blueBright("╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝\n"));
     }
 
     public Skill getBasicAttack(){
