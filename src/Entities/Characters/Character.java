@@ -59,12 +59,12 @@ public abstract class Character extends Entity {
     public void generateEnergyFromDamage() {
         int energyGained = 5 + random.nextInt(10) + 1; //5 + random 1-10
         this.energy = Math.min(this.energy + energyGained, this.maxEnergy);
-        System.out.println("💫 Gained " + energyGained + " energy from taking damage! (" + energy + "/" + maxEnergy + ")");
+        System.out.println(ColorUtil.brightYellowBold("\t💫 Gained " + energyGained + " energy from taking damage! (" + energy + "/" + maxEnergy + ")"));
     }
 
     public void generateEnergy(int amount) {
         this.energy = Math.min(this.energy + amount, this.maxEnergy);
-        System.out.println("⚡ Generated " + amount + " energy! (" + energy + "/" + maxEnergy + ")");
+        System.out.println(ColorUtil.yellowBold("\t\t\t⚡ Generated " + amount + " energy! (" + energy + "/" + maxEnergy + ")"));
     }
 
     public boolean consumeEnergy(int amount) {
@@ -109,6 +109,18 @@ public abstract class Character extends Entity {
         System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
     }
 
+    public void afterBattleHeal(){
+        //heal after battle against common and elite enemies
+        //basically heals a total of 50% lost HP after battle
+        int healthBeforeHeal = health;
+        int healAmount = (maxHealth - health) / 2;
+
+        //returns the lower value, ensures it never exceeds maxHP
+        //even tho it never will since the formula i made only heals a portion of the lost HP HAHHAHAHAHHAHA
+        health = Math.min(maxHealth, healAmount + healthBeforeHeal);
+        System.out.println(ColorUtil.brightYellowBold("\t\t\t" + name + " recovers " + healAmount + " HP!"));
+    }
+
     // New resurrection method
     public void resurrect() {
         if (hasResurrected) {
@@ -139,22 +151,24 @@ public abstract class Character extends Entity {
 
     public void displayStats() {
         DecimalFormat df = new DecimalFormat("####");
-        System.out.println("\n═════════ " + name + "'s STATS ═════════");
-        System.out.println("CURRENCY: "+currency+"\n");
-        System.out.println("Level: " + level);
-        System.out.println("Experience: " + experience + "/" + experienceNeeded);
-        System.out.println("Class: " + classType);
-        System.out.println("HP: " + health + "/" + maxHealth);
-        System.out.println("Energy: " + energy + "/" + maxEnergy);
-        System.out.println("Physical Attack: " + (hasStatusEffect("PhysicalDamageBoost") ? "↑" : "") +physicalDamage);
-        System.out.println("Physical Resistance: " + df.format(physicalResistance * 100) + "%");
-        System.out.println("Magic Attack: " + (hasStatusEffect("MagicalDamageBoost") ? "↑" : "") +magicDamage);
-        System.out.println("Magic Resistance: " + df.format(magicResistance * 100) + "%");
-        System.out.println("Defense: " + defense);
-        System.out.println("Speed: " + (hasStatusEffect("SpeedBoost") ? "↑" : "") + speed);
-        System.out.println("Ultimate Charge: " + ultimateCounter + "/" + maxUltimateCounter);
-        System.out.println("Resurrection: " + (hasResurrected ? "❌ USED" : "✅ AVAILABLE"));
-        System.out.println("══════════════════════════════════════");
+        System.out.println(ColorUtil.blueBright("╔═════════════════ CHARACTER STATS ══════════════════╗"));
+        System.out.println(ColorUtil.brightCyanBold("  CURRENCY: " + currency));
+        System.out.println(ColorUtil.blueBright("  ──────────────────────────────────────────────────  "));
+        System.out.println(ColorUtil.brightCyanBold("  Level: " + level));
+        System.out.println(ColorUtil.brightCyanBold("  Experience: " + experience + "/" + experienceNeeded));
+        System.out.println(ColorUtil.brightCyanBold("  Class: " + classType));
+        System.out.println(ColorUtil.brightCyanBold("  HP: " + health + "/" + maxHealth));
+        System.out.println(ColorUtil.brightCyanBold("  Energy: " + energy + "/" + maxEnergy));
+        System.out.println(ColorUtil.brightCyanBold("  Physical Attack: " + (hasStatusEffect("PhysicalDamageBoost") ? "↑" : "") + physicalDamage));
+        System.out.println(ColorUtil.brightCyanBold("  Physical Resistance: " + df.format(physicalResistance * 100) + "%"));
+        System.out.println(ColorUtil.brightCyanBold("  Magic Attack: " + (hasStatusEffect("MagicalDamageBoost") ? "↑" : "") + magicDamage));
+        System.out.println(ColorUtil.brightCyanBold("  Magic Resistance: " + df.format(magicResistance * 100) + "%"));
+        System.out.println(ColorUtil.brightCyanBold("  Defense: " + defense));
+        System.out.println(ColorUtil.brightCyanBold("  Speed: " + (hasStatusEffect("SpeedBoost") ? "↑" : "") + speed));
+        System.out.println(ColorUtil.brightCyanBold("  Ultimate Charge: " + ultimateCounter + "/" + maxUltimateCounter));
+        System.out.println(ColorUtil.brightCyanBold("  Resurrection: " + (hasResurrected ? "❌ USED" : "✅ AVAILABLE")));
+        System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
+        delay(1200);
     }
 
     public void displayInventory(){
@@ -181,11 +195,11 @@ public abstract class Character extends Entity {
     public void displayInventoryInShop(){
         inventory.cleanInventory();
         Item[] items = inventory.getItems();
-        System.out.println(ColorUtil.blueBright("\n╔═══════════════════") + ColorUtil.brightCyanBold("  INVENTORY  ") + ColorUtil.blueBright("════════════════════╗"));
+        System.out.println(ColorUtil.brightPurpleBold("\n╔═══════════════════") + ColorUtil.brightCyanBold("  INVENTORY  ") + ColorUtil.blueBright("════════════════════╗"));
         System.out.println(ColorUtil.brightYellowBold("   CURRENCY: " + currency));
         System.out.println(ColorUtil.brightCyanBold("   Weapon: " + equippedWeapon.getName()));
 
-        System.out.println(ColorUtil.blueBright("  ──────────────────────────────────────────────────  "));
+        System.out.println(ColorUtil.brightPurpleBold("  ──────────────────────────────────────────────────  "));
         for(int i = 0; i < inventory.getMaxCapacity(); i++){
             System.out.printf(ColorUtil.brightCyanBold("   [%d] "),i+1);
             if (items == null || i >= items.length) {
@@ -193,11 +207,11 @@ public abstract class Character extends Entity {
             } else if (items[i] == null) {
                 System.out.print("   -EMPTY-");
             } else {
-                System.out.print(items[i].getQuantity() + "x " + items[i].getName() + " $"+(items[i].getValue() - (int) (items[i].getValue() * 0.75)) + (items[i] instanceof Weapon weapon && weapon.getIsEquipped() ? " (equipped)" : ""));
+                System.out.print(items[i].getQuantity() + "x " + items[i].getName() + ColorUtil.greenBright(" $"+(items[i].getValue() - (int) (items[i].getValue() * 0.75))) + (items[i] instanceof Weapon weapon && weapon.getIsEquipped() ? " (equipped)" : ""));
             }
             System.out.println();
         }
-        System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
+        System.out.println(ColorUtil.brightPurpleBold("╚════════════════════════════════════════════════════╝"));
     }
     public boolean hasItem(Item item){
         Item[]  items = inventory.getItems();
@@ -239,7 +253,7 @@ public abstract class Character extends Entity {
         boolean hasStored = false;
 
         if(item instanceof Weapon && hasItem(item)){
-            System.out.println("Obtained "+item.getName()+" but already owned");
+            //System.out.println("Obtained "+item.getName()+" but already owned");
             hasStored = true;
         }
         if (!inventory.getIsFull() && !hasStored) {

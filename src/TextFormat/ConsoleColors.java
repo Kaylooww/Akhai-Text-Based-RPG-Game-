@@ -14,6 +14,7 @@ public class ConsoleColors {
     public static final String CYAN = "\033[0;36m";    // CYAN
     public static final String WHITE = "\033[0;37m";   // WHITE
     public static final String ORANGE = "\u001B[38;2;255;165;0m"; // ORANGE
+    public static final String BLUE_GREEN = "\u001B[38;2;0;165;165m"; // BLUE_GREEN
 
     // Bold (brighter versions)
     public static final String BLACK_BOLD = "\033[1;30m";   // BLACK
@@ -24,6 +25,7 @@ public class ConsoleColors {
     public static final String PURPLE_BOLD = "\033[1;35m";  // PURPLE
     public static final String CYAN_BOLD = "\033[1;36m";    // CYAN
     public static final String WHITE_BOLD = "\033[1;37m";   // WHITE
+    public static final String BLUE_GREEN_BOLD = "\u001B[1;38;2;0;165;165m"; // BLUE_GREEN BOLD
 
     // Bright Colors (even brighter - 90-97 range)
     public static final String BLACK_BRIGHT = "\033[0;90m";   // BLACK
@@ -34,6 +36,7 @@ public class ConsoleColors {
     public static final String PURPLE_BRIGHT = "\033[0;95m";  // PURPLE
     public static final String CYAN_BRIGHT = "\033[0;96m";    // CYAN
     public static final String WHITE_BRIGHT = "\033[0;97m";   // WHITE
+    public static final String BLUE_GREEN_BRIGHT = "\u001B[0;38;2;0;200;200m"; // BRIGHTER BLUE_GREEN
 
     // Bold Bright Colors
     public static final String BLACK_BOLD_BRIGHT = "\033[1;90m";   // BLACK
@@ -44,10 +47,12 @@ public class ConsoleColors {
     public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";  // PURPLE
     public static final String CYAN_BOLD_BRIGHT = "\033[1;96m";    // CYAN
     public static final String WHITE_BOLD_BRIGHT = "\033[1;97m";   // WHITE
+    public static final String BLUE_GREEN_BOLD_BRIGHT = "\u001B[1;38;2;0;230;230m"; // BOLD BRIGHT BLUE_GREEN
 
     // Background
     public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
     public static final String RED_BACKGROUND = "\033[41m";    // RED
     public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN
+    public static final String BLUE_GREEN_BACKGROUND = "\u001B[48;2;0;165;165m"; // BLUE_GREEN BACKGROUND
     // ... and more background colors
 }

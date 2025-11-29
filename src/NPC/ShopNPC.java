@@ -23,14 +23,14 @@ public class ShopNPC extends NPC{
         boolean exit = false;
         while(!exit){
             System.out.println(ColorUtil.purple("\n"+name+": Hello fellow adventurer! Care to browse my wares? Or perhaps interested in fortune telling?"));
-            System.out.println(ColorUtil.blueBright("╔════════════════════════════════════════════════════╗"));
-            System.out.println(ColorUtil.blueBright("║") + ColorUtil.brightCyanBold("                    KYLE'S SHOP                     ") + ColorUtil.blueBright("║"));
-            System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[1] Browse Shop") + ColorUtil.blueBright("                                   ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Sell Item") + ColorUtil.blueBright("                                     ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3] Fortune Telling") + ColorUtil.blueBright("                               ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[4] Exit ") + ColorUtil.blueBright("                                         ║"));
-            System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
+            System.out.println(ColorUtil.brightPurpleBold("╔════════════════════════════════════════════════════╗"));
+            System.out.println(ColorUtil.brightPurpleBold("║") + ColorUtil.brightCyanBold("                    KYLE'S SHOP                     ") + ColorUtil.brightPurpleBold("║"));
+            System.out.println(ColorUtil.brightPurpleBold("╠════════════════════════════════════════════════════╣"));
+            System.out.println(ColorUtil.brightPurpleBold("║  ") + ColorUtil.brightCyanBold("[1] Browse Shop") + ColorUtil.brightPurpleBold("                                   ║"));
+            System.out.println(ColorUtil.brightPurpleBold("║  ") + ColorUtil.brightCyanBold("[2] Sell Item") + ColorUtil.brightPurpleBold("                                     ║"));
+            System.out.println(ColorUtil.brightPurpleBold("║  ") + ColorUtil.brightCyanBold("[3] Fortune Telling") + ColorUtil.brightPurpleBold("                               ║"));
+            System.out.println(ColorUtil.brightPurpleBold("║  ") + ColorUtil.brightCyanBold("[4] Exit ") + ColorUtil.brightPurpleBold("                                         ║"));
+            System.out.println(ColorUtil.brightPurpleBold("╚════════════════════════════════════════════════════╝"));
             int choice = getIntInput("Enter choice: ", 1, 4);
 
             switch (choice) {
@@ -203,9 +203,9 @@ public class ShopNPC extends NPC{
         stockItems(player,  currentChapter);
         boolean exit = false;
         while(!exit){
-            System.out.println(ColorUtil.brightBlueBold("╔═══════════════════════ SHOP ═══════════════════════╗"));
+            System.out.println(ColorUtil.brightPurpleBold("╔═══════════════════════ SHOP ═══════════════════════╗"));
             displayShop();
-            System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
+            System.out.println(ColorUtil.brightPurpleBold("╚════════════════════════════════════════════════════╝"));
 
             System.out.println("CURRENCY: "+player.getCurrency());
             System.out.println(ColorUtil.brightCyanBold("\n["+(shopItems.size()+1)+"] Exit"));
@@ -222,7 +222,7 @@ public class ShopNPC extends NPC{
                         break;
                     }
 
-                    System.out.println(ColorUtil.brightBlueBold("════════════════════ BUYING ITEM ═════════════════════"));
+                    System.out.println(ColorUtil.brightPurpleBold("════════════════════ BUYING ITEM ═════════════════════"));
                     purchasedItem.displayInfo();
                     int quantity = getIntInput("\nHow many would you like to buy? (0-"+(purchasedItem.getMaxStack() - purchasedItem.getQuantity())+"): ",0, purchasedItem.getMaxStack());
                     if(quantity == 0){
@@ -263,30 +263,30 @@ public class ShopNPC extends NPC{
             }
 
             if(!isEmpty){
-                System.out.println(ColorUtil.brightBlueBold("════════════════════ SELLING ITEM ════════════════════"));
+                System.out.println(ColorUtil.brightPurpleBold("════════════════════ SELLING ITEM ════════════════════"));
                 if(item.getQuantity() > 1){
-                    int quantity = getIntInput("How many would you like to sell?: ", 0, item.getQuantity());
+                    int quantity = getIntInput(ColorUtil.orange("How many would you like to sell?: "), 0, item.getQuantity());
                     if(quantity != 0){
                         int soldPrice = quantity * (item.getValue() - (int) (item.getValue() * 0.75));
                         player.setCurrency(player.getCurrency() + soldPrice);
                         item.setQuantity(item.getQuantity() - quantity);
-                        System.out.println("Sold "+quantity+"x "+item.getName()+" for $"+soldPrice+"!");
+                        System.out.println("Sold "+quantity+"x "+item.getName()+" for" + ColorUtil.greenBright(" $"+soldPrice)+"!");
                     }
                 }else{
-                    choice = getIntInput("Are you sure you want to sell "+item.getName()+"? (Yes [1] | No [0]): ", 0, 1);
+                    choice = getIntInput(ColorUtil.orange("Are you sure you want to sell "+item.getName()+"? (Yes [1] | No [0]): "), 0, 1);
                     if(choice == 1){
                         if(item instanceof Weapon weapon && weapon.getIsEquipped() == true){
-                            System.out.println("Selected item cannot be sold. Unequip item first.");
+                            System.out.println(ColorUtil.redBright("Selected item cannot be sold. Unequip item first."));
                         }else{
                             int soldPrice = item.getValue() - (int) (item.getValue() * 0.75);
                             player.setCurrency(player.getCurrency() + soldPrice);
                             item.setQuantity(item.getQuantity() - 1);
-                            System.out.println("Sold "+item.getName()+" for $"+soldPrice+"!");
+                            System.out.println("Sold "+item.getName()+" for" + ColorUtil.greenBright(" $"+soldPrice)+"!");
                         }
                     }
                 }
             }else{
-                System.out.println("Please select another item.");
+                System.out.println(ColorUtil.redBright("Please select another item."));
                 isEmpty = false;
                 delay(1000);
             }
@@ -295,7 +295,7 @@ public class ShopNPC extends NPC{
     public void displayShop(){
         int i = 1;
         for(Item item: shopItems){
-            System.out.println(ColorUtil.brightCyanBold("   ["+i+"] "+"$"+item.getValue()+" ")+item.getName());
+            System.out.println(ColorUtil.brightCyanBold("   ["+i+"] ")+ ColorUtil.greenBright("$"+item.getValue())+" "+item.getName());
             i++;
         }
     }

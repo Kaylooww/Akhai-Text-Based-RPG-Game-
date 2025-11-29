@@ -88,7 +88,7 @@ public class Boss extends Enemy {
     //final boss
     public static class DemonKingDin extends Boss {
         public DemonKingDin() {
-            super("Demon-King Din", 1000, 2, 75, 75, 30, 0.25, 0.25, 20);
+            super("Demon-King Din", 1000, 2, 75, 75, 20, 0.25, 0.25, 20);
             basicAttack = new EnemySkill("Infernal Strike", "The Demon-King delivers a searing blow wreathed in hellfire", 1.30, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Abyssal Torment", "Unleashes waves of pure demonic energy that scorch the soul", 1.80, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Realm of Suffering", "Creates a domain of absolute darkness where pain becomes reality", 2.50, 80, DamageType.PHYSICAL, TargetType.SINGLE);
@@ -97,7 +97,7 @@ public class Boss extends Enemy {
     // chap 4
     public static class Abaddon extends Boss {
         public Abaddon() {
-            super("Abaddon", 700, 2, 70, 70, 28, 0.23, 0.23, 19);
+            super("Abaddon", 500, 2, 70, 70, 18, 0.23, 0.23, 19);
             basicAttack = new EnemySkill("Soul Reaver", "A blade strike that seeks to sever the very essence of life", 1.30, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Plague Wind", "Releases a corrosive gust that decays all it touches", 1.80, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Apocalypse Call", "Summons the end of days in a cataclysmic explosion of power", 2.50, 80, DamageType.PHYSICAL, TargetType.SINGLE);
@@ -108,25 +108,25 @@ public class Boss extends Enemy {
     //chap 3
     public static class Kamish extends Boss {
         public Kamish() {
-            super("Kamish", 400, 2, 65, 65, 17, 0.21, 0.21, 18);
+            super("Kamish", 400, 2, 50, 50, 12, 0.21, 0.21, 18);
             basicAttack = new EnemySkill("Dragon's Claw", "A swift, precise strike with razor-sharp talons", 1.30, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Ancient Roar", "A thunderous cry that shakes the very foundations of the earth", 1.70, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Skyfall Descent", "Plummets from the heavens with the force of a meteor", 2.30, 80, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
     // chap 2
-    public static class EnderDragon extends Boss {
-        public EnderDragon() {
-            super("Ender Dragon", 300, 2, 45, 45, 16, 0.17, 0.17, 17);
+    public static class MiningCable extends Boss {
+        public MiningCable() {
+            super("MiningCable", 225, 2, 45, 45, 11, 0.17, 0.17, 17);
             basicAttack = new EnemySkill("Void Bite", "A chilling attack that seems to consume the light around it", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Ender Breath", "Exhales a cloud of pure void energy that corroses reality", 1.45, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Dragon's Dive", "A devastating aerial assault that strikes with immense force", 2.00, 80, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
     // chap 1
-    public static class EnderMan extends Boss {
-        public EnderMan() {
-            super("Ender Man", 280, 2, 40, 40, 15, 0.16, 0.16, 16);
+    public static class Frankenstein extends Boss {
+        public Frankenstein() {
+            super("Frankenstein", 180, 2, 40, 40, 10, 0.16, 0.16, 16);
             basicAttack = new EnemySkill("Telekinetic Slam", "Uses psychic power to strike from an unexpected angle", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Void Warp", "Instantly teleports behind the target for a surprise attack", 1.40, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Enderman's Wrath", "Unleashes the full power of the void in a chaotic burst", 1.90, 80, DamageType.PHYSICAL, TargetType.SINGLE);

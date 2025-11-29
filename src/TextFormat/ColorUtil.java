@@ -34,6 +34,10 @@ public class ColorUtil {
         return ConsoleColors.ORANGE + text + ConsoleColors.RESET;
     }
 
+    public static String blueGreen(String text) {
+        return ConsoleColors.BLUE_GREEN + text + ConsoleColors.RESET;
+    }
+
     // bright versions
     public static String blueBright(String text) {
         return ConsoleColors.BLUE_BRIGHT + text + ConsoleColors.RESET;
@@ -45,6 +49,14 @@ public class ColorUtil {
 
     public static String yellowBright(String text) {
         return ConsoleColors.YELLOW_BRIGHT + text + ConsoleColors.RESET;
+    }
+
+    public static String redBright(String text) {
+        return ConsoleColors.RED_BRIGHT + text + ConsoleColors.RESET;
+    }
+
+    public static String greenBright(String text) {
+        return ConsoleColors.GREEN_BRIGHT + text + ConsoleColors.RESET;
     }
 
     // Bold versions
@@ -83,5 +95,9 @@ public class ColorUtil {
 
     public static String brightRedBold(String text) {
         return ConsoleColors.RED_BOLD_BRIGHT + text + ConsoleColors.RESET;
+    }
+
+    public static String brightGreenBold(String text) {
+        return ConsoleColors.GREEN_BOLD_BRIGHT + text + ConsoleColors.RESET;
     }
 }

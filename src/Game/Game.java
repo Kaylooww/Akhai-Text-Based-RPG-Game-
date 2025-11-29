@@ -37,95 +37,95 @@ public class Game {
         // Initialize story system
         storyManager = new StoryManager();
 
-        //Items (LEGENDARY Items should be very rare)
-        items.add(new HealingPotion("HP001", ColorUtil.green("Lesser Healing Potion"), "<Empty>", 12, 1, 5, Rarity.COMMON, 50));
+        //Items
+        items.add(new HealingPotion("HP001", ColorUtil.blueGreen("Lesser Healing Potion"), "<Empty>", 12, 1, 5, Rarity.COMMON, 50));
         items.add(new HealingPotion("HP002", ColorUtil.blueBright("Healing Potion"), "<Empty>", 12, 1, 10, Rarity.RARE, 75));
         items.add(new HealingPotion("HP003", ColorUtil.brightPurpleBold("Greater Healing Potion"), "<Empty>", 12, 1, 15, Rarity.EPIC, 100));
         items.add(new HealingPotion("HP004", ColorUtil.brightYellowBold("Legendary Healing Potion"), "<Empty>", 12, 1, 25, Rarity.LEGENDARY, 200));
 
-        items.add(new EnergyPotion("EP001", ColorUtil.green("Lesser Energy Potion"), "<Empty>", 12, 1, 3, Rarity.COMMON, 40));
+        items.add(new EnergyPotion("EP001", ColorUtil.blueGreen("Lesser Energy Potion"), "<Empty>", 12, 1, 3, Rarity.COMMON, 40));
         items.add(new EnergyPotion("EP002", ColorUtil.blueBright("Energy Potion"), "<Empty>", 12, 1, 9, Rarity.RARE, 60));
         items.add(new EnergyPotion("EP003", ColorUtil.brightPurpleBold("Greater Energy Potion"), "<Empty>", 12, 1, 12, Rarity.EPIC, 80));
         items.add(new EnergyPotion("EP004", ColorUtil.brightYellowBold("Legendary Energy Potion"), "<Empty>", 12, 1, 18, Rarity.LEGENDARY, 100));
 
-        items.add(new PhysicalDamagePotion("PDP001", ColorUtil.green("Lesser Physical Potion"), "<Empty>", 12, 1, 4, Rarity.COMMON, 0.24));
+        items.add(new PhysicalDamagePotion("PDP001", ColorUtil.blueGreen("Lesser Physical Potion"), "<Empty>", 12, 1, 4, Rarity.COMMON, 0.24));
         items.add(new PhysicalDamagePotion("PDP002", ColorUtil.blueBright("Physical Potion"), "<Empty>", 12, 1, 9, Rarity.RARE, 0.36));
         items.add(new PhysicalDamagePotion("PDP003", ColorUtil.brightPurpleBold("Greater Physical Potion"), "<Empty>", 12, 1, 18, Rarity.EPIC, 0.48));
         items.add(new PhysicalDamagePotion("PDP004", ColorUtil.brightYellowBold("Legendary Physical Potion"), "<Empty>", 12, 1, 24, Rarity.LEGENDARY, 0.60));
 
-        items.add(new MagicalDamagePotion("MDP001", ColorUtil.green("Lesser Magic Potion"), "<Empty>", 12, 1, 4, Rarity.COMMON, 0.24));
+        items.add(new MagicalDamagePotion("MDP001", ColorUtil.blueGreen("Lesser Magic Potion"), "<Empty>", 12, 1, 4, Rarity.COMMON, 0.24));
         items.add(new MagicalDamagePotion("MDP002", ColorUtil.blueBright("Magic Potion"), "<Empty>", 12, 1, 9, Rarity.RARE, 0.36));
         items.add(new MagicalDamagePotion("MDP003", ColorUtil.brightPurpleBold("Greater Magic Potion"), "<Empty>", 12, 0, 18, Rarity.EPIC, 0.48));
         items.add(new MagicalDamagePotion("MDP004", ColorUtil.brightYellowBold("Legendary Magic Potion"), "<Empty>", 12, 0, 24, Rarity.LEGENDARY, 0.60));
 
-        items.add(new SpeedPotion("SP001", ColorUtil.green("Lesser Speed Potion"), "<Empty>", 12, 1, 5, Rarity.COMMON, 4));
+        items.add(new SpeedPotion("SP001", ColorUtil.blueGreen("Lesser Speed Potion"), "<Empty>", 12, 1, 5, Rarity.COMMON, 4));
         items.add(new SpeedPotion("SP002", ColorUtil.blueBright("Speed Potion"), "<Empty>", 12, 1, 10, Rarity.RARE, 8));
         items.add(new SpeedPotion("SP003", ColorUtil.brightPurpleBold("Greater Speed Potion"), "<Empty>", 12, 1, 15, Rarity.EPIC, 12));
         items.add(new SpeedPotion("SP004", ColorUtil.brightYellowBold("Legendary Speed Potion"), "<Empty>", 12, 1, 25, Rarity.LEGENDARY, 20));
 
-        items.add(new EvasivenessPotion("EVP001", ColorUtil.green("Lesser Evasiveness Potion"), "Slightly reduces enemy accuracy", 12, 1, 5, Rarity.COMMON, 0.05));
+        items.add(new EvasivenessPotion("EVP001", ColorUtil.blueGreen("Lesser Evasiveness Potion"), "Slightly reduces enemy accuracy", 12, 1, 5, Rarity.COMMON, 0.05));
         items.add(new EvasivenessPotion("EVP002", ColorUtil.blueBright("Evasiveness Potion"), "Reduces enemy accuracy", 12, 1, 10, Rarity.RARE, 0.10));
         items.add(new EvasivenessPotion("EVP003", ColorUtil.brightPurpleBold("Greater Evasiveness Potion"), "Greatly reduces enemy accuracy", 12, 1, 15, Rarity.EPIC, 0.15));
         items.add(new EvasivenessPotion("EVP004", ColorUtil.brightYellowBold("Legendary Evasiveness Potion"), "Massively reduces enemy accuracy", 12, 1, 25, Rarity.LEGENDARY, 0.25));
 //Tier 1 (COMMON) Weapons and Varieties
 //1
-        items.add(new Weapon("BW001.1", ColorUtil.green("Wooden Bow"), WeaponType.BOW, "",
+        items.add(new Weapon("BW001.1", ColorUtil.blueGreen("Wooden Bow"), WeaponType.BOW, "",
                 new WeaponSkill("Basic Attack", "Fires a single arrow at the target.", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Shoots a more forceful arrow for increased damage.", 1.3, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Releases a fully drawn shot that strikes with maximum power.", 1.7, 80, DamageType.PHYSICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
-        items.add(new Weapon("SW001.1", ColorUtil.green("Bronze Sword"), WeaponType.SWORD, "",
+        items.add(new Weapon("SW001.1", ColorUtil.blueGreen("Bronze Sword"), WeaponType.SWORD, "",
                 new WeaponSkill("Basic Attack", "Delivers a simple forward slash.", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Unleashes a stronger, committed sword strike.", 1.3, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Executes a heavy overhead slash that deals high damage.", 1.7, 80, DamageType.PHYSICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
-        items.add(new Weapon("MGS001.1", ColorUtil.green("Wooden Staff"), WeaponType.MAGIC_STAFF, "",
+        items.add(new Weapon("MGS001.1", ColorUtil.blueGreen("Wooden Staff"), WeaponType.MAGIC_STAFF, "",
                 new WeaponSkill("Basic Attack", "Releases a small bolt of beginner-level magic.", 1.15, 0, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Casts a focused burst of magic at the target.", 1.3, 40, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Unleashes a concentrated wave of raw magical energy.", 1.7, 80, DamageType.MAGICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
-        items.add(new Weapon("BS001.1", ColorUtil.green("Iron Broadsword"), WeaponType.BROADSWORD, "",
+        items.add(new Weapon("BS001.1", ColorUtil.blueGreen("Iron Broadsword"), WeaponType.BROADSWORD, "",
                 new WeaponSkill("Basic Attack", "Strikes the target with a heavy blade swing.", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Uses the sword's weight to deliver a powerful sweeping attack.", 1.3, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Brings the broadsword down in a slow but crushing blow.", 1.7, 80, DamageType.PHYSICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
-        items.add(new Weapon("DR001.1", ColorUtil.green("Rusty Dagger"), WeaponType.DAGGER, "",
+        items.add(new Weapon("DR001.1", ColorUtil.blueGreen("Rusty Dagger"), WeaponType.DAGGER, "",
                 new WeaponSkill("Basic Attack", "Quickly stabs the target.", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Strikes with a faster, deeper thrust.", 1.3, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Performs a rapid forward lunge aimed at weak points.", 1.7, 80, DamageType.PHYSICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
-        items.add(new Weapon("MGSW001.1", ColorUtil.green("Rookie's Magic Sword"), WeaponType.MAGIC_SWORD, "",
+        items.add(new Weapon("MGSW001.1", ColorUtil.blueGreen("Rookie's Magic Sword"), WeaponType.MAGIC_SWORD, "",
                 new WeaponSkill("Basic Attack", "Slashes with the blade while releasing a small magical spark.", 1.15, 0, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Channels magic through the sword for a stronger enchanted slash.", 1.3, 40, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Releases a burst of beginner magic during a powerful swing.", 1.7, 80, DamageType.MAGICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
 //2
-        items.add(new Weapon("BW001.2", ColorUtil.green("Simple Bow"), WeaponType.BOW, "",
+        items.add(new Weapon("BW001.2", ColorUtil.blueGreen("Simple Bow"), WeaponType.BOW, "",
                 new WeaponSkill("Basic Attack", "Fires a light arrow straight at the target.", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Shoots a stronger, more focused arrow.", 1.3, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Releases a fully drawn shot for maximum impact.", 1.7, 80, DamageType.PHYSICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
-        items.add(new Weapon("SW001.2", ColorUtil.green("Traveler's Sword"), WeaponType.SWORD, "",
+        items.add(new Weapon("SW001.2", ColorUtil.blueGreen("Traveler's Sword"), WeaponType.SWORD, "",
                 new WeaponSkill("Basic Attack", "Strikes the target with a straightforward slash.", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Delivers a stronger, more committed sword swing.", 1.3, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Executes a heavy downward slash for high damage.", 1.7, 80, DamageType.PHYSICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
-        items.add(new Weapon("MGS001.2", ColorUtil.green("Apprentice's Staff"), WeaponType.MAGIC_STAFF, "",
+        items.add(new Weapon("MGS001.2", ColorUtil.blueGreen("Apprentice's Staff"), WeaponType.MAGIC_STAFF, "",
                 new WeaponSkill("Basic Attack", "Releases a small spark of basic magic.", 1.15, 0, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Casts a focused burst of low-level magic.", 1.3, 40, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Unleashes a concentrated wave of unstable magical energy.", 1.7, 80, DamageType.MAGICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
-        items.add(new Weapon("BS001.2", ColorUtil.green("Worn Broadsword"), WeaponType.BROADSWORD, "",
+        items.add(new Weapon("BS001.2", ColorUtil.blueGreen("Worn Broadsword"), WeaponType.BROADSWORD, "",
                 new WeaponSkill("Basic Attack", "Swings the heavy blade in a simple attack.", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Uses the sword's weight to deliver a stronger sweep.", 1.3, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Brings the broadsword down in a slow but crushing blow.", 1.7, 80, DamageType.PHYSICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
-        items.add(new Weapon("DR001.2", ColorUtil.green("Rusty Knife"), WeaponType.DAGGER, "",
+        items.add(new Weapon("DR001.2", ColorUtil.blueGreen("Rusty Knife"), WeaponType.DAGGER, "",
                 new WeaponSkill("Basic Attack", "Quickly stabs the target.", 1.15, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Delivers a sharper, faster thrust.", 1.3, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Lunges forward with a rapid strike aimed at weak spots.", 1.7, 80, DamageType.PHYSICAL, TargetType.SINGLE),
                 20, Rarity.COMMON));
-        items.add(new Weapon("MGSW001.2", ColorUtil.green("Faintblade"), WeaponType.MAGIC_SWORD, "",
+        items.add(new Weapon("MGSW001.2", ColorUtil.blueGreen("Faintblade"), WeaponType.MAGIC_SWORD, "",
                 new WeaponSkill("Basic Attack", "Strikes with a faint magical slash.", 1.15, 0, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Channels a small amount of magic into a stronger slash.", 1.3, 40, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Releases a brief magical burst during a forceful swing.", 1.7, 80, DamageType.MAGICAL, TargetType.SINGLE),
@@ -358,63 +358,63 @@ public class Game {
                 new WeaponSkill("Basic Attack", "Fires arrows woven from the first light of creation that ignore conventional physics and always find their mark.", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Launches solar prominence arrows that burn with the intensity of a newborn star, vaporizing all matter they contact.", 2.2, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Channels the Big Bang's primordial energy to create an arrow that rewrites reality's laws upon impact, erasing targets from the timeline.", 3.0, 80, DamageType.PHYSICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
         items.add(new Weapon("SW004.2", ColorUtil.brightYellowBold("Oblivion's Edge"), WeaponType.SWORD, "",
                 new WeaponSkill("Basic Attack", "The blade exists in a state of quantum superposition, simultaneously striking and having already struck its target.", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Creates localized entropy fields that accelerate time around the target to instant decay while the blade remains timeless.", 2.2, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Unleashes the sword's true nature as a fragment of nothingness, cutting the very concept of the target's existence from the cosmic record.", 3.0, 80, DamageType.PHYSICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
         items.add(new Weapon("MGS004.2", ColorUtil.brightYellowBold("Vermilion Aegis"), WeaponType.MAGIC_STAFF, "",
                 new WeaponSkill("Basic Attack", "Projects crimson reality anchors that lock targets in place while simultaneously unraveling their molecular integrity.", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Creates protective-destructive paradox fields that convert all defensive energy into offensive power against the target.", 2.2, 40, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Activates the staff's ultimate protocol: rewriting causality to make the target's destruction an immutable fact of the universe.", 3.0, 80, DamageType.MAGICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
         items.add(new Weapon("BS004.2", ColorUtil.brightYellowBold("Draconic Cleaver"), WeaponType.BROADSWORD, "",
                 new WeaponSkill("Basic Attack", "Channels primordial dragon fury into each swing, dealing damage that scales exponentially with the target's own power.", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Unleashes the collective wrath of all dragonkind in a single strike that shatters mountains and splits the sky.", 2.2, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Awakens the World-Ender protocol, focusing the energy that destroyed continents into a single, civilization-ending blow.", 3.0, 80, DamageType.PHYSICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
         items.add(new Weapon("DR004.2", ColorUtil.brightYellowBold("Silent Requiem"), WeaponType.DAGGER, "",
                 new WeaponSkill("Basic Attack", "Moves between heartbeats of time, striking in the spaces between moments where defenses cannot exist.", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Plays the target's death as a musical composition, with each note representing a fatal strike across multiple dimensions.", 2.2, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Composes and performs the Final Symphony - a series of strikes that systematically erase the target from all possible realities.", 3.0, 80, DamageType.PHYSICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
         items.add(new Weapon("MGSW004.2", ColorUtil.brightYellowBold("Celestia's Wrath"), WeaponType.MAGIC_SWORD, "",
                 new WeaponSkill("Basic Attack", "Channels the anger of dying stars into each swing, projecting supernova energy that consumes all in its path.", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Unleashes galactic core energy that creates miniature black holes along the blade's trajectory, warping space-time itself.", 2.2, 40, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Becomes a conduit for the universe's fundamental forces, delivering a strike that can reset local reality to its pre-creation state.", 3.0, 80, DamageType.MAGICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
 //3
         items.add(new Weapon("BW004.3", ColorUtil.brightYellowBold("Heaven Piercer"), WeaponType.BOW, "",
                 new WeaponSkill("Basic Attack", "Fires arrows that transcend dimensional barriers, striking targets regardless of their position in the celestial hierarchy.", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Launches divine judgment arrows that scale their damage based on the target's sins, with no upper limit to potential damage.", 2.2, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Channels the collective power of the heavenly host to create an arrow that can pierce through divine realms and strike down gods.", 3.0, 80, DamageType.PHYSICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
         items.add(new Weapon("SW004.3", ColorUtil.brightYellowBold("Sky Splitter"), WeaponType.SWORD, "",
                 new WeaponSkill("Basic Attack", "Each swing creates spatial fractures that extend infinitely upward, dealing damage that scales with the height of the target's ambitions.", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Unleashes a crescent of energy that travels along the fabric of reality, cutting through all barriers physical, magical, or conceptual.", 2.2, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Focuses the sword's true power to perform a strike that literally divides heaven from earth, creating a permanent scar in reality.", 3.0, 80, DamageType.PHYSICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
         items.add(new Weapon("MGS004.3", ColorUtil.brightYellowBold("Orb of Avarice"), WeaponType.MAGIC_STAFF, "",
                 new WeaponSkill("Basic Attack", "Projects energy streams that permanently steal a portion of the target's power and add it to the wielder's capabilities.", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Creates a power vortex that drains the target's life force, memories, and abilities simultaneously, storing them within the orb.", 2.2, 40, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Activates the orb's ultimate function: temporarily claiming ownership of the target's very soul, rendering them completely powerless.", 3.0, 80, DamageType.MAGICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
         items.add(new Weapon("BS004.3", ColorUtil.brightYellowBold("Demon Dweller"), WeaponType.BROADSWORD, "",
                 new WeaponSkill("Basic Attack", "The blade houses captive demons that manifest with each strike, dealing additional spiritual damage that bypasses holy protections.", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Unleashes the trapped demons in a coordinated assault that attacks the target's body, mind, and soul simultaneously.", 2.2, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Opens a permanent gateway to the abyss within the target, allowing an endless stream of demons to pour forth from their body.", 3.0, 80, DamageType.PHYSICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
         items.add(new Weapon("DR004.3", ColorUtil.brightYellowBold("Death's Gaze"), WeaponType.DAGGER, "",
                 new WeaponSkill("Basic Attack", "Strikes that connect impose a death countdown, with each subsequent attack exponentially reducing the time until instant death.", 1.7, 0, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "The dagger temporarily becomes an extension of Death itself, ensuring the next strike will be fatal regardless of the target's defenses.", 2.2, 40, DamageType.PHYSICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Forces the target to witness their own death across infinite timelines simultaneously, causing catastrophic existential collapse.", 3.0, 80, DamageType.PHYSICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
         items.add(new Weapon("MGSW004.3", ColorUtil.brightYellowBold("Archangel's Judgement"), WeaponType.MAGIC_SWORD, "",
                 new WeaponSkill("Basic Attack", "Projects blades of divine light that automatically seek out and strike the most vulnerable aspects of the target's existence.", 1.7, 0, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Skill Attack", "Channels celestial justice into the blade, dealing damage proportional to the target's crimes against cosmic order.", 2.2, 40, DamageType.MAGICAL, TargetType.SINGLE),
                 new WeaponSkill("Ultimate Attack", "Unleashes the Final Judgment, a strike that permanently seals the target's fate across all dimensions and timelines.", 3.0, 80, DamageType.MAGICAL, TargetType.SINGLE),
-                200, Rarity.LEGENDARY));
+                150, Rarity.LEGENDARY));
 
 //Hidden Tier (MYTHICAL) Weapons [Hehe I may or may not have made this a bit too Over-Powered] -zed
         items.add(new Weapon("BW005", ColorUtil.brightRedBold("Recurve of Eternal Fate"), WeaponType.BOW, "",
@@ -563,6 +563,8 @@ public class Game {
 
         while(gameRunning) {
             displayLevelMap();
+
+            //"What would you like to do?"
             handleLevelActions();
 
             if (currentChapter > MAX_LEVEL) {
@@ -588,8 +590,8 @@ public class Game {
 
         System.out.println(ColorUtil.blueBright("╔══════════════════") + ColorUtil.brightCyanBold("  CURRENT MAP  ") + ColorUtil.blueBright("═══════════════════╗"));
         for (int i = 1; i <= MAX_LEVEL; i++) {
-            String status = (i == currentChapter) ? ColorUtil.greenBold("📍 CURRENT") :
-                    (levelsCompleted[i]) ? ColorUtil.yellowBold("✅ COMPLETED") : ColorUtil.red("🔒 LOCKED");
+            String status = (i == currentChapter) ? ColorUtil.brightYellowBold("📍 CURRENT") :
+                    (levelsCompleted[i]) ? ColorUtil.brightGreenBold("✅ COMPLETED") : ColorUtil.red("🔒 LOCKED");
             System.out.println(ColorUtil.brightCyanBold("   Chapter " + i + ": ") + getLevelName(i) + " - " + status);
         }
         System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
@@ -663,29 +665,29 @@ public class Game {
                     break;
             }
         } else {
-            System.out.println("\n🎯 What would you like to do?");
-            System.out.println("[1] Enter the Finale");
-            System.out.println("[2] Check stats");
-            System.out.println("[3] Open Inventory");
-            System.out.println("[4] Check resurrection status");
-            System.out.println("[5] Shop");
-            System.out.println("[6] View Current Story");
-            System.out.println("[7] Quit game");
+            System.out.println(ColorUtil.blueBright("\n╔════════════════════════════════════════════════════╗"));
+            System.out.println(ColorUtil.blueBright("║") + ColorUtil.brightCyanBold("             What would you like to do?             ") + ColorUtil.blueBright("║"));
+            System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[1] Explore") + ColorUtil.blueBright("                                       ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Check stats") + ColorUtil.blueBright("                                   ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3] Open Inventory") + ColorUtil.blueBright("                                ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[4] Check resurrection status") + ColorUtil.blueBright("                     ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[5] Shop") + ColorUtil.blueBright("                                          ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[6] View Current Story") + ColorUtil.blueBright("                            ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[7] Enter the Finale") + ColorUtil.blueBright("                              ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[8] Quit game") + ColorUtil.blueBright("                                     ║"));
+            System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
 
             choice = getIntInput("Enter your choice: ", 1, 7);
 
             switch (choice) {
                 case 1:
-                    //add final boss
-                    //TODO battle finale boss (Demon King Din) must correlate to the story
-                    battle(player, new Boss.DemonKingDin(), 2);
-                    //TODO story ends after winning the battle
+                    explore();
                     break;
                 case 2:
                     player.displayStats();
                     break;
                 case 3:
-                    //player.displayInventory();
                     openInventory(player);
                     break;
                 case 4:
@@ -699,6 +701,12 @@ public class Game {
                     viewCurrentStory();
                     break;
                 case 7:
+                    //add final boss
+                    //TODO battle finale boss (Demon King Din) must correlate to the story
+                    battle(player, new Boss.DemonKingDin(), 3);
+                    //TODO story ends after winning the battle
+                    break;
+                case 8:
                     gameRunning = false;
                     System.out.println("Thanks for playing Akhai!");
                     break;
@@ -707,7 +715,7 @@ public class Game {
     }
     boolean EncounterZed = true;
     public void explore() {
-        System.out.println("\nYou explore " + getLevelName(currentChapter) + "...");
+        System.out.println(ColorUtil.brightYellowBold("\n\t\tYou explore ") + getLevelName(currentChapter) + ColorUtil.brightYellowBold("..."));
         delay(1000);
 
         // Different encounter rates based on level
@@ -1203,7 +1211,7 @@ public class Game {
             displayBattleHealth(player, enemy);
 
             boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
-            System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
+            System.out.println("\t\t\t\t" + (isPlayerTurn ? ColorUtil.brightGreenBold(player.getName() + "'s turn!") : ColorUtil.brightRedBold(enemy.getName() + "'s turn!")));
 
             //Take action based on who's acting
             int damage = takeAction(isPlayerTurn, enemy);
@@ -1243,7 +1251,7 @@ public class Game {
                     System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
                     damage = player.getBasicAttack().execute(player);
                     int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
-                    System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
+                    System.out.println(ColorUtil.brightGreenBold("\t\tYou dealt " + actualDamage + " damage to " + enemy.getName()));
 
                     //Reset player speed after resurrection free turn
                     playerCurrentSpeed = playerOriginalSpeed;
@@ -1258,6 +1266,9 @@ public class Game {
 
         // Clear battle effects after combat
         clearBattleEffects(enemy);
+
+        //Heal 50% lost HP after battle
+        player.afterBattleHeal();
 
         inBattle = false;
     }
@@ -1283,7 +1294,7 @@ public class Game {
             displayBattleHealth(player, enemy);
 
             boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
-            System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
+            System.out.println("\t\t\t\t" + (isPlayerTurn ? ColorUtil.brightGreenBold(player.getName() + "'s turn!") : ColorUtil.brightRedBold(enemy.getName() + "'s turn!")));
 
             //Take action based on who's acting
             int damage = takeAction(isPlayerTurn, enemy);
@@ -1323,7 +1334,7 @@ public class Game {
                     System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
                     damage = player.getBasicAttack().execute(player);
                     int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
-                    System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
+                    System.out.println(ColorUtil.brightGreenBold("\t\tYou dealt " + actualDamage + " damage to " + enemy.getName()));
 
                     //Reset player speed after resurrection free turn
                     playerCurrentSpeed = playerOriginalSpeed;
@@ -1338,6 +1349,9 @@ public class Game {
 
         // Clear battle effects after combat
         clearBattleEffects(enemy);
+
+        //Heal 50% lost HP after battle
+        player.afterBattleHeal();
 
         inBattle = false;
     }
@@ -1361,7 +1375,7 @@ public class Game {
             displayBattleHealth(player, enemy);
 
             boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
-            System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
+            System.out.println("\t\t\t\t" + (isPlayerTurn ? ColorUtil.brightGreenBold(player.getName() + "'s turn!") : ColorUtil.brightRedBold(enemy.getName() + "'s turn!")));
 
             //Take action based on who's acting
             int damage = takeAction(isPlayerTurn, enemy);
@@ -1401,7 +1415,7 @@ public class Game {
                     System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
                     damage = player.getBasicAttack().execute(player);
                     int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
-                    System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
+                    System.out.println(ColorUtil.brightGreenBold("\t\tYou dealt " + actualDamage + " damage to " + enemy.getName()));
 
                     //Reset player speed after resurrection free turn
                     playerCurrentSpeed = playerOriginalSpeed;
@@ -1439,7 +1453,7 @@ public class Game {
             displayBattleHealth(player, enemy);
 
             boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
-            System.out.println((isPlayerTurn ? player.getName() : enemy.getName()) + "'s turn!");
+            System.out.println("\t\t\t\t" + (isPlayerTurn ? ColorUtil.brightGreenBold(player.getName() + "'s turn!") : ColorUtil.brightRedBold(enemy.getName() + "'s turn!")));
 
             //Take action based on who's acting
             int damage = takeAction(isPlayerTurn, enemy);
@@ -1479,7 +1493,7 @@ public class Game {
                     System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
                     damage = player.getBasicAttack().execute(player);
                     int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
-                    System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
+                    System.out.println(ColorUtil.brightGreenBold("\t\tYou dealt " + actualDamage + " damage to " + enemy.getName()));
 
                     //Reset player speed after resurrection free turn
                     playerCurrentSpeed = playerOriginalSpeed;
@@ -1506,7 +1520,7 @@ public class Game {
             }else if(wave == 1 && maxWave == 3){
                 battle(player, randomizeEliteEnemy());
             }else{
-                battle(player, randomizeBoss());
+                battle(player, new Boss.Kamish());
             }
         }
         playerHealthCheck(enemy, baseExp, player);
@@ -1539,19 +1553,19 @@ public class Game {
         String bar = "█".repeat(filled) + "░".repeat(empty);
 
         if(player instanceof Hawkseye){
-            return String.format(ColorUtil.greenBold("%s %d/%d\n\t\t\t\tInsight"), bar, player.getEnergy(), player.getMaxEnergy());
+            return String.format(ColorUtil.greenBold("%s %d/%d\n\t\t\t\t\tInsight"), bar, player.getEnergy(), player.getMaxEnergy());
         }else if(player instanceof  Blademaster){
-            return String.format(ColorUtil.blueBright("%s %d/%d\n\t\t\t\tEnergy"), bar, player.getEnergy(), player.getMaxEnergy());
+            return String.format(ColorUtil.blueBright("%s %d/%d\n\t\t\t\t\tEnergy"), bar, player.getEnergy(), player.getMaxEnergy());
         }else if(player instanceof Berserker){
-            return String.format(ColorUtil.orange("%s %d/%d\n\t\t\t\tFury"), bar, player.getEnergy(), player.getMaxEnergy());
+            return String.format(ColorUtil.orange("%s %d/%d\n\t\t\t\t\tFury"), bar, player.getEnergy(), player.getMaxEnergy());
         }else if(player instanceof  Runecaster){
-            return String.format(ColorUtil.purpleBright("%s %d/%d\n\t\t\t\tMana"), bar, player.getEnergy(), player.getMaxEnergy());
+            return String.format(ColorUtil.purpleBright("%s %d/%d\n\t\t\t\t\tMana"), bar, player.getEnergy(), player.getMaxEnergy());
         }else if(player instanceof  RuneKnight){
-            return String.format(ColorUtil.yellowBright("%s %d/%d\n\t\t\t\tBlessing"), bar, player.getEnergy(), player.getMaxEnergy());
+            return String.format(ColorUtil.yellowBright("%s %d/%d\n\t\t\t\t\tBlessing"), bar, player.getEnergy(), player.getMaxEnergy());
         }else if(player instanceof Shinobi){
-            return String.format(ColorUtil.purple("%s %d/%d\n\t\t\t\tChakra"), bar, player.getEnergy(), player.getMaxEnergy());
+            return String.format(ColorUtil.purple("%s %d/%d\n\t\t\t\t\tChakra"), bar, player.getEnergy(), player.getMaxEnergy());
         }else{
-            return String.format(ColorUtil.blue("%s %d/%d\n\t\t\t\tAura"), bar, player.getEnergy(), player.getMaxEnergy());
+            return String.format(ColorUtil.blue("%s %d/%d\n\t\t\t\t\tAura"), bar, player.getEnergy(), player.getMaxEnergy());
         }
     }
     private boolean checkSpeed(int playerCurrentSpeed, int enemyCurrentSpeed){
@@ -1576,10 +1590,10 @@ public class Game {
                     // Check player accuracy
                     if (AccuracySystem.playerHits()) {
                         int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
-                        System.out.println("You dealt " + actualDamage + " damage to " + enemy.getName());
+                        System.out.println(ColorUtil.brightGreenBold("\t\tYou dealt " + actualDamage + " damage to " + enemy.getName()));
                         delay(1000);
                     } else {
-                        System.out.println("Your attack missed!");
+                        System.out.println(ColorUtil.orange("\t\t\t\tYour attack missed!"));
                         damage = 0;
                         delay(1000);
                     }
@@ -1588,10 +1602,10 @@ public class Game {
                 // Check enemy accuracy
                 if (AccuracySystem.enemyHits()) {
                     int actualEnemyDamage = player.takeDamage(damage, player.getDefense(), player.getPhysicalResistance(), player.getMagicResistance());
-                    System.out.println(enemy.getName() + " dealt " + actualEnemyDamage + " damage to you!");
+                    System.out.println(ColorUtil.redBright("\t\t" + enemy.getName() + " dealt " + actualEnemyDamage + " damage to you!"));
                     delay(1000);
                 } else {
-                    System.out.println(enemy.getName() + "'s attack missed!");
+                    System.out.println(ColorUtil.orange("\t\t\t" + enemy.getName() + "'s attack missed!"));
                     damage = 0;
                     delay(1000);
                 }
@@ -1762,11 +1776,12 @@ public class Game {
             delay(500);
 
             // Chance for energy restoration
-            if (Math.random() > 0.5) {
-                System.out.println("✨ Energy partially restored!");
-                delay(500);
-                player.setEnergy(Math.min(100, player.getEnergy() + 25));
-            }
+//            if (Math.random() > 0.5) {
+//                System.out.println("✨ Energy partially restored!");
+//                delay(500);
+            //Guaranteed energy restore
+            player.setEnergy(Math.min(100, player.getEnergy() + 25));
+//            }
         }
     }
     // Add a method to check resurrection status
@@ -1782,7 +1797,7 @@ public class Game {
 
     //Character
     public void addStarterPack(Character player, List<Item> items){
-        System.out.println(ColorUtil.cyan("Adding starter pack..."));
+        System.out.println(ColorUtil.brightYellowBold("Adding starter pack..."));
         delay(800);
         if(player instanceof Hawkseye || player instanceof Blademaster || player instanceof Berserker || player instanceof Shinobi) {
             player.obtainItem(findItemId("PDP001", items, 5));
@@ -1844,11 +1859,11 @@ public class Game {
             }
 
             if(!isEmpty){
-                System.out.println("========== SELECTING ITEM ==========");
+                System.out.println(ColorUtil.blueBright("════════════════════")+ColorUtil.brightCyanBold(" SELECTING ITEM ")+ColorUtil.blueBright("════════════════════"));
                 item.displayInfo();
                 System.out.println("Select "+item.getName()+"?: ");
-                System.out.println("[1] Select Item");
-                System.out.println("[2] Back");
+                System.out.println(ColorUtil.brightCyanBold("[1] Select Item"));
+                System.out.println(ColorUtil.brightCyanBold("[2] Back"));
 
                 confirm = getIntInput("Choose action: ", 1, 2);
                 if(confirm == 1){
@@ -1892,10 +1907,10 @@ public class Game {
             if(item == null){isEmpty = true;}
 
             if(!isEmpty){
-                System.out.println("========== SELECTING ITEM ==========");
+                System.out.println(ColorUtil.blueBright("════════════════════")+ColorUtil.brightCyanBold(" SELECTING ITEM ")+ColorUtil.blueBright("════════════════════"));
                 System.out.println("Select "+item.getName()+"?: ");
-                System.out.println("[1] Select Item");
-                System.out.println("[2] Back");
+                System.out.println(ColorUtil.brightCyanBold("[1] Select Item"));
+                System.out.println(ColorUtil.brightCyanBold("[2] Back"));
 
                 confirm = getIntInput("Choose action: ", 1, 2);
                 if(confirm == 1){
@@ -1996,23 +2011,8 @@ public class Game {
             case 8:
                 return new EliteEnemy.AbyssHerald();
             case 9:
-                return new EliteEnemy.Daniel();
+                return new EliteEnemy.FrankDaniel();
 
-        }
-        return null;
-    }
-    //unnecessary but why not lol | Bruh HAHAHAHAHA instead of random boss ato butangan each chap refer to the boss class -zed
-    public Boss randomizeBoss(){
-        Random rand = new Random();
-        int choice = rand.nextInt(3);
-
-        switch(choice){
-            case 0:
-                return new Boss.Kamish();
-            case 1:
-                return new Boss.Kamish();
-            case 2:
-                return new Boss.Kamish();
         }
         return null;
     }
