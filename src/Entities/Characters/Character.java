@@ -6,6 +6,7 @@ import Items.Weapons.Weapon;
 import Skills.*;
 import StatusEffects.*;
 import TextFormat.ColorUtil;
+import TextFormat.ConsoleColors;
 
 import java.util.Random;
 import java.text.DecimalFormat;
@@ -123,27 +124,22 @@ public abstract class Character extends Entity {
 
     // New resurrection method
     public void resurrect() {
-        if (hasResurrected) {
-            System.out.println("❌ " + name + " cannot resurrect again! Resurrection already used.");
-            return;
-        }
-
-        if (health > 0) {
-            System.out.println("❌ " + name + " doesn't need resurrection! Health is still positive.");
-            return;
-        }
-
-        System.out.println("✨ ✨ ✨ DIVINE INTERVENTION! ✨ ✨ ✨");
-        System.out.println(name + " has been granted a second chance!");
-
+        delay(800);
+        System.out.println(ColorUtil.brightYellowBold("\t\t✨ ✨ ✨ DIVINE INTERVENTION! ✨ ✨ ✨"));
+        delay(800);
+        System.out.println(ColorUtil.brightYellowBold("\t" + name + " has been granted a second chance!"));
+        delay(800);
         //Resurrect with 50% of max health and reset ultimate counter
         health = maxHealth / 2;
         hasResurrected = true;
         resetUltimateCounter(); //Reset ultimate charges on resurrection
 
-        System.out.println(name + " resurrects with " + health + " HP!");
-        System.out.println("Ultimate charges have been reset!");
-        System.out.println("This resurrection has been consumed and cannot be used again.");
+        System.out.println(ColorUtil.brightYellowBold("\t" +name + " resurrects with " + health + " HP!"));
+        delay(800);
+        System.out.println(ColorUtil.brightCyanBold("\t\tUltimate charges have been reset!"));
+        delay(800);
+        System.out.println(ColorUtil.brightRedBold("You can no longer resurrect, second chances only happens once."));
+        delay(800);
     }
     public boolean hasResurrected(){
         return hasResurrected;
