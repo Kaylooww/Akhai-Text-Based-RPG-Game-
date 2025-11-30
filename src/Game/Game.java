@@ -1905,6 +1905,7 @@ public class Game {
     }
     private int openInventory(Character player){
         int confirm = 0;
+        int uses = 0;
         boolean isEmpty = false;
         while(confirm == 0){
             player.displayInventory();
@@ -1935,9 +1936,12 @@ public class Game {
                         System.out.println(player.getName()+" used "+item.getName()+"!");
                         delay(1000);
                         item.use(player);
-                        if(inBattle){
+                        if(inBattle && uses < 2){
                             System.out.println(ColorUtil.brightYellowBold("\t\t\tYou can take another action!"));
                             delay(1000);
+                            if(item instanceof HealingPotion){
+                                uses++;
+                            }
                         }
                         confirm = 0;
                     }
@@ -1983,12 +1987,14 @@ public class Game {
                         System.out.println(player.getName()+" used "+item.getName()+"!");
                         delay(1000);
                         item.use(player);
-                        if(inBattle && uses <= 2){
+                        if(inBattle && uses < 2){
                             System.out.println(ColorUtil.brightYellowBold("\t\t\tYou can take another action!"));
                             delay(1000);
                             displayBattleHealth(player, enemy);
                             confirm = 0;
-                            uses++;
+                            if(item instanceof HealingPotion){
+                                uses++;
+                            }
                         }
                     }
                 }else{
