@@ -16,6 +16,17 @@ public class ConsoleColors {
     public static final String ORANGE = "\u001B[38;2;255;165;0m"; // ORANGE
     public static final String BLUE_GREEN = "\u001B[38;2;0;165;165m"; // BLUE_GREEN
 
+    // Dark Colors
+    public static final String DARK_RED = "\033[0;31;2m";     // DARK RED
+    public static final String DARK_GREEN = "\033[0;32;2m";   // DARK GREEN
+    public static final String DARK_YELLOW = "\033[0;33;2m";  // DARK YELLOW
+    public static final String DARK_BLUE = "\033[0;34;2m";    // DARK BLUE
+    public static final String DARK_PURPLE = "\033[0;35;2m";  // DARK PURPLE
+    public static final String DARK_CYAN = "\033[0;36;2m";    // DARK CYAN
+    public static final String DARK_WHITE = "\033[0;37;2m";   // DARK WHITE
+    public static final String DARK_ORANGE = "\u001B[38;2;165;85;0m"; // DARK ORANGE
+    public static final String DARK_BLUE_GREEN = "\u001B[38;2;0;85;85m"; // DARK BLUE_GREEN
+
     // Bold (brighter versions)
     public static final String BLACK_BOLD = "\033[1;30m";   // BLACK
     public static final String RED_BOLD = "\033[1;31m";     // RED
@@ -54,5 +65,12 @@ public class ConsoleColors {
     public static final String RED_BACKGROUND = "\033[41m";    // RED
     public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN
     public static final String BLUE_GREEN_BACKGROUND = "\u001B[48;2;0;165;165m"; // BLUE_GREEN BACKGROUND
+
+    // Dark Backgrounds
+    public static final String DARK_RED_BACKGROUND = "\033[41;2m";    // DARK RED BACKGROUND
+    public static final String DARK_GREEN_BACKGROUND = "\033[42;2m";  // DARK GREEN BACKGROUND
+    public static final String DARK_BLUE_BACKGROUND = "\033[44;2m";   // DARK BLUE BACKGROUND
+    public static final String DARK_PURPLE_BACKGROUND = "\033[45;2m"; // DARK PURPLE BACKGROUND
+    public static final String DARK_CYAN_BACKGROUND = "\033[46;2m";   // DARK CYAN BACKGROUND
     // ... and more background colors
 }

@@ -2,7 +2,7 @@ package Entities.Characters;
 
 public class Berserker extends Character{
     public Berserker(String name) {
-        super(name, 330, ClassType.BERSERKER, 22, 0, 15, 0.08, 0.08, 19);
+        super(name, 330, ClassType.BERSERKER, 22, 0, 15, 0.08, 0.08, 18);
         this.level = 1;
     }
 //
@@ -10,21 +10,4 @@ public class Berserker extends Character{
     public int attack(){
         return 0;
     }
-    /*
-    @Override
-    public int useBasicAttack(){
-        double basicDamage = basicAttack * physicalDamage;
-        return (int) basicDamage;
-    }
-    @Override
-    public int useSkillAttack(){
-        double skillDamage = skillAttack * physicalDamage;
-        return (int) skillDamage;
-    }
-    @Override
-    public int useUltimateAttack(){
-        double ultDamage = ultimateAttack * physicalDamage;
-        return (int) ultDamage;
-    }
-     */
 }

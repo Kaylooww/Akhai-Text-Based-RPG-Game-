@@ -415,7 +415,7 @@ public class StoryManager {
                 DialogueType.DIN_SPEECH));
 
         ch6.addDialogue(new DialogueNode("",
-                "My isekai story was over. My new life, as Khai's true successor, had just begun.",
+                "My isekai story was over. My new life, as Khai's true successor, had just begun...",
                 DialogueType.NARRATION));
 
         ch6.addDialogue(new DialogueNode("",

@@ -3,6 +3,7 @@ package Entities.Enemies;
 import Entities.Characters.DamageType;
 import Entities.Characters.TargetType;
 import Skills.EnemySkill;
+import TextFormat.ColorUtil;
 
 public class Boss extends Enemy {
     int phase = 1;
@@ -73,13 +74,13 @@ public class Boss extends Enemy {
             if(phase < maxPhase){
                 phase++;
                 health = maxHealth;
-                System.out.println("BOSS "+name+" is entering phase "+phase+"!");
+                System.out.println(ColorUtil.brightRedBold("\t\t‼️BOSS "+name+" is entering phase "+phase+"‼️"));
             }else{
                 health = 0;
                 System.out.println("🎯 " + name + " has been defeated!");
             }
         } else if (health < oldHealth * 0.3) {
-            System.out.println("⚠️  " + name + " is looking weak!");
+            System.out.println(ColorUtil.brightGreenBold("\t\t⚠️ " + name + " is looking weak!"));
         }
 
         return (int) actualDamage;

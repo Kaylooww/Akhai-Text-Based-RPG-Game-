@@ -2,7 +2,7 @@ package Entities.Characters;
 
 public class RuneKnight extends Character{
     public RuneKnight(String name) {
-        super(name, 285, ClassType.RUNEKNIGHT, 10, 22, 20, 0.10, 0.10, 20);
+        super(name, 285, ClassType.RUNEKNIGHT, 10, 22, 20, 0.12, 0.12, 22);
         this.level = 1;
     }
 //
@@ -10,21 +10,4 @@ public class RuneKnight extends Character{
     public int attack(){
         return 0;
     }
-    /*
-    @Override
-    public int useBasicAttack(){
-        double basicDamage = basicAttack * magicDamage;
-        return (int) basicDamage;
-    }
-    @Override
-    public int useSkillAttack(){
-        double skillDamage = skillAttack * magicDamage;
-        return (int) skillDamage;
-    }
-    @Override
-    public int useUltimateAttack(){
-        double ultDamage = ultimateAttack * magicDamage;
-        return (int) ultDamage;
-    }
-     */
 }

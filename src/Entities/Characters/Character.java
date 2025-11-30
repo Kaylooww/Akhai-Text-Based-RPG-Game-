@@ -77,7 +77,7 @@ public abstract class Character extends Entity {
 
     public void gainExperience(int exp) {
         experience += exp;
-        System.out.println("💰 Gained " + exp + " experience!");
+        System.out.println(ColorUtil.brightYellowBold("\t\t\t💰 Gained " + exp + " experience!"));
         while (experience >= experienceNeeded && level <= 30) { // Added level cap
             levelUp();
         }
@@ -166,6 +166,7 @@ public abstract class Character extends Entity {
         System.out.println(ColorUtil.brightCyanBold("   🛡️ Defense: " + defense));
         System.out.println(ColorUtil.brightCyanBold("   🏃 Speed: " + (hasStatusEffect("SpeedBoost") ? "↑" : "") + speed));
         System.out.println(ColorUtil.brightCyanBold("   ✨ Ultimate Charge: " + ultimateCounter + "/" + maxUltimateCounter));
+        System.out.println(ColorUtil.blueBright("  ──────────────────────────────────────────────────  "));
         System.out.println(ColorUtil.brightCyanBold("   🔄 Resurrection: " + (hasResurrected ? "❌ USED" : "✅ AVAILABLE")));
         System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
         delay(1500);
@@ -259,7 +260,7 @@ public abstract class Character extends Entity {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null && items[i].getItemId().equals(item.getItemId())) {
                     items[i].setQuantity(items[i].getQuantity() + 1);
-                    System.out.println("Item \"" + item.getName() + "\" obtained.");
+                    System.out.println(ColorUtil.brightYellowBold("\t\tItem \"") + item.getName() + ColorUtil.brightYellowBold("\" obtained!"));
                     delay(500);
                     return;
                 }
@@ -275,7 +276,7 @@ public abstract class Character extends Entity {
                 }
             }
         } else if (inventory.getIsFull()) {
-            System.out.println("Inventory is full!");
+            System.out.println(ColorUtil.brightRedBold("\t\t\tInventory is full!"));
         }
     }
     public void buyItem(Item item, int quantity){

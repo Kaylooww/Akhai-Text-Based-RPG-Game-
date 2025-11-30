@@ -2,7 +2,7 @@ package Entities.Characters;
 
 public class Shinobi extends Character{
     public Shinobi(String name) {
-        super(name, 245, ClassType.ASSASSIN, 25, 0, 12, 0.10, 0.10, 35);
+        super(name, 245, ClassType.ASSASSIN, 22, 0, 12, 0.10, 0.10, 37);
         this.level = 1;
     }
 
@@ -10,21 +10,4 @@ public class Shinobi extends Character{
     public int attack(){
         return 0;
     }
-    /*
-    @Override
-    public int useBasicAttack(){
-        double basicDamage = basicAttack * physicalDamage;
-        return (int) basicDamage;
-    }
-    @Override
-    public int useSkillAttack(){
-        double skillDamage = skillAttack * physicalDamage;
-        return (int) skillDamage;
-    }
-    @Override
-    public int useUltimateAttack(){
-        double ultDamage = ultimateAttack * physicalDamage;
-        return (int) ultDamage;
-    }
-     */
 }

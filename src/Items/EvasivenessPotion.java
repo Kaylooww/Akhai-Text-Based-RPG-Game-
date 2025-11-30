@@ -24,7 +24,7 @@ public class EvasivenessPotion extends Consumable{
             setQuantity(getQuantity() - 1);
             hasConsumed = true;
         }else{
-            System.out.println("You can only consume this potion once!");
+            System.out.println(ColorUtil.brightRedBold("\t\tYou can only consume this potion once!"));
         }
     }
 

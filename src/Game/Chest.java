@@ -3,6 +3,7 @@ package Game;
 import java.util.*;
 import Items.Rarity;
 import Entities.Characters.Character;
+import TextFormat.ColorUtil;
 
 public abstract class Chest{
     private String name;
@@ -24,7 +25,7 @@ public abstract class Chest{
 
     public void obtain(Character player){
         player.gainExperience(expYield);
-        System.out.println("\uD83E\uDE99 Gained "+gold+" extra gold coins!");
+        System.out.println(ColorUtil.brightYellowBold("\t\t\uD83E\uDE99 Gained "+gold+" extra gold coins!"));
         player.setCurrency(player.getCurrency() + gold);
     }
 

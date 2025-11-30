@@ -38,6 +38,11 @@ public class ColorUtil {
         return ConsoleColors.BLUE_GREEN + text + ConsoleColors.RESET;
     }
 
+    //dark version
+    public static String darkRed(String text) {
+        return ConsoleColors.DARK_RED + text + ConsoleColors.RESET;
+    }
+
     // bright versions
     public static String blueBright(String text) {
         return ConsoleColors.BLUE_BRIGHT + text + ConsoleColors.RESET;

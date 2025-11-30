@@ -467,93 +467,94 @@ public class Game {
             System.out.println(ColorUtil.brightBlueBold("╔════════════════════════════════════════════════════╗"));
             System.out.println(ColorUtil.brightBlueBold("║") + ColorUtil.brightYellowBold("                 Choose your class!                 ") + ColorUtil.brightBlueBold("║"));
             System.out.println(ColorUtil.brightBlueBold("╠════════════════════════════════════════════════════╣"));
-            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("1. Hawkseye") + ColorUtil.brightBlueBold("                                       ║"));
-            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("2. Blademaster") + ColorUtil.brightBlueBold("                                    ║"));
-            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("3. Rune Caster") + ColorUtil.brightBlueBold("                                    ║"));
-            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("4. Berserker") + ColorUtil.brightBlueBold("                                      ║"));
-            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("5. Shinobi") + ColorUtil.brightBlueBold("                                        ║"));
-            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("6. Rune Knight") + ColorUtil.brightBlueBold("                                    ║"));
+            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("1.")+ColorUtil.greenBold(" Hawkseye") + ColorUtil.brightBlueBold("                                       ║"));
+            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("2.")+ColorUtil.blueBright(" Blademaster") + ColorUtil.brightBlueBold("                                    ║"));
+            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("3.")+ColorUtil.purpleBright(" Rune Caster") + ColorUtil.brightBlueBold("                                    ║"));
+            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("4.")+ColorUtil.orange(" Berserker") + ColorUtil.brightBlueBold("                                      ║"));
+            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("5.")+ColorUtil.purple(" Shinobi") + ColorUtil.brightBlueBold("                                        ║"));
+            System.out.println(ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("6.")+ColorUtil.yellowBright(" Rune Knight") + ColorUtil.brightBlueBold("                                    ║"));
             System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
 
         int choice = getIntInput("Enter your choice (1-6): ", 1, 7);
 
             switch (choice) {
                 case 1:
-                    System.out.println("Deals the highest physical damage from range, a precision marksman who never misses their mark.");
-
+                    System.out.println(ColorUtil.brightBlueBold("╔═════════════════════")+ColorUtil.brightCyanBold(" Hawkseye ")+ColorUtil.brightBlueBold("═════════════════════╗"));
+                    System.out.println(ColorUtil.greenBold("   Deals the highest physical damage from range, a\n   precision marksman who never misses their mark."));
+                    System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput("Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
                         player = new Hawkseye("Hawkseye " + thyName);
                         System.out.println(ColorUtil.brightCyanBold("\nYou have chosen the Hawkseye class!"));
-                        delay(1200);
                     }
                     break;
                 case 2:
-                    System.out.println("A versatile all-rounder fighter, perfectly balanced stats for any combat situation.");
-
+                    System.out.println(ColorUtil.brightBlueBold("╔════════════════════")+ColorUtil.brightCyanBold(" Blademaster ")+ColorUtil.brightBlueBold("═══════════════════╗"));
+                    System.out.println(ColorUtil.blueBright("   A versatile all-rounder fighter, perfectly\n   balanced stats for any combat situation."));
+                    System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput("Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
                         player = new Blademaster(thyName + " the Blademaster");
                         System.out.println(ColorUtil.brightCyanBold("\nYou have chosen the Blademaster class!"));
-                        delay(1200);
                     }
                     break;
                 case 3:
-                    System.out.println("Unleashes the highest damage output with devastating spells! Sacrifices speed for overwhelming magical power.");
-
+                    System.out.println(ColorUtil.brightBlueBold("╔════════════════════")+ColorUtil.brightCyanBold(" Rune Caster ")+ColorUtil.brightBlueBold("═══════════════════╗"));
+                    System.out.println(ColorUtil.purpleBright("   Deals the highest damage output with devastating\n   spells, sacrifices speed for overwhelming power."));
+                    System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput("Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
                         player = new Runecaster("Rune Caster " + thyName);
                         System.out.println(ColorUtil.brightCyanBold("\nYou have chosen the Rune Caster class!"));
-                        delay(1200);
                     }
                     break;
                 case 4:
-                    System.out.println("Tanks through battles with the highest HP pool, a relentless force that outlasts all opponents.");
-
+                    System.out.println(ColorUtil.brightBlueBold("╔════════════════════")+ColorUtil.brightCyanBold(" Berserker ")+ColorUtil.brightBlueBold("═════════════════════╗"));
+                    System.out.println(ColorUtil.orange("   Tanks through battles with the highest HP pool,\n   a relentless force that outlasts all opponents."));
+                    System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput("Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
                         player = new Berserker("Berserker " + thyName);
                         System.out.println(ColorUtil.brightCyanBold("\nYou have chosen the Berserker class!"));
-                        delay(1200);
                     }
                     break;
                 case 5:
-                    System.out.println("Overwhelms enemies with blinding speed, the fastest class that strikes before any enemy can react.");
-
+                    System.out.println(ColorUtil.brightBlueBold("╔═════════════════════")+ColorUtil.brightCyanBold(" Shinobi ")+ColorUtil.brightBlueBold("══════════════════════╗"));
+                    System.out.println(ColorUtil.purple("   Overwhelms enemies with blinding speed and can\n   dish out damage before any enemy can react."));
+                    System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput("Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
                         player = new Shinobi("Shinobi " + thyName);
                         System.out.println(ColorUtil.brightCyanBold("\nYou have chosen the Shinobi class!"));
-                        delay(1200);
                     }
                     break;
                 case 6:
-                    System.out.println("A magical all-rounder warrior, blends sword and sorcery with well-rounded offensive and defensive capabilities.");
-
+                    System.out.println(ColorUtil.brightBlueBold("╔════════════════════")+ColorUtil.brightCyanBold(" Rune Knight ")+ColorUtil.brightBlueBold("═══════════════════╗"));
+                    System.out.println(ColorUtil.yellowBright("   A magical warrior that blends sword and sorcery\n   with both offensive & defensive capabilities."));
+                    System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput("Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
                         player = new RuneKnight(thyName + " the Rune Knight");
                         System.out.println(ColorUtil.brightCyanBold("\nYou have chosen the Rune Knight class!"));
-                        delay(1200);
                     }
                     break;
                 case 7:
-                    System.out.println("This is a test class.");
-
+                    System.out.println(ColorUtil.brightBlueBold("╔══════════════════")+ ColorUtil.brightCyanBold(" The Chosen One ") +ColorUtil.brightBlueBold("══════════════════╗"));
+                    System.out.println(ColorUtil.brightRedBold("   Throughout Heaven and Earth, I Alone Am\n   The Honored One."));
+                    System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput("Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
                         player = new JinwooSun(thyName + " (Test)");
                         System.out.println(ColorUtil.brightCyanBold("\nSelecting Test Class..."));
-                        delay(1200);
                     }
                     break;
             }
+            delay(900);
         }
 
         System.out.println(ColorUtil.brightBlueBold("\n═════════════ Beginning your adventure in Akhai! ═════════════"));
         System.out.println(ColorUtil.cyanBold("You are on a quest to find the power to go back to your world.\n"));
-        delay(1500);
+        delay(800);
     }
     public void startGame() {
         addStarterPack(player, items);
@@ -642,16 +643,15 @@ public class Game {
             System.out.println(ColorUtil.blueBright("║") + ColorUtil.brightCyanBold("             What would you like to do?             ") + ColorUtil.blueBright("║"));
             System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[1] Explore") + ColorUtil.blueBright("                                       ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Check stats") + ColorUtil.blueBright("                                   ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Check Stats and Resurrection status") + ColorUtil.blueBright("           ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3] Open Inventory") + ColorUtil.blueBright("                                ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[4] Check resurrection status") + ColorUtil.blueBright("                     ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[5] Shop") + ColorUtil.blueBright("                                          ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[6] View Current Story") + ColorUtil.blueBright("                            ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[7]")+ColorUtil.brightYellowBold(" Proceed to Story") + ColorUtil.blueBright("                              ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[8] Quit game") + ColorUtil.blueBright("                                     ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[4] Shop") + ColorUtil.blueBright("                                          ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[5] View Current Story") + ColorUtil.blueBright("                            ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[6]")+ColorUtil.brightYellowBold(" Proceed to Story") + ColorUtil.blueBright("                              ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[7] Quit game") + ColorUtil.blueBright("                                     ║"));
             System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
 
-            choice = getIntInput("Enter your choice: ", 1, 8);
+            choice = getIntInput("Enter your choice: ", 1, 7);
 
             switch (choice) {
                 case 1:
@@ -664,16 +664,13 @@ public class Game {
                     openInventory(player);
                     break;
                 case 4:
-                    checkResurrectionStatus();
-                    break;
-                case 5:
                     ShopNPC Kyle = new ShopNPC("Kyle", "Shopkeeper", items);
                     Kyle.interact(player, currentChapter);
                     break;
-                case 6:
+                case 5:
                     viewCurrentStory();  // NEW
                     break;
-                case 7:
+                case 6:
                     //TODO before next level must fight boss that correlates to the story
                     //add boss before next chapter and must win in order to proceed
                     if(attemptChapterProgression()){
@@ -682,7 +679,7 @@ public class Game {
                         }
                     }
                     break;
-                case 8:
+                case 7:
                     gameRunning = false;
                     System.out.println("Thanks for playing Akhai!");
                     break;
@@ -710,16 +707,15 @@ public class Game {
             System.out.println(ColorUtil.blueBright("║") + ColorUtil.brightCyanBold("             What would you like to do?             ") + ColorUtil.blueBright("║"));
             System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[1] Explore") + ColorUtil.blueBright("                                       ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Check stats") + ColorUtil.blueBright("                                   ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Check Stats and Resurrection status") + ColorUtil.blueBright("           ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3] Open Inventory") + ColorUtil.blueBright("                                ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[4] Check resurrection status") + ColorUtil.blueBright("                     ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[5] Shop") + ColorUtil.blueBright("                                          ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[6] View Current Story") + ColorUtil.blueBright("                            ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[7]")+ColorUtil.brightRedBold(" Enter the Finale") + ColorUtil.blueBright("                              ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[8] Quit game") + ColorUtil.blueBright("                                     ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[4] Shop") + ColorUtil.blueBright("                                          ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[5] View Current Story") + ColorUtil.blueBright("                            ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[6]")+ColorUtil.brightRedBold(" Enter the Final Battle") + ColorUtil.blueBright("                        ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[7] Quit game") + ColorUtil.blueBright("                                     ║"));
             System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
 
-            choice = getIntInput("Enter your choice: ", 1, 8);
+            choice = getIntInput("Enter your choice: ", 1, 7);
 
             switch (choice) {
                 case 1:
@@ -732,23 +728,20 @@ public class Game {
                     openInventory(player);
                     break;
                 case 4:
-                    checkResurrectionStatus();
-                    break;
-                case 5:
                     ShopNPC Kyle = new ShopNPC("Kyle", "Shopkeeper", items);
                     Kyle.interact(player, currentChapter);
                     break;
-                case 6:
+                case 5:
                     viewCurrentStory();
                     break;
-                case 7:
+                case 6:
                     //add final boss
                     //TODO battle finale boss (Demon King Din) must correlate to the story
                     battle(player, new Boss.DemonKingDin(), 3);
                     //TODO story ends after winning the battle
                     proceedToNextChapter();
                     break;
-                case 8:
+                case 7:
                     gameRunning = false;
                     System.out.println("Thanks for playing Akhai!");
                     break;
@@ -766,66 +759,67 @@ public class Game {
         double encounterRate = 0.75 + (currentChapter * 0.05);
         if (Math.random() <= encounterRate) {
             if(currentChapter < 3) {
-                System.out.println("🚨 You encountered a Common enemy!");
+                System.out.println(ColorUtil.darkRed("\t🚨 You encountered a Common enemy!"));
                 battleCommon();
             } else if (currentChapter == 3) {
                 if(Math.random() >= 0.75){
-                    System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                    System.out.println(ColorUtil.darkRed("\t🚨 Warning! You encountered an Elite enemy!"));
                     battleElite();
                 } else {
-                    System.out.println("🚨 You encountered a Common enemy!");
+                    System.out.println(ColorUtil.darkRed("\t🚨 You encountered a Common enemy!"));
                     battleCommon();
                 }
             } else if(currentChapter == 4) {
                 if(Math.random() >= 0.10) {
-                    System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                    System.out.println(ColorUtil.darkRed("\t🚨 Warning! You encountered an Elite enemy!"));
                     battleElite();
                 } else {
                     if(EncounterZed) {
-                        System.out.println("🚨" + ColorUtil.redBold(" WARNING!!!") + " You encountered a " + ColorUtil.redBold("BOSS") + " enemy!");
+                        System.out.println("\t🚨" + ColorUtil.redBold(" WARNING!!!") + " You encountered a " + ColorUtil.redBold("BOSS") + " enemy!");
                         battle(player, new MiniBoss.EdgeLordZedjy());
                         EncounterZed = false;
                     } else {
-                        System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                        System.out.println(ColorUtil.darkRed("\t🚨 Warning! You encountered an Elite enemy!"));
                         battleElite();
                     }
                 }
             } else {
-                if(Math.random() >= 0.50) {
-                    System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                if(Math.random() >= 0.40) {
+                    System.out.println(ColorUtil.darkRed("\t🚨 Warning! You encountered an Elite enemy!"));
                     battleElite();
                 } else {
                     if(EncounterZed) {
-                        System.out.println("🚨" + ColorUtil.redBold(" WARNING!!!") + " You encountered a " + ColorUtil.redBold("BOSS") + " enemy!");
+                        System.out.println("\t🚨" + ColorUtil.redBold(" WARNING!!!") + " You encountered a " + ColorUtil.redBold("BOSS") + " enemy!");
                         battle(player, new MiniBoss.EdgeLordZedjy());
                         EncounterZed = false;
                     } else {
-                        System.out.println("🚨 Warning! You encountered an Elite enemy!");
+                        System.out.println(ColorUtil.darkRed("\t🚨 Warning! You encountered an Elite enemy!"));
                         battleElite();
                     }
                 }
             }
         } else {
             // Chance for finding items or hidden events
-            if (Math.random() < 0.7) {
+            if (Math.random() < 0.8) {
                 findHiddenTreasure();
                 delay(800);
             } else {
-                System.out.println("You found nothing of interest.");
+                System.out.println(ColorUtil.blueGreenBold("\t\tYou found nothing of interest."));
                 delay(800);
             }
         }
     }
     private void obtainLoot(Character player, Enemy enemy){
         double chance = Math.random(); //Made a variable para di sigeg gamit ug Math.random ugh
+
         if(!(enemy instanceof MiniBoss)){
             switch(currentChapter) {
                 case 1:
                     Chest CommonChest = new Chest.CommonChest();
-                    System.out.println("↓ 💎 You found a " + CommonChest.getName() + " and open it! ↓");
+                    System.out.println(ColorUtil.blueGreenBold("\t↓ 💎 You found a " + CommonChest.getName() + " and opened it! ↓"));
                     CommonChest.obtain(player);
                     //40% to obtain a weapon :P
-                    if(Math.random() <= 0.4) {
+                    if(Math.random() <= 0.5) {
                         switch (player.getClassType()) {
                             case HAWKSEYE:
                                 if (Math.random() <= 0.5) {
@@ -875,10 +869,10 @@ public class Game {
                 case 2:
                     if(Math.random() > 0.1){
                         Chest EliteChest = new Chest.EliteChest();
-                        System.out.println("↓ 💎 You found a "+EliteChest.getName()+" and open it! ↓");
+                        System.out.println(ColorUtil.blueBright("\t↓ 💎 You found a "+EliteChest.getName()+" and opened it! ↓"));
                         EliteChest.obtain(player);
                         //40% chance to obtain weap
-                        if(Math.random() <= 0.4) {
+                        if(Math.random() <= 0.5) {
                             switch (player.getClassType()) {
                                 case HAWKSEYE:
                                     if (chance <= 0.33) {
@@ -941,10 +935,10 @@ public class Game {
                 case 3:
                     if(Math.random() > 0.2){
                         Chest EpicChest = new Chest.EpicChest();
-                        System.out.println("↓ 💎 You found a "+EpicChest.getName()+" and open it! ↓");
+                        System.out.println(ColorUtil.brightPurpleBold("\t↓ 💎 You found a "+EpicChest.getName()+" and opened it! ↓"));
                         EpicChest.obtain(player);
                         //30% chance to obtain weap
-                        if(Math.random() <= 0.3) {
+                        if(Math.random() <= 0.5) {
                             switch (player.getClassType()) {
                                 case HAWKSEYE:
                                     if (chance <= 0.33) {
@@ -1006,64 +1000,64 @@ public class Game {
                     break;
                 case 4:
                     if(Math.random() > 0.5){
-                        Chest EpicChest = new Chest.EpicChest();
-                        System.out.println("↓ 💎 You found a "+EpicChest.getName()+" and open it! ↓");
-                        EpicChest.obtain(player);
-                        //30% chance to obtain weap
-                        if(Math.random() <= 0.3) {
+                        Chest LegendaryChest = new Chest.LegendaryChest();
+                        System.out.println(ColorUtil.brightYellowBold("\t↓ 💎 You found a "+LegendaryChest.getName()+" and opened it! ↓"));
+                        LegendaryChest.obtain(player);
+                        //20% chance to obtain weap
+                        if(Math.random() <= 0.4) {
                             switch (player.getClassType()) {
                                 case HAWKSEYE:
                                     if (chance <= 0.33) {
-                                        player.obtainItem(findItemId("BW003.1", items, 1));
+                                        player.obtainItem(findItemId("BW004.1", items, 1));
                                     } else if (chance <= 0.66) {
-                                        player.obtainItem(findItemId("BW003.2", items, 1));
+                                        player.obtainItem(findItemId("BW004.2", items, 1));
                                     } else {
-                                        player.obtainItem(findItemId("BW003.3", items, 1));
+                                        player.obtainItem(findItemId("BW004.3", items, 1));
                                     }
                                     break;
                                 case BLADEMASTER:
                                     if (chance <= 0.33) {
-                                        player.obtainItem(findItemId("SW003.1", items, 1));
+                                        player.obtainItem(findItemId("SW004.1", items, 1));
                                     } else if (chance <= 0.66) {
-                                        player.obtainItem(findItemId("SW003.2", items, 1));
+                                        player.obtainItem(findItemId("SW004.2", items, 1));
                                     } else {
-                                        player.obtainItem(findItemId("SW003.3", items, 1));
+                                        player.obtainItem(findItemId("SW004.3", items, 1));
                                     }
                                     break;
                                 case BERSERKER:
                                     if (chance <= 0.33) {
-                                        player.obtainItem(findItemId("BS003.1", items, 1));
+                                        player.obtainItem(findItemId("BS004.1", items, 1));
                                     } else if (chance <= 0.66) {
-                                        player.obtainItem(findItemId("BS003.2", items, 1));
+                                        player.obtainItem(findItemId("BS004.2", items, 1));
                                     } else {
-                                        player.obtainItem(findItemId("BS003.3", items, 1));
+                                        player.obtainItem(findItemId("BS004.3", items, 1));
                                     }
                                     break;
                                 case ASSASSIN:
                                     if (chance <= 0.33) {
-                                        player.obtainItem(findItemId("DR003.1", items, 1));
+                                        player.obtainItem(findItemId("DR004.1", items, 1));
                                     } else if (chance <= 0.66) {
-                                        player.obtainItem(findItemId("DR003.2", items, 1));
+                                        player.obtainItem(findItemId("DR004.2", items, 1));
                                     } else {
-                                        player.obtainItem(findItemId("DR003.3", items, 1));
+                                        player.obtainItem(findItemId("DR004.3", items, 1));
                                     }
                                     break;
                                 case RUNECASTER:
                                     if (chance <= 0.33) {
-                                        player.obtainItem(findItemId("MGS003.1", items, 1));
+                                        player.obtainItem(findItemId("MGS004.1", items, 1));
                                     } else if (chance <= 0.66) {
-                                        player.obtainItem(findItemId("MGS003.2", items, 1));
+                                        player.obtainItem(findItemId("MGS004.2", items, 1));
                                     } else {
-                                        player.obtainItem(findItemId("MGS003.3", items, 1));
+                                        player.obtainItem(findItemId("MGS004.3", items, 1));
                                     }
                                     break;
                                 case RUNEKNIGHT:
                                     if (chance <= 0.33) {
-                                        player.obtainItem(findItemId("MGSW003.1", items, 1));
+                                        player.obtainItem(findItemId("MGSW004.1", items, 1));
                                     } else if (chance <= 0.66) {
-                                        player.obtainItem(findItemId("MGSW003.2", items, 1));
+                                        player.obtainItem(findItemId("MGSW004.2", items, 1));
                                     } else {
-                                        player.obtainItem(findItemId("MGSW003.3", items, 1));
+                                        player.obtainItem(findItemId("MGSW004.3", items, 1));
                                     }
                                     break;
                             }
@@ -1071,12 +1065,12 @@ public class Game {
                     }
                     break;
                 case 5:
-                    if(Math.random() > 0.6){
+                    if(Math.random() > 0.4){
                         Chest LegendaryChest = new Chest.LegendaryChest();
-                        System.out.println("↓ 💎 You found a "+LegendaryChest.getName()+" and open it! ↓");
+                        System.out.println(ColorUtil.brightYellowBold("\t↓ 💎 You found a "+LegendaryChest.getName()+" and opened it! ↓"));
                         LegendaryChest.obtain(player);
                         //20% chance to obtain weap
-                        if(Math.random() <= 0.2) {
+                        if(Math.random() <= 0.5) {
                             switch (player.getClassType()) {
                                 case HAWKSEYE:
                                     if (chance <= 0.33) {
@@ -1138,7 +1132,7 @@ public class Game {
             }
         }else{
             Chest MythicalChest = new Chest.MythicalChest();
-            System.out.println("↓ 💎 You found a " + MythicalChest.getName() + " and open it ↓!");
+            System.out.println(ColorUtil.brightRedBold("\t↓ 💎 You found a " + MythicalChest.getName() + " and opened it ↓!"));
             MythicalChest.obtain(player);
             switch (player.getClassType()) {
                 case HAWKSEYE:
@@ -1165,8 +1159,8 @@ public class Game {
     }
     private void findHiddenTreasure() {
         Random rnd = new Random();
-        System.out.println("💎 You found a hidden treasure!");
-        int expBonus = currentChapter * rnd.nextInt(5, 11);
+        System.out.println(ColorUtil.brightCyanBold("\t\t\t💎 You found a hidden treasure!"));
+        int expBonus = currentChapter * rnd.nextInt(10, 16);
         player.gainExperience(expBonus);
     }
     private boolean attemptChapterProgression() {
@@ -1209,10 +1203,11 @@ public class Game {
     }
 
     private void viewCurrentStory() {
-        System.out.println("\n📖 STORY MENU");
-        System.out.println("[1] View current chapter");
-        System.out.println("[2] View all unlocked chapters");
-        System.out.println("[3] Back");
+        System.out.println(ColorUtil.brightBlueBold("╔════════════════════")+ColorUtil.brightCyanBold(" STORY MENU ")+ColorUtil.brightBlueBold("════════════════════╗"));
+        System.out.println(ColorUtil.brightBlueBold("║") + ColorUtil.brightCyanBold("  [1] View current chapter") + " ".repeat(26) + ColorUtil.brightBlueBold("║"));
+        System.out.println(ColorUtil.brightBlueBold("║") + ColorUtil.brightCyanBold("  [2] View all unlocked chapters") + " ".repeat(20) + ColorUtil.brightBlueBold("║"));
+        System.out.println(ColorUtil.brightBlueBold("║") + ColorUtil.brightCyanBold("  [3] Back") + " ".repeat(42) + ColorUtil.brightBlueBold("║"));
+        System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
 
         int choice = getIntInput("Choose: ", 1, 3);
 
@@ -1228,12 +1223,15 @@ public class Game {
         }
     }
     private void viewAllChapters() {
-        System.out.println("\n📚 ALL CHAPTERS");
+        System.out.println(ColorUtil.brightBlueBold("╔════════════════════════════════════════════════════╗"));
+        System.out.println(" ".repeat(18) + ColorUtil.brightCyanBold("📚 ALL CHAPTERS"));
+        System.out.println(ColorUtil.blueBright("  ──────────────────────────────────────────────────  "));
         for (int i = 1; i <= currentChapter; i++) {
             Chapter chapter = storyManager.getChapter(i);
             String status = chapter.isCompleted() ? "✅" : "🔒";
-            System.out.println(status + " Chapter " + i + ": " + chapter.getChapterTitle());
+            System.out.println("  " + status + ColorUtil.brightCyanBold(" Chapter " + i + ": ") + chapter.getChapterTitle());
         }
+        System.out.println(ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
 
         System.out.println("\nEnter chapter number to replay (or 0 to go back): ");
         int choice = getIntInput("Choose: ", 0, currentChapter);
@@ -1249,7 +1247,7 @@ public class Game {
         int turns = 1;
         Enemy enemy = randomizeCommonEnemy();
 
-        System.out.println("🚨 A wild " + enemy.getName() + " appears!");
+        System.out.println(ColorUtil.darkRed("\t\t🚨 A wild " + enemy.getName() + " appears!"));
         delay(1000);
 
         int baseExp = 30;
@@ -1321,9 +1319,6 @@ public class Game {
         // Clear battle effects after combat
         clearBattleEffects(enemy);
 
-        //Heal 25% lost HP after battle
-        player.afterBattleHeal();
-
         inBattle = false;
     }
     //Random Battle (Elite Enemies)
@@ -1332,7 +1327,7 @@ public class Game {
         int turns = 1;
         Enemy enemy = randomizeEliteEnemy();
 
-        System.out.println("🚨 A wild " + enemy.getName() + " appears!");
+        System.out.println(ColorUtil.darkRed("\t\t🚨 A wild " + enemy.getName() + " appears!"));
         delay(1000);
 
         int baseExp = 40;
@@ -1404,9 +1399,6 @@ public class Game {
         // Clear battle effects after combat
         clearBattleEffects(enemy);
 
-        //Heal 50% lost HP after battle
-        player.afterBattleHeal();
-
         inBattle = false;
     }
     public boolean battleChapterBoss(){
@@ -1414,7 +1406,8 @@ public class Game {
         int turns = 1;
         Enemy enemy = selectChapterBoss();
 
-        System.out.println("🚨 BOSS " + enemy.getName() + " appears!");
+        System.out.println(ColorUtil.brightRedBold("\t\t\t\t\t‼️ WARNING ️‼️️"));
+        System.out.println(ColorUtil.brightRedBold("\t\t\t🚨 BOSS " + enemy.getName() + " appears!"));
         delay(1000);
 
         int baseExp = 40;
@@ -1486,9 +1479,6 @@ public class Game {
         // Clear battle effects after combat
         clearBattleEffects(enemy);
 
-        //Heal 50% lost HP after battle
-        player.afterBattleHeal();
-
         inBattle = false;
         return hasWon;
     }
@@ -1497,7 +1487,7 @@ public class Game {
         inBattle = true;
         int turns = 1;
 
-        System.out.println("🚨 Careful! " + enemy.getName() + " appears!");
+        System.out.println(ColorUtil.brightRedBold("\t\t🚨 Careful! " + enemy.getName() + " appears!"));
         delay(1000);
 
         int baseExp = 30;
@@ -1574,10 +1564,10 @@ public class Game {
         inBattle = true;
         int turns = 1;
 
-        System.out.println("🚨 BOSS " + enemy.getName() + " appears!");
+        System.out.println(ColorUtil.brightRedBold("\t\t🚨 BOSS " + enemy.getName() + " appears!"));
         delay(1000);
 
-        int baseExp = 30;
+        int baseExp = 50;
 
         int playerCurrentSpeed = player.getSpeed();
         int playerOriginalSpeed = player.getSpeed();
@@ -1655,6 +1645,8 @@ public class Game {
             if(wave == maxWave){
                 battle(player, enemy);
             }else if(wave == 1 && maxWave == 3){
+                battle(player, randomizeEliteEnemy());
+            }else if(wave == 1 && maxWave == 2){
                 battle(player, randomizeEliteEnemy());
             }else{
                 battle(player, new Boss.Kamish());
@@ -1746,7 +1738,7 @@ public class Game {
                         System.out.println(ColorUtil.brightGreenBold("\t\tYou dealt " + actualDamage + " damage to " + enemy.getName()));
                         delay(1000);
                     } else {
-                        System.out.println(ColorUtil.orange("\t\t\t\t"+enemy.getName()+" avoided the attack!"));
+                        System.out.println(ColorUtil.orange("\t\t\t"+enemy.getName()+" avoided the attack!"));
                         damage = 0;
                         delay(1000);
                     }
@@ -1792,7 +1784,7 @@ public class Game {
                     break;
                 case 3:
                     if(!(enemy instanceof Boss)){
-                        if (Math.random() > 0.75) {
+                        if (Math.random() > 0.9) {
                             System.out.println("You successfully fled!");
                             inBattle = false;
                             return -1;
@@ -1801,7 +1793,7 @@ public class Game {
                         }
                         hasActed = true;
                     }else{
-                        System.out.println("Cannot run from a boss");
+                        System.out.println(ColorUtil.brightRedBold("\t\t\t⚠️ Cannot run from a boss!"));
                     }
 
                     break;
@@ -1913,20 +1905,88 @@ public class Game {
             System.out.println("Remember: You still have your resurrection available for next time!");
         }
 
+        String[] bannerLines = {
+                "▓█████▄ ▓█████   █████▒▓█████ ▄▄▄     ▄▄▄█████▓",
+                "▒██▀ ██▌▓█   ▀ ▓██   ▒ ▓█   ▀▒████▄   ▓  ██▒ ▓▒",
+                "░██   █▌▒███   ▒████ ░ ▒███  ▒██  ▀█▄ ▒ ▓██░ ▒░",
+                "░▓█▄   ▌▒▓█  ▄ ░▓█▒  ░ ▒▓█  ▄░██▄▄▄▄██░ ▓██▓ ░ ",
+                "░▒████▓ ░▒████▒░▒█░    ░▒████▒▓█   ▓██▒ ▒██▒ ░ ",
+                " ▒▒▓  ▒ ░░ ▒░ ░ ▒ ░    ░░ ▒░ ░▒▒   ▓▒█░ ▒ ░░   ",
+                " ░ ▒  ▒  ░ ░  ░ ░       ░ ░  ░ ▒   ▒▒ ░   ░    ",
+                " ░ ░  ░    ░    ░ ░       ░    ░   ▒    ░      ",
+                "   ░       ░  ░           ░  ░     ░  ░        ",
+                " ░                                             "
+        };
+
+        for (String line : bannerLines) {
+            String coloredLine = "";
+            for (int i = 0; i < line.length(); i++) {
+                char c = line.charAt(i);
+                if(c == '█'){
+                    coloredLine += ColorUtil.redBright("█");
+                } else if(c == '▄'){
+                    coloredLine += ColorUtil.redBright("▄");
+                } else if(c == '▀'){
+                    coloredLine += ColorUtil.redBright("▀");
+                } else if(c == '▌'){
+                    coloredLine += ColorUtil.redBright("▌");
+                } else if (c == '▓') {
+                    coloredLine += ColorUtil.red("▓");
+                } else if (c == '▒') {
+                    coloredLine += ColorUtil.darkRed("▒");
+                } else if (c == '░') {
+                    coloredLine += ColorUtil.darkRed("░");
+                } else {
+                    coloredLine += ConsoleColors.RESET + c;
+                }
+            }
+            coloredLine += ConsoleColors.RESET;
+            System.out.println(coloredLine);
+        }
+        delay(500);
+
         // Partial recovery but lose some progress
         player.setHealth(player.getMaxHealth() / 3);
         System.out.println("You wake up with " + player.getHealth() + " HP.");
+        delay(500);
 
         // Lose some experience but not below current level
         int expLoss = (int)(player.getExperience() * 0.1);
         player.setExperience(Math.max(0, player.getExperience() + expLoss));
         System.out.println("You lost " + expLoss + " experience points during the retreat.");
+        delay(500);
     }
     private void handleVictory(Enemy enemy, int baseExp, Character player) {
         if(enemy.getHealth() <= 0){
-            //System.out.println("💀 " + enemy.getName() + " has been defeated!");
-            System.out.println("🎉 You defeated " + enemy.getName() + "!");
+            System.out.println(ColorUtil.brightYellowBold("\t\t🎉 You defeated " + enemy.getName() + "!"));
             delay(500);
+
+            String[] bannerLines2 = {
+                    "░██    ░██ ░██████  ░██████  ░██████████  ░██████   ░█████████  ░██     ░██ ░██ ",
+                    "░██    ░██   ░██   ░██   ░██     ░██     ░██   ░██  ░██     ░██  ░██   ░██  ░██ ",
+                    "░██    ░██   ░██  ░██            ░██    ░██     ░██ ░██     ░██   ░██ ░██   ░██ ",
+                    "░██    ░██   ░██  ░██            ░██    ░██     ░██ ░█████████     ░████    ░██ ",
+                    " ░██  ░██    ░██  ░██            ░██    ░██     ░██ ░██   ░██       ░██     ░██ ",
+                    "  ░██░██     ░██   ░██   ░██     ░██     ░██   ░██  ░██    ░██      ░██         ",
+                    "   ░███    ░██████  ░██████      ░██      ░██████   ░██     ░██     ░██     ░██ ",
+            };
+
+            for (String line : bannerLines2) {
+                String coloredLine = "";
+                for (int i = 0; i < line.length(); i++) {
+                    char c = line.charAt(i);
+                    if (c == '░') {
+                        coloredLine += ColorUtil.yellow("░");
+                    } else if (c == '█') {
+                        coloredLine += ColorUtil.brightYellowBold("█");
+                    } else {
+                        coloredLine += ConsoleColors.RESET + c;
+                    }
+                }
+                coloredLine += ConsoleColors.RESET;
+                System.out.println(coloredLine);
+            }
+            delay(1200);
 
             player.gainExperience(baseExp);
             delay(500);
@@ -1936,18 +1996,22 @@ public class Game {
 
             obtainLoot(player, enemy);
             delay(500);
+
+            //Heal 25% Lost Hp after winning a battle
+            player.afterBattleHeal();
+            delay(500);
         }
     }
     // Add a method to check resurrection status
-    public void checkResurrectionStatus() {
-        System.out.println("\n🔮 Resurrection Status:");
-        if (player.hasResurrected()) {
-            System.out.println("❌ Resurrection has been used and cannot be used again.");
-        } else {
-            System.out.println("✅ Resurrection is available! You will be given the option to resurrect once when defeated.");
-            System.out.println("This powerful ability can only be used once per playthrough.");
-        }
-    }
+//    public void checkResurrectionStatus() {
+//        System.out.println("\n🔮 Resurrection Status:");
+//        if (player.hasResurrected()) {
+//            System.out.println("❌ Resurrection has been used and cannot be used again.");
+//        } else {
+//            System.out.println("✅ Resurrection is available! You will be given the option to resurrect once when defeated.");
+//            System.out.println("This powerful ability can only be used once per playthrough.");
+//        }
+//    }
 
     //Character
     public void addStarterPack(Character player, List<Item> items){
@@ -2003,9 +2067,9 @@ public class Game {
         boolean isEmpty = false;
         while(confirm == 0){
             player.displayInventory();
-            System.out.println(ColorUtil.brightCyanBold("[11] Back"));
-            int choice = getIntInput("Select an item: ", 1, 11);
-            if(choice == 11){
+            System.out.println(ColorUtil.brightCyanBold("[0] Back"));
+            int choice = getIntInput("Select an item: ", 0, 10);
+            if(choice == 0){
                 break;
             }
             Item item = player.getInventory().getItems()[--choice];
@@ -2062,9 +2126,9 @@ public class Game {
         boolean isEmpty = false;
         while(confirm == 0){
             player.displayInventory();
-            System.out.println(ColorUtil.brightCyanBold("[11] Back"));
-            int choice = getIntInput("Select an item: ", 1, 11);
-            if(choice == 11){
+            System.out.println(ColorUtil.brightCyanBold("[0] Back"));
+            int choice = getIntInput("Select an item: ", 0, 10);
+            if(choice == 0){
                 break;
             }
             Item item = player.getInventory().getItems()[--choice];
@@ -2116,7 +2180,7 @@ public class Game {
         Random rnd = new Random();
         int goldYield = currentChapter * rnd.nextInt(15, 21);
         player.setCurrency(player.getCurrency() + goldYield);
-        System.out.println("\uD83E\uDE99 Gained "+goldYield+" gold coins!");
+        System.out.println(ColorUtil.brightYellowBold("\t\t\t\uD83E\uDE99 Gained "+goldYield+" gold coins!"));
     }
     public void displayBattleHealth(Character player, Entity enemy){
         String playerHealthBar = createHealthBar(player, 45);
