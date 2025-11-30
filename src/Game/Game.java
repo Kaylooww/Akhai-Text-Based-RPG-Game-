@@ -1203,7 +1203,9 @@ public class Game {
         // Play the new chapter's story
         storyManager.playChapter(currentChapter);
 
-        System.out.println("\n⚔️ New challenges await in " + getLevelName(currentChapter) + "!");
+        if(currentChapter < MAX_LEVEL){
+            System.out.println("\n⚔️ New challenges await in " + getLevelName(currentChapter) + "!");
+        }
     }
 
     private void viewCurrentStory() {
