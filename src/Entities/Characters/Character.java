@@ -252,8 +252,7 @@ public abstract class Character extends Entity {
         Item[] items = inventory.getItems();
         boolean hasStored = false;
 
-        if(item instanceof Weapon && hasItem(item)){
-            //System.out.println("Obtained "+item.getName()+" but already owned");
+        if (item instanceof Weapon && hasItem(item)) {
             hasStored = true;
         }
         if (!inventory.getIsFull() && !hasStored) {
@@ -275,7 +274,7 @@ public abstract class Character extends Entity {
                     return;
                 }
             }
-        } else if(inventory.getIsFull() && hasItem(item)){
+        } else if (inventory.getIsFull()) {
             System.out.println("Inventory is full!");
         }
     }

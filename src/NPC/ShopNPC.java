@@ -229,7 +229,7 @@ public class ShopNPC extends NPC{
                         break;
                     }
                     if(player.getCurrency() > quantity * purchasedItem.getValue()){
-                        if(player.getInventory().getIsFull()){
+                        if(player.getInventory().getIsFull() && !player.hasItem(purchasedItem)){
                             System.out.println("Inventory is full!");
                             break;
                         }else{
