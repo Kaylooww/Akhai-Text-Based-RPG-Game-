@@ -635,9 +635,7 @@ public class Game {
             String playerHealthBar = createHealthBar(player, 37);
             String playerEnergyBar = createEnergyBar(player, 37);
 
-            System.out.println(ColorUtil.green("   " + playerHealthBar + " HP\n   ") + playerEnergyBar + "\n   1" +
-                    "1" +
-                    "" + ColorUtil.cyan(playerExpBar + " Exp"));
+            System.out.println(ColorUtil.green("   " + playerHealthBar + " HP\n   ") + playerEnergyBar + "\n   " + ColorUtil.cyan(playerExpBar + " Exp"));
             System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
             delay(500);
             System.out.println(ColorUtil.blueBright("╔════════════════════════════════════════════════════╗"));
@@ -678,7 +676,11 @@ public class Game {
                 case 7:
                     //TODO before next level must fight boss that correlates to the story
                     //add boss before next chapter and must win in order to proceed
-                    attemptChapterProgression();
+                    if(attemptChapterProgression()){
+                        if(battleChapterBoss()){
+                            proceedToNextChapter();
+                        }
+                    }
                     break;
                 case 8:
                     gameRunning = false;
@@ -744,6 +746,7 @@ public class Game {
                     //TODO battle finale boss (Demon King Din) must correlate to the story
                     battle(player, new Boss.DemonKingDin(), 3);
                     //TODO story ends after winning the battle
+                    proceedToNextChapter();
                     break;
                 case 8:
                     gameRunning = false;
@@ -1166,7 +1169,7 @@ public class Game {
         int expBonus = currentChapter * rnd.nextInt(5, 11);
         player.gainExperience(expBonus);
     }
-    private void attemptChapterProgression() {
+    private boolean attemptChapterProgression() {
         if (currentChapter >= MAX_LEVEL) {
             System.out.println("🎉 Congratulations! You've completed all chapters!");
 
@@ -1174,17 +1177,19 @@ public class Game {
                 System.out.println("\n✨ You have witnessed the complete story of Akhai!");
                 System.out.println("Thank you for playing!");
             }
-            return;
+            return true;
         }
-
         // Check if player is strong enough to progress
         if (player.getLevel() < currentChapter * 4) {
             System.out.println(ColorUtil.red("\n⚠️ You're not strong enough to face the challenges ahead!"));
             System.out.println(ColorUtil.brightCyanBold("Recommended level for next chapter:") + ColorUtil.brightYellowBold((" " + currentChapter * 4)));
             System.out.println(ColorUtil.brightCyanBold("Your current level:") + ColorUtil.brightYellowBold(" " + player.getLevel()));
-            return;
+            return false;
+        }else{
+            return true;
         }
-
+    }
+    private void proceedToNextChapter(){
         System.out.println("\n📖 Beginning Chapter " + (currentChapter + 1) + "...");
         delay(1000);
 
@@ -1199,18 +1204,6 @@ public class Game {
         storyManager.playChapter(currentChapter);
 
         System.out.println("\n⚔️ New challenges await in " + getLevelName(currentChapter) + "!");
-    }
-    public void talkToNPC() {
-        System.out.println("Which NPC would you like to talk to?");
-        for (int i = 0; i < npcs.size(); i++) {
-            System.out.println((i + 1) + ". " + npcs.get(i).getName() + " - " + npcs.get(i).getDescription());
-        }
-
-        int choice = getIntInput("Enter your choice: ", 1, npcs.size());
-        NPC selectedNPC = npcs.get(choice - 1);
-
-        System.out.println("You approach " + selectedNPC.getName() + "...");
-        selectedNPC.interact(player, currentChapter);
     }
 
     private void viewCurrentStory() {
@@ -1232,7 +1225,6 @@ public class Game {
                 return;
         }
     }
-
     private void viewAllChapters() {
         System.out.println("\n📚 ALL CHAPTERS");
         for (int i = 1; i <= currentChapter; i++) {
@@ -1414,6 +1406,89 @@ public class Game {
         player.afterBattleHeal();
 
         inBattle = false;
+    }
+    public boolean battleChapterBoss(){
+        inBattle = true;
+        int turns = 1;
+        Enemy enemy = selectChapterBoss();
+
+        System.out.println("🚨 BOSS " + enemy.getName() + " appears!");
+        delay(1000);
+
+        int baseExp = 40;
+
+        int playerCurrentSpeed = player.getSpeed();
+        int playerOriginalSpeed = player.getSpeed();
+        int enemyCurrentSpeed = enemy.getSpeed();
+        int enemyOriginalSpeed = enemy.getSpeed();
+
+        while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
+
+            System.out.println(ColorUtil.brightBlueBold("\n═══════════════════════") + ColorUtil.brightYellowBold(" TURN "+(turns++)) + ColorUtil.brightBlueBold(" ═══════════════════════"));
+            displayBattleHealth(player, enemy);
+
+            boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
+            System.out.println("\t\t\t\t" + (isPlayerTurn ? ColorUtil.brightGreenBold(player.getName() + "'s turn!") : ColorUtil.brightRedBold(enemy.getName() + "'s turn!")));
+
+            //Take action based on who's acting
+            int damage = takeAction(isPlayerTurn, enemy);
+
+            //Update speed counters after action
+            if (damage != -1) {
+                if (isPlayerTurn) {
+                    playerCurrentSpeed -= enemyCurrentSpeed;
+                    if (enemyCurrentSpeed < enemyOriginalSpeed) {
+                        enemyCurrentSpeed += enemyOriginalSpeed;
+                    }
+                } else {
+                    enemyCurrentSpeed -= playerCurrentSpeed;
+                    if (playerCurrentSpeed < playerOriginalSpeed) {
+                        playerCurrentSpeed += playerOriginalSpeed;
+                    }
+
+                    if (damage > 0) {
+                        player.generateEnergyFromDamage();
+                    }
+                }
+            }
+
+            //Check if player died and can resurrect
+            if (!isPlayerTurn && player.getHealth() <= 0 && !player.hasResurrected()) {
+                System.out.println("\n💫 The power of resurrection is available...");
+                delay(1000);
+                System.out.println("Would you like to use your one-time resurrection?");
+                delay(500);
+                System.out.println("[1] Yes, resurrect and continue fighting!");
+                System.out.println("[2] No, accept defeat");
+
+                int resurrectChoice = getIntInput("Choose: ", 1, 2);
+                if (resurrectChoice == 1) {
+                    player.resurrect();
+                    // Player gets a free turn after resurrection
+                    System.out.println("\n⭐ " + player.getName() + " gets a free attack after resurrection!");
+                    damage = player.getBasicAttack().execute(player);
+                    int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
+                    System.out.println(ColorUtil.brightGreenBold("\t\tYou dealt " + actualDamage + " damage to " + enemy.getName()));
+
+                    //Reset player speed after resurrection free turn
+                    playerCurrentSpeed = playerOriginalSpeed;
+                } else {
+                    System.out.println("You accept your fate...");
+                }
+            }
+            player.checkStatusEffect();
+            enemy.checkStatusEffect();
+        }
+        boolean hasWon = playerHealthCheck(enemy, baseExp, player);
+
+        // Clear battle effects after combat
+        clearBattleEffects(enemy);
+
+        //Heal 50% lost HP after battle
+        player.afterBattleHeal();
+
+        inBattle = false;
+        return hasWon;
     }
 
     public void battle(Character player, EliteEnemy enemy){
@@ -1629,11 +1704,20 @@ public class Game {
         }
     }
     private String createExperienceBar(Character player, int length) {
-        int filled = (player.getExperience() * length) / player.getExperienceNeeded();
+        int currentExp = player.getExperience();
+        int maxExp = player.getExperienceNeeded();
+
+        // Ensure we don't divide by zero and clamp values
+        if (maxExp <= 0) maxExp = 1;
+        if (currentExp < 0) currentExp = 0;
+        if (currentExp > maxExp) currentExp = maxExp;
+
+        int filled = (int) ((double) currentExp / maxExp * length);
+        filled = Math.max(0, Math.min(filled, length)); // Clamp between 0 and length
         int empty = length - filled;
 
-        String bar = "█".repeat(filled) + "░".repeat(empty);
-        return String.format("%s %d/%d", bar, player.getExperience(), player.getExperienceNeeded());
+        String bar = "█".repeat(filled) + "░".repeat(Math.max(0, empty));
+        return String.format("%s %d/%d", bar, currentExp, maxExp);
     }
     private boolean checkSpeed(int playerCurrentSpeed, int enemyCurrentSpeed){
         if (playerCurrentSpeed >= enemyCurrentSpeed) {
@@ -1808,13 +1892,16 @@ public class Game {
         player.setShield(0);
     }
 
-    private void playerHealthCheck(Enemy enemy, int baseExp, Character player){
+    private boolean playerHealthCheck(Enemy enemy, int baseExp, Character player){
+        boolean hasWon = false;
         if (player.getHealth() <= 0) {
             handlePlayerDefeat();
         } else {
             handleVictory(enemy, baseExp, player);
+            hasWon = true;
         }
         resetHasConsumed(items);
+        return hasWon;
     }
     private void handlePlayerDefeat() {
         System.out.println("\n💀 You have been defeated...");
@@ -1838,10 +1925,13 @@ public class Game {
             //System.out.println("💀 " + enemy.getName() + " has been defeated!");
             System.out.println("🎉 You defeated " + enemy.getName() + "!");
             delay(500);
+
             player.gainExperience(baseExp);
             delay(500);
+
             obtainGold(player);
             delay(500);
+
             obtainLoot(player, enemy);
             delay(500);
         }
@@ -2095,6 +2185,19 @@ public class Game {
 
         }
         return null;
+    }
+    public Boss selectChapterBoss(){
+        switch(currentChapter){
+            case 1:
+                return new Boss.Frankenstein();
+            case 2:
+                return new Boss.MiningCable();
+            case 3:
+                return new Boss.Kamish();
+            case 4:
+                return new Boss.Abaddon();
+        }
+        return new Boss.DemonKingDin();
     }
 
     //Item

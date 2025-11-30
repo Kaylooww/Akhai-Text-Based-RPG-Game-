@@ -103,6 +103,7 @@ public class Boss extends Enemy {
             ultimateAttack = new EnemySkill("Ult: Apocalypse Call", "Summons the end of days in a cataclysmic explosion of power", 2.50, 80, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }
+
     //For more Boss add here:
     // Weak bosses chap 1-3, difficulty spike at chap 4
     //chap 3
