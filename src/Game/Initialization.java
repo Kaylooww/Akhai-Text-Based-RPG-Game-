@@ -16,7 +16,7 @@ public class Initialization {
     static ColorUtil ColorUtil = new  ColorUtil();
     
     //TODO fix this bs where it will error adding and the error is "IndexOutOfBounds"
-    public static void initPotions() {
+    public static void initPotions(List<Item> items) {
         //Items
         items.add(new HealingPotion("HP001",ColorUtil.blueGreen("Lesser Healing Potion"), "<Empty>", 12, 1, 5, Rarity.COMMON, 50));
         items.add(new HealingPotion("HP002", ColorUtil.blueBright("Healing Potion"), "<Empty>", 12, 1, 10, Rarity.RARE, 75));
@@ -49,7 +49,7 @@ public class Initialization {
         items.add(new EvasivenessPotion("EVP004", ColorUtil.brightYellowBold("Legendary Evasiveness Potion"), "Massively reduces enemy accuracy", 12, 1, 25, Rarity.LEGENDARY, 0.15));
     }
 
-    public void initWeaponT1() {
+    public void initWeaponT1(List<Item> items) {
 //Tier 1 (COMMON) Weapons and Varieties
 //1
         items.add(new Weapon("BW001.1", ColorUtil.blueGreen("Wooden Bow"), WeaponType.BOW, "",
@@ -115,7 +115,7 @@ public class Initialization {
                 20, Rarity.COMMON));
     }
 
-    public void initWeaponT2() {
+    public void initWeaponT2(List<Item> items) {
 //Tier 2 (RARE) Weapons and Varieties
 //1
         items.add(new Weapon("BW002.1", ColorUtil.blueBright("Iron Bow"), WeaponType.BOW, "",
@@ -212,7 +212,7 @@ public class Initialization {
                 80, Rarity.RARE));
     }
 
-    public void initWeaponT3() {
+    public void initWeaponT3(List<Item> items) {
 //Tier 3 (EPIC) Weapons including Varieties
 //1
         items.add(new Weapon("BW003.1", ColorUtil.brightPurpleBold("Elven Bow"), WeaponType.BOW, "",
@@ -309,7 +309,7 @@ public class Initialization {
                 120, Rarity.EPIC));
     }
 
-    public void initWeaponT4() {
+    public void initWeaponT4(List<Item> items) {
 //Tier 4 (LEGENDARY) Weapons including Varieties
 //1
         items.add(new Weapon("BW004.1", ColorUtil.brightYellowBold("Seraphic Longbow"), WeaponType.BOW, "",
@@ -406,7 +406,7 @@ public class Initialization {
                 150, Rarity.LEGENDARY));
     }
 
-    public void initWeaponHiddenTier() {
+    public void initWeaponHiddenTier(List<Item> items) {
 //Hidden Tier (MYTHICAL) Weapons [Hehe I may or may not have made this a bit too Over-Powered] -zed
         items.add(new Weapon("BW005", ColorUtil.brightRedBold("Recurve of Eternal Fate"), WeaponType.BOW, "",
                 new WeaponSkill("Basic Attack", "Fires arrows that rewrite probability, ensuring each shot was always destined to strike true while making all possible dodges impossible.", 2.5, 0, DamageType.PHYSICAL, TargetType.SINGLE),

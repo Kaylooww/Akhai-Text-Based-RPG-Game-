@@ -1,5 +1,7 @@
 package Story;
 
+//By Kyle
+
 import TextFormat.ColorUtil;
 import java.util.Scanner;
 
@@ -85,44 +87,33 @@ public class DialogueNode {
         }
     }
 
-    /**
-     * Displays narration text in cyan
-     */
+
+    //Displays narration text in cyan
     private void displayNarration() {
         System.out.println(ColorUtil.cyan("\n" + text));
     }
 
-    /**
-     * Displays player character speech in green
-     */
+    //Displays player character speech in green
     private void displayCharacterSpeech() {
         System.out.println(ColorUtil.green("\n[" + speaker + "]: " + text));
     }
 
-    /**
-     * Displays Khai's speech in purple
-     */
+    //Displays Khai's speech in purple
     private void displayKhaiSpeech() {
         System.out.println(ColorUtil.purple("\n[Khai - The Wandering Spirit]: " + text));
     }
 
-    /**
-     * Displays Din's speech in red
-     */
+    //Displays Din's speech in red
     private void displayDinSpeech() {
         System.out.println(ColorUtil.red("\n[Din - The Demon King]: " + text));
     }
 
-    /**
-     * Displays system messages in yellow
-     */
+    //Displays system messages in yellow
     private void displaySystemMessage() {
         System.out.println(ColorUtil.yellow("\n>>> " + text + " <<<"));
     }
 
-    /**
-     * Displays character thoughts in blue
-     */
+    //Displays character thoughts in blue
     private void displayThought() {
         System.out.println(ColorUtil.blue("\n(Thought) " + text));
     }

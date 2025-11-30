@@ -1,5 +1,7 @@
 package Story;
 
+//By Kyle
+
 import Story.DialogueNode.DialogueType;
 import TextFormat.ColorUtil;
 
@@ -16,7 +18,7 @@ public class StoryManager {
     private int currentChapter;
 
     /**
-     * Constructor initializes the complete story
+     * This constructor initializes the complete story
      */
     public StoryManager() {
         this.chapters = new ArrayList<>();
