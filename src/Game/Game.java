@@ -635,7 +635,9 @@ public class Game {
             String playerHealthBar = createHealthBar(player, 37);
             String playerEnergyBar = createEnergyBar(player, 37);
 
-            System.out.println("   " + ColorUtil.cyan(playerExpBar + " Exp\n   ") + ColorUtil.green(playerHealthBar + " HP\n   ") + playerEnergyBar);
+            System.out.println(ColorUtil.green("   " + playerHealthBar + " HP\n   ") + playerEnergyBar + "\n   1" +
+                    "1" +
+                    "" + ColorUtil.cyan(playerExpBar + " Exp"));
             System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
             delay(500);
             System.out.println(ColorUtil.blueBright("╔════════════════════════════════════════════════════╗"));
@@ -1936,11 +1938,16 @@ public class Game {
                         System.out.println(player.getName()+" used "+item.getName()+"!");
                         delay(1000);
                         item.use(player);
-                        if(inBattle && uses < 2){
-                            System.out.println(ColorUtil.brightYellowBold("\t\t\tYou can take another action!"));
-                            delay(1000);
-                            if(item instanceof HealingPotion){
-                                uses++;
+                        if(inBattle){
+                            if(uses < 2){
+                                System.out.println(ColorUtil.brightYellowBold("\t\t\tYou can take another action!"));
+                                delay(1000);
+                                if(item instanceof HealingPotion){
+                                    uses++;
+                                }
+                            }else{
+                                System.out.println(ColorUtil.brightYellowBold("\t\t\tEnding Turn!..."));
+                                delay(1000);
                             }
                         }
                         confirm = 0;
@@ -1987,13 +1994,18 @@ public class Game {
                         System.out.println(player.getName()+" used "+item.getName()+"!");
                         delay(1000);
                         item.use(player);
-                        if(inBattle && uses < 2){
-                            System.out.println(ColorUtil.brightYellowBold("\t\t\tYou can take another action!"));
-                            delay(1000);
-                            displayBattleHealth(player, enemy);
-                            confirm = 0;
-                            if(item instanceof HealingPotion){
-                                uses++;
+                        if(inBattle){
+                            if(uses < 2){
+                                System.out.println(ColorUtil.brightYellowBold("\t\t\tYou can take another action!"));
+                                delay(1000);
+                                displayBattleHealth(player, enemy);
+                                confirm = 0;
+                                if(item instanceof HealingPotion){
+                                    uses++;
+                                }
+                            }else{
+                                System.out.println(ColorUtil.brightYellowBold("\t\t\tEnding Turn!..."));
+                                delay(1000);
                             }
                         }
                     }
