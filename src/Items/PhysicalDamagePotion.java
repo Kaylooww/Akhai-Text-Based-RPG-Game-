@@ -20,7 +20,7 @@ public class PhysicalDamagePotion extends Consumable{
             PhysicalDamageBoost effect = new PhysicalDamageBoost(physicalDamageAmount);
             effect.applyEffect(player);
             player.addStatusEffect(effect);
-            System.out.println("💪 " + player.getName() + "'s physical damage increased by " + (physicalDamageAmount * 100) + "%!");
+            System.out.println(ColorUtil.brightYellowBold("💪 " + player.getName() + "'s physical damage increased by " + (physicalDamageAmount * 100) + "%!"));
             setQuantity(getQuantity() - 1);
             hasConsumed = true;
         }else{

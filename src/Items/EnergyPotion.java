@@ -18,10 +18,10 @@ public class EnergyPotion extends Consumable{
             if(player.getEnergy() >= player.getMaxEnergy()){
                 player.setEnergy(player.getMaxEnergy());
             }
-            System.out.println("⚡ " + player.getName() + " restored " + energyAmount + " energy!");
+            System.out.println(ColorUtil.brightCyanBold("⚡ " + player.getName() + " restored " + energyAmount + " energy!"));
             setQuantity(getQuantity() - 1);
         }else{
-            System.out.println("Energy is full!");
+            System.out.println(ColorUtil.brightRedBold("Energy is full!"));
         }
     }
 

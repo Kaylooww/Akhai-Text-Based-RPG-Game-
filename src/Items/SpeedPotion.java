@@ -19,7 +19,7 @@ public class SpeedPotion extends Consumable{
             SpeedBoost effect = new SpeedBoost(speedAmount);
             effect.applyEffect(player);
             player.addStatusEffect(effect);
-            System.out.println("⚡ " + player.getName() + "'s speed increased by " + speedAmount + "!");
+            System.out.println(ColorUtil.brightBlueBold("⚡ " + player.getName() + "'s speed increased by " + speedAmount + "!"));
             setQuantity(getQuantity() - 1);
             hasConsumed = true;
         }else{

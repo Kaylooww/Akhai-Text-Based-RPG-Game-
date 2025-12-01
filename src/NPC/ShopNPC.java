@@ -215,10 +215,10 @@ public class ShopNPC extends NPC{
                 boolean confirm = false;
                 while(!confirm){
                     if(player.hasItem(purchasedItem) && purchasedItem instanceof Weapon){
-                        System.out.println("You've already owned this weapon!");
+                        System.out.println(ColorUtil.brightRedBold("\t\t\tYou already own this weapon!"));
                         break;
                     }else if(purchasedItem.getMaxStack() == purchasedItem.getQuantity()){
-                        System.out.println("Cannot buy item (Max Stack)!");
+                        System.out.println(ColorUtil.brightRedBold("\t\t\tCannot buy item (Max Stack)!"));
                         break;
                     }
 

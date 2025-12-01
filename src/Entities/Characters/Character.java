@@ -165,7 +165,10 @@ public abstract class Character extends Entity {
         System.out.println(ColorUtil.blueBright("  ──────────────────────────────────────────────────  "));
         System.out.println(ColorUtil.brightCyanBold("   🔄 Resurrection: " + (hasResurrected ? "❌ USED" : "✅ AVAILABLE")));
         System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
-        delay(1500);
+        System.out.println(ColorUtil.brightCyanBold("\t\t\t[Press ENTER to continue...]"));
+
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        scanner.nextLine();
     }
 
     public void displayInventory(){

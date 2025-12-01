@@ -117,4 +117,9 @@ public class ColorUtil {
     public static String brightBlueGreenBold(String text) {
         return ConsoleColors.BLUE_GREEN_BOLD_BRIGHT + text + ConsoleColors.RESET;
     }
+
+    //background
+    public static String brightGreenBg(String text) {
+        return ConsoleColors.BRIGHT_GREEN_BACKGROUND + text + ConsoleColors.RESET;
+    }
 }

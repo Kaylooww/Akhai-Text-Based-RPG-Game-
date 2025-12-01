@@ -20,7 +20,7 @@ public class EvasivenessPotion extends Consumable{
         if(hasConsumed == false){
             EvasivenessBoost effect = new EvasivenessBoost(accuracyReduction);
             player.addStatusEffect(effect);
-            System.out.println("🌪️ " + player.getName() + "'s evasiveness increased! Enemy accuracy reduced by " + (accuracyReduction * 100) + "%!");
+            System.out.println(ColorUtil.brightPurpleBold("🌪️ " + player.getName() + "'s evasiveness increased! Enemy accuracy reduced by " + (accuracyReduction * 100) + "%!"));
             setQuantity(getQuantity() - 1);
             hasConsumed = true;
         }else{

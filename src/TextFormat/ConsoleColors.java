@@ -60,11 +60,25 @@ public class ConsoleColors {
     public static final String WHITE_BOLD_BRIGHT = "\033[1;97m";   // WHITE
     public static final String BLUE_GREEN_BOLD_BRIGHT = "\u001B[1;38;2;0;230;230m"; // BOLD BRIGHT BLUE_GREEN
 
-    // Background
-    public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
-    public static final String RED_BACKGROUND = "\033[41m";    // RED
-    public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN
-    public static final String BLUE_GREEN_BACKGROUND = "\u001B[48;2;0;165;165m"; // BLUE_GREEN BACKGROUND
+    // Standard background colors
+    public static final String BLACK_BACKGROUND = "\033[40m";        // BLACK
+    public static final String RED_BACKGROUND = "\033[41m";          // RED
+    public static final String GREEN_BACKGROUND = "\033[42m";        // GREEN
+    public static final String YELLOW_BACKGROUND = "\033[43m";       // YELLOW
+    public static final String BLUE_BACKGROUND = "\033[44m";         // BLUE
+    public static final String MAGENTA_BACKGROUND = "\033[45m";      // MAGENTA
+    public static final String CYAN_BACKGROUND = "\033[46m";         // CYAN
+    public static final String WHITE_BACKGROUND = "\033[47m";        // WHITE
+
+    // Bright background colors (high intensity)
+    public static final String BRIGHT_BLACK_BACKGROUND = "\033[100m";   // BRIGHT BLACK (GRAY)
+    public static final String BRIGHT_RED_BACKGROUND = "\033[101m";     // BRIGHT RED
+    public static final String BRIGHT_GREEN_BACKGROUND = "\033[102m";   // BRIGHT GREEN
+    public static final String BRIGHT_YELLOW_BACKGROUND = "\033[103m";  // BRIGHT YELLOW
+    public static final String BRIGHT_BLUE_BACKGROUND = "\033[104m";    // BRIGHT BLUE
+    public static final String BRIGHT_MAGENTA_BACKGROUND = "\033[105m"; // BRIGHT MAGENTA
+    public static final String BRIGHT_CYAN_BACKGROUND = "\033[106m";    // BRIGHT CYAN
+    public static final String BRIGHT_WHITE_BACKGROUND = "\033[107m";   // BRIGHT WHITE
 
     // Dark Backgrounds
     public static final String DARK_RED_BACKGROUND = "\033[41;2m";    // DARK RED BACKGROUND

@@ -451,7 +451,7 @@ public class StoryManager {
         chapter.setCompleted(true);
 
         System.out.println(ColorUtil.brightYellowBold("\n✅ Chapter " + chapterNumber + " completed!"));
-        System.out.println(ColorUtil.brightCyanBold("[Press ENTER to continue...]"));
+        System.out.println(ColorUtil.brightCyanBold("\t\t\t[Press ENTER to continue...]"));
 
         java.util.Scanner scanner = new java.util.Scanner(System.in);
         scanner.nextLine();

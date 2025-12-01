@@ -21,7 +21,7 @@ public class MagicalDamagePotion extends Consumable{
             MagicalDamageBoost effect = new MagicalDamageBoost(magicalDamageAmount);
             effect.applyEffect(player);
             player.addStatusEffect(effect);
-            System.out.println("✨ " + player.getName() + "'s magical damage increased by " + (magicalDamageAmount * 100) + "%!");
+            System.out.println(ColorUtil.brightBlueBold("✨ " + player.getName() + "'s magical damage increased by " + (magicalDamageAmount * 100) + "%!"));
             setQuantity(getQuantity() - 1);
             hasConsumed = true;
         }else{

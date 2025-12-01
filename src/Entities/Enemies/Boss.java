@@ -20,7 +20,7 @@ public class Boss extends Enemy {
     @Override
     public int attack() {
         // Bosses have more complex attack patterns based on phase and health
-        if (getHealth() < getMaxHealth() * 0.10) {
+        if (getHealth() < 100) {
             // Low health - use ultimate
             return performUltimateAttack();
         } else if (Math.random() < 0.3) {
@@ -37,8 +37,8 @@ public class Boss extends Enemy {
     public int performBasicAttack() {
         if (basicAttack != null) {
             double damage = getPhysicalDamage() * basicAttack.getDamageMultiplier();
-            System.out.println(name + " uses " + basicAttack.getName() + "!");
-            System.out.println(basicAttack.getDescription());
+            System.out.println(ColorUtil.darkRed("\t\t\t"+name + " uses " + basicAttack.getName() + "!"));
+            System.out.println(ColorUtil.darkRed("\t\t"+basicAttack.getDescription()));
             return (int) damage;
         }
         return getPhysicalDamage();
@@ -46,8 +46,8 @@ public class Boss extends Enemy {
     public int performSkillAttack() {
         if (skillAttack != null) {
             double damage = getPhysicalDamage() * skillAttack.getDamageMultiplier();
-            System.out.println(name + " uses " + skillAttack.getName() + "!");
-            System.out.println(skillAttack.getDescription());
+            System.out.println(ColorUtil.redBold("\t\t\t"+name + " uses " + skillAttack.getName() + "!"));
+            System.out.println(ColorUtil.redBold("\t\t"+skillAttack.getDescription()));
             return (int) damage;
         }
         return getPhysicalDamage();
@@ -55,8 +55,8 @@ public class Boss extends Enemy {
     public int performUltimateAttack() {
         if (ultimateAttack != null) {
             double damage = getPhysicalDamage() * ultimateAttack.getDamageMultiplier();
-            System.out.println(name + " uses " + ultimateAttack.getName() + "!");
-            System.out.println(ultimateAttack.getDescription());
+            System.out.println(ColorUtil.brightRedBold("\t\t\t"+name + " uses " + ultimateAttack.getName() + "!"));
+            System.out.println(ColorUtil.brightRedBold("\t\t"+ultimateAttack.getDescription()));
             return (int) damage;
         }
         return getPhysicalDamage();
@@ -77,7 +77,7 @@ public class Boss extends Enemy {
                 System.out.println(ColorUtil.brightRedBold("\t\t‼️BOSS "+name+" is entering phase "+phase+"‼️"));
             }else{
                 health = 0;
-                System.out.println("🎯 " + name + " has been defeated!");
+                //System.out.println("🎯 " + name + " has been defeated!");
             }
         } else if (health < oldHealth * 0.3) {
             System.out.println(ColorUtil.brightGreenBold("\t\t⚠️ " + name + " is looking weak!"));
@@ -119,7 +119,7 @@ public class Boss extends Enemy {
     // chap 2
     public static class MiningCable extends Boss {
         public MiningCable() {
-            super("MiningCable", 200, 2, 45, 45, 11, 0.17, 0.17, 17);
+            super("MiningCable", 200, 1, 45, 45, 11, 0.17, 0.17, 17);
             basicAttack = new EnemySkill("Void Bite", "A chilling attack that seems to consume the light around it", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Ender Breath", "Exhales a cloud of pure void energy that corroses reality", 1.45, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Dragon's Dive", "A devastating aerial assault that strikes with immense force", 2.00, 80, DamageType.PHYSICAL, TargetType.SINGLE);
@@ -128,7 +128,7 @@ public class Boss extends Enemy {
     // chap 1
     public static class Frankenstein extends Boss {
         public Frankenstein() {
-            super("Frankenstein", 160, 2, 40, 40, 10, 0.16, 0.16, 16);
+            super("Frankenstein", 160, 1, 40, 40, 10, 0.16, 0.16, 16);
             basicAttack = new EnemySkill("Telekinetic Slam", "Uses psychic power to strike from an unexpected angle", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Void Warp", "Instantly teleports behind the target for a surprise attack", 1.40, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Enderman's Wrath", "Unleashes the full power of the void in a chaotic burst", 1.90, 80, DamageType.PHYSICAL, TargetType.SINGLE);
