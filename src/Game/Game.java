@@ -28,6 +28,7 @@ public class Game {
     private int currentChapter = 1;
     private boolean gameRunning = true;
     private boolean inBattle = false;
+    boolean EncounterZed = true;
     private StoryManager storyManager;
     private final int MAX_LEVEL = 5;
     private boolean[] levelsCompleted = new boolean[MAX_LEVEL + 1];
@@ -146,7 +147,7 @@ public class Game {
             for(int i = 0; i < 33; i++){
                 System.out.print(" ");
             }
-            thyName = getStringInput(ColorUtil.brightBlueGreenBold("What is thy name?: "));
+            thyName = getNameInput(ColorUtil.brightBlueGreenBold("What is thy name?: "));
             System.out.println();
             for(int i = 0; i < 23; i++){
                 System.out.print(" ");
@@ -374,7 +375,14 @@ public class Game {
 
             switch (choice) {
                 case 1:
-                    explore();
+                    if(player.getEquippedWeapon().getName() == "None"){
+                        int input = getIntInput("Warning: You have not equipped a weapon. Continue? (Yes [1] | No [0]): ", 0, 1);
+                        if(input == 1) {
+                            explore();
+                        }
+                    }else{
+                        explore();
+                    }
                     break;
                 case 2:
                     player.displayStats();
@@ -438,7 +446,14 @@ public class Game {
 
             switch (choice) {
                 case 1:
-                    explore();
+                    if(player.getEquippedWeapon().getName() == "None"){
+                        int input = getIntInput("Warning: You have not equipped a weapon. Continue? (Yes [1] | No [0]): ", 0, 1);
+                        if(input == 1) {
+                            explore();
+                        }
+                    }else{
+                        explore();
+                    }
                     break;
                 case 2:
                     player.displayStats();
@@ -468,8 +483,13 @@ public class Game {
         }
     }
 
+    public boolean shouldExploreArea(){
+        System.out.println();
+
+        int input = getIntInput("Explore the area? ([1] Yes | [0] No): ", 0, 1);
+        return input == 1;
+    }
     //TODO make sure to display a warning if they try to explore without a weapon equipped -for frank
-    boolean EncounterZed = true;
     public void explore() {
         System.out.println(ColorUtil.brightYellowBold("\n\t\tYou explore ") + getLevelName(currentChapter) + ColorUtil.brightYellowBold("..."));
         delay(1000);
@@ -536,7 +556,7 @@ public class Game {
                 case 1:
                     Chest CommonChest = new Chest.CommonChest();
                     System.out.println(ColorUtil.blueGreenBold("\t↓ 💎 You found a " + CommonChest.getName() + " and opened it! ↓"));
-                    CommonChest.obtain(player);
+                    CommonChest.obtain(player, currentChapter);
                     //40% to obtain a weapon :P
                     if(Math.random() <= 0.5) {
                         switch (player.getClassType()) {
@@ -589,7 +609,7 @@ public class Game {
                     if(Math.random() > 0.1){
                         Chest EliteChest = new Chest.EliteChest();
                         System.out.println(ColorUtil.blueBright("\t↓ 💎 You found a "+EliteChest.getName()+" and opened it! ↓"));
-                        EliteChest.obtain(player);
+                        EliteChest.obtain(player, currentChapter);
                         //40% chance to obtain weap
                         if(Math.random() <= 0.5) {
                             switch (player.getClassType()) {
@@ -655,7 +675,7 @@ public class Game {
                     if(Math.random() > 0.2){
                         Chest EpicChest = new Chest.EpicChest();
                         System.out.println(ColorUtil.brightPurpleBold("\t↓ 💎 You found a "+EpicChest.getName()+" and opened it! ↓"));
-                        EpicChest.obtain(player);
+                        EpicChest.obtain(player, currentChapter);
                         //30% chance to obtain weap
                         if(Math.random() <= 0.5) {
                             switch (player.getClassType()) {
@@ -721,7 +741,7 @@ public class Game {
                     if(Math.random() > 0.5){
                         Chest LegendaryChest = new Chest.LegendaryChest();
                         System.out.println(ColorUtil.brightYellowBold("\t↓ 💎 You found a "+LegendaryChest.getName()+" and opened it! ↓"));
-                        LegendaryChest.obtain(player);
+                        LegendaryChest.obtain(player, currentChapter);
                         //20% chance to obtain weap
                         if(Math.random() <= 0.4) {
                             switch (player.getClassType()) {
@@ -787,7 +807,7 @@ public class Game {
                     if(Math.random() > 0.4){
                         Chest LegendaryChest = new Chest.LegendaryChest();
                         System.out.println(ColorUtil.brightYellowBold("\t↓ 💎 You found a "+LegendaryChest.getName()+" and opened it! ↓"));
-                        LegendaryChest.obtain(player);
+                        LegendaryChest.obtain(player, currentChapter);
                         //20% chance to obtain weap
                         if(Math.random() <= 0.5) {
                             switch (player.getClassType()) {
@@ -852,7 +872,7 @@ public class Game {
         }else{
             Chest MythicalChest = new Chest.MythicalChest();
             System.out.println(ColorUtil.brightRedBold("\t↓ 💎 You found a " + MythicalChest.getName() + " and opened it ↓!"));
-            MythicalChest.obtain(player);
+            MythicalChest.obtain(player, currentChapter);
             switch (player.getClassType()) {
                 case HAWKSEYE:
                     player.obtainItem(findItemId("BW005", items, 1));
@@ -880,7 +900,7 @@ public class Game {
         Random rnd = new Random();
         System.out.println(ColorUtil.brightCyanBold("\t\t\t💎 You found a hidden treasure!"));
         int expBonus = currentChapter * rnd.nextInt(10, 16);
-        player.gainExperience(expBonus);
+        player.gainExperience(expBonus, currentChapter);
     }
     private boolean attemptChapterProgression() {
         if (currentChapter >= MAX_LEVEL) {
@@ -1676,7 +1696,7 @@ public class Game {
             }
             delay(1200);
 
-            player.gainExperience(baseExp);
+            player.gainExperience(baseExp, currentChapter);
             delay(500);
 
             obtainGold(player);
@@ -2002,13 +2022,17 @@ public class Game {
             }
         }
     }
-    public String getStringInput(String prompt){
+    public String getNameInput(String prompt){
         while(true){
             System.out.print(prompt);
             try{
                 String userInput = scan.nextLine().trim();
                 if(userInput.isEmpty()){
                     System.out.println("Please enter your name");
+                    continue;
+                }
+                if(userInput.length() > 15){
+                    System.out.println("Please enter a maximum of 15 characters");
                     continue;
                 }
                 return userInput;

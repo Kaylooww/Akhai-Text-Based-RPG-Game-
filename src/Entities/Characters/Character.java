@@ -76,13 +76,16 @@ public abstract class Character extends Entity {
         return false;
     }
 
-    public void gainExperience(int exp) {
-        experience += exp;
-        System.out.println(ColorUtil.brightYellowBold("\t\t\t💰 Gained " + exp + " experience!"));
-        while (experience >= experienceNeeded && level <= 30) { // Added level cap
-            levelUp();
+    public void gainExperience(int exp, int chapter) {
+        if(canGainExperience(chapter)){
+            experience += exp;
+            System.out.println(ColorUtil.brightYellowBold("\t\t\t💰 Gained " + exp + " experience!"));
+            while (experience >= experienceNeeded && level <= 30) { // Added level cap
+                levelUp();
+            }
+        }else{
+            System.out.println("Level limit reached for this chapter! You may now proceed to the next chapter");
         }
-
     }
     public void levelUp() {
         experience -= experienceNeeded;
@@ -108,6 +111,16 @@ public abstract class Character extends Entity {
         System.out.println(ColorUtil.brightCyanBold("   🛡️ Physical Resistance stat +1%"));
         System.out.println(ColorUtil.brightCyanBold("   🛡️ Magic Resistance stat +1%"));
         System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
+    }
+    public boolean canGainExperience(int chapter){
+        return switch (chapter) {
+            case 1 -> level < 8;
+            case 2 -> level < 12;
+            case 3 -> level < 18;
+            case 4 -> level < 22;
+            case 5 -> level < 30;
+            default -> true;
+        };
     }
 
     public void afterBattleHeal(){
@@ -344,6 +357,9 @@ public abstract class Character extends Entity {
     }
     public int getMaxEnergy(){
         return maxEnergy;
+    }
+    public Weapon getEquippedWeapon(){
+        return equippedWeapon;
     }
     public Skill getBasicAttack(){
         return basicAttack;

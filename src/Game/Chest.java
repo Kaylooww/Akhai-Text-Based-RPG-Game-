@@ -23,8 +23,8 @@ public abstract class Chest{
         return name;
     }
 
-    public void obtain(Character player){
-        player.gainExperience(expYield);
+    public void obtain(Character player, int chapter){
+        player.gainExperience(expYield, chapter);
         System.out.println(ColorUtil.brightYellowBold("\t\t\uD83E\uDE99 Gained "+gold+" extra gold coins!"));
         player.setCurrency(player.getCurrency() + gold);
     }
