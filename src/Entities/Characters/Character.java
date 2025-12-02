@@ -64,8 +64,26 @@ public abstract class Character extends Entity {
     }
 
     public void generateEnergy(int amount) {
+        String energy = "";
+
+        if (this instanceof Hawkseye) {
+            energy = ColorUtil.greenBold("Insight");
+        } else if (this instanceof Blademaster) {
+            energy = ColorUtil.blueBright("Energy");
+        } else if (this instanceof Berserker) {
+            energy = ColorUtil.orange("Fury");
+        } else if (this instanceof Runecaster) {
+            energy = ColorUtil.purpleBright("Mana");
+        } else if (this instanceof RuneKnight) {
+            energy =  ColorUtil.yellowBright("Blessing");
+        } else if (this instanceof Shinobi) {
+            energy =  ColorUtil.purple("Chakra");
+        } else {
+            energy = ColorUtil.blue("Aura");
+        }
+
         this.energy = Math.min(this.energy + amount, this.maxEnergy);
-        System.out.println(ColorUtil.yellowBold("\t\t\t⚡ Generated " + amount + " energy! (" + energy + "/" + maxEnergy + ")"));
+        System.out.println(ColorUtil.yellowBold("\t\t\t⚡ Generated " + amount + " "+energy+"! (" + this.energy + "/" + maxEnergy + ")"));
     }
 
     public boolean consumeEnergy(int amount) {
@@ -80,7 +98,7 @@ public abstract class Character extends Entity {
         if(canGainExperience(chapter)){
             experience += exp;
             System.out.println(ColorUtil.brightYellowBold("\t\t\t💰 Gained " + exp + " experience!"));
-            while (experience >= experienceNeeded && level <= 30) { // Added level cap
+            while (experience >= experienceNeeded && level < 30) { // Added level cap
                 levelUp();
             }
         }else{

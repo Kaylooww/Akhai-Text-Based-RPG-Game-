@@ -1185,6 +1185,75 @@ public class Game {
         inBattle = false;
         return hasWon;
     }
+    public void battleMiniBoss(Character player, Boss enemy){
+        inBattle = true;
+        int turns = 1;
+
+        System.out.println(ColorUtil.brightRedBold("\t\t🚨 BOSS " + enemy.getName() + " appears!"));
+        delay(1000);
+
+        int baseExp = 50;
+
+        int playerCurrentSpeed = player.getSpeed();
+        int playerOriginalSpeed = player.getSpeed();
+        int enemyCurrentSpeed = enemy.getSpeed();
+        int enemyOriginalSpeed = enemy.getSpeed();
+
+        while (enemy.getHealth() > 0 && player.getHealth() > 0 && inBattle) {
+
+            System.out.println(ColorUtil.brightBlueBold("\n═══════════════════════") + ColorUtil.brightYellowBold(" TURN "+(turns++)) + ColorUtil.brightBlueBold(" ═══════════════════════"));
+            displayBattleHealth(player, enemy);
+
+            boolean isPlayerTurn = checkSpeed(playerCurrentSpeed, enemyCurrentSpeed);
+            System.out.println("\t\t\t\t" + (isPlayerTurn ? ColorUtil.brightGreenBold(player.getName() + "'s turn!") : ColorUtil.brightRedBold(enemy.getName() + "'s turn!")));
+
+            //Take action based on who's acting
+            int damage = takeAction(isPlayerTurn, enemy);
+
+            //Update speed counters after action
+            if (damage != -1) {
+                if (isPlayerTurn) {
+                    playerCurrentSpeed -= enemyCurrentSpeed;
+                    if (enemyCurrentSpeed < enemyOriginalSpeed) {
+                        enemyCurrentSpeed += enemyOriginalSpeed;
+                    }
+                } else {
+                    enemyCurrentSpeed -= playerCurrentSpeed;
+                    if (playerCurrentSpeed < playerOriginalSpeed) {
+                        playerCurrentSpeed += playerOriginalSpeed;
+                    }
+
+                    if (damage > 0) {
+                        player.generateEnergyFromDamage();
+                    }
+                }
+            }
+
+            //Check if player died and can resurrect
+            if (!isPlayerTurn && player.getHealth() <= 0 && !player.hasResurrected()) {
+                player.resurrect();
+                // Player gets a free turn after resurrection
+                System.out.println(ColorUtil.brightYellowBold("\n⭐ " + player.getName() + " gets a free attack after resurrection!"));
+                damage = player.getBasicAttack().execute(player);
+                int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
+                System.out.println(ColorUtil.brightGreenBold("\t\tYou dealt " + actualDamage + " damage to " + enemy.getName()));
+
+                //Reset player speed after resurrection free turn
+                playerCurrentSpeed = playerOriginalSpeed;
+            }
+            player.checkStatusEffect();
+            enemy.checkStatusEffect();
+        }
+
+        if (player.getHealth() <= 0) {
+            handlePlayerDefeat();
+        }else{
+            System.out.println(ColorUtil.brightYellowBold("\t\t🎉 You defeated " + enemy.getName() + "!"));
+            delay(1000);
+        }
+
+        inBattle = false;
+    }
 
     public void battle(Character player, EliteEnemy enemy){
         inBattle = true;
@@ -1244,11 +1313,12 @@ public class Game {
             player.checkStatusEffect();
             enemy.checkStatusEffect();
         }
-        playerHealthCheck(enemy, baseExp, player);
-
-        // Clear battle effects after combat
-        clearBattleEffects(enemy);
-
+        if (player.getHealth() <= 0) {
+            handlePlayerDefeat();
+        }else{
+            System.out.println(ColorUtil.brightYellowBold("\t\t🎉 You defeated " + enemy.getName() + "!"));
+            delay(1000);
+        }
         inBattle = false;
     }
     public void battle(Character player, Boss enemy){
@@ -1326,7 +1396,7 @@ public class Game {
             }else if(wave == 1 && maxWave == 3){
                 battle(player, randomizeEliteEnemy());
             }else{
-                battle(player, new Boss.Kamish());
+                battleMiniBoss(player, new Boss.Kamish());
             }
         }
         playerHealthCheck(enemy, baseExp, player);
@@ -1439,6 +1509,7 @@ public class Game {
         boolean hasActed = false;
         int damage = 0;
         int choice;
+        IntWrapper healingPotionUsed = new IntWrapper(0);
 
         while(!hasActed) {
             System.out.println(ColorUtil.blueBright("╔════════════════════════════════════════════════════╗"));
@@ -1457,7 +1528,7 @@ public class Game {
                     hasActed = true;
                     break;
                 case 2:
-                    hasActed = openInventory(player, enemy) == 1;
+                    hasActed = openInventory(player, enemy, healingPotionUsed) == 1;
                     break;
                 case 3:
                     if(!(enemy instanceof Boss)){
@@ -1479,17 +1550,18 @@ public class Game {
         return damage;
     }
     private int handleFightAction(Entity enemy) {
+        String energy = getEnergySystemName();
         System.out.println(ColorUtil.blueBright("╔════════════════════════════════════════════════════╗"));
         System.out.println(ColorUtil.blueBright("║") + ColorUtil.brightCyanBold("                        FIGHT                       ") + ColorUtil.blueBright("║"));
         System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
         System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[1] Basic Attack") + ColorUtil.blueBright("                                  ║"));
-        System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("    (Generates 25 energy + 1 ultimate charge)  ") + ColorUtil.blueBright("   ║"));
+        System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("    (Generates 25 "+energy+" + 1 ultimate charge)  ") + ColorUtil.blueBright("   ║"));
         System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Skill") + ColorUtil.blueBright("                                         ║"));
-        System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("    (Costs 40 energy + 2 ultimate charges)    ") + ColorUtil.blueBright("    ║"));
+        System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("    (Costs 40 "+energy+" + 2 ultimate charges)    ") + ColorUtil.blueBright("    ║"));
 
         if (player.isUltimateReady()) {
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3]")+ ColorUtil.brightYellowBold(" Ultimate") + ColorUtil.blueBright("                              ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightYellowBold("    (Costs 80 energy, consumes all charges) ") + ColorUtil.blueBright("      ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightYellowBold("    (Costs 80 "+energy+", consumes all charges) ") + ColorUtil.blueBright("      ║"));
         } else {
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3] Ultimate (Locked)") + ColorUtil.blueBright("                             ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("    (" + player.getUltimateCounter() + "/" + player.getMaxUltimateCounter() + " charges)                ") + ColorUtil.blueBright("                 ║"));
@@ -1509,7 +1581,7 @@ public class Game {
                 if (player.getEnergy() >= player.getSkillAttack().getEnergyCost()) {
                     damage = player.getSkillAttack().execute(player);
                 } else {
-                    System.out.println("You need 40 energy before you can use this skill. Current: " + player.getEnergy());
+                    System.out.println("You need 40 "+energy+" before you can use this skill. Current: " + player.getEnergy());
                     damage = handleFightAction(enemy); // Recursive call to try again
                 }
                 break;
@@ -1518,7 +1590,7 @@ public class Game {
                     if (player.getEnergy() >= player.getUltimateAttack().getEnergyCost()) {
                         damage = player.getUltimateAttack().execute(player);
                     } else {
-                        System.out.println("You need 80 energy before you can use the ultimate. Current: " + player.getEnergy());
+                        System.out.println("You need 80 "+energy+" before you can use the ultimate. Current: " + player.getEnergy());
                         damage = handleFightAction(enemy); // Recursive call to try again
                     }
                 } else {
@@ -1667,7 +1739,7 @@ public class Game {
     private void handleVictory(Enemy enemy, int baseExp, Character player) {
         if(enemy.getHealth() <= 0){
             System.out.println(ColorUtil.brightYellowBold("\t\t🎉 You defeated " + enemy.getName() + "!"));
-            delay(500);
+            delay(1000);
 
             String[] bannerLines2 = {
                     "░██    ░██ ░██████  ░██████  ░██████████  ░██████   ░█████████  ░██     ░██ ░██ ",
@@ -1832,9 +1904,8 @@ public class Game {
         }
         return confirm;
     }
-    private int openInventory(Character player, Entity enemy){
+    private int openInventory(Character player, Entity enemy, IntWrapper uses){
         int confirm = 0;
-        int uses = 0;
         boolean isEmpty = false;
         while(confirm == 0){
             player.displayInventory();
@@ -1863,14 +1934,14 @@ public class Game {
                         delay(1000);
                         item.use(player);
                         if(inBattle){
-                            if(uses < 2){
+                            if(item instanceof HealingPotion){
+                                uses.value++;
+                            }
+                            if(uses.value < 3){
                                 System.out.println(ColorUtil.brightYellowBold("\t\t\tYou can take another action!"));
                                 delay(1000);
                                 displayBattleHealth(player, enemy);
                                 confirm = 0;
-                                if(item instanceof HealingPotion){
-                                    uses++;
-                                }
                             }else{
                                 System.out.println(ColorUtil.brightYellowBold("\t\t\tEnding Turn!..."));
                                 delay(1000);
@@ -1888,6 +1959,13 @@ public class Game {
         }
         return confirm;
     }
+    class IntWrapper {
+        int value;
+
+        IntWrapper(int value){
+            this.value = value;
+        }
+    }
     public void obtainGold(Character player){
         Random rnd = new Random();
         int goldYield = currentChapter * rnd.nextInt(15, 21);
@@ -1904,6 +1982,25 @@ public class Game {
         System.out.println("\n\t\t\t\t"+player.getName());
         System.out.println(ColorUtil.green(playerHealthBar));
         System.out.println(playerEnergyBar);
+    }
+    private String getEnergySystemName() {
+        if (player instanceof Hawkseye) {
+            return ColorUtil.greenBold("Insight");
+        } else if (player instanceof Blademaster) {
+            return ColorUtil.blueBright("Energy");
+        } else if (player instanceof Berserker) {
+            return ColorUtil.orange("Fury");
+        } else if (player instanceof Runecaster) {
+
+
+            return ColorUtil.purpleBright("Mana");
+        } else if (player instanceof RuneKnight) {
+            return ColorUtil.yellowBright("Blessing");
+        } else if (player instanceof Shinobi) {
+            return ColorUtil.purple("Chakra");
+        } else {
+            return ColorUtil.blue("Aura");
+        }
     }
 
     //Enemy
