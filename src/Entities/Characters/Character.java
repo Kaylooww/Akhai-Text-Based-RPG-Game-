@@ -27,6 +27,7 @@ public abstract class Character extends Entity {
     protected ClassType classType;
     protected boolean hasResurrected = false; // New resurrection flag
     protected boolean isExploring = false;
+    protected boolean inBattle = false;
 
     protected int ultimateCounter = 0;
     protected int maxUltimateCounter = 8;
@@ -39,6 +40,7 @@ public abstract class Character extends Entity {
         this.basicAttack = new UnarmedSkill("Punch", "A basic strike delivered with quick force", 0.5, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         this.skillAttack = new UnarmedSkill("Super Punch", "A strong blow that hits with enhanced power", 0.8, 40, DamageType.PHYSICAL, TargetType.SINGLE);
         this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "A devastating punch that maximizes raw strength", 1.2, 80, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.evasiveness = 0.90;
     }
 
     public int getUltimateCounter() {
@@ -377,6 +379,10 @@ public abstract class Character extends Entity {
     public void setIsExploring(boolean isExploring){
         this.isExploring = isExploring;
     }
+    public void setInBattle(boolean inBattle){
+        this.inBattle = inBattle;
+    }
+
     public int getExperience(){
         return experience;
     }
@@ -415,6 +421,9 @@ public abstract class Character extends Entity {
     }
     public boolean getIsExploring(){
         return isExploring;
+    }
+    public boolean getInBattle(){
+        return  inBattle;
     }
 
     public void delay(int delay) {

@@ -141,8 +141,6 @@ public class Game {
 
         while(true){
             thyName = getNameInput(ColorUtil.brightBlueGreenBold(" ".repeat(33)+"What is thy name?: "));
-            System.out.println();
-
             int choice = getIntInput(ColorUtil.brightCyanBold(" ".repeat(23)+"Is "+thyName+" your name? (Yes [1]| No [0]): "), 0, 1);
             if(choice == 1){
                 break;
@@ -151,16 +149,27 @@ public class Game {
 
         int classChosen = 0;
         while(classChosen == 0){
-            System.out.println(" ".repeat(15)+ColorUtil.brightBlueBold("╔════════════════════════════════════════════════════╗"));
-            System.out.println(" ".repeat(15)+ColorUtil.brightBlueBold("║") + ColorUtil.brightYellowBold("                 Choose your class!                 ") + ColorUtil.brightBlueBold("║"));
-            System.out.println(" ".repeat(15)+ColorUtil.brightBlueBold("╠════════════════════════════════════════════════════╣"));
-            System.out.println(" ".repeat(15)+ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("1.")+ColorUtil.greenBold(" Hawkseye") + ColorUtil.brightBlueBold("                                       ║"));
-            System.out.println(" ".repeat(15)+ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("2.")+ColorUtil.blueBright(" Blademaster") + ColorUtil.brightBlueBold("                                    ║"));
-            System.out.println(" ".repeat(15)+ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("3.")+ColorUtil.purpleBright(" Rune Caster") + ColorUtil.brightBlueBold("                                    ║"));
-            System.out.println(" ".repeat(15)+ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("4.")+ColorUtil.orange(" Berserker") + ColorUtil.brightBlueBold("                                      ║"));
-            System.out.println(" ".repeat(15)+ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("5.")+ColorUtil.purple(" Shinobi") + ColorUtil.brightBlueBold("                                        ║"));
-            System.out.println(" ".repeat(15)+ColorUtil.brightBlueBold("║  ") + ColorUtil.brightCyanBold("6.")+ColorUtil.yellowBright(" Rune Knight") + ColorUtil.brightBlueBold("                                    ║"));
-            System.out.println(" ".repeat(15)+ColorUtil.brightBlueBold("╚════════════════════════════════════════════════════╝"));
+            System.out.println(ColorUtil.brightBlueBold("╔═══════════════════════════════════════════════════════════════════════════════════╗"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightYellowBold("                                 Choose your class                                 ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("╠═══════════════════════════╦═══════════════════════════╦═══════════════════════════╣"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("     [1]")+ColorUtil.greenBold(" Hawkseye          ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("    [2]")+ColorUtil.blueBright(" Blademaster        ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("    [3]")+ColorUtil.purpleBright(" Rune Caster        ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("╠═══════════════════════════╬═══════════════════════════╬═══════════════════════════╣"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightYellowBold("  Marksman                 ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightYellowBold("  Fighter                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightYellowBold("  Mage                     ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 245                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 250                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 205                  ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Attack: 31               ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Attack: 24               ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Attack: 37               ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Speed: 20                ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Speed: 22                ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Speed: 17                ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Def: 14                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Def: 20                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Def: 13                  ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Damage Res: 10%          ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Damage Res: 15%          ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Damage Res: 9%           ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("╠═══════════════════════════╬═══════════════════════════╬═══════════════════════════╣"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("     [4]")+ColorUtil.orange(" Berserker         ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("      [5]")+ColorUtil.purple(" Shinobi          ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("    [6]")+ColorUtil.yellowBright(" Rune Knight        ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("╠═══════════════════════════╬═══════════════════════════╬═══════════════════════════╣"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightYellowBold("  Tank                     ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightYellowBold("  Assassin                 ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightYellowBold("  Fighter                  ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 350                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 245                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 290                  ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Attack: 20               ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Attack: 22               ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Attack: 21               ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Speed: 18                ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Speed: 37                ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Speed: 24                ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Def: 15                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Def: 12                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Def: 20                  ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Damage Res: 8%           ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Damage Res: 10%          ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Damage Res: 12%          ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("╚═══════════════════════════╩═══════════════════════════╩═══════════════════════════╝"));
 
         int choice = getIntInput(" ".repeat(15)+"Enter your choice (1-6): ", 1, 7);
 
@@ -168,10 +177,6 @@ public class Game {
                 case 1:
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╔═════════════════════")+ColorUtil.brightCyanBold(" Hawkseye ")+ColorUtil.brightBlueBold("═════════════════════╗"));
                     System.out.println(ColorUtil.greenBold(" ".repeat(15)+"   Deals the highest physical damage from range, a\n"+" ".repeat(15)+"   precision marksman who never misses their mark."));
-                    System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"  ─────────────────────")+ColorUtil.brightCyanBold(" STATS ")+ColorUtil.brightBlueBold("──────────────────────"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   HP: 245                   Attack: 31"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Def: 14                   Speed: 20"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Damage Res: 10%"));
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput(" ".repeat(15)+"Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
@@ -182,10 +187,6 @@ public class Game {
                 case 2:
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╔════════════════════")+ColorUtil.brightCyanBold(" Blademaster ")+ColorUtil.brightBlueBold("═══════════════════╗"));
                     System.out.println(ColorUtil.blueBright(" ".repeat(15)+"   A versatile all-rounder fighter, perfectly\n"+" ".repeat(15)+"   balanced stats for any combat situation."));
-                    System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"  ─────────────────────")+ColorUtil.brightCyanBold(" STATS ")+ColorUtil.brightBlueBold("──────────────────────"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   HP: 255                   Attack: 23"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Def: 20                   Speed: 24"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Damage Res: 15%"));
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput(" ".repeat(15)+"Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
@@ -196,10 +197,6 @@ public class Game {
                 case 3:
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╔════════════════════")+ColorUtil.brightCyanBold(" Rune Caster ")+ColorUtil.brightBlueBold("═══════════════════╗"));
                     System.out.println(ColorUtil.purpleBright(" ".repeat(15)+"   Deals the highest damage output with devastating\n"+" ".repeat(15)+"   spells, sacrifices speed for overwhelming power."));
-                    System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"  ─────────────────────")+ColorUtil.brightCyanBold(" STATS ")+ColorUtil.brightBlueBold("──────────────────────"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   HP: 225                   Attack: 37"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Def: 13                   Speed: 17"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Damage Res: 9%"));
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput(" ".repeat(15)+"Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
@@ -210,10 +207,6 @@ public class Game {
                 case 4:
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╔════════════════════")+ColorUtil.brightCyanBold(" Berserker ")+ColorUtil.brightBlueBold("═════════════════════╗"));
                     System.out.println(ColorUtil.orange(" ".repeat(15)+"   Tanks through battles with the highest HP pool,\n"+" ".repeat(15)+"   a relentless force that outlasts all opponents."));
-                    System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"  ─────────────────────")+ColorUtil.brightCyanBold(" STATS ")+ColorUtil.brightBlueBold("──────────────────────"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   HP: 330                   Attack: 22"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Def: 15                   Speed: 18"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Damage Res: 8%"));
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput(" ".repeat(15)+"Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
@@ -224,10 +217,6 @@ public class Game {
                 case 5:
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╔═════════════════════")+ColorUtil.brightCyanBold(" Shinobi ")+ColorUtil.brightBlueBold("══════════════════════╗"));
                     System.out.println(ColorUtil.purple(" ".repeat(15)+"   Overwhelms enemies with blinding speed and can\n"+" ".repeat(15)+"   dish out damage before any enemy can react."));
-                    System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"  ─────────────────────")+ColorUtil.brightCyanBold(" STATS ")+ColorUtil.brightBlueBold("──────────────────────"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   HP: 245                   Attack: 22"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Def: 12                   Speed: 37"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Damage Res: 10%"));
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput(" ".repeat(15)+"Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
@@ -238,10 +227,6 @@ public class Game {
                 case 6:
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╔════════════════════")+ColorUtil.brightCyanBold(" Rune Knight ")+ColorUtil.brightBlueBold("═══════════════════╗"));
                     System.out.println(ColorUtil.yellowBright(" ".repeat(15)+"   A magical warrior that blends sword and sorcery\n"+" ".repeat(15)+"   with both offensive & defensive capabilities."));
-                    System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"  ─────────────────────")+ColorUtil.brightCyanBold(" STATS ")+ColorUtil.brightBlueBold("──────────────────────"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   HP: 285                   Attack: 22"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Def: 20                   Speed: 22"));
-                    System.out.println(ColorUtil.brightCyanBold(" ".repeat(15)+"   Damage Res: 12%"));
                     System.out.println(ColorUtil.brightBlueBold(" ".repeat(15)+"╚════════════════════════════════════════════════════╝"));
                     classChosen = getIntInput(" ".repeat(15)+"Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
@@ -256,11 +241,11 @@ public class Game {
                     classChosen = getIntInput(" ".repeat(15)+"Select class? (Yes [1] | No [0]): ", 0, 1);
                     if(classChosen == 1){
                         player = new JinwooSun(thyName + " (Test)");
-                        System.out.println(ColorUtil.brightCyanBold("\n"+" ".repeat(15)+"Selecting Test Class..."));
+                        System.out.println(ColorUtil.brightCyanBold("\n"+" ".repeat(15)+"Selecting The Right Choice..."));
                     }
                     break;
             }
-            delay(300);
+            delay(800);
         }
 
         System.out.println(ColorUtil.brightBlueBold("\n═════════════ Beginning your adventure in Akhai! ═════════════"));
@@ -983,6 +968,7 @@ public class Game {
     //Random Battle (Common Enemies)
     public void battleCommon() {
         inBattle = true;
+
         int turns = 1;
         Enemy enemy = randomizeCommonEnemy();
 
@@ -1051,6 +1037,7 @@ public class Game {
     //Random Battle (Elite Enemies)
     public void battleElite() {
         inBattle = true;
+
         int turns = 1;
         Enemy enemy = randomizeEliteEnemy();
 
@@ -1118,6 +1105,7 @@ public class Game {
     }
     public boolean battleChapterBoss(){
         inBattle = true;
+
         int turns = 1;
         Boss enemy = selectChapterBoss();
 
@@ -1191,6 +1179,7 @@ public class Game {
     }
     public void battleMinionBoss(Character player, Boss enemy){
         inBattle = true;
+
         int turns = 1;
 
         System.out.println(ColorUtil.brightRedBold("\t\t🚨 BOSS " + enemy.getName() + " appears!"));
@@ -1263,6 +1252,8 @@ public class Game {
 
     public void battle(Character player, EliteEnemy enemy){
         inBattle = true;
+        player.setInBattle(true);
+
         int turns = 1;
 
         System.out.println(ColorUtil.brightRedBold("\t\t🚨 Careful! " + enemy.getName() + " appears!"));
@@ -1329,6 +1320,7 @@ public class Game {
     }
     public void battle(Character player, Boss enemy){
         inBattle = true;
+
         int turns = 1;
 
         System.out.println(ColorUtil.brightRedBold("\t\t🚨 BOSS " + enemy.getName() + " appears!"));
@@ -1395,6 +1387,7 @@ public class Game {
         clearBattleEffects(enemy);
 
         inBattle = false;
+        player.setInBattle(false);
     }
     //Boss Din
     public void battle(Character player, Boss enemy, int maxWave/*min: 2 | max: 3*/){
@@ -1409,17 +1402,11 @@ public class Game {
         }
     }
 
-    public class AccuracySystem {
-        public static final double PLAYER_BASE_ACCURACY = 0.95;
-        public static final double ENEMY_BASE_ACCURACY = 0.90;
-
-        public static boolean playerHits() {
-            return Math.random() <= PLAYER_BASE_ACCURACY;
-        }
-
-        public static boolean enemyHits() {
-            return Math.random() <= ENEMY_BASE_ACCURACY;
-        }
+    public static boolean playerHits(Enemy enemy){
+        return Math.random() <= enemy.getEvasiveness();
+    }
+    public static boolean enemyHits(Character player){
+        return Math.random() <= player.getEvasiveness();
     }
 
     private String createHealthBar(Entity entity, int length) {
@@ -1487,7 +1474,7 @@ public class Game {
             if (isPlayerTurn) {
                 if(damage != 0){
                     // Check player accuracy
-                    if (AccuracySystem.playerHits()) {
+                    if (playerHits(enemy)) {
                         int actualDamage = enemy.takeDamage(damage, enemy.getDefense(), enemy.getPhysicalResistance(), enemy.getMagicResistance());
                         System.out.println(ColorUtil.brightGreenBold("\t\tYou dealt " + actualDamage + " damage to " + enemy.getName()));
                         delay(1000);
@@ -1499,7 +1486,7 @@ public class Game {
                 }
             } else {
                 // Check enemy accuracy
-                if (AccuracySystem.enemyHits()) {
+                if (enemyHits(player)) {
                     int actualEnemyDamage = player.takeDamage(damage, player.getDefense(), player.getPhysicalResistance(), player.getMagicResistance());
                     System.out.println(ColorUtil.redBright("\t\t" + enemy.getName() + " dealt " + actualEnemyDamage + " damage to you!"));
                     delay(1000);

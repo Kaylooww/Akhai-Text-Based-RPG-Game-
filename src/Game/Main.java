@@ -1,32 +1,31 @@
 package Game;
 
-import AsciiArts.ASCII_ART;
-import TextFormat.ColorUtil;
-import TextFormat.ConsoleColors;
-
 public class Main {
     public static void main(String[] args) {
         //Starting the game
-        //TODO add display ascii art during the start of the game -for kyle
-        //TODO add display ascii art during handleDefeat() method
-        //TODO add display ascii art during handleVictory() method
-        //Mb gaw ari lang nako i butang kay gipa dali ko I search lang na nga method mao mana ila mga pangan
         Game game = new Game();
         game.initializeGame();
         game.startGame();
-
-        ASCII_ART asciiArt = new ASCII_ART();
-
-        //Start menu design
-        //asciiArt.startMenu();
-
-        //Class arts
-        //asciiArt.hawkseyeArt();
-        //asciiArt.runeCasterArt();
-        //asciiArt.shinobiArt();
-
-        //Character in the original world
-        //asciiArt.sageKhai();
-        //asciiArt.finalBoss();
     }
 }
+
+//        ╔═══════════════════════════════════════════════════════════════════════════════════╗
+//        ║                                 Choose your class                                 ║
+//        ╠═══════════════════════════╦═══════════════════════════╦═══════════════════════════╣
+//        ║     [1] Hawkseye          ║    [2] Blademaster        ║    [3] Rune Caster        ║
+//        ╠═══════════════════════════╬═══════════════════════════╬═══════════════════════════╣
+//        ║  HP: 245                  ║  HP: 255                  ║  HP: 225                  ║
+//        ║  Attack: 31               ║  Attack: 23               ║  Attack: 37               ║
+//        ║  Speed: 20                ║  Speed: 24                ║  Speed: 17                ║
+//        ║  Def: 14                  ║  Def: 20                  ║  Def: 13                  ║
+//        ║  Damage Res: 10%          ║  Damage Res: 15%          ║  Damage Res: 9%           ║
+//        ╠═══════════════════════════╬═══════════════════════════╬═══════════════════════════╣
+//        ║     [4] Berserker         ║      [5] Shinobi          ║    [6] Rune Knight        ║
+//        ╠═══════════════════════════╬═══════════════════════════╬═══════════════════════════╣
+//        ║  HP: 330                  ║  HP: 245                  ║  HP: 285                  ║
+//        ║  Attack: 22               ║  Attack: 22               ║  Attack: 22               ║
+//        ║  Speed: 18                ║  Speed: 37                ║  Speed: 22                ║
+//        ║  Def: 15                  ║  Def: 12                  ║  Def: 20                  ║
+//        ║  Damage Res: 8%           ║  Damage Res: 10%          ║  Damage Res: 12%          ║
+//        ╚═══════════════════════════╩═══════════════════════════╩═══════════════════════════╝
+
