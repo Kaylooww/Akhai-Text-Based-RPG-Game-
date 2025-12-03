@@ -62,14 +62,14 @@ public class ShopNPC extends NPC{
     public void stockItems(Character player, int currentChapter){
         shopItems.clear();
 
-        if(currentChapter >= 5){
+        if(currentChapter >= 4){
             shopItems.add(findItemId("HP004", items));
             shopItems.add(findItemId("EP004", items));
             shopItems.add(findItemId("PDP004", items));
             shopItems.add(findItemId("MDP004", items));
             shopItems.add(findItemId("SP004", items));
             shopItems.add(findItemId("EVP004", items));
-        }else if(currentChapter >= 3){
+        }else if(currentChapter == 3){
             shopItems.add(findItemId("HP003", items));
             shopItems.add(findItemId("EP003", items));
             shopItems.add(findItemId("PDP003", items));
@@ -226,6 +226,10 @@ public class ShopNPC extends NPC{
                     purchasedItem.displayInfo();
                     int quantity = getIntInput("\nHow many would you like to buy? (0-"+(purchasedItem.getMaxStack() - purchasedItem.getQuantity())+"): ",0, purchasedItem.getMaxStack());
                     if(quantity == 0){
+                        break;
+                    }
+                    if(quantity + purchasedItem.getQuantity() > purchasedItem.getMaxStack()){
+                        System.out.println("You cannot buy beyond "+(purchasedItem.getMaxStack() - purchasedItem.getQuantity())+" "+purchasedItem.getName()+" (Max Stack)");
                         break;
                     }
                     if(player.getCurrency() > quantity * purchasedItem.getValue()){

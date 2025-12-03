@@ -18,16 +18,15 @@ public class Main {
         ASCII_ART asciiArt = new ASCII_ART();
 
         //Start menu design
-        asciiArt.startMenu();
+        //asciiArt.startMenu();
 
         //Class arts
-        //TODO implement these when choosing what class you want to play with (in the class file)
-        asciiArt.hawkseyeArt();
-        asciiArt.runeCasterArt();
-        asciiArt.shinobiArt();
+        //asciiArt.hawkseyeArt();
+        //asciiArt.runeCasterArt();
+        //asciiArt.shinobiArt();
 
         //Character in the original world
-        asciiArt.sageKhai();
-        asciiArt.finalBoss();
+        //asciiArt.sageKhai();
+        //asciiArt.finalBoss();
     }
 }
