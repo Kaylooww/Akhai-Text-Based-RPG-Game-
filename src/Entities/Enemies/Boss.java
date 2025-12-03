@@ -6,10 +6,11 @@ import Skills.EnemySkill;
 import TextFormat.ColorUtil;
 
 public class Boss extends Enemy {
-    int phase = 1;
-    int maxPhase;
-    public EnemySkill basicAttack;
-    public EnemySkill skillAttack;
+    protected int phase = 1;
+    protected int maxPhase;
+    protected boolean enteredNextPhase;
+    protected EnemySkill basicAttack;
+    protected EnemySkill skillAttack;
     public EnemySkill ultimateAttack;
 
     public Boss(String name, int health, int maxPhase, int attackDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed){
@@ -74,11 +75,10 @@ public class Boss extends Enemy {
             if(phase < maxPhase){
                 phase++;
                 health = maxHealth;
-                System.out.println(ColorUtil.brightRedBold("\t\t‼️BOSS "+name+" is entering phase "+phase+"‼️"));
+                enteredNextPhase = true;
+                //System.out.println(ColorUtil.brightRedBold("\t\t‼️BOSS "+name+" is entering phase "+phase+"‼️"));
             }else{
-                health = 0;
-                //System.out.println("🎯 " + name + " has been defeated!");
-            }
+                health = 0;}
         } else if (health < oldHealth * 0.3) {
             System.out.println(ColorUtil.brightGreenBold("\t\t⚠️ " + name + " is looking weak!"));
         }
@@ -133,5 +133,16 @@ public class Boss extends Enemy {
             skillAttack = new EnemySkill("Skill: Void Warp", "Instantly teleports behind the target for a surprise attack", 1.40, 40, DamageType.PHYSICAL, TargetType.SINGLE);
             ultimateAttack = new EnemySkill("Ult: Enderman's Wrath", "Unleashes the full power of the void in a chaotic burst", 1.90, 80, DamageType.PHYSICAL, TargetType.SINGLE);
         }
+    }
+
+    public void setEnteredNextPhase(boolean enteredNextPhase){
+        this.enteredNextPhase = enteredNextPhase;
+    }
+
+    public boolean getEnteredNextPhase(){
+        return enteredNextPhase;
+    }
+    public int getPhase(){
+        return phase;
     }
 }

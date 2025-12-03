@@ -26,6 +26,7 @@ public abstract class Character extends Entity {
 
     protected ClassType classType;
     protected boolean hasResurrected = false; // New resurrection flag
+    protected boolean isExploring = false;
 
     protected int ultimateCounter = 0;
     protected int maxUltimateCounter = 8;
@@ -83,7 +84,7 @@ public abstract class Character extends Entity {
         }
 
         this.energy = Math.min(this.energy + amount, this.maxEnergy);
-        System.out.println(ColorUtil.yellowBold("\t\t\t⚡ Generated " + amount + " "+energy+"! (" + this.energy + "/" + maxEnergy + ")"));
+        System.out.println(ColorUtil.yellowBold("\t\t\t⚡ Generated " + amount) + " "+energy+ColorUtil.yellowBold("! (" + this.energy + "/" + maxEnergy + ")"));
     }
 
     public boolean consumeEnergy(int amount) {
@@ -95,15 +96,24 @@ public abstract class Character extends Entity {
     }
 
     public void gainExperience(int exp, int chapter) {
-        if(canGainExperience(chapter)){
+        if(isExploring){
+            if(canGainExperience(chapter)){
+                experience += exp;
+                System.out.println(ColorUtil.brightYellowBold("\t\t\t💰 Gained " + exp + " experience!"));
+                while (experience >= experienceNeeded && level < 30) { // Added level cap
+                    levelUp();
+                }
+            }else{
+                System.out.println(ColorUtil.brightRedBold("Level limit reached! \nYou've already explored every inch of this map\nYou may proceed to the next chapter"));
+            }
+        }else{
             experience += exp;
             System.out.println(ColorUtil.brightYellowBold("\t\t\t💰 Gained " + exp + " experience!"));
             while (experience >= experienceNeeded && level < 30) { // Added level cap
                 levelUp();
             }
-        }else{
-            System.out.println("Level limit reached for this chapter! You may now proceed to the next chapter");
         }
+
     }
     public void levelUp() {
         experience -= experienceNeeded;
@@ -364,6 +374,9 @@ public abstract class Character extends Entity {
     public void setCurrency(int currency){
         this.currency = currency;
     }
+    public void setIsExploring(boolean isExploring){
+        this.isExploring = isExploring;
+    }
     public int getExperience(){
         return experience;
     }
@@ -399,6 +412,9 @@ public abstract class Character extends Entity {
     }
     public int getCurrency(){
         return currency;
+    }
+    public boolean getIsExploring(){
+        return isExploring;
     }
 
     public void delay(int delay) {
