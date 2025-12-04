@@ -93,7 +93,7 @@ public class CommonEnemy extends Enemy {
 
     public static class Frank extends CommonEnemy {
         public Frank() {
-            super("Frankie", 67, 31, 31, 8, 0.05, 0.05, 10);
+            super("Frankie Jr.", 67, 31, 31, 8, 0.05, 0.05, 10);
             basicAttack = new EnemySkill("Dailies", "Frankie asks you to do his dailies!", 1.20, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         }
     }

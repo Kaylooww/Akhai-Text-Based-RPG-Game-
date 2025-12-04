@@ -9,7 +9,6 @@ public class MiniBoss extends Boss {
         super(name, health, maxPhase, attackDamage, magicDamage, defense, physicalResistance, magicResistance, speed);
     }
 
-    //TODO dili siya ma kuan walay progress mawa
     public static class EdgeLordZedjy extends MiniBoss {
         public EdgeLordZedjy(){
             super("Edge-Lord Zedjy", 700, 2, 72, 72, 20, 0.22, 0.22, 19);

@@ -14,10 +14,10 @@ public class Initialization {
     //TODO fix this bs where it will error adding and the error is "IndexOutOfBounds"
     public static void initPotions(List<Item> items) {
         //Items
-        items.add(new HealingPotion("HP001",ColorUtil.blueGreen("Lesser Healing Potion"), "<Empty>", 12, 0, 7, Rarity.COMMON, 50));
-        items.add(new HealingPotion("HP002", ColorUtil.blueBright("Healing Potion"), "<Empty>", 12, 0, 14, Rarity.RARE, 75));
-        items.add(new HealingPotion("HP003", ColorUtil.brightPurpleBold("Greater Healing Potion"), "<Empty>", 12, 1, 20, Rarity.EPIC, 100));
-        items.add(new HealingPotion("HP004", ColorUtil.brightYellowBold("Legendary Healing Potion"), "<Empty>", 12, 1, 30, Rarity.LEGENDARY, 150));
+        items.add(new HealingPotion("HP001",ColorUtil.blueGreen("Lesser Healing Potion"), "<Empty>", 12, 0, 7, Rarity.COMMON, 30));
+        items.add(new HealingPotion("HP002", ColorUtil.blueBright("Healing Potion"), "<Empty>", 12, 0, 14, Rarity.RARE, 50));
+        items.add(new HealingPotion("HP003", ColorUtil.brightPurpleBold("Greater Healing Potion"), "<Empty>", 12, 1, 20, Rarity.EPIC, 70));
+        items.add(new HealingPotion("HP004", ColorUtil.brightYellowBold("Legendary Healing Potion"), "<Empty>", 12, 1, 30, Rarity.LEGENDARY, 100));
 
         items.add(new EnergyPotion("EP001", ColorUtil.blueGreen("Lesser Energy Potion"), "<Empty>", 12, 0, 3, Rarity.COMMON, 20));
         items.add(new EnergyPotion("EP002", ColorUtil.blueBright("Energy Potion"), "<Empty>", 12, 0, 9, Rarity.RARE, 40));
@@ -34,10 +34,10 @@ public class Initialization {
         items.add(new MagicalDamagePotion("MDP003", ColorUtil.brightPurpleBold("Greater Magic Potion"), "<Empty>", 5, 0, 20, Rarity.EPIC, 0.48));
         items.add(new MagicalDamagePotion("MDP004", ColorUtil.brightYellowBold("Legendary Magic Potion"), "<Empty>", 5, 0, 25, Rarity.LEGENDARY, 0.60));
 
-        items.add(new SpeedPotion("SP001", ColorUtil.blueGreen("Lesser Speed Potion"), "<Empty>", 5, 0, 5, Rarity.COMMON, 4));
-        items.add(new SpeedPotion("SP002", ColorUtil.blueBright("Speed Potion"), "<Empty>", 5, 0, 10, Rarity.RARE, 7));
-        items.add(new SpeedPotion("SP003", ColorUtil.brightPurpleBold("Greater Speed Potion"), "<Empty>", 5, 0, 15, Rarity.EPIC, 10));
-        items.add(new SpeedPotion("SP004", ColorUtil.brightYellowBold("Legendary Speed Potion"), "<Empty>", 5, 0, 25, Rarity.LEGENDARY, 13));
+        items.add(new SpeedPotion("SP001", ColorUtil.blueGreen("Lesser Speed Potion"), "<Empty>", 5, 0, 5, Rarity.COMMON, 2));
+        items.add(new SpeedPotion("SP002", ColorUtil.blueBright("Speed Potion"), "<Empty>", 5, 0, 10, Rarity.RARE, 4));
+        items.add(new SpeedPotion("SP003", ColorUtil.brightPurpleBold("Greater Speed Potion"), "<Empty>", 5, 0, 15, Rarity.EPIC, 7));
+        items.add(new SpeedPotion("SP004", ColorUtil.brightYellowBold("Legendary Speed Potion"), "<Empty>", 5, 0, 25, Rarity.LEGENDARY, 10));
 
         items.add(new EvasivenessPotion("EVP001", ColorUtil.blueGreen("Lesser Evasiveness Potion"), "Slightly reduces enemy accuracy", 5, 0, 5, Rarity.COMMON, 0.05));
         items.add(new EvasivenessPotion("EVP002", ColorUtil.blueBright("Evasiveness Potion"), "Reduces enemy accuracy", 5, 1, 10, Rarity.RARE, 0.8));

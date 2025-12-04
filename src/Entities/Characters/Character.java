@@ -169,20 +169,20 @@ public abstract class Character extends Entity {
     public void resurrect() {
         delay(800);
         System.out.println(ColorUtil.brightYellowBold("\t\t✨ ✨ ✨ DIVINE INTERVENTION! ✨ ✨ ✨"));
-        delay(800);
+        delay(1000);
         System.out.println(ColorUtil.brightYellowBold("\t" + name + " has been granted a second chance!"));
-        delay(800);
+        delay(1000);
         //Resurrect with 50% of max health and reset ultimate counter
         health = maxHealth / 2;
         hasResurrected = true;
         resetUltimateCounter(); //Reset ultimate charges on resurrection
 
         System.out.println(ColorUtil.brightYellowBold("\t" +name + " resurrects with " + health + " HP!"));
-        delay(800);
+        delay(1000);
         System.out.println(ColorUtil.brightCyanBold("\t\tUltimate charges have been reset!"));
-        delay(800);
+        delay(1000);
         System.out.println(ColorUtil.brightRedBold("You can no longer resurrect, second chances only happens once."));
-        delay(800);
+        delay(1500);
     }
     public boolean hasResurrected(){
         return hasResurrected;
@@ -312,7 +312,7 @@ public abstract class Character extends Entity {
                     items[i] = item;
                     inventory.setCapacity(inventory.getCapacity() + 1);
                     inventory.setIsFull(inventory.getCapacity() == inventory.getMaxCapacity());
-                    System.out.println(ColorUtil.yellowBright("NEW ITEM") + " \"" + item.getName() + "\" " + ColorUtil.yellowBright("obtained!"));
+                    System.out.println(ColorUtil.yellowBright("\t\tNEW ITEM") + " \"" + item.getName() + "\" " + ColorUtil.yellowBright("obtained!"));
                     delay(300);
                     return;
                 }

@@ -25,7 +25,7 @@ public class EliteEnemy extends Enemy {
 
     private boolean shouldUseSkillAttack() {
         // Simple logic: 30% chance to use skill attack
-        return Math.random() < 0.3;
+        return Math.random() < 0.5;
     }
 
     public int performBasicAttack() {
@@ -99,7 +99,7 @@ public class EliteEnemy extends Enemy {
 
     public static class AbyssRogue extends EliteEnemy {
         public AbyssRogue() {
-            super("AbyssRogue", 270, 46, 46, 5, 0.06, 0.06, 15);
+            super("Abyss Rogue", 270, 46, 46, 5, 0.06, 0.06, 15);
             basicAttack = new EnemySkill("Shadow Stab", "A quick, precise dagger attack from the darkness", 1.10, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: Phantom Strike", "Vanishes and reappears for a devastating backstab", 1.50, 40, DamageType.PHYSICAL, TargetType.SINGLE);
         }
@@ -123,7 +123,7 @@ public class EliteEnemy extends Enemy {
 
     public static class FrankDaniel extends EliteEnemy {
         public FrankDaniel() {
-            super("Frank Daniel", 240, 55, 55, 5, 0.10, 0.10, 15);
+            super("Frankie Sr.", 240, 55, 55, 5, 0.10, 0.10, 15);
             basicAttack = new EnemySkill("Ano wala?", "Frankie opens the group chat and asks to play!", 1.10, 0, DamageType.PHYSICAL, TargetType.SINGLE);
             skillAttack = new EnemySkill("Skill: 67", "Frankie gathers his innate powers and screams 67!", 1.50, 40, DamageType.PHYSICAL, TargetType.SINGLE);
         }
