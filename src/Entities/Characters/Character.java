@@ -122,7 +122,7 @@ public abstract class Character extends Entity {
         level++;
         experienceNeeded += 3;
         System.out.println(ColorUtil.blueBright("╔════════════════════") + ColorUtil.brightCyanBold(" LEVEL UP! ") + ColorUtil.blueBright("═════════════════════╗"));
-        System.out.println(ColorUtil.brightCyanBold("   ✨ " + name + " leveled up to level " + level + "!"));
+        System.out.println(ColorUtil.brightCyanBold("   ✨ " + name + " leveled up to")+ColorUtil.brightYellowBold(" level " + level + "!"));
         System.out.println(ColorUtil.brightCyanBold("   ✨ Stats Increased!"));
 
 // Improve stats on level up

@@ -153,7 +153,7 @@ public class Game {
             System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("     [1]")+ColorUtil.greenBold(" Hawkseye          ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("    [2]")+ColorUtil.blueBright(" Blademaster        ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("    [3]")+ColorUtil.purpleBright(" Rune Caster        ")+ColorUtil.brightBlueBold("║"));
             System.out.println(ColorUtil.brightBlueBold("╠═══════════════════════════╬═══════════════════════════╬═══════════════════════════╣"));
             System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightYellowBold("  Marksman                 ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightYellowBold("  Fighter                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightYellowBold("  Mage                     ")+ColorUtil.brightBlueBold("║"));
-            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 245                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 250                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 205                  ")+ColorUtil.brightBlueBold("║"));
+            System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 225                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 250                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  HP: 205                  ")+ColorUtil.brightBlueBold("║"));
             System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Attack: 31               ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Attack: 24               ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Attack: 37               ")+ColorUtil.brightBlueBold("║"));
             System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Speed: 20                ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Speed: 22                ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Speed: 17                ")+ColorUtil.brightBlueBold("║"));
             System.out.println(ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Def: 14                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Def: 20                  ")+ColorUtil.brightBlueBold("║")+ColorUtil.brightCyanBold("  Def: 13                  ")+ColorUtil.brightBlueBold("║"));
@@ -469,13 +469,11 @@ public class Game {
         }
     }
 
-    //TODO make sure to display a warning if they try to explore without a weapon equipped -for frank
     public void explore() {
         player.setIsExploring(true);
 
         System.out.println(ColorUtil.brightYellowBold("\n\t\tYou explore ") + getLevelName(currentChapter) + ColorUtil.brightYellowBold("..."));
         delay(1000);
-
         // Different encounter rates based on level
         double encounterRate = 0.75 + (currentChapter * 0.05);
         if (Math.random() <= encounterRate) {
@@ -491,7 +489,7 @@ public class Game {
                     battleCommon();
                 }
             } else if(currentChapter == 4) {
-                if(Math.random() >= 0.10) {
+                if(Math.random() >= 0.05) {
                     System.out.println(ColorUtil.darkRed("\t\t🚨 Warning! You encountered an Elite enemy!"));
                     battleElite();
                 } else {
@@ -1027,7 +1025,7 @@ public class Game {
         System.out.println(ColorUtil.darkRed("\t\t🚨 A wild " + enemy.getName() + " appears!"));
         delay(1000);
 
-        int baseExp = 30;
+        int baseExp = 40;
 
         int playerCurrentSpeed = player.getSpeed();
         int playerOriginalSpeed = player.getSpeed();
@@ -1096,7 +1094,7 @@ public class Game {
         System.out.println(ColorUtil.darkRed("\t\t🚨 A wild " + enemy.getName() + " appears!"));
         delay(1000);
 
-        int baseExp = 40;
+        int baseExp = 50;
 
         int playerCurrentSpeed = player.getSpeed();
         int playerOriginalSpeed = player.getSpeed();
@@ -1246,6 +1244,7 @@ public class Game {
             if(enemy.getEnteredNextPhase()){
                 System.out.println(ColorUtil.brightRedBold("\t\t‼️BOSS "+enemy.getName()+" is entering phase "+enemy.getPhase()+"‼️"));
                 enemy.setEnteredNextPhase(false);
+                delay(1500);
             }
 
             System.out.println(ColorUtil.brightBlueBold("\n═══════════════════════") + ColorUtil.brightYellowBold(" TURN "+(turns++)) + ColorUtil.brightBlueBold(" ═══════════════════════"));
@@ -1311,7 +1310,7 @@ public class Game {
         System.out.println(ColorUtil.brightRedBold("\t\t🚨 Careful! " + enemy.getName() + " appears!"));
         delay(1000);
 
-        int baseExp = 30;
+        int baseExp = 50;
 
         int playerCurrentSpeed = player.getSpeed();
         int playerOriginalSpeed = player.getSpeed();
@@ -1378,7 +1377,7 @@ public class Game {
         System.out.println(ColorUtil.brightRedBold("\t\t🚨 BOSS " + enemy.getName() + " appears!"));
         delay(1000);
 
-        int baseExp = 50;
+        int baseExp = 60;
 
         int playerCurrentSpeed = player.getSpeed();
         int playerOriginalSpeed = player.getSpeed();
@@ -1389,6 +1388,7 @@ public class Game {
             if(enemy.getEnteredNextPhase()){
                 System.out.println(ColorUtil.brightRedBold("\t\t‼️BOSS "+enemy.getName()+" is entering phase "+enemy.getPhase()+"‼️"));
                 enemy.setEnteredNextPhase(false);
+                delay(1500);
             }
 
             System.out.println(ColorUtil.brightBlueBold("\n═══════════════════════") + ColorUtil.brightYellowBold(" TURN "+(turns++)) + ColorUtil.brightBlueBold(" ═══════════════════════"));
@@ -1857,9 +1857,10 @@ public class Game {
             coloredLine += ConsoleColors.RESET;
             System.out.println(coloredLine);
         }
-        System.out.println(ColorUtil.brightCyanBold(" ".repeat(17)+"Due to the Edge-Lord's Mercy, he leaves you alive..."));
-        delay(2000);
-        System.out.println(" ".repeat(38)+ ColorUtil.brightRedBold("For now..."));
+        delay(2500);
+        System.out.println(ColorUtil.brightRedBold(" ".repeat(17)+"Due to the Edge-Lord's Mercy, he leaves you alive..."));
+        delay(2500);
+        System.out.println(" ".repeat(38)+ ColorUtil.darkRed("For now..."));
         delay(2500);
     }
     private void handleVictory(Enemy enemy, int baseExp, Character player) {
