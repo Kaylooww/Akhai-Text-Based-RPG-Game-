@@ -1628,16 +1628,16 @@ public class Game {
         System.out.println(ColorUtil.blueBright("╔════════════════════════════════════════════════════╗"));
         System.out.println(ColorUtil.blueBright("║") + ColorUtil.brightCyanBold("                        FIGHT                       ") + ColorUtil.blueBright("║"));
         System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
-        System.out.println(ColorUtil.brightCyanBold("   [1]")+ColorUtil.brightYellowBold(" Basic Attack"));
+        System.out.println(ColorUtil.brightCyanBold("   [1]")+ColorUtil.brightYellowBold(" Basic Attack ("+df.format(player.getEquippedWeapon().getBasicAttack().getDamageMultiplier() * 100)+"%)"));
         System.out.println(ColorUtil.brightCyanBold("\t\t(Generates 25 ")+energy+ColorUtil.brightCyanBold(" + 1 ultimate charge)  "));
-        System.out.println(ColorUtil.brightCyanBold("   [2]")+ColorUtil.brightYellowBold(" Skill"));
+        System.out.println(ColorUtil.brightCyanBold("   [2]")+ColorUtil.brightYellowBold(" Skill ("+df.format(player.getEquippedWeapon().getSkillAttack().getDamageMultiplier() * 100)+"%)"));
         System.out.println(ColorUtil.brightCyanBold("\t\t(Costs 40 ")+energy+ColorUtil.brightCyanBold(" + 2 ultimate charges)    "));
 
         if (player.isUltimateReady()) {
-            System.out.println(ColorUtil.brightCyanBold("   [3]")+ ColorUtil.brightYellowBold(" Ultimate"));
+            System.out.println(ColorUtil.brightCyanBold("   [3]")+ ColorUtil.brightYellowBold(" Ultimate ("+df.format(player.getEquippedWeapon().getUltimateAttack().getDamageMultiplier() * 100)+"%)"));
             System.out.println(ColorUtil.brightYellowBold("\t\t(Costs 80 ")+energy+ColorUtil.brightYellowBold(", consumes all charges) "));
         } else {
-            System.out.println(ColorUtil.brightCyanBold("   [3] ")+ColorUtil.brightRedBold("Ultimate (Locked)"));
+            System.out.println(ColorUtil.brightCyanBold("   [3] ")+ColorUtil.brightRedBold("Ultimate (Locked) ("+df.format(player.getEquippedWeapon().getUltimateAttack().getDamageMultiplier() * 100)+"%)"));
             System.out.println(ColorUtil.brightRedBold("\t\t(" + player.getUltimateCounter() + "/" + player.getMaxUltimateCounter() + " charges)"));
         }
 
