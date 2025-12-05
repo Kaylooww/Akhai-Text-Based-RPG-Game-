@@ -19,12 +19,11 @@ public class EvasivenessPotion extends Consumable{
     public void use(Character player){
         if(!hasConsumed){
             EvasivenessBoost effect = new EvasivenessBoost(accuracyReduction);
+            effect.applyEffect(player);
             player.addStatusEffect(effect);
             System.out.println(ColorUtil.brightPurpleBold("🌪️ " + player.getName() + "'s evasiveness increased!"));
             setQuantity(getQuantity() - 1);
             hasConsumed = true;
-        }else if(player.getInBattle()){
-            System.out.println(ColorUtil.brightRedBold("\t\tCannot use potion outside the battle!"));
         }else{
             System.out.println(ColorUtil.brightRedBold("\t\tYou can only consume this potion once!"));
         }

@@ -12,7 +12,7 @@ public class EvasivenessBoost extends StatusEffect {
 
     @Override
     public void applyEffect(Entity target) {
-        target.setEvasiveness(evasiveness);
+        target.setEvasiveness(target.getEvasiveness() - evasiveness);
     }
 
     @Override

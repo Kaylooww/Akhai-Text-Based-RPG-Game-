@@ -1420,7 +1420,7 @@ public class Game {
             }
 
             //Check if player died and can resurrect
-            if (!isPlayerTurn && player.getHealth() <= 0 && !player.hasResurrected() && enemy instanceof MiniBoss) {
+            if (!isPlayerTurn && player.getHealth() <= 0 && !player.hasResurrected() && !(enemy instanceof MiniBoss)) {
                 player.resurrect();
                 // Player gets a free turn after resurrection
                 System.out.println(ColorUtil.brightYellowBold("\n⭐ " + player.getName() + " gets a free attack after resurrection!"));
