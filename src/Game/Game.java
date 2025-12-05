@@ -316,7 +316,7 @@ public class Game {
         if(currentChapter < 5) {
             //Display stats on main menu
             //dynamic title with fixed width of 54
-            String title = " " + thyName + " ";
+            String title = "  " + thyName + "  ";
             int totalWidth = 53; //53 since title length is -1
             int titleLength = title.length();
 
@@ -338,7 +338,7 @@ public class Game {
             System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[1]")+ColorUtil.brightGreenBold(" Explore and Fight") +" ".repeat(29)+ ColorUtil.blueBright("║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Check Stats and Resurrection status") + ColorUtil.blueBright("           ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3] My Inventory") + ColorUtil.blueBright("                                  ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3]")+ColorUtil.blueGreenBold(" My Inventory") + ColorUtil.blueBright("                                  ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[4]")+ColorUtil.brightPurpleBold(" Kyle's Shop") + ColorUtil.blueBright("                                   ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[5] View Current Story") + ColorUtil.blueBright("                            ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[6]")+ColorUtil.brightYellowBold(" Proceed to Story") + ColorUtil.blueBright("                              ║"));
@@ -418,7 +418,7 @@ public class Game {
             System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[1]")+ColorUtil.brightGreenBold(" Explore and Fight") +" ".repeat(29)+ ColorUtil.blueBright("║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Check Stats and Resurrection status") + ColorUtil.blueBright("           ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3] My Inventory") + ColorUtil.blueBright("                                  ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3]")+ColorUtil.blueGreenBold(" My Inventory") + ColorUtil.blueBright("                                  ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[4]")+ColorUtil.brightPurpleBold(" Kyle's Shop") + ColorUtil.blueBright("                                   ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[5] View Current Story") + ColorUtil.blueBright("                            ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[6]")+ColorUtil.brightRedBold(" Enter the Final Battle") + ColorUtil.blueBright("                        ║"));
@@ -1589,7 +1589,7 @@ public class Game {
             System.out.println(ColorUtil.blueBright("║") + ColorUtil.brightCyanBold("                   SELECT ACTION                    ") + ColorUtil.blueBright("║"));
             System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[1]")+ColorUtil.brightYellowBold(" Fight") + ColorUtil.blueBright("                                         ║"));
-            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2] Open Inventory") + ColorUtil.blueBright("                                ║"));
+            System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[2]")+ColorUtil.blueGreenBold(" Open Inventory") + ColorUtil.blueBright("                                ║"));
             System.out.println(ColorUtil.blueBright("║  ") + ColorUtil.brightCyanBold("[3]")+ColorUtil.brightRedBold(" Run") + ColorUtil.blueBright("                                           ║"));
             System.out.println(ColorUtil.blueBright("╚════════════════════════════════════════════════════╝"));
 
@@ -1628,16 +1628,16 @@ public class Game {
         System.out.println(ColorUtil.blueBright("╔════════════════════════════════════════════════════╗"));
         System.out.println(ColorUtil.blueBright("║") + ColorUtil.brightCyanBold("                        FIGHT                       ") + ColorUtil.blueBright("║"));
         System.out.println(ColorUtil.blueBright("╠════════════════════════════════════════════════════╣"));
-        System.out.println(ColorUtil.brightCyanBold("   [1]")+ColorUtil.brightYellowBold(" Basic Attack ("+df.format(player.getEquippedWeapon().getBasicAttack().getDamageMultiplier() * 100)+"%)"));
-        System.out.println(ColorUtil.brightCyanBold("\t\t(Generates 25 ")+energy+ColorUtil.brightCyanBold(" + 1 ultimate charge)  "));
-        System.out.println(ColorUtil.brightCyanBold("   [2]")+ColorUtil.brightYellowBold(" Skill ("+df.format(player.getEquippedWeapon().getSkillAttack().getDamageMultiplier() * 100)+"%)"));
-        System.out.println(ColorUtil.brightCyanBold("\t\t(Costs 40 ")+energy+ColorUtil.brightCyanBold(" + 2 ultimate charges)    "));
+        System.out.println(ColorUtil.brightCyanBold("   [1]")+ColorUtil.brightYellowBold(" Basic Attack ")+ ColorUtil.brightCyanBold("("+df.format(player.getEquippedWeapon().getBasicAttack().getDamageMultiplier() * 100)+"%)"));
+        System.out.println(ColorUtil.blueGreenBold("\t\t(Generates 25 ")+energy+ColorUtil.blueGreenBold(" + 1 ultimate charge)  "));
+        System.out.println(ColorUtil.brightCyanBold("   [2]")+ColorUtil.brightYellowBold(" Skill ")+ ColorUtil.brightCyanBold("("+df.format(player.getEquippedWeapon().getSkillAttack().getDamageMultiplier() * 100)+"%)"));
+        System.out.println(ColorUtil.blueGreenBold("\t\t(Costs 40 ")+energy+ColorUtil.blueGreenBold(" + 2 ultimate charges)    "));
 
         if (player.isUltimateReady()) {
-            System.out.println(ColorUtil.brightCyanBold("   [3]")+ ColorUtil.brightYellowBold(" Ultimate ("+df.format(player.getEquippedWeapon().getUltimateAttack().getDamageMultiplier() * 100)+"%)"));
+            System.out.println(ColorUtil.brightCyanBold("   [3]")+ ColorUtil.brightYellowBold(" Ultimate ")+ColorUtil.brightCyanBold("("+df.format(player.getEquippedWeapon().getUltimateAttack().getDamageMultiplier() * 100)+"%)"));
             System.out.println(ColorUtil.brightYellowBold("\t\t(Costs 80 ")+energy+ColorUtil.brightYellowBold(", consumes all charges) "));
         } else {
-            System.out.println(ColorUtil.brightCyanBold("   [3] ")+ColorUtil.brightRedBold("Ultimate (Locked) ("+df.format(player.getEquippedWeapon().getUltimateAttack().getDamageMultiplier() * 100)+"%)"));
+            System.out.println(ColorUtil.brightCyanBold("   [3] ")+ColorUtil.brightRedBold("Ultimate (Locked)"));
             System.out.println(ColorUtil.brightRedBold("\t\t(" + player.getUltimateCounter() + "/" + player.getMaxUltimateCounter() + " charges)"));
         }
 
