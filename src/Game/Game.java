@@ -1163,7 +1163,7 @@ public class Game {
         System.out.println(ColorUtil.brightRedBold("\t\t\t🚨 BOSS " + enemy.getName() + " appears!"));
         delay(1000);
 
-        int baseExp = 40;
+        int baseExp = 60;
 
         int playerCurrentSpeed = player.getSpeed();
         int playerOriginalSpeed = player.getSpeed();
@@ -1862,6 +1862,7 @@ public class Game {
         delay(2500);
         System.out.println(" ".repeat(38)+ ColorUtil.darkRed("For now..."));
         delay(2500);
+        player.setHealth(player.getMaxHealth());
     }
     private void handleVictory(Enemy enemy, int baseExp, Character player) {
         if(enemy.getHealth() <= 0){
