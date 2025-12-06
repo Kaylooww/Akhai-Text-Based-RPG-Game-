@@ -2,7 +2,7 @@ package Entities.Characters;
 
 public class Berserker extends Character{
     public Berserker(String name) {
-        super(name, 330, ClassType.BERSERKER, 22, 0, 15, 0.08, 0.08, 18);
+        super(name, 350, ClassType.BERSERKER, 20, 0, 15, 0.08, 0.08, 18);
         this.level = 1;
     }
 //

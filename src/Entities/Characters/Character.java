@@ -27,6 +27,7 @@ public abstract class Character extends Entity {
     protected ClassType classType;
     protected boolean hasResurrected = false; // New resurrection flag
     protected boolean isExploring = false;
+    protected boolean inBattle = false;
 
     protected int ultimateCounter = 0;
     protected int maxUltimateCounter = 8;
@@ -39,6 +40,8 @@ public abstract class Character extends Entity {
         this.basicAttack = new UnarmedSkill("Punch", "A basic strike delivered with quick force", 0.5, 0, DamageType.PHYSICAL, TargetType.SINGLE);
         this.skillAttack = new UnarmedSkill("Super Punch", "A strong blow that hits with enhanced power", 0.8, 40, DamageType.PHYSICAL, TargetType.SINGLE);
         this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "A devastating punch that maximizes raw strength", 1.2, 80, DamageType.PHYSICAL, TargetType.SINGLE);
+        this.evasiveness = 0.90;
+        this.maxEvasiveness = evasiveness;
     }
 
     public int getUltimateCounter() {
@@ -120,7 +123,7 @@ public abstract class Character extends Entity {
         level++;
         experienceNeeded += 3;
         System.out.println(ColorUtil.blueBright("╔════════════════════") + ColorUtil.brightCyanBold(" LEVEL UP! ") + ColorUtil.blueBright("═════════════════════╗"));
-        System.out.println(ColorUtil.brightCyanBold("   ✨ " + name + " leveled up to level " + level + "!"));
+        System.out.println(ColorUtil.brightCyanBold("   ✨ " + name + " leveled up to")+ColorUtil.brightYellowBold(" level " + level + "!"));
         System.out.println(ColorUtil.brightCyanBold("   ✨ Stats Increased!"));
 
 // Improve stats on level up
@@ -167,20 +170,20 @@ public abstract class Character extends Entity {
     public void resurrect() {
         delay(800);
         System.out.println(ColorUtil.brightYellowBold("\t\t✨ ✨ ✨ DIVINE INTERVENTION! ✨ ✨ ✨"));
-        delay(800);
+        delay(1000);
         System.out.println(ColorUtil.brightYellowBold("\t" + name + " has been granted a second chance!"));
-        delay(800);
+        delay(1000);
         //Resurrect with 50% of max health and reset ultimate counter
         health = maxHealth / 2;
         hasResurrected = true;
         resetUltimateCounter(); //Reset ultimate charges on resurrection
 
         System.out.println(ColorUtil.brightYellowBold("\t" +name + " resurrects with " + health + " HP!"));
-        delay(800);
+        delay(1000);
         System.out.println(ColorUtil.brightCyanBold("\t\tUltimate charges have been reset!"));
-        delay(800);
+        delay(1000);
         System.out.println(ColorUtil.brightRedBold("You can no longer resurrect, second chances only happens once."));
-        delay(800);
+        delay(1500);
     }
     public boolean hasResurrected(){
         return hasResurrected;
@@ -310,7 +313,7 @@ public abstract class Character extends Entity {
                     items[i] = item;
                     inventory.setCapacity(inventory.getCapacity() + 1);
                     inventory.setIsFull(inventory.getCapacity() == inventory.getMaxCapacity());
-                    System.out.println(ColorUtil.yellowBright("NEW ITEM") + " \"" + item.getName() + "\" " + ColorUtil.yellowBright("obtained!"));
+                    System.out.println(ColorUtil.yellowBright("\t\tNEW ITEM") + " \"" + item.getName() + "\" " + ColorUtil.yellowBright("obtained!"));
                     delay(300);
                     return;
                 }
@@ -377,6 +380,10 @@ public abstract class Character extends Entity {
     public void setIsExploring(boolean isExploring){
         this.isExploring = isExploring;
     }
+    public void setInBattle(boolean inBattle){
+        this.inBattle = inBattle;
+    }
+
     public int getExperience(){
         return experience;
     }
@@ -415,6 +422,9 @@ public abstract class Character extends Entity {
     }
     public boolean getIsExploring(){
         return isExploring;
+    }
+    public boolean getInBattle(){
+        return  inBattle;
     }
 
     public void delay(int delay) {

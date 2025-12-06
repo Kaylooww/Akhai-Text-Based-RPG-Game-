@@ -1,6 +1,7 @@
 package Items;
 
 import Entities.Characters.Character;
+import Entities.Enemies.Enemy;
 import StatusEffects.EvasivenessBoost;
 import StatusEffects.SpeedBoost;
 import TextFormat.ColorUtil;
@@ -14,13 +15,13 @@ public class EvasivenessPotion extends Consumable{
         super(itemId, name, description, maxStack, quantity, value, rarity, true, false);
         this.accuracyReduction = accuracyReduction;
     }
-
     @Override
     public void use(Character player){
-        if(hasConsumed == false){
+        if(!hasConsumed){
             EvasivenessBoost effect = new EvasivenessBoost(accuracyReduction);
+            effect.applyEffect(player);
             player.addStatusEffect(effect);
-            System.out.println(ColorUtil.brightPurpleBold("🌪️ " + player.getName() + "'s evasiveness increased! Enemy accuracy reduced by " + (accuracyReduction * 100) + "%!"));
+            System.out.println(ColorUtil.brightPurpleBold("🌪️ " + player.getName() + "'s evasiveness increased!"));
             setQuantity(getQuantity() - 1);
             hasConsumed = true;
         }else{
@@ -35,7 +36,7 @@ public class EvasivenessPotion extends Consumable{
         String nameLine = name + " (x" + getQuantity() + ") ";
         String visibleNameLine = nameLine.replaceAll("\u001B\\[[;\\d]*m", "");
 
-        String accuracyLine = "> Reduces enemy accuracy by " + df.format(accuracyReduction * 100) + "%";
+        String accuracyLine = "> Increases the chance to dodge enemy attacks";
 
         //padding for each line
         int namePadding = totalWidth - visibleNameLine.length() - 4;

@@ -13,10 +13,11 @@ public abstract class Entity {
     protected double physicalResistance;
     protected double magicResistance;
     protected int speed;
-    protected double accuracy = 0.95;
+    protected double evasiveness;
     protected List<StatusEffect> statusEffects = new ArrayList<>();
 
     protected int maxHealth;
+    protected double maxEvasiveness;
 
     public Entity(String name, int health, int physicalDamage, int magicDamage, int defense, double physicalResistance, double magicResistance, int speed) {
         this.name = name;
@@ -55,9 +56,6 @@ public abstract class Entity {
     public void removeStatusEffect(StatusEffect statusEffect) {
         statusEffects.remove(statusEffect);
     }
-    public void removeAllStatusEffect(){
-        statusEffects.clear();
-    }
     public void modifyStatPercentage(StatType statType, double value) {
         switch (statType) {
             case PHYSICAL_DAMAGE:
@@ -79,7 +77,7 @@ public abstract class Entity {
                 speed += speed * value;
                 break;
             case ACCURACY:
-                accuracy += accuracy * value;
+                evasiveness += evasiveness * value;
         }
     }
     public void modifyStatFlat(StatType statType, int value){
@@ -103,7 +101,7 @@ public abstract class Entity {
                 speed += value;
                 break;
             case ACCURACY:
-                accuracy += value;
+                evasiveness += value;
         }
     }
     public void checkStatusEffect(){
@@ -121,6 +119,9 @@ public abstract class Entity {
     public void setPhysicalDamage(int physicalDamage) {this.physicalDamage = physicalDamage;}
     public void setMagicDamage(int magicDamage) {this.magicDamage = magicDamage;}
     public void setSpeed(int speed) {this.speed = speed;}
+    public void setEvasiveness(double evasiveness) {
+        this.evasiveness = evasiveness;
+    }
 
     public String getName() {
         return name;
@@ -150,8 +151,11 @@ public abstract class Entity {
     public int getSpeed(){
         return speed;
     }
-    public double getAccuracy(){
-        return accuracy;
+    public double getEvasiveness(){
+        return evasiveness;
+    }
+    public double getMaxEvasiveness(){
+        return maxEvasiveness;
     }
     public List<StatusEffect> getStatusEffects() {
         return statusEffects;
