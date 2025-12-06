@@ -96,11 +96,11 @@ public class ShopNPC extends NPC{
     }
     public void addWeapons(Character player, int currentChapter){
         if(player instanceof Berserker || player instanceof JinwooSun){
-            if(currentChapter >= 5){
+            if(currentChapter >= 4){
                 shopItems.add(findItemId("BS004.1", items));
                 shopItems.add(findItemId("BS004.2", items));
                 shopItems.add(findItemId("BS004.3", items));
-            }else if(currentChapter >= 3){
+            }else if(currentChapter == 3){
                 shopItems.add(findItemId("BS003.1", items));
                 shopItems.add(findItemId("BS003.2", items));
                 shopItems.add(findItemId("BS003.3", items));
@@ -113,11 +113,11 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("BS001.2", items));
             }
         }else if(player instanceof Blademaster || player instanceof JinwooSun){
-            if(currentChapter >= 5){
+            if(currentChapter >= 4){
                 shopItems.add(findItemId("SW004.1", items));
                 shopItems.add(findItemId("SW004.2", items));
                 shopItems.add(findItemId("SW004.3", items));
-            }else if(currentChapter >= 3){
+            }else if(currentChapter == 3){
                 shopItems.add(findItemId("SW003.1", items));
                 shopItems.add(findItemId("SW003.2", items));
                 shopItems.add(findItemId("SW003.3", items));
@@ -130,11 +130,11 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("SW001.2", items));
             }
         }else if(player instanceof Hawkseye || player instanceof JinwooSun){
-            if(currentChapter >= 5){
+            if(currentChapter >= 4){
                 shopItems.add(findItemId("BW004.1", items));
                 shopItems.add(findItemId("BW004.2", items));
                 shopItems.add(findItemId("BW004.3", items));
-            }else if(currentChapter >= 3){
+            }else if(currentChapter == 3){
                 shopItems.add(findItemId("BW003.1", items));
                 shopItems.add(findItemId("BW003.2", items));
                 shopItems.add(findItemId("BW003.3", items));
@@ -147,7 +147,7 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("BW001.2", items));
             }
         }else if(player instanceof Runecaster || player instanceof JinwooSun){
-            if(currentChapter >= 5){
+            if(currentChapter >= 4){
                 shopItems.add(findItemId("MGS004.1", items));
                 shopItems.add(findItemId("MGS004.2", items));
                 shopItems.add(findItemId("MGS004.3", items));
@@ -164,11 +164,11 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("MGS001.2", items));
             }
         }else if(player instanceof RuneKnight || player instanceof JinwooSun){
-            if(currentChapter >= 5){
+            if(currentChapter >= 4){
                 shopItems.add(findItemId("MGSW004.1", items));
                 shopItems.add(findItemId("MGSW004.2", items));
                 shopItems.add(findItemId("MGSW004.3", items));
-            }else if(currentChapter >= 3){
+            }else if(currentChapter == 3){
                 shopItems.add(findItemId("MGSW003.1", items));
                 shopItems.add(findItemId("MGSW003.2", items));
                 shopItems.add(findItemId("MGSW003.3", items));
@@ -181,11 +181,11 @@ public class ShopNPC extends NPC{
                 shopItems.add(findItemId("MGSW001.2", items));
             }
         }else if(player instanceof Shinobi || player instanceof JinwooSun){
-            if(currentChapter >= 5){
+            if(currentChapter >= 4){
                 shopItems.add(findItemId("DR004.1", items));
                 shopItems.add(findItemId("DR004.2", items));
                 shopItems.add(findItemId("DR004.3", items));
-            }else if(currentChapter >= 3){
+            }else if(currentChapter == 3){
                 shopItems.add(findItemId("DR003.1", items));
                 shopItems.add(findItemId("DR003.2", items));
                 shopItems.add(findItemId("DR003.3", items));
