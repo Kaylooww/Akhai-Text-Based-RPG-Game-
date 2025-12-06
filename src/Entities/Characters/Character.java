@@ -41,6 +41,7 @@ public abstract class Character extends Entity {
         this.skillAttack = new UnarmedSkill("Super Punch", "A strong blow that hits with enhanced power", 0.8, 40, DamageType.PHYSICAL, TargetType.SINGLE);
         this.ultimateAttack = new UnarmedSkill("Ultimate Punch", "A devastating punch that maximizes raw strength", 1.2, 80, DamageType.PHYSICAL, TargetType.SINGLE);
         this.evasiveness = 0.90;
+        this.maxEvasiveness = evasiveness;
     }
 
     public int getUltimateCounter() {

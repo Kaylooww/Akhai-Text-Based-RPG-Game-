@@ -29,7 +29,6 @@ public abstract class Entity {
         this.physicalResistance = physicalResistance;
         this.magicResistance = magicResistance;
         this.speed = speed;
-        this.maxEvasiveness = evasiveness;
     }
 
     // Abstract attack method for player to use
