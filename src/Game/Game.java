@@ -1598,7 +1598,17 @@ public class Game {
             switch(choice) {
                 case 1:
                     damage = handleFightAction(enemy);
-                    hasActed = true;
+                    if(player instanceof Shinobi){
+                        if(Math.random() <= 0.6){
+                            //TODO format this
+                            System.out.println(player.getName()+" gets another turn!");
+                            delay(1000);
+                        }else{
+                            hasActed = true;
+                        }
+                    }else{
+                        hasActed = true;
+                    }
                     break;
                 case 2:
                     hasActed = openInventory(player, enemy, healingPotionUsed) == 1;

@@ -1,5 +1,6 @@
 package Entities;
 
+import Entities.Characters.Blademaster;
 import StatusEffects.StatusEffect;
 import java.util.*;
 
@@ -45,6 +46,14 @@ public abstract class Entity {
 
         if (health <= 0) {
             health = 0;
+        }
+
+        if(this instanceof Blademaster){
+            if(Math.random() <= 0.6){
+                ((Blademaster) this).getBasicAttack().execute(this);
+                //TODO format this
+                System.out.println(name+" dealt a counter attack!");
+            }
         }
 
         return (int) actualDamage;

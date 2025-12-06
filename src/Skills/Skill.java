@@ -81,5 +81,14 @@ public abstract class Skill {
         return energyCost;
     }
 
+    public void delay(int delay) {
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Re-interrupt the thread
+            System.err.println("Thread was interrupted during sleep.");
+        }
+    }
+
 }
 

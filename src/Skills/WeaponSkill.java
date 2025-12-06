@@ -27,10 +27,4 @@ public class WeaponSkill extends Skill{
         }
         return 0;
     }
-
-//    @Override
-//    public int execute(Entity caster){
-//        double skillDamage = multiplier * caster.getPhysicalDamage();
-//        return (int) skillDamage;
-//    }
 }
